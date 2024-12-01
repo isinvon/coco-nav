@@ -5,10 +5,35 @@
  *  @author sinvon
  *  @date: 2024年12月1日23:50:54
  */
-import {Star, Share} from '@element-plus/icons-vue'
+import {Share, Star} from '@element-plus/icons-vue'
 import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer'
-// 引入二维码组件
+// markdown 组件
+import MarkdownIt from 'markdown-it';
+import {computed, ref} from "vue";
+
 const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore()
+
+// Markdown 内容，可能是从 API 获取的
+const markdownContent = ref(`
+### 这是一个简单的Markdown文本。
+
+### markdown图片测试
+
+![Image](https://example.com/image.png)
+
+## 链接直达测试
+
+[Link](https://www.baidu.com)
+`);
+
+const md = new MarkdownIt();
+
+const renderedMarkdown = computed(() => {
+  return md.render(markdownContent.value);
+});
+
+console.log(md.render(markdownContent.value));
+
 
 // 打开链接直达
 const openLink = () => {
@@ -100,6 +125,11 @@ const bookmark = {
         </div>
       </div>
     </div>
+    <!-- Markdown 文章格式描述 -->
+    <div class="markdown-content">
+      <!-- 使用 v-html 渲染解析后的 Markdown 内容 -->
+      <div v-html="renderedMarkdown"></div>
+    </div>
   </el-drawer>
 </template>
 
@@ -178,5 +208,11 @@ const bookmark = {
 
 .el-button small {
   height: 32px;
+}
+
+.markdown-content {
+  margin-top: 40px;
+  padding: 0 30px;
+  color: #777777;
 }
 </style>
