@@ -1,0 +1,35 @@
+{
+  "name": "home",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "author": {
+    "name": "sinvon",
+    "url": "https://github.com/isinvon",
+    "github": "https://github.com/isinvon",
+    "repo": "https://github.com/isinvon/coco-nav",
+    "juejin": "https://juejin.cn/user/2388605244547997"
+  },
+  "description": "coco-nav 是一个基于 java + springboot + vue + vite 开发的书签导航网站",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isinvon/coco-nav.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "element-plus": "^2.9.0",
+    "pinia": "^2.2.8",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "less": "^4.2.1",
+    "less-loader": "^12.2.0",
+    "vite": "^6.0.1"
+  }
+}
