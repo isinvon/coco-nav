@@ -7,7 +7,6 @@ export const useRightDrawerStore = defineStore('rightDrawer', {
     actions: {
         toggleDrawer() {
             this.isOpen = !this.isOpen
-            console.log(this.isOpen)
         },
         openDrawer() {
             this.isOpen = true
