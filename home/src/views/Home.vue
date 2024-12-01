@@ -4,6 +4,7 @@ import Main from '@/views/components/Main/index.vue'
 import Footer from '@/views/components/Footer/index.vue'
 import LeftDrawer from '@/components/LeftDrawer/index.vue'
 import RightDrawer from '@/components/RightDrawer/index.vue'
+import BookmarkDetailsDrawer from '@/components/BookmarkDetailsDrawer/index.vue'
 import Anchor from '@/components/Anchor/index.vue'
 </script>
 <template>
@@ -23,6 +24,8 @@ import Anchor from '@/components/Anchor/index.vue'
       <LeftDrawer/>
       <!--抽屉-->
       <RightDrawer/>
+      <!--标签详情抽屉-->
+      <BookmarkDetailsDrawer/>
     </el-container>
   </div>
 </template>

@@ -1,4 +1,15 @@
 <script setup>
+/**
+ * @description Main page
+ */
+// 书签详情抽屉全局状态管理
+import { useBookmarkDetailsDrawerStore } from '@/store/bookmarkDetailsDrawer'
+const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore()
+
+// 切换抽屉状态
+const toggleBookmarkDetailsDrawer = () => {
+  bookmarkDetailsDrawerStore.toggleDrawer()
+}
 </script>
 
 <template>
@@ -8,7 +19,7 @@
         <div class="bookmark-icon">🌐</div>
         <div class="bookmark-title">Google</div>
       </div>
-      <div v-for="i in 30" class="bookmark">
+      <div @click="toggleBookmarkDetailsDrawer" v-for="i in 30" class="bookmark">
         <div class="bookmark-icon">📘</div>
         <div class="bookmark-title">Facebook</div>
       </div>
