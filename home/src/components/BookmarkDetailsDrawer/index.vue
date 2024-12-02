@@ -10,6 +10,8 @@ import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer'
 // markdown 组件
 import MarkdownIt from 'markdown-it';
 import {computed, ref} from "vue";
+// 相关导航组件
+import RelateNavigation from "@/components/RelateNavigation/index.vue";
 
 const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore()
 
@@ -129,6 +131,11 @@ const bookmark = {
     <div class="markdown-content">
       <!-- 使用 v-html 渲染解析后的 Markdown 内容 -->
       <div v-html="renderedMarkdown"></div>
+    </div>
+    <!--相关导航-->
+    <div class="related-navigation">
+      <RelateNavigation/>
+    </div>
     </div>
   </el-drawer>
 </template>
