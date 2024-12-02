@@ -36,9 +36,6 @@ const renderedMarkdown = computed(() => {
   return md.render(markdownContent.value);
 });
 
-console.log(md.render(markdownContent.value));
-
-
 // 打开链接直达
 const openLink = () => {
   window.open('https://www.baidu.com', '_blank')
