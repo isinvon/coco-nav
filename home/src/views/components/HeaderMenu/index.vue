@@ -1,8 +1,12 @@
 <script setup>
 /**
- * 头部菜单
+ * @description 头部菜单
+ * @author sinvon
+ * @since 2024年12月2日23:49:46
+ * @module HeaderMenu
  */
 import ExpandButton from "@/views/components/HeaderMenu/components/ExpandButton.vue";
+import AddBookmarkButton from "@/views/components/HeaderMenu/components/AddBookmarkButton.vue";
 import Avatar from '@/components/Avatar/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
@@ -33,6 +37,8 @@ function updateMenu() {
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'><label></label>
 
     <ul>
+      <!--添加书签按钮-->
+      <AddBookmarkButton/>
       <li><a href='http://'>Home</a></li>
       <li><a class='dropdown-arrow' href='http://'>Products</a>
         <ul class='sub-menus'>

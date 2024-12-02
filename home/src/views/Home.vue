@@ -6,6 +6,7 @@ import LeftDrawer from '@/components/LeftDrawer/index.vue'
 import RightDrawer from '@/components/RightDrawer/index.vue'
 import BookmarkDetailsDrawer from '@/components/BookmarkDetailsDrawer/index.vue'
 import Anchor from '@/components/Anchor/index.vue'
+import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
 </script>
 <template>
   <div class="common-layout">
@@ -26,6 +27,8 @@ import Anchor from '@/components/Anchor/index.vue'
       <RightDrawer/>
       <!--标签详情抽屉-->
       <BookmarkDetailsDrawer/>
+      <!--添加书签的框-->
+      <AddBookmarkBox/>
     </el-container>
   </div>
 </template>
