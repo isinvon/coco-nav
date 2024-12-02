@@ -11,7 +11,7 @@
             :key="link.href"
             :href="link.href"
         >
-          {{ link.text }}
+          {{ link.category }}
         </el-anchor-link>
       </div>
     </el-anchor>
@@ -19,43 +19,49 @@
 </template>
 
 <script lang="js" setup>
+/**
+ * @module Anchor
+ * @description 锚点组件
+ * @author sinvon
+ * @since 2024年12月2日14:55:46
+ */
 import {computed, onMounted, onUnmounted, ref} from "vue";
 
 const isAnchorVisible = ref(false); // 默认设置为不可见
 
 // 如果 anchorLinks 是空的，则使用默认的
 const defaultAnchorLinks = ref([
-  {href: '#basic-usage', text: '影视网站'},
-  {href: '#horizontal-mode', text: 'API接口'},
-  {href: '#scroll-container', text: '编程播客'},
-  {href: '#anchor-api', text: '开发工具'},
-  {href: '#anchor-attributes', text: '书籍报刊'},
-  {href: '#anchor-events', text: '摸鱼社区'},
-  {href: '#anchor-slot', text: '技术社区'},
-  {href: '#coding-challenges', text: '编程挑战'},
+  {href: '#basic-usage', category: '影视网站'},
+  {href: '#horizontal-mode', category: 'API接口'},
+  {href: '#scroll-container', category: '编程播客'},
+  {href: '#anchor-api', category: '开发工具'},
+  {href: '#anchor-attributes', category: '书籍报刊'},
+  {href: '#anchor-events', category: '摸鱼社区'},
+  {href: '#anchor-slot', category: '技术社区'},
+  {href: '#coding-challenges', category: '编程挑战'},
 ]);
 
 const anchorLinks = [
-  {href: '#basic-usage', text: '🐦影视网站'},
-  {href: '#horizontal-mode', text: '🐱API接口'},
-  {href: '#scroll-container', text: '🐍编程播客'},
-  {href: '#anchor-api', text: '🔨开发工具'},
-  {href: '#anchor-attributes', text: '📚书籍报刊'},
-  {href: '#anchor-events', text: '🐟摸鱼社区'},
-  {href: '#anchor-slot', text: '💻技术社区'},
-  {href: '#coding-challenges', text: '🔪编程挑战'},
-  {href: '#developer-resources', text: '⚙️开发者资源'},
-  {href: '#community-forum', text: '🖱社区论坛'},
-  {href: '#tech-tutorials', text: '技术教程'},
-  {href: '#open-source-projects', text: '🎈开源项目'},
-  {href: '#career-development', text: '🪣职业发展'},
-  {href: '#software-tools', text: '🚌软件工具'},
-  {href: '#web-development', text: '🤩Web开发'},
-  {href: '#mobile-apps', text: '📱移动应用'},
-  {href: '#data-science', text: '🔑数据科学'},
-  {href: '#machine-learning', text: '🤖机器学习'},
-  {href: '#cloud-computing', text: '🐔云计算'},
-  {href: '#devops', text: '🧠DevOps'}
+  {href: '#basic-usage', category: '🐦影视网站'},
+  {href: '#horizontal-mode', category: '🐱API接口'},
+  {href: '#scroll-container', category: '🐍编程播客'},
+  {href: '#anchor-api', category: '🔨开发工具'},
+  {href: '#anchor-attributes', category: '📚书籍报刊'},
+  {href: '#anchor-events', category: '🐟摸鱼社区'},
+  {href: '#anchor-slot', category: '💻技术社区'},
+  {href: '#coding-challenges', category: '🔪编程挑战'},
+  {href: '#developer-resources', category: '⚙️开发者资源'},
+  {href: '#community-forum', category: '🖱社区论坛'},
+  {href: '#tech-tutorials', category: '👋技术教程'},
+  {href: '#open-source-projects', category: '🎈开源项目'},
+  {href: '#career-development', category: '🪣职业发展'},
+  {href: '#software-tools', category: '🚌软件工具'},
+  {href: '#web-development', category: '🤩Web开发'},
+  {href: '#mobile-apps', category: '📱移动应用'},
+  {href: '#data-science', category: '🔑数据科学'},
+  {href: '#machine-learning', category: '🤖机器学习'},
+  {href: '#cloud-computing', category: '🐔云计算'},
+  {href: '#devops', category: '🧠DevOps'}
 ];
 
 

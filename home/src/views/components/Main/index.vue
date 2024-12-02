@@ -1,6 +1,8 @@
 <script setup>
 /**
  * @description Main page
+ * @author sinvon
+ * @since 2024年12月2日14:56:16
  */
 import MIcon from "@/components/MIcon/index.vue";
 // 书签详情抽屉全局状态管理
@@ -63,9 +65,6 @@ const bookmarkList = [
       {title: 'GitHub', url: 'https://github.com/', icon: 'https://github.com/favicon.ico', description: 'GitHub - 全球最大的开源代码托管平台'},
       {title: 'GitHub', url: 'https://github.com/', icon: 'https://github.com/favicon.ico', description: 'GitHub - 提供版本控制、代码托管和协作开发服务'},
       {title: 'GitHub', url: 'https://github.com/', icon: 'https://github.com/favicon.ico', description: 'GitHub - 开源代码社区和软件开发平台'},
-      {title: 'Stack Overflow', url: 'https://stackoverflow.com/', icon: 'https://stackoverflow.com/favicon.ico', description: 'Stack Overflow - 程序员问答社区，解决技术问题'},
-      {title: 'Stack Overflow', url: 'https://stackoverflow.com/', icon: 'https://stackoverflow.com/favicon.ico', description: 'Stack Overflow - 提供技术问题解答和讨论的平台'},
-      {title: 'Stack Overflow', url: 'https://stackoverflow.com/', icon: 'https://stackoverflow.com/favicon.ico', description: 'Stack Overflow - 程序员社群，分享经验和解决编程问题'},
       {title: 'GitLab', url: 'https://gitlab.com/', icon: 'https://gitlab.com/favicon.ico', description: 'GitLab - 提供Git代码托管、CI/CD和版本控制服务'},
       {title: 'GitLab', url: 'https://gitlab.com/', icon: 'https://gitlab.com/favicon.ico', description: 'GitLab - 强大的代码托管和开发工具，支持自动化部署'},
       {title: 'GitLab', url: 'https://gitlab.com/', icon: 'https://gitlab.com/favicon.ico', description: 'GitLab - 用于软件开发的Git仓库管理和协作平台'},
