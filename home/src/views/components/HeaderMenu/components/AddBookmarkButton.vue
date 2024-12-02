@@ -52,7 +52,7 @@ const toggleAddBookmarkBox = () => {
     // 鼠标悬浮时，图标颜色变绿, 颜色渐变动画, 大小变大1.05倍数动画
     &:hover {
       color: #09b269;
-      transform: scale(1.5);
+      transform: scale(1.6);
       transition: transform 0.5s ease, color 0.5s ease;
     }
 
