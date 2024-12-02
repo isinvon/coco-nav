@@ -12,6 +12,8 @@ import MarkdownIt from 'markdown-it';
 import {computed, ref} from "vue";
 // 相关导航组件
 import RelateNavigation from "@/components/RelateNavigation/index.vue";
+// 广告组件
+import Advertisement from "@/components/Advertisement/index.vue";
 
 const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore()
 
@@ -136,6 +138,9 @@ const bookmark = {
     <div class="related-navigation">
       <RelateNavigation/>
     </div>
+    <!--广告-->
+    <div class="advertisement">
+      <Advertisement/>
     </div>
   </el-drawer>
 </template>
