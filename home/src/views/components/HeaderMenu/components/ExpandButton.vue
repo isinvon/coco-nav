@@ -1,6 +1,9 @@
 <script setup>
 /**
  * 展开抽屉的按钮
+ * @author sivnon
+ * @since 2024年12月2日15:48:21
+ * @module ExpandButton
  */
 import { useLeftDrawerStore } from '@/store/leftDrawer'
 
@@ -65,4 +68,3 @@ const toggleDrawer = () => {
   outline: none; /* 去掉按钮的聚焦时外框 */
 }
 </style>
-e>

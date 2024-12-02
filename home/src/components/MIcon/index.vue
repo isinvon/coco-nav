@@ -40,7 +40,6 @@ const props = defineProps({
   </div>
 </template>
 
-
 <style lang="less" scoped>
 .icon-size {
 @apply shadow-sm rounded-full;
