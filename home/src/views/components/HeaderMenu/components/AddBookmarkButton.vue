@@ -47,10 +47,19 @@ const toggleAddBookmarkBox = () => {
     align-items: center;
     justify-content: center;
     color: #59636e;
+    transition: transform 0.3s ease, color 0.3s ease; /* 添加过渡动画(使按钮失去焦点的时候,恢复原状的过程也有动画) */
 
+    // 鼠标悬浮时，图标颜色变绿, 颜色渐变动画, 大小变大1.05倍数动画
     &:hover {
-      color: #105e10;
-      transition: color 0.5s ease;
+      color: #09b269;
+      transform: scale(1.5);
+      transition: transform 0.5s ease, color 0.5s ease;
+    }
+
+    // 点击按钮时，图标向下移动2px
+    &:active {
+      transform: translateY(5px);
+      transition: transform 0.2s ease;
     }
 
     &:focus {
