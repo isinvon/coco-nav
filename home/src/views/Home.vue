@@ -8,6 +8,7 @@ import BookmarkDetailsDrawer from '@/components/BookmarkDetailsDrawer/index.vue'
 import Anchor from '@/components/Anchor/index.vue'
 import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
 import DeleteMenu from '@/components/DeleteMenu/index.vue'
+import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
 </script>
 <template>
   <div class="common-layout">
@@ -32,6 +33,8 @@ import DeleteMenu from '@/components/DeleteMenu/index.vue'
       <AddBookmarkBox/>
       <!--删除书签环绕菜单 (内部逻辑: 状态为正在删除的时候触发)-->
       <DeleteMenu class="delete-menu"/>
+      <!--回收站抽屉组件-->
+      <RecycleBinDrawer/>
     </el-container>
   </div>
 </template>
