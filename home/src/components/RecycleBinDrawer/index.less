@@ -1,0 +1,111 @@
+@global-border-radius: 8px;
+@button-background-color: #af021d;
+@button-border-color: #af021d;
+@button-background-color-hover: #750a1b;
+@button-border-color-hover: #750a1b;
+
+.recycle-bin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .el-button {
+    font-size: 15px;
+    background-color: @button-background-color;
+    border-color: @button-border-color;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    border-radius: @global-border-radius;
+
+    &:hover {
+      background-color: #750a1b;
+      border-color: @button-border-color-hover;
+    }
+  }
+}
+
+.infinite-list {
+  margin-top: 10px;
+  background-color: #f6f8fa;
+  height: 100%;
+  overflow-y: auto;
+  padding: 10px;
+
+  .infinite-list-item {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    border: 1px solid #d1d9e0;
+    border-radius: @global-border-radius;
+    transition: background-color 0.2s;
+
+
+    &:hover {
+      background-color: #f2f3f4;
+    }
+
+    .bookmark-info {
+      display: flex;
+      align-items: center;
+      flex: 1; /* 左侧内容占满剩余空间 */
+      overflow: hidden; // 确保左侧内容区域不会超出分配的空间，从而避免挤压右侧的按钮
+
+      .bookmark-icon {
+        width: 56px;
+        height: 56px;
+        margin-right: 8px;
+        flex-shrink: 0; /* 防止图标缩小 */
+        border-radius: @global-border-radius;
+      }
+
+      .bookmark-details {
+        display: flex;
+        flex-direction: column;
+        flex: 1; /* 占满剩余空间 */
+        overflow: hidden; // 确保内容区域不会超出分配的空间
+
+        .bookmark-title {
+          font-size: 14px;
+          color: #0969da;
+          font-weight: bold;
+          text-decoration: none; // 默认无下划线
+          white-space: nowrap; /* 禁止换行 */
+          overflow: hidden; /* 超出部分隐藏 */
+          text-overflow: ellipsis; /* 使用省略号 */
+          max-width: 100%; /* 防止超出 */
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .bookmark-description {
+          color: #777777;
+          font-size: 12px;
+          margin-top: 2px;
+          white-space: nowrap; /* 禁止换行 */
+          overflow: hidden; /* 超出部分隐藏 */
+          text-overflow: ellipsis; /* 使用省略号 */
+          max-width: 100%; /* 防止超出 */
+        }
+      }
+    }
+
+    .el-button {
+      border-radius: @global-border-radius;
+      margin-left: 10px;
+      flex-shrink: 0; /* 防止按钮缩小 */
+      background-color: #a10202;
+      border-color: #8b0000;
+
+      &:hover {
+        background-color: @button-background-color-hover;
+        border-color: @button-border-color-hover;
+      }
+    }
+  }
+}
