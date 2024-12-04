@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
 
 export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
     state: () => ({
@@ -10,6 +10,16 @@ export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
     }),
 
     actions: {
+        // 关闭删除状态
+        closeDeleteState() {
+            this.isDeleting = false
+        },
+
+        // 开启删除状态
+        openDeleteState() {
+            this.isDeleting = true
+        },
+
         // 添加书签到已删除列表
         deleteBookmark(bookmark) {
             if (this.isConfirmingDelete) {
