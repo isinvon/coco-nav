@@ -1,150 +1,63 @@
 <script setup>
-
+/**
+ * @description 自定义 Tooltip 组件
+ * @param {String} tooltipText - 提示文本内容
+ * @param {String} placement - 提示位置，可选值为 top、bottom、left、right
+ * @param {String} effect - 主题效果，可选值为 dark、light、customized
+ * @example <Tooltip tooltipText="提示文本" placement="bottom" effect="dark"></Tooltip>
+ * @author sinvon
+ * @since 2024年12月4日21:54:06
+ * @module Tooltip
+ */
+// 定义接受的属性
+defineProps({
+  /**
+   * @type {String}
+   * @required
+   */
+  tooltipText: {
+    type: String,
+    required: true,
+  },
+  /**
+   * @type {'top'|'bottom'|'left'|'right'}
+   * @default 'bottom'
+   */
+  placement: {
+    type: String,
+    default: 'bottom', // 默认位置为 top
+    validator: (value) => ['top', 'bottom', 'left', 'right'].includes(value),
+  },
+  // TODO - Bug: 当父组件调用 Tooltip 的时候,effect=customized 不生效
+  /**
+   * @type {'dark'|'light'|'customized'}
+   * @default 'dark'
+   */
+  effect: {
+    type: String,
+    default: 'dark', // 默认主题效果为 dark
+    validator: (value) => ['dark', 'light', 'customized'].includes(value),
+  },
+});
 </script>
 
 <template>
-  <span data-tooltip="Tooltip help here!" data-flow="bottom">CSS Tooltips</span>
+  <el-tooltip :content="tooltipText" :placement="placement" :effect="effect">
+    <template #default>
+      <slot>Default Tooltip</slot>
+    </template>
+  </el-tooltip>
 </template>
 
-<style scoped lang="less">
-[data-tooltip] {
-  position: relative;
-  pointer: cursor;
+<style lang="less" scoped>
+.el-popper.is-customized {
+  /* Set padding to ensure the height is 32px */
+  padding: 6px 12px;
+  background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
 }
 
-[data-tooltip]::before,
-[data-tooltip]::after {
-  text-transform: none;
-  font-size: .9em;
-  line-height: 1;
-  position: absolute;
-  display: none;
-  opacity: 0;
+.el-popper.is-customized .el-popper__arrow::before {
+  background: linear-gradient(45deg, #b2e68d, #bce689);
+  right: 0;
 }
-
-[data-tooltip]::before {
-  content: '';
-  border: 6px solid transparent;
-  z-index: 101;
-}
-
-[data-tooltip]::after {
-  content: attr(data-tooltip);
-  text-align: center;
-  min-width: 3em;
-  max-width: 21em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 5px 7px;
-  border-radius: 6px;
-  background: #25292E;
-  color: #FFFFFF;
-  z-index: 100;
-}
-
-[data-tooltip]:hover::before,
-[data-tooltip]:hover::after {
-  display: block;
-}
-
-[data-tooltip='']::before,
-[data-tooltip='']::after {
-  display: none !important;
-}
-
-[data-tooltip]:not([data-flow])::before,
-[data-tooltip][data-flow^="top"]::before {
-  bottom: 100%;
-  border-bottom-width: 0;
-  border-top-color: #25292E;
-}
-
-[data-tooltip]:not([data-flow])::after,
-[data-tooltip][data-flow^="top"]::after {
-  bottom: calc(100% + 5px);
-}
-
-[data-tooltip]:not([data-flow])::before,
-[data-tooltip]:not([data-flow])::after,
-[data-tooltip][data-flow^="top"]::before,
-[data-tooltip][data-flow^="top"]::after {
-  left: 50%;
-  transform: translate(-50%, -.4em);
-}
-
-[data-tooltip][data-flow^="bottom"]::before {
-  top: 100%;
-  border-top-width: 0;
-  border-bottom-color: #25292E;
-}
-
-[data-tooltip][data-flow^="bottom"]::after {
-  top: calc(100% + 5px);
-}
-
-[data-tooltip][data-flow^="bottom"]::before,
-[data-tooltip][data-flow^="bottom"]::after {
-  left: 50%;
-  transform: translate(-50%, .4em);
-}
-
-[data-tooltip][data-flow^="left"]::before {
-  top: 50%;
-  border-right-width: 0;
-  border-left-color: #25292E;
-  left: calc(0em - 5px);
-  transform: translate(-.5em, -50%);
-}
-
-[data-tooltip][data-flow^="left"]::after {
-  top: 50%;
-  right: calc(100% + 5px);
-  transform: translate(-.4em, -50%);
-}
-
-[data-tooltip][data-flow^="right"]::before {
-  top: 50%;
-  border-left-width: 0;
-  border-right-color: #25292E;
-  right: calc(0em - 7px);
-  transform: translate(.4em, -50%);
-}
-
-[data-tooltip][data-flow^="right"]::after {
-  top: 50%;
-  left: calc(100% + 5px);
-  transform: translate(.5em, -50%);
-}
-
-@keyframes tooltip-vert {
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-@keyframes tooltip-horz {
-  to {
-    opacity: 1;
-    transform: translate(0, -50%);
-  }
-}
-
-[data-tooltip]:not([data-flow]):hover::before,
-[data-tooltip]:not([data-flow]):hover::after,
-[data-tooltip][data-flow^="top"]:hover::before,
-[data-tooltip][data-flow^="top"]:hover::after,
-[data-tooltip][data-flow^="bottom"]:hover::before,
-[data-tooltip][data-flow^="bottom"]:hover::after {
-  animation: tooltip-vert .5s ease-out forwards;
-}
-
-[data-tooltip][data-flow^="left"]:hover::before,
-[data-tooltip][data-flow^="left"]:hover::after,
-[data-tooltip][data-flow^="right"]:hover::before,
-[data-tooltip][data-flow^="right"]:hover::after {
-  animation: tooltip-horz .5s ease-out forwards;
-}
-
 </style>
