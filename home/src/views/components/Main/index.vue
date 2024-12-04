@@ -15,7 +15,6 @@ const deleteBookmarkStore = useDeleteBookmarkStore();
 
 // 切换抽屉状态
 const toggleBookmarkDetailsDrawer = () => {
-  bookmarkDetailsDrawerStore.toggleDrawer();
   if (!deleteBookmarkStore.isDeleting) {  // 只有在没有删除模式下才触发
     bookmarkDetailsDrawerStore.toggleDrawer();
   }
@@ -32,18 +31,78 @@ const bookmarkList = [
     href: '#movie-site',
     icon: 'https://element.eleme.cn/favicon.ico',
     children: [
-      {title: '腾讯视频', url: 'https://v.qq.com/', icon: 'https://v.qq.com/favicon.ico', description: '腾讯视频 - 提供最新的电影、电视剧和综艺节目'},
-      {title: '腾讯视频', url: 'https://v.qq.com/', icon: 'https://v.qq.com/favicon.ico', description: '腾讯视频 - 提供多样的影视内容和直播服务'},
-      {title: '腾讯视频', url: 'https://v.qq.com/', icon: 'https://v.qq.com/favicon.ico', description: '腾讯视频 - 在线影视平台，提供高清影视资源'},
-      {title: '优酷', url: 'https://www.youku.com/', icon: 'https://www.youku.com/favicon.ico', description: '优酷 - 国内领先的视频平台，提供影视、综艺、新闻等内容'},
-      {title: '优酷', url: 'https://www.youku.com/', icon: 'https://www.youku.com/favicon.ico', description: '优酷 - 提供丰富的网络视频内容，覆盖多个领域'},
-      {title: '优酷', url: 'https://www.youku.com/', icon: 'https://www.youku.com/favicon.ico', description: '优酷 - 观看最新电影、电视剧、综艺节目的平台'},
-      {title: '哔哩哔哩', url: 'https://www.bilibili.com/', icon: 'https://www.bilibili.com/favicon.ico', description: '哔哩哔哩 - 以二次元文化为主的综合性视频网站'},
-      {title: '哔哩哔哩', url: 'https://www.bilibili.com/', icon: 'https://www.bilibili.com/favicon.ico', description: '哔哩哔哩 - 提供弹幕视频，包含动画、游戏等内容'},
-      {title: '哔哩哔哩', url: 'https://www.bilibili.com/', icon: 'https://www.bilibili.com/favicon.ico', description: '哔哩哔哩 - 深受年轻人喜爱的二次元视频社区'},
-      {title: '爱奇艺', url: 'https://www.iqiyi.com/', icon: 'https://www.iqiyi.com/favicon.ico', description: '爱奇艺 - 提供电视剧、电影、综艺等视频内容'},
-      {title: '爱奇艺', url: 'https://www.iqiyi.com/', icon: 'https://www.iqiyi.com/favicon.ico', description: '爱奇艺 - 在线视频平台，致力于高清影视的播放'},
-      {title: '爱奇艺', url: 'https://www.iqiyi.com/', icon: 'https://www.iqiyi.com/favicon.ico', description: '爱奇艺 - 最新的电影、电视剧、综艺节目的在线播放平台'},
+      {
+        title: '腾讯视频',
+        url: 'https://v.qq.com/',
+        icon: 'https://v.qq.com/favicon.ico',
+        description: '腾讯视频 - 提供最新的电影、电视剧和综艺节目'
+      },
+      {
+        title: '腾讯视频',
+        url: 'https://v.qq.com/',
+        icon: 'https://v.qq.com/favicon.ico',
+        description: '腾讯视频 - 提供多样的影视内容和直播服务'
+      },
+      {
+        title: '腾讯视频',
+        url: 'https://v.qq.com/',
+        icon: 'https://v.qq.com/favicon.ico',
+        description: '腾讯视频 - 在线影视平台，提供高清影视资源'
+      },
+      {
+        title: '优酷',
+        url: 'https://www.youku.com/',
+        icon: 'https://www.youku.com/favicon.ico',
+        description: '优酷 - 国内领先的视频平台，提供影视、综艺、新闻等内容'
+      },
+      {
+        title: '优酷',
+        url: 'https://www.youku.com/',
+        icon: 'https://www.youku.com/favicon.ico',
+        description: '优酷 - 提供丰富的网络视频内容，覆盖多个领域'
+      },
+      {
+        title: '优酷',
+        url: 'https://www.youku.com/',
+        icon: 'https://www.youku.com/favicon.ico',
+        description: '优酷 - 观看最新电影、电视剧、综艺节目的平台'
+      },
+      {
+        title: '哔哩哔哩',
+        url: 'https://www.bilibili.com/',
+        icon: 'https://www.bilibili.com/favicon.ico',
+        description: '哔哩哔哩 - 以二次元文化为主的综合性视频网站'
+      },
+      {
+        title: '哔哩哔哩',
+        url: 'https://www.bilibili.com/',
+        icon: 'https://www.bilibili.com/favicon.ico',
+        description: '哔哩哔哩 - 提供弹幕视频，包含动画、游戏等内容'
+      },
+      {
+        title: '哔哩哔哩',
+        url: 'https://www.bilibili.com/',
+        icon: 'https://www.bilibili.com/favicon.ico',
+        description: '哔哩哔哩 - 深受年轻人喜爱的二次元视频社区'
+      },
+      {
+        title: '爱奇艺',
+        url: 'https://www.iqiyi.com/',
+        icon: 'https://www.iqiyi.com/favicon.ico',
+        description: '爱奇艺 - 提供电视剧、电影、综艺等视频内容'
+      },
+      {
+        title: '爱奇艺',
+        url: 'https://www.iqiyi.com/',
+        icon: 'https://www.iqiyi.com/favicon.ico',
+        description: '爱奇艺 - 在线视频平台，致力于高清影视的播放'
+      },
+      {
+        title: '爱奇艺',
+        url: 'https://www.iqiyi.com/',
+        icon: 'https://www.iqiyi.com/favicon.ico',
+        description: '爱奇艺 - 最新的电影、电视剧、综艺节目的在线播放平台'
+      },
     ],
   },
   {
@@ -51,21 +110,96 @@ const bookmarkList = [
     href: '#tech-hub',
     icon: 'https://element.eleme.cn/favicon.ico',
     children: [
-      {title: '牛客', url: 'https://www.nowcoder.com/', icon: 'https://www.nowcoder.com/favicon.ico', description: '牛客网 - 提供编程题库、面试题及在线编程平台'},
-      {title: '牛客', url: 'https://www.nowcoder.com/', icon: 'https://www.nowcoder.com/favicon.ico', description: '牛客网 - 面向IT行业的招聘信息平台'},
-      {title: '牛客', url: 'https://www.nowcoder.com/', icon: 'https://www.nowcoder.com/favicon.ico', description: '牛客网 - 提供在线面试和编程题库的平台'},
-      {title: 'gitee', url: 'https://gitee.com/', icon: 'https://gitee.com/favicon.ico', description: 'Gitee - 国内领先的Git代码托管平台'},
-      {title: 'gitee', url: 'https://gitee.com/', icon: 'https://gitee.com/favicon.ico', description: 'Gitee - 提供代码托管和版本控制服务'},
-      {title: 'gitee', url: 'https://gitee.com/', icon: 'https://gitee.com/favicon.ico', description: 'Gitee - 开源项目托管平台，支持Git仓库管理'},
-      {title: '简书', url: 'https://www.jianshu.com/', icon: 'https://www.jianshu.com/favicon.ico', description: '简书 - 个人写作和阅读分享平台'},
-      {title: '简书', url: 'https://www.jianshu.com/', icon: 'https://www.jianshu.com/favicon.ico', description: '简书 - 提供创作、阅读与分享的社区平台'},
-      {title: '简书', url: 'https://www.jianshu.com/', icon: 'https://www.jianshu.com/favicon.ico', description: '简书 - 记录生活点滴，分享创作的社交平台'},
-      {title: 'CSDN', url: 'https://www.csdn.net/', icon: 'https://www.csdn.net/favicon.ico', description: 'CSDN - 中国领先的IT技术社区，提供技术教程和开发资源'},
-      {title: 'CSDN', url: 'https://www.csdn.net/', icon: 'https://www.csdn.net/favicon.ico', description: 'CSDN - 提供编程技术文章、资源下载和编程交流平台'},
-      {title: 'CSDN', url: 'https://www.csdn.net/', icon: 'https://www.csdn.net/favicon.ico', description: 'CSDN - IT技术学习与分享平台，包含博客、论坛和代码库'},
-      {title: '知乎', url: 'https://www.zhihu.com/', icon: 'https://www.zhihu.com/favicon.ico', description: '知乎 - 提供问答和知识分享的平台'},
-      {title: '知乎', url: 'https://www.zhihu.com/', icon: 'https://www.zhihu.com/favicon.ico', description: '知乎 - 高质量的中文问答平台，汇聚各类专家'},
-      {title: '知乎', url: 'https://www.zhihu.com/', icon: 'https://www.zhihu.com/favicon.ico', description: '知乎 - 专注于知识分享与思想碰撞的平台'},
+      {
+        title: '牛客',
+        url: 'https://www.nowcoder.com/',
+        icon: 'https://www.nowcoder.com/favicon.ico',
+        description: '牛客网 - 提供编程题库、面试题及在线编程平台'
+      },
+      {
+        title: '牛客',
+        url: 'https://www.nowcoder.com/',
+        icon: 'https://www.nowcoder.com/favicon.ico',
+        description: '牛客网 - 面向IT行业的招聘信息平台'
+      },
+      {
+        title: '牛客',
+        url: 'https://www.nowcoder.com/',
+        icon: 'https://www.nowcoder.com/favicon.ico',
+        description: '牛客网 - 提供在线面试和编程题库的平台'
+      },
+      {
+        title: 'gitee',
+        url: 'https://gitee.com/',
+        icon: 'https://gitee.com/favicon.ico',
+        description: 'Gitee - 国内领先的Git代码托管平台'
+      },
+      {
+        title: 'gitee',
+        url: 'https://gitee.com/',
+        icon: 'https://gitee.com/favicon.ico',
+        description: 'Gitee - 提供代码托管和版本控制服务'
+      },
+      {
+        title: 'gitee',
+        url: 'https://gitee.com/',
+        icon: 'https://gitee.com/favicon.ico',
+        description: 'Gitee - 开源项目托管平台，支持Git仓库管理'
+      },
+      {
+        title: '简书',
+        url: 'https://www.jianshu.com/',
+        icon: 'https://www.jianshu.com/favicon.ico',
+        description: '简书 - 个人写作和阅读分享平台'
+      },
+      {
+        title: '简书',
+        url: 'https://www.jianshu.com/',
+        icon: 'https://www.jianshu.com/favicon.ico',
+        description: '简书 - 提供创作、阅读与分享的社区平台'
+      },
+      {
+        title: '简书',
+        url: 'https://www.jianshu.com/',
+        icon: 'https://www.jianshu.com/favicon.ico',
+        description: '简书 - 记录生活点滴，分享创作的社交平台'
+      },
+      {
+        title: 'CSDN',
+        url: 'https://www.csdn.net/',
+        icon: 'https://www.csdn.net/favicon.ico',
+        description: 'CSDN - 中国领先的IT技术社区，提供技术教程和开发资源'
+      },
+      {
+        title: 'CSDN',
+        url: 'https://www.csdn.net/',
+        icon: 'https://www.csdn.net/favicon.ico',
+        description: 'CSDN - 提供编程技术文章、资源下载和编程交流平台'
+      },
+      {
+        title: 'CSDN',
+        url: 'https://www.csdn.net/',
+        icon: 'https://www.csdn.net/favicon.ico',
+        description: 'CSDN - IT技术学习与分享平台，包含博客、论坛和代码库'
+      },
+      {
+        title: '知乎',
+        url: 'https://www.zhihu.com/',
+        icon: 'https://www.zhihu.com/favicon.ico',
+        description: '知乎 - 提供问答和知识分享的平台'
+      },
+      {
+        title: '知乎',
+        url: 'https://www.zhihu.com/',
+        icon: 'https://www.zhihu.com/favicon.ico',
+        description: '知乎 - 高质量的中文问答平台，汇聚各类专家'
+      },
+      {
+        title: '知乎',
+        url: 'https://www.zhihu.com/',
+        icon: 'https://www.zhihu.com/favicon.ico',
+        description: '知乎 - 专注于知识分享与思想碰撞的平台'
+      },
     ],
   },
   {
@@ -73,15 +207,60 @@ const bookmarkList = [
     href: '#dev-tools',
     icon: 'https://element.eleme.cn/favicon.ico',
     children: [
-      {title: 'GitHub', url: 'https://github.com/', icon: 'https://github.com/favicon.ico', description: 'GitHub - 全球最大的开源代码托管平台'},
-      {title: 'GitHub', url: 'https://github.com/', icon: 'https://github.com/favicon.ico', description: 'GitHub - 提供版本控制、代码托管和协作开发服务'},
-      {title: 'GitHub', url: 'https://github.com/', icon: 'https://github.com/favicon.ico', description: 'GitHub - 开源代码社区和软件开发平台'},
-      {title: 'GitLab', url: 'https://gitlab.com/', icon: 'https://gitlab.com/favicon.ico', description: 'GitLab - 提供Git代码托管、CI/CD和版本控制服务'},
-      {title: 'GitLab', url: 'https://gitlab.com/', icon: 'https://gitlab.com/favicon.ico', description: 'GitLab - 强大的代码托管和开发工具，支持自动化部署'},
-      {title: 'GitLab', url: 'https://gitlab.com/', icon: 'https://gitlab.com/favicon.ico', description: 'GitLab - 用于软件开发的Git仓库管理和协作平台'},
-      {title: 'Bitbucket', url: 'https://bitbucket.org/', icon: 'https://bitbucket.org/favicon.ico', description: 'Bitbucket - 提供Git和Mercurial代码托管服务'},
-      {title: 'Bitbucket', url: 'https://bitbucket.org/', icon: 'https://bitbucket.org/favicon.ico', description: 'Bitbucket - 一个用于代码托管和项目管理的平台'},
-      {title: 'Bitbucket', url: 'https://bitbucket.org/', icon: 'https://bitbucket.org/favicon.ico', description: 'Bitbucket - 提供团队合作和源码管理'},
+      {
+        title: 'GitHub',
+        url: 'https://github.com/',
+        icon: 'https://github.com/favicon.ico',
+        description: 'GitHub - 全球最大的开源代码托管平台'
+      },
+      {
+        title: 'GitHub',
+        url: 'https://github.com/',
+        icon: 'https://github.com/favicon.ico',
+        description: 'GitHub - 提供版本控制、代码托管和协作开发服务'
+      },
+      {
+        title: 'GitHub',
+        url: 'https://github.com/',
+        icon: 'https://github.com/favicon.ico',
+        description: 'GitHub - 开源代码社区和软件开发平台'
+      },
+      {
+        title: 'GitLab',
+        url: 'https://gitlab.com/',
+        icon: 'https://gitlab.com/favicon.ico',
+        description: 'GitLab - 提供Git代码托管、CI/CD和版本控制服务'
+      },
+      {
+        title: 'GitLab',
+        url: 'https://gitlab.com/',
+        icon: 'https://gitlab.com/favicon.ico',
+        description: 'GitLab - 强大的代码托管和开发工具，支持自动化部署'
+      },
+      {
+        title: 'GitLab',
+        url: 'https://gitlab.com/',
+        icon: 'https://gitlab.com/favicon.ico',
+        description: 'GitLab - 用于软件开发的Git仓库管理和协作平台'
+      },
+      {
+        title: 'Bitbucket',
+        url: 'https://bitbucket.org/',
+        icon: 'https://bitbucket.org/favicon.ico',
+        description: 'Bitbucket - 提供Git和Mercurial代码托管服务'
+      },
+      {
+        title: 'Bitbucket',
+        url: 'https://bitbucket.org/',
+        icon: 'https://bitbucket.org/favicon.ico',
+        description: 'Bitbucket - 一个用于代码托管和项目管理的平台'
+      },
+      {
+        title: 'Bitbucket',
+        url: 'https://bitbucket.org/',
+        icon: 'https://bitbucket.org/favicon.ico',
+        description: 'Bitbucket - 提供团队合作和源码管理'
+      },
     ],
   },
   {
@@ -89,11 +268,36 @@ const bookmarkList = [
     href: '#learning-resources',
     icon: 'https://element.eleme.cn/favicon.ico',
     children: [
-      {title: '菜鸟教程', url: 'https://www.runoob.com/', icon: 'https://www.runoob.com/favicon.ico', description: '菜鸟教程 - 免费的在线编程教程'},
-      {title: '菜鸟教程', url: 'https://www.runoob.com/', icon: 'https://www.runoob.com/favicon.ico', description: '菜鸟教程 - 免费的在线编程教程'},
-      {title: '菜鸟教程', url: 'https://www.runoob.com/', icon: 'https://www.runoob.com/favicon.ico', description: '菜鸟教程 - 免费的在线编程教程'},
-      {title: '菜鸟教程', url: 'https://www.runoob.com/', icon: 'https://www.runoob.com/favicon.ico', description: '菜鸟教程 - 免费的在线编程教程'},
-      {title: '菜鸟教程', url: 'https://www.runoob.com/', icon: 'https://www.runoob.com/favicon.ico', description: '菜鸟教程 - 免费的在线编程教程'},
+      {
+        title: '菜鸟教程',
+        url: 'https://www.runoob.com/',
+        icon: 'https://www.runoob.com/favicon.ico',
+        description: '菜鸟教程 - 免费的在线编程教程'
+      },
+      {
+        title: '菜鸟教程',
+        url: 'https://www.runoob.com/',
+        icon: 'https://www.runoob.com/favicon.ico',
+        description: '菜鸟教程 - 免费的在线编程教程'
+      },
+      {
+        title: '菜鸟教程',
+        url: 'https://www.runoob.com/',
+        icon: 'https://www.runoob.com/favicon.ico',
+        description: '菜鸟教程 - 免费的在线编程教程'
+      },
+      {
+        title: '菜鸟教程',
+        url: 'https://www.runoob.com/',
+        icon: 'https://www.runoob.com/favicon.ico',
+        description: '菜鸟教程 - 免费的在线编程教程'
+      },
+      {
+        title: '菜鸟教程',
+        url: 'https://www.runoob.com/',
+        icon: 'https://www.runoob.com/favicon.ico',
+        description: '菜鸟教程 - 免费的在线编程教程'
+      },
     ]
   }
 ]
