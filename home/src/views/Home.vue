@@ -7,6 +7,7 @@ import RightDrawer from '@/components/RightDrawer/index.vue'
 import BookmarkDetailsDrawer from '@/components/BookmarkDetailsDrawer/index.vue'
 import Anchor from '@/components/Anchor/index.vue'
 import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
+import DeleteMenu from '@/components/DeleteMenu/index.vue'
 </script>
 <template>
   <div class="common-layout">
@@ -29,6 +30,8 @@ import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
       <BookmarkDetailsDrawer/>
       <!--添加书签的框-->
       <AddBookmarkBox/>
+      <!--删除书签环绕菜单 (内部逻辑: 状态为正在删除的时候触发)-->
+      <DeleteMenu class="delete-menu"/>
     </el-container>
   </div>
 </template>
@@ -46,6 +49,12 @@ import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
   //  transform: translateY(-50%); // 垂直居中
   //  opacity: 0.8; /* 临时改为 1，测试锚点是否正常渲染 */
   width: 1px;
+}
+
+.delete-menu {
+  z-index: 1000;
+  position: fixed; // 位置固定
+  top: 4.6%;
 }
 
 </style>
