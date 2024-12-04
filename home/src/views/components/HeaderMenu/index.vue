@@ -11,6 +11,7 @@ import Avatar from '@/components/Avatar/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
 import DeleteBookmarkButton from "@/views/components/HeaderMenu/components/DeleteBookmarkButton.vue";
+import CancelDeleteBookmarkButton from "@/views/components/HeaderMenu/components/CancelDeleteBookmarkButton.vue";
 import {useDeleteBookmarkStore} from "@/store/deleteBookmark";
 
 const rightDrawerStore = useRightDrawerStore()
@@ -38,8 +39,12 @@ function updateMenu() {
     <!-- ExpandButton 放置在最左侧 -->
     <ExpandButton/>
 
+    <!--删除书签按钮/取消删除书签按钮-->
     <!--删除按钮 - 只有在不删除的时候才显示-->
     <DeleteBookmarkButton v-if="!deleteBookmarkStore.isDeleting"/>
+    <!--取消删除按钮 - 只有在删除状态下才显示-->
+    <CancelDeleteBookmarkButton v-if="deleteBookmarkStore.isDeleting"/>
+
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'><label></label>
 
     <ul>
