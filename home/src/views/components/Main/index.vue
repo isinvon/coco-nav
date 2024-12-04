@@ -7,13 +7,24 @@
 import MIcon from "@/components/MIcon/index.vue";
 // 书签详情抽屉全局状态管理
 import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer';
+import {Delete} from "@element-plus/icons-vue";
+import {useDeleteBookmarkStore} from "@/store/deleteBookmark.js";
 
 const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore();
+const deleteBookmarkStore = useDeleteBookmarkStore();
 
 // 切换抽屉状态
 const toggleBookmarkDetailsDrawer = () => {
   bookmarkDetailsDrawerStore.toggleDrawer();
+  if (!deleteBookmarkStore.isDeleting) {  // 只有在没有删除模式下才触发
+    bookmarkDetailsDrawerStore.toggleDrawer();
+  }
 };
+
+// 切换抽屉状态
+// const toggleBookmarkDetailsDrawer = () => {
+//   bookmarkDetailsDrawerStore.toggleDrawer();
+// };
 
 const bookmarkList = [
   {
@@ -111,6 +122,9 @@ const bookmarkList = [
           <div class="bookmark-info">
             <div class="bookmark-title">{{ bookmark.title }}</div>
             <div class="bookmark-desc">{{ bookmark.description }}</div>
+          </div>
+          <div class="bookmark-delete-button" v-show="deleteBookmarkStore.isDeleting">
+            <Delete style="width: 2em; height: 2em; margin-right: 8px;margin-left: -5px; margin-bottom: 40px; color: darkred"/>
           </div>
         </div>
       </div>
