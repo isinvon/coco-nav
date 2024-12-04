@@ -8,7 +8,7 @@
  * @author sinvon
  * @since 2024年12月2日21:26:27
  */
-import {defineEmits, ref} from "vue";
+import {ref} from "vue";
 
 const bookmarkCategory = ref('')
 
