@@ -363,7 +363,7 @@ const bookmarkList = [
   background-color: rgb(246, 246, 246);
   border-radius: 10px;
   display: flex;
-  align-items: center;  // 垂直居中对齐
+  align-items: center; // 垂直居中对齐
   padding: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -378,21 +378,21 @@ const bookmarkList = [
 
 .bookmark-icon {
   font-size: 2rem;
-  margin-right: 10px;  // 保证图标和文本之间有间隔
+  margin-right: 10px; // 保证图标和文本之间有间隔
   width: auto; // 让图标填充父容器,注意: 换成 100% 会让 margin-right 即使是为 0 也还是有间隔
   height: 100%; /* 使得图标容器的高度与父容器一致 */
 }
 
 .bookmark-info {
   display: flex;
-  flex-direction: column;  // 让标题和描述上下排列
+  flex-direction: column; // 让标题和描述上下排列
   align-items: flex-start; // 靠左对齐
   justify-content: center; // 竖直方向居中对齐
 }
 
 .bookmark-title, .bookmark-desc {
   color: #59636e;
-  margin: 0;  // 去掉上下的默认间距
+  margin: 0; // 去掉上下的默认间距
   white-space: nowrap; // 防止文本换行
   overflow: hidden; // 超出部分隐藏
   text-overflow: ellipsis; // 超出部分使用省略号显示
@@ -401,13 +401,13 @@ const bookmarkList = [
 .bookmark-title {
   font-size: 12px;
   font-weight: bold;
-  max-width: 130px;  // 限制最大宽度，防止文字过长, 多的部分会被省略号显示
+  max-width: 130px; // 限制最大宽度，防止文字过长, 多的部分会被省略号显示
 }
 
 .bookmark-desc {
   font-size: 11px;
   font-weight: normal;
-  max-width: 130px;  // 限制最大宽度，防止文字过长, 多的部分会被省略号显示
+  max-width: 130px; // 限制最大宽度，防止文字过长, 多的部分会被省略号显示
 }
 
 </style>
