@@ -10,8 +10,12 @@ import AddBookmarkButton from "@/views/components/HeaderMenu/components/AddBookm
 import Avatar from '@/components/Avatar/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
+import DeleteBookmarkButton from "@/views/components/HeaderMenu/components/DeleteBookmarkButton.vue";
+import {useDeleteBookmarkStore} from "@/store/deleteBookmark";
 
 const rightDrawerStore = useRightDrawerStore()
+
+const deleteBookmarkStore = useDeleteBookmarkStore()
 
 // 切换抽屉状态
 const toggleDrawer = () => {
@@ -34,6 +38,8 @@ function updateMenu() {
     <!-- ExpandButton 放置在最左侧 -->
     <ExpandButton/>
 
+    <!--删除按钮 - 只有在不删除的时候才显示-->
+    <DeleteBookmarkButton v-if="!deleteBookmarkStore.isDeleting"/>
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'><label></label>
 
     <ul>
