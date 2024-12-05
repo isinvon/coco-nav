@@ -10,6 +10,7 @@ import AddBookmarkButton from "@/views/components/HeaderMenu/components/AddBookm
 import Avatar from '@/components/Avatar/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
+import HotButton from "./components/HotButton/index.vue";
 
 const rightDrawerStore = useRightDrawerStore()
 
@@ -31,8 +32,12 @@ function updateMenu() {
 <template>
 
   <nav id='menu'>
-    <!-- ExpandButton 放置在最左侧 -->
-    <ExpandButton/>
+    <div class="left-buttons">
+      <!-- ExpandButton-->
+      <ExpandButton />
+      <!--热点按钮-->
+      <HotButton />
+    </div>
 
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'><label></label>
 
@@ -93,8 +98,11 @@ function updateMenu() {
   border-radius: @border-radius;
   border: 1px solid @border-color;
 
-  > ExpandButton {
-    margin-right: @expand-button-margin;
+  .left-buttons {
+    display: flex;
+    align-items: center;
+    // 靠左排列
+    justify-content: flex-start;
   }
 
   ul {
