@@ -9,6 +9,7 @@ import Anchor from '@/components/Anchor/index.vue'
 import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
 import DeleteMenu from '@/components/DeleteMenu/index.vue'
 import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
+import HotCard from '@/components/HotCard/index.vue'
 </script>
 <template>
   <div class="common-layout">
@@ -35,6 +36,8 @@ import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
       <DeleteMenu class="delete-menu"/>
       <!--回收站抽屉组件-->
       <RecycleBinDrawer/>
+      <!--热点卡片-->
+      <HotCard class="hot-card"/>
     </el-container>
   </div>
 </template>
@@ -55,9 +58,16 @@ import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
 }
 
 .delete-menu {
-  z-index: 1000;
+  z-index: 10;
   position: fixed; // 位置固定
   top: -2%;
   transition: top 0.3s ease; // 添加过渡效果
+}
+
+.hot-card {
+  top: 80px;
+  left: 40px;
+  position: absolute;
+  z-index: 100;
 }
 </style>

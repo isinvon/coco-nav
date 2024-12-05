@@ -11,8 +11,10 @@ import Avatar from '@/components/Avatar/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
 import HotButton from "./components/HotButton/index.vue";
+import {useHotCardStore} from "@/store/hotCard.js";
 
 const rightDrawerStore = useRightDrawerStore()
+const hotCardStore = useHotCardStore()
 
 // 切换抽屉状态
 const toggleDrawer = () => {
@@ -34,9 +36,9 @@ function updateMenu() {
   <nav id='menu'>
     <div class="left-buttons">
       <!-- ExpandButton-->
-      <ExpandButton />
+      <ExpandButton/>
       <!--热点按钮-->
-      <HotButton />
+      <HotButton @click='hotCardStore.toggleHotCardOpenState()'/>
     </div>
 
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'><label></label>
