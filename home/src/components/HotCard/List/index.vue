@@ -5,17 +5,29 @@
  * @since 2024年12月5日23:30:44
  * @module List
  */
-import {ref} from 'vue'
 
-const count = ref(0)
-const load = () => {
-  count.value += 2
-}
+// 接收父组件传递的新闻列表
+defineProps({
+  newsList: {
+    type: Array,
+    required: true, // 确保接收到数据
+  },
+});
 </script>
 
 <template>
-  <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-    <li v-for="i in count" :key="i" class="infinite-list-item">{{ i }}</li>
+  <ul class="infinite-list">
+    <li
+        v-for="(news, index) in newsList"
+        :key="news.id"
+        class="infinite-list-item"
+        :class="{ hot: index < 3 }"
+    >
+      <!-- 渲染新闻标题，点击跳转新标签 -->
+      <a :href="news.url" target="_blank">
+        {{ news.title }}<span v-if="index < 3">🔥</span>
+      </a>
+    </li>
   </ul>
 </template>
 
@@ -46,14 +58,28 @@ const load = () => {
   border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 50px;
-  background: var(--el-color-primary-light-9);
   margin: 10px;
+  padding: 0 10px;
   color: var(--el-color-primary);
+  background: var(--el-color-primary-light-9);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    flex: 1;
+  }
+
 }
 
 .infinite-list .infinite-list-item + .list-item {
   margin-top: 10px;
+}
+
+/* 高亮前三条新闻 */
+.infinite-list .infinite-list-item.hot {
+  background: #fef0f0; /* 红色背景 */
+  color: #f56c6c;
 }
 </style>
