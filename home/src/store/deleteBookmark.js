@@ -21,6 +21,11 @@ export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
             this.isDeleting = true
         },
 
+        // 切换删除状态
+        toggleDeleteState() {
+            this.isDeleting = !this.isDeleting
+        },
+
         // 开启多选删除状态
         openMultipleChoiceDelete() {
             this.isMultipleChoiceDelete = true

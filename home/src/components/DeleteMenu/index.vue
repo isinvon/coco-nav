@@ -15,11 +15,11 @@ const deleteBookmarkStore = useDeleteBookmarkStore()
 </script>
 
 <template>
-  <transition name="delete-menu" v-if="deleteBookmarkStore.isDeleting">
+  <transition name="delete-menu">
     <div class="wrapper">
       <input class="hidden-trigger" id="toogle" type="checkbox">
       <Tooltip tooltipText="菜单" placement="bottom" effect="dark">
-        <label class="circle" for="toogle">
+        <label @click="deleteBookmarkStore.toggleDeleteState()" class="circle" for="toogle">
           <svg xmlns="http://www.w3.org/2000/svg" style="color: #e8e8e8;width: 80px;height: 80px;" xml:space="preserve" viewBox="-6 -6 48 48"><path fill="currentColor" d="M10 20q-.825 0-1.412-.587T8 18t.588-1.412T10 16h10q.825 0 1.413.588T22 18t-.587 1.413T20 20zm0-6q-.825 0-1.412-.587T8 12t.588-1.412T10 10h10q.825 0 1.413.588T22 12t-.587 1.413T20 14zm0-6q-.825 0-1.412-.587T8 6t.588-1.412T10 4h10q.825 0 1.413.588T22 6t-.587 1.413T20 8zM4 8q-.825 0-1.412-.587T2 6t.588-1.412T4 4t1.413.588T6 6t-.587 1.413T4 8m0 6q-.825 0-1.412-.587T2 12t.588-1.412T4 10t1.413.588T6 12t-.587 1.413T4 14m0 6q-.825 0-1.412-.587T2 18t.588-1.412T4 16t1.413.588T6 18t-.587 1.413T4 20"/></svg>
         </label>
       </Tooltip>
