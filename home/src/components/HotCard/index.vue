@@ -1,15 +1,15 @@
 <script setup>
 /**
- * @name Card
- * @module Card
- * @description 卡片组件
+ * @name HotCard
+ * @module HotCard
+ * @description 热点卡片组件（支持无限滚动功能）
  * @author sinvon
  * @since 2024年12月5日22:59:21
  */
 
-import { defineProps } from 'vue';
-import List from './List/index.vue';
+import {defineProps} from 'vue';
 import {useHotCardStore} from "@/store/hotCard.js";
+import List from './List/index.vue'
 
 const hotCardStore = useHotCardStore()
 // 接收父组件传入的新闻数据
@@ -25,7 +25,7 @@ defineProps({
   <el-card v-if="hotCardStore.isOpen" class="hot-card" style="max-width: 480px">
     <!--<h3>热点新闻</h3>-->
     <!-- 将新闻列表数据传递给子组件 -->
-    <List :newsList="newsList" />
+    <List :newsList="newsList"/>
   </el-card>
 </template>
 
