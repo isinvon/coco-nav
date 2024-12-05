@@ -25,18 +25,12 @@ export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
         openMultipleChoiceDelete() {
             this.isMultipleChoiceDelete = true
             this.isDeleting = true
-            console.log('开启多选删除状态')
-            console.log("isDeleting: ", this.isDeleting)
-            console.log("isMultipleChoiceDelete: ", this.isMultipleChoiceDelete)
         },
 
         // 关闭多选删除状态
         closeMultipleChoiceDelete() {
             this.isDeleting = false
             this.isMultipleChoiceDelete = false
-            console.log('关闭多选删除状态')
-            console.log("isDeleting: ", this.isDeleting)
-            console.log("isMultipleChoiceDelete: ", this.isMultipleChoiceDelete)
         },
 
         // 关闭删除状态和多选删除状态
