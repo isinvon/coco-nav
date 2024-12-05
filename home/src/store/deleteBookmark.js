@@ -3,6 +3,7 @@ import {defineStore} from 'pinia'
 export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
     state: () => ({
         isDeleting: false,              // 当前是否处于删除状态
+        isMultipleChoiceDelete: false,  // 当前是否处于多选删除状态
         selectedBookmarks: [],          // 当前选中的书签（批量删除用）
         deletedBookmarks: [],          // 存储已删除的书签
         isConfirmingDelete: false,      // 是否弹出删除确认框
@@ -18,6 +19,30 @@ export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
         // 开启删除状态
         openDeleteState() {
             this.isDeleting = true
+        },
+
+        // 开启多选删除状态
+        openMultipleChoiceDelete() {
+            this.isMultipleChoiceDelete = true
+            this.isDeleting = true
+            console.log('开启多选删除状态')
+            console.log("isDeleting: ", this.isDeleting)
+            console.log("isMultipleChoiceDelete: ", this.isMultipleChoiceDelete)
+        },
+
+        // 关闭多选删除状态
+        closeMultipleChoiceDelete() {
+            this.isDeleting = false
+            this.isMultipleChoiceDelete = false
+            console.log('关闭多选删除状态')
+            console.log("isDeleting: ", this.isDeleting)
+            console.log("isMultipleChoiceDelete: ", this.isMultipleChoiceDelete)
+        },
+
+        // 关闭删除状态和多选删除状态
+        closeDeleteAndMultipleDelete() {
+            this.closeDeleteState()
+            this.closeMultipleChoiceDelete()
         },
 
         // 添加书签到已删除列表

@@ -58,7 +58,7 @@ const deleteBookmarkStore = useDeleteBookmarkStore()
           </button>
         </Tooltip>
         <Tooltip tooltipText="取消" placement="bottom" effect="dark">
-          <button @click="deleteBookmarkStore.closeDeleteState()" class="sub-circle">
+          <button @click="deleteBookmarkStore.closeDeleteAndMultipleDelete()" class="sub-circle">
             <input class="hidden-sub-trigger" id="sub6" type="radio" name="sub-circle" value="1">
               <label for="sub6">
                 <!--取消-->
@@ -67,7 +67,7 @@ const deleteBookmarkStore = useDeleteBookmarkStore()
           </button>
         </Tooltip>
         <Tooltip tooltipText="批量选择" placement="bottom" effect="dark">
-          <button class="sub-circle">
+          <button @click="deleteBookmarkStore.openMultipleChoiceDelete()" class="sub-circle">
             <input class="hidden-sub-trigger" id="sub7" type="radio" name="sub-circle" value="1">
             <label for="sub7">
               <!--批量选择-->

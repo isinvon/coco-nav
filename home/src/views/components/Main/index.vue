@@ -327,8 +327,13 @@ const bookmarkList = [
             <div class="bookmark-title">{{ bookmark.title }}</div>
             <div class="bookmark-desc">{{ bookmark.description }}</div>
           </div>
-          <div class="bookmark-delete-button" v-show="deleteBookmarkStore.isDeleting">
+          <!--单个删除按钮, 批量删除为false,删除为true的时候,开启-->
+          <div class="bookmark-delete-button" v-show="deleteBookmarkStore.isDeleting && !deleteBookmarkStore.isMultipleChoiceDelete">
             <Delete style="width: 2em; height: 2em; margin-right: 8px;margin-left: -5px; margin-bottom: 40px; color: darkred"/>
+          </div>
+          <!--复选框, 批量删除状态为false的时候会自动让isDeleting为true(在useDeleteBookmarkStore内部已经定义好逻辑了)-->
+          <div class="bookmark-delete-multiple-checkbox" v-show="deleteBookmarkStore.isMultipleChoiceDelete">
+            <input type="checkbox" class="checkbox" v-model="selectedBookmarks" :value="bookmark.url" style="width: 2em; height: 2em; margin-right: 8px;margin-left: -5px; margin-bottom: 40px;"/>
           </div>
         </div>
       </div>
