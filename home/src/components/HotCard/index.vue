@@ -9,7 +9,9 @@
 
 import { defineProps } from 'vue';
 import List from './List/index.vue';
+import {useHotCardStore} from "@/store/hotCard.js";
 
+const hotCardStore = useHotCardStore()
 // 接收父组件传入的新闻数据
 defineProps({
   newsList: {
@@ -20,7 +22,7 @@ defineProps({
 </script>
 
 <template>
-  <el-card class="hot-card" style="max-width: 480px">
+  <el-card v-if="hotCardStore.isOpen" class="hot-card" style="max-width: 480px">
     <!--<h3>热点新闻</h3>-->
     <!-- 将新闻列表数据传递给子组件 -->
     <List :newsList="newsList" />
