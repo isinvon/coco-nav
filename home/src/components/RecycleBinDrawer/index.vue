@@ -10,7 +10,6 @@ import {useRecycleBinDrawerStore} from '@/store/recycleBinDrawer';
 import {ref} from 'vue';
 import {throttle} from 'lodash';
 import {ElMessageBox, ElMessage} from 'element-plus';
-import {Delete} from "@element-plus/icons-vue";
 
 const recycleBinDrawerStore = useRecycleBinDrawerStore();
 const bookmarks = ref([
