@@ -39,12 +39,17 @@ import newsList from "../../mock/newList.js";
       <!--回收站抽屉组件-->
       <RecycleBinDrawer/>
       <!--热点卡片-->
-      <HotCard class="hot-card" :newsList="newsList"/>
+      <transition name="hot-card-animation">
+        <HotCard class="hot-card" :newsList="newsList"/>
+      </transition>
     </el-container>
   </div>
 </template>
 
 <style scoped lang="less">
+// 引入hotCard的样式
+@import "style/hotCard";
+
 .main-container {
   position: relative;
 }
@@ -66,10 +71,4 @@ import newsList from "../../mock/newList.js";
   transition: top 0.3s ease; // 添加过渡效果
 }
 
-.hot-card {
-  top: 80px;
-  left: 40px;
-  position: absolute;
-  z-index: 100;
-}
 </style>

@@ -1,0 +1,205 @@
+
+.hot-card {
+  top: 80px;
+  left: 40px;
+  position: absolute;
+  z-index: 100;
+}
+
+.hot-card-animation-enter-active,
+.hot-card-animation-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hot-card-animation-enter-from {
+  opacity: 0;
+  transform: translateY(-20px); /* 初始状态：向上偏移 */
+}
+
+.hot-card-animation-leave-to {
+  opacity: 0;
+  transform: translateY(-20px); /* 结束状态：向上偏移 */
+}
+
+// =========缩放动画======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: opacity 0.3s ease, transform 0.3s ease;
+//}
+//
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  transform: scale(0.8);  /* 初始状态：缩小 */
+//}
+//
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//  transform: scale(0.8);  /* 离开时缩小 */
+//}
+// =========缩放动画======end======
+
+
+// =========退场动画======start======
+
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: opacity 0.3s ease, transform 0.3s ease;
+//}
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  transform: rotateY(90deg);
+//  transform-origin: center center;
+//  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+//  transition-delay: 0.2s;
+//  transition-duration: 0.5s;
+//  transition-property: opacity, transform;
+//}
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//
+//  transform: rotateY(90deg);
+//  transform-origin: center center;
+//  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+//  transition-duration: 0.5s;
+//  transition-property: opacity, transform;
+//  transition-delay: 0.2s;
+//}
+//=======退场动画======end======
+
+// =========旋转缩放动画======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: transform 0.5s ease, opacity 0.5s ease;
+//}
+//
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  transform: rotate(180deg) scale(0.8);  /* 旋转并缩小 */
+//}
+//
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//  transform: rotate(180deg) scale(0.8);  /* 离开时旋转并缩小 */
+//}
+//=========旋转缩放动画======end======
+
+// ========跳跃动画======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+//}
+//
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  transform: translateY(50px);  /* 初始状态：从下方进入 */
+//}
+//
+//.hot-card-animation-enter-to {
+//  opacity: 1;
+//  transform: translateY(0); /* 结束状态：恢复正常位置 */
+//}
+//
+//.hot-card-animation-leave-from {
+//  opacity: 1;
+//  transform: translateY(0); /* 离开时从原位置 */
+//}
+//
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//  transform: translateY(50px); /* 离开时向下消失 */
+//}
+// ========跳跃动画======end======
+
+// =========横向位移动画======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: opacity 0.5s ease, transform 0.5s ease, background 0.5s ease;
+//}
+//
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  transform: translateX(-100px);  /* 从左边进入 */
+//}
+//
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//  transform: translateX(100px); /* 离开时向右移动 */
+//}
+// =========横向位移动画======end======
+
+// =========水平翻转动画======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+//}
+//
+//.hot-card-animation-enter-from,
+//.hot-card-animation-leave-to {
+//  transform: rotateY(90deg); /* 初始/结束状态：水平翻转 */
+//}
+//
+//.hot-card-animation-enter-to {
+//  transform: rotateY(0); /* 进入时恢复正常 */
+//}
+//
+//.hot-card-animation-leave-from {
+//  transform: rotateY(0); /* 离开时翻转 */
+//}
+//=========水平翻转动画======end======
+
+// =========垂直翻转动画======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: transform 1s ease, opacity 1s ease;
+//}
+//
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  transform: scale(0.5) rotateX(90deg);  /* 初始状态：缩小并且旋转90度 */
+//  transform-origin: center;  /* 设置旋转的中心为卡片中心 */
+//}
+//
+//.hot-card-animation-enter-to {
+//  opacity: 1;
+//  transform: scale(1) rotateX(0);  /* 展开时恢复正常尺寸并且旋转到0度 */
+//}
+//
+//.hot-card-animation-leave-from {
+//  opacity: 1;
+//  transform: scale(1) rotateX(0);  /* 离开时恢复正常尺寸 */
+//}
+//
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//  transform: scale(0.5) rotateX(90deg);  /* 离开时缩小并旋转90度 */
+//}
+// =========垂直翻转动画======end======
+
+
+// =========高度动画(犹如书卷展开,高度从0->原始高度)======start======
+//.hot-card-animation-enter-active,
+//.hot-card-animation-leave-active {
+//  transition: max-height 0.8s ease-out, opacity 0.8s ease-out;
+//}
+//
+//.hot-card-animation-enter-from {
+//  opacity: 0;
+//  max-height: 0; /* 初始状态：高度为0 */
+//  overflow: hidden; /* 超出部分隐藏 */
+//}
+//
+//.hot-card-animation-enter-to {
+//  opacity: 1;
+//  max-height: 500px; /* 目标最大高度（根据需要调整） */
+//}
+//
+//.hot-card-animation-leave-from {
+//  opacity: 1;
+//  max-height: 500px; /* 离开时保持最大高度 */
+//}
+//
+//.hot-card-animation-leave-to {
+//  opacity: 0;
+//  max-height: 0; /* 离开时高度为0 */
+//}
+// =========高度动画======end======
