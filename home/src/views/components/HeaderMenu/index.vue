@@ -10,13 +10,8 @@ import AddBookmarkButton from "@/views/components/HeaderMenu/components/AddBookm
 import Avatar from '@/components/Avatar/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
-import DeleteBookmarkButton from "@/views/components/HeaderMenu/components/DeleteBookmarkButton.vue";
-import CancelDeleteBookmarkButton from "@/views/components/HeaderMenu/components/CancelDeleteBookmarkButton.vue";
-import {useDeleteBookmarkStore} from "@/store/deleteBookmark";
 
 const rightDrawerStore = useRightDrawerStore()
-
-const deleteBookmarkStore = useDeleteBookmarkStore()
 
 // 切换抽屉状态
 const toggleDrawer = () => {
