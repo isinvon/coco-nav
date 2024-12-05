@@ -39,12 +39,6 @@ function updateMenu() {
     <!-- ExpandButton 放置在最左侧 -->
     <ExpandButton/>
 
-    <!--删除书签按钮/取消删除书签按钮-->
-    <!--删除按钮 - 只有在不删除的时候才显示-->
-    <DeleteBookmarkButton v-if="!deleteBookmarkStore.isDeleting"/>
-    <!--取消删除按钮 - 只有在删除状态下才显示-->
-    <CancelDeleteBookmarkButton v-if="deleteBookmarkStore.isDeleting"/>
-
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'><label></label>
 
     <ul>
