@@ -1,24 +1,42 @@
 <script lang="js" setup>
+import {ref} from "vue";
+
 /**
- * 热点列表
+ * 热点列表 (支持无限滚动加载)
  * @author sinvon
  * @since 2024年12月5日23:30:44
  * @module List
  */
 
 // 接收父组件传递的新闻列表
-defineProps({
+const props = defineProps({
   newsList: {
     type: Array,
     required: true, // 确保接收到数据
   },
 });
+
+const newListSplit = ref([]); // 已加载的新闻列表
+let startIndex = 0; // 起始索引
+const batchSize = 6; // 每次加载的数量
+
+// 将新闻列表分割成小块，每次加载3条, (如果不启动无限滚动请直接去除v-infinite-scroll属性)
+const load = () => {
+  if (startIndex >= props.newsList.length) return; // 防止越界
+  const endIndex = startIndex + batchSize;
+  newListSplit.value.push(...props.newsList.slice(startIndex, endIndex));
+  startIndex = endIndex; // 更新起始索引
+};
 </script>
 
 <template>
-  <ul class="infinite-list">
+  <ul
+      v-infinite-scroll="load"
+      class="infinite-list"
+      style="overflow: auto"
+  >
     <li
-        v-for="(news, index) in newsList"
+        v-for="(news, index) in newListSplit"
         :key="news.id"
         class="infinite-list-item"
         :class="{ hot: index < 3 }"
