@@ -3,7 +3,7 @@
  * @author sinvon
  * @description 取消删除书签按钮(启动删除模式会显示)
  * @since 2024年12月3日00:33:22
- * @module DeleteBookmarkButton
+ * @module CancelDeleteBookmarkButton
  */
 import {useDeleteBookmarkStore} from '@/store/deleteBookmark'
 
