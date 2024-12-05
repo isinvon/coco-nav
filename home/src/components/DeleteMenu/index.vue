@@ -21,7 +21,7 @@ const deleteBookmarkStore = useDeleteBookmarkStore()
 const menuOperationLogic = () => {
   // 将style='top=xxx'挂载到 .wrapper 上，用于控制动画效果
   if (!isFirstClickMenu.value) {
-    document.querySelector('.wrapper').style.top = "4%"
+    document.querySelector('.wrapper').style.top = "5%"
     isFirstClickMenu.value = true
     // 第一次点击的时候显示删除模式
     deleteBookmarkStore.openDeleteState()
