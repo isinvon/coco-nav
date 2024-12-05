@@ -9,9 +9,28 @@
 import Tooltip from '@/components/Tooltip/index.vue'
 import {useDeleteBookmarkStore} from "@/store/deleteBookmark";
 import {useRecycleBinDrawerStore} from '@/store/recycleBinDrawer'
+import {ref} from "vue";
+
+// 判断菜单是否是上一次收缩回去之后重新计时的第一次点击
+const isFirstClickMenu = ref(false)
 
 const recycleBinDrawerStore = useRecycleBinDrawerStore()
 const deleteBookmarkStore = useDeleteBookmarkStore()
+
+// 菜单按钮的操作逻辑
+const menuOperationLogic = () => {
+  // 将style='top=xxx'挂载到 .wrapper 上，用于控制动画效果
+  if (!isFirstClickMenu.value) {
+    document.querySelector('.wrapper').style.top = "4%"
+    isFirstClickMenu.value = true
+    // 第一次点击的时候显示删除模式
+    deleteBookmarkStore.openDeleteState()
+  }else {
+    document.querySelector('.wrapper').style.top = "-2%"
+    isFirstClickMenu.value = false
+    deleteBookmarkStore.closeDeleteAndMultipleDelete()
+  }
+}
 </script>
 
 <template>
@@ -19,7 +38,7 @@ const deleteBookmarkStore = useDeleteBookmarkStore()
     <div class="wrapper">
       <input class="hidden-trigger" id="toogle" type="checkbox">
       <Tooltip tooltipText="菜单" placement="bottom" effect="dark">
-        <label @click="deleteBookmarkStore.toggleDeleteState()" class="circle" for="toogle">
+        <label @click="menuOperationLogic" class="circle" for="toogle">
           <svg xmlns="http://www.w3.org/2000/svg" style="color: #e8e8e8;width: 80px;height: 80px;" xml:space="preserve" viewBox="-6 -6 48 48"><path fill="currentColor" d="M10 20q-.825 0-1.412-.587T8 18t.588-1.412T10 16h10q.825 0 1.413.588T22 18t-.587 1.413T20 20zm0-6q-.825 0-1.412-.587T8 12t.588-1.412T10 10h10q.825 0 1.413.588T22 12t-.587 1.413T20 14zm0-6q-.825 0-1.412-.587T8 6t.588-1.412T10 4h10q.825 0 1.413.588T22 6t-.587 1.413T20 8zM4 8q-.825 0-1.412-.587T2 6t.588-1.412T4 4t1.413.588T6 6t-.587 1.413T4 8m0 6q-.825 0-1.412-.587T2 12t.588-1.412T4 10t1.413.588T6 12t-.587 1.413T4 14m0 6q-.825 0-1.412-.587T2 18t.588-1.412T4 16t1.413.588T6 18t-.587 1.413T4 20"/></svg>
         </label>
       </Tooltip>

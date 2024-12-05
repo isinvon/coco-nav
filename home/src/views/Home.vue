@@ -57,7 +57,12 @@ import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
 .delete-menu {
   z-index: 1000;
   position: fixed; // 位置固定
-  top: 4.6%;
+  top: -2%;
+  transition: top 0.1s ease; // 添加过渡效果
+}
+
+.delete-menu:hover {
+  top: 4%;
 }
 
 </style>
