@@ -21,6 +21,7 @@
                     v-for="engine in searchEngines"
                     :key="engine.name"
                     :command="engine"
+                    style="color: gray;"
                 >
                   {{ engine.name }}
                 </el-dropdown-item>
