@@ -8,7 +8,7 @@
           class="search-input"
           @keyup.enter="performSearch"
       >
-        <template #suffix>
+        <template #prepend>
           <el-dropdown trigger="click" @command="setSearchEngine" class="dropdown">
             <el-button class="engine-btn">
               {{ currentEngine.name }}
