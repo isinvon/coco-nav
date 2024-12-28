@@ -163,6 +163,7 @@ const addEngine = () => {
     height: 45px; // 由engine-btn决定搜索框的高度,搜索框无需设置高度
     outline: none; /* 去除点击后的边框 */
     box-shadow: none; /* 去除可能的阴影效果 */
+    color: #888888;
   }
 
   .settings-btn {
