@@ -152,6 +152,8 @@ const addEngine = () => {
   align-items: center;
 
   .search-input {
+    box-shadow: 0 0 0 0.1px #939393;
+    border-radius: 12px;
     // 使用 :deep() 伪类选择器，设置 .el-input__wrapper 的样式来覆盖 el-input 默认样式, 实现 el-input 圆角
     :deep(.el-input__wrapper) {
       width: 600px;
