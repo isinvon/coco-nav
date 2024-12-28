@@ -153,13 +153,14 @@ const addEngine = () => {
 
   // 通过 ::v-deep 伪类选择器，设置 .el-input__wrapper 的样式来覆盖el-input默认样式,实现el-input圆角
   .search-input::v-deep .el-input__wrapper {
+    width: 600px;
     font-size: 16px;
     border-radius: 12px !important;
   }
 
 
   .engine-btn {
-    height: auto;
+    height: 45px; // 由engine-btn决定搜索框的高度,搜索框无需设置高度
     outline: none; /* 去除点击后的边框 */
     box-shadow: none; /* 去除可能的阴影效果 */
   }
