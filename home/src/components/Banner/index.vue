@@ -188,6 +188,8 @@ const addEngine = () => {
 
     &:hover {
       color: black;
+      // 旋转
+      transform: rotate(45deg);
     }
 
     &:focus {
