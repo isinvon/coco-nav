@@ -156,7 +156,8 @@ const addEngine = () => {
     :deep(.el-input__wrapper) {
       width: 600px;
       font-size: 16px;
-      border-radius: 12px;
+      border-top-right-radius: 12px;   /* 右上角设置圆角 */
+      border-bottom-right-radius: 12px;/* 右下角设置圆角 */
     }
   }
 
