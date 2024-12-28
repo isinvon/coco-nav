@@ -3,15 +3,32 @@
     <div class="sidebar-content">
       <span>Hi there!</span>
       <UserInfoSection :userInfo="userInfo" />
+
+      <div class="div-spacing"/>
+
       <SettingsButton @open-settings="showModal = true" />
+
+      <div class="div-spacing"/>
+
       <SortOrderSection @update-sort-order="handleSortOrderChange" />
+
+      <div class="div-spacing"/>
+
       <div class="settings-section">
         <h3>Recently Visited Bookmarks</h3>
         <WordcloudTag :data="recentBookmarks" />
       </div>
+
+      <div class="div-spacing"/>
+
       <RecommendedBookmarks :bookmarks="recommendedBookmarks" />
+
+      <div class="div-spacing"/>
+
       <AboutUsSection :aboutUsText="aboutUsText" />
     </div>
+
+    <div class="div-spacing"/>
 
     <SettingsDialog v-model="showModal" />
   </el-drawer>
@@ -67,5 +84,8 @@ const handleSortOrderChange = (newValue) => {
 .sidebar-content {
   padding: 20px;
   color: #666666;
+}
+.div-spacing{
+  padding: 1px;
 }
 </style>
