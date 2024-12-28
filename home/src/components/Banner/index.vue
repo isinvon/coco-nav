@@ -154,19 +154,20 @@ const addEngine = () => {
     :deep(.el-input__wrapper) {
       width: 600px;
       font-size: 16px;
-      border-top-right-radius: 12px;   /* 右上角设置圆角 */
-      border-bottom-right-radius: 12px;/* 右下角设置圆角 */
+      border-top-right-radius: 12px; /* 右上角设置圆角 */
+      border-bottom-right-radius: 12px; /* 右下角设置圆角 */
       box-shadow: none;
     }
   }
 
   // 修改引擎选择按钮engine-btn的样式
-  :deep(.el-input-group__prepend){
+  :deep(.el-input-group__prepend) {
     border-top-left-radius: 12px; /* 设置左上角圆角 */
-    border-bottom-left-radius:12px; /* 设置左下角圆角 */
+    border-bottom-left-radius: 12px; /* 设置左下角圆角 */
   }
-  .dropdown{
-    .engine-btn{
+
+  .dropdown {
+    .engine-btn {
       height: 45px; // 由engine-btn决定搜索框的高度,搜索框无需设置高度
       outline: none; /* 去除点击后的边框 */
       box-shadow: none; /* 去除可能的阴影效果 */
