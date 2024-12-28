@@ -48,20 +48,18 @@
             <el-color-picker v-model="settings.background"/>
           </el-form-item>
           <el-form-item label="引擎列表">
-            <el-input
-                v-for="(engine, index) in settings.engines"
-                :key="index"
-                v-model="settings.engines[index].name"
-                placeholder="引擎名称"
-                class="engine-input"
-            />
-            <el-input
-                v-for="(engine, index) in settings.engines"
-                :key="'url-' + index"
-                v-model="settings.engines[index].url"
-                placeholder="引擎URL"
-                class="engine-input"
-            />
+            <div v-for="(engine, index) in settings.engines" :key="index" class="engine-item">
+              <el-input
+                  v-model="engine.name"
+                  placeholder="引擎名称"
+                  class="engine-input"
+              />
+              <el-input
+                  v-model="engine.url"
+                  placeholder="引擎URL"
+                  class="engine-input"
+              />
+            </div>
             <el-button type="text" icon="el-icon-circle-plus-outline" @click="addEngine">
               添加引擎
             </el-button>
@@ -207,4 +205,8 @@ const addEngine = () => {
     }
   }
 }
+.settings-container .engine-item {
+  margin-bottom: 15px;
+}
+
 </style>
