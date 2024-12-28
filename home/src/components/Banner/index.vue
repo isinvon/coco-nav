@@ -161,11 +161,19 @@ const addEngine = () => {
     }
   }
 
-  .engine-btn {
-    height: 45px; // 由engine-btn决定搜索框的高度,搜索框无需设置高度
-    outline: none; /* 去除点击后的边框 */
-    box-shadow: none; /* 去除可能的阴影效果 */
-    color: #888888;
+  // 修改引擎选择按钮engine-btn的样式
+  :deep(.el-input-group__prepend){
+    border-top-left-radius: 12px; /* 设置左上角圆角 */
+    border-bottom-left-radius:12px; /* 设置左下角圆角 */
+  }
+  .dropdown{
+    .engine-btn{
+      height: 45px; // 由engine-btn决定搜索框的高度,搜索框无需设置高度
+      outline: none; /* 去除点击后的边框 */
+      box-shadow: none; /* 去除可能的阴影效果 */
+      color: #888888;
+      font-size: 16px;
+    }
   }
 
   .settings-btn {
