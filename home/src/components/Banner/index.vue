@@ -10,7 +10,7 @@
       >
         <template #suffix>
           <el-dropdown trigger="click" @command="setSearchEngine" class="dropdown">
-            <el-button class="engine-btn" type="primary">
+            <el-button class="engine-btn">
               {{ currentEngine.name }}
               <i class="el-icon-arrow-down"></i>
             </el-button>
