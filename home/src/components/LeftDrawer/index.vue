@@ -20,23 +20,7 @@
       </div>
       <div class="settings-section">
         <h3>Recently Visited Bookmarks</h3>
-        <!--<word-cloud-->
-        <!--    :data="recentBookmarks"-->
-        <!--    nameKey="name"-->
-        <!--    valueKey="value"-->
-        <!--    :color="['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']"-->
-        <!--    :fontSize="[20, 60]"-->
-        <!--    style="width: 100%; height: 300px;"-->
-        <!--/>-->
-        <word-cloud
-            v-if="recentBookmarks.length"
-            :data="recentBookmarks"
-            nameKey="name"
-            valueKey="value"
-            :color="['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']"
-            :fontSize="[20, 60]"
-            style="width: 100%; height: 300px;"
-        />
+        <WordcloudTag :data="recentBookmarks"/>
       </div>
       <div class="settings-section">
         <h3>Recommended Bookmarks</h3>
@@ -106,9 +90,9 @@
 </template>
 
 <script lang="js" setup>
-import {ref, watch} from 'vue';
+import {ref} from 'vue';
 import {useLeftDrawerStore} from '@/store/leftDrawer';
-import WordCloud from 'vue-wordcloud';
+import WordcloudTag from './WordcloudTag/index.vue'; // 确保路径正确
 
 const leftDrawerStore = useLeftDrawerStore();
 const showModal = ref(false);
@@ -119,13 +103,13 @@ const enableNotifications = ref(false);
 const enableSync = ref(false);
 const shareData = ref(false);
 
-const recentBookmarks = ref([
+const recentBookmarks = [
   {name: 'Bookmark 1', value: 10},
   {name: 'Bookmark 2', value: 20},
   {name: 'Bookmark 3', value: 30},
   {name: 'Bookmark 4', value: 40},
   {name: 'Bookmark 5', value: 50}
-]);
+];
 
 const recommendedBookmarks = [
   {title: 'Recommendation 1', url: 'https://example.com/recommendation1'},
@@ -153,7 +137,6 @@ const openHelp = () => {
 const contactSupport = () => {
   window.open('mailto:support@example.com?subject=Support%20Request', '_blank');
 };
-
 </script>
 
 <style scoped>
@@ -196,9 +179,5 @@ ul {
 
 li {
   margin-bottom: 10px;
-}
-
-.wordcloud-container {
-  height: 300px;
 }
 </style>
