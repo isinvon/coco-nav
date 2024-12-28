@@ -7,7 +7,6 @@
  * @since 2024年12月5日22:59:21
  */
 
-import {defineProps} from 'vue';
 import {useHotCardStore} from "@/store/hotCard.js";
 import List from './List/index.vue'
 
