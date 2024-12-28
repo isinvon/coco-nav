@@ -5,6 +5,7 @@
  * @since 2024年12月2日14:56:16
  */
 import MIcon from "@/components/MIcon/index.vue";
+import Banner from '@/components/Banner/index.vue'
 // 书签详情抽屉全局状态管理
 import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer';
 import {Delete} from "@element-plus/icons-vue";
@@ -305,6 +306,8 @@ const bookmarkList = [
 </script>
 <template>
   <div class="container">
+    <!--横幅(内有搜索框)-->
+    <Banner/>
     <div v-for="(category, index) in bookmarkList" :key="index" class="category-container">
       <!-- 分类名称 -->
       <div class="category-title">
