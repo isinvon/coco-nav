@@ -38,11 +38,15 @@ const userInfo = {
 };
 
 const recentBookmarks = [
-  { name: 'Bookmark 1', value: 10 },
-  { name: 'Bookmark 2', value: 20 },
-  { name: 'Bookmark 3', value: 30 },
-  { name: 'Bookmark 4', value: 40 },
-  { name: 'Bookmark 5', value: 50 }
+  { name: 'Bookmark 1', view: 10 },
+  { name: 'Bookmark 2', view: 20 },
+  { name: 'Bookmark 3', view: 30 },
+  { name: 'Bookmark 4', view: 40 },
+  { name: 'Bookmark 5', view: 121110 },
+  { name: 'Bookmark 6', view: 50 },
+  { name: 'Bookmark 7', view: 80 },
+  { name: 'Bookmark 8', view: 121110 },
+  { name: 'Bookmark 9', view: 220 },
 ];
 
 const recommendedBookmarks = [
