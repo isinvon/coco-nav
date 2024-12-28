@@ -2,41 +2,41 @@
   <el-drawer direction="ltr" v-model="leftDrawerStore.isOpen" title="我是左边的抽屉" :with-header="false">
     <div class="sidebar-content">
       <span>Hi there!</span>
-      <UserInfoSection :userInfo="userInfo" />
+      <UserInfoSection :userInfo="userInfo"/>
 
       <div class="div-spacing"/>
 
-      <SettingsButton @open-settings="showModal = true" />
+      <SettingsButton @open-settings="showModal = true"/>
 
       <div class="div-spacing"/>
 
-      <SortOrderSection @update-sort-order="handleSortOrderChange" />
+      <SortOrderSection @update-sort-order="handleSortOrderChange"/>
 
       <div class="div-spacing"/>
 
       <div class="settings-section">
         <h3>Recently Visited Bookmarks</h3>
-        <WordcloudTag :data="recentBookmarks" />
+        <WordcloudTag :data="recentBookmarks"/>
       </div>
 
       <div class="div-spacing"/>
 
-      <RecommendedBookmarks :bookmarks="recommendedBookmarks" />
+      <RecommendedBookmarks :bookmarks="recommendedBookmarks"/>
 
       <div class="div-spacing"/>
 
-      <AboutUsSection :aboutUsText="aboutUsText" />
+      <AboutUsSection :aboutUsText="aboutUsText"/>
     </div>
 
     <div class="div-spacing"/>
 
-    <SettingsDialog v-model="showModal" />
+    <SettingsDialog v-model="showModal"/>
   </el-drawer>
 </template>
 
 <script lang="js" setup>
-import { ref } from 'vue';
-import { useLeftDrawerStore } from '@/store/leftDrawer';
+import {ref} from 'vue';
+import {useLeftDrawerStore} from '@/store/leftDrawer';
 import UserInfoSection from './components/UserInfoSection.vue';
 import SettingsButton from './components/SettingsButton.vue';
 import SortOrderSection from './components/SortOrderSection.vue';
@@ -55,21 +55,21 @@ const userInfo = {
 };
 
 const recentBookmarks = [
-  { name: 'Bookmark 1', view: 10 },
-  { name: 'Bookmark 2', view: 20 },
-  { name: 'Bookmark 3', view: 30 },
-  { name: 'Bookmark 4', view: 40 },
-  { name: 'Bookmark 5', view: 121110 },
-  { name: 'Bookmark 6', view: 50 },
-  { name: 'Bookmark 7', view: 80 },
-  { name: 'Bookmark 8', view: 121110 },
-  { name: 'Bookmark 9', view: 220 },
+  {name: 'Bookmark 1', view: 10},
+  {name: 'Bookmark 2', view: 20},
+  {name: 'Bookmark 3', view: 30},
+  {name: 'Bookmark 4', view: 40},
+  {name: 'Bookmark 5', view: 121110},
+  {name: 'Bookmark 6', view: 50},
+  {name: 'Bookmark 7', view: 80},
+  {name: 'Bookmark 8', view: 121110},
+  {name: 'Bookmark 9', view: 220},
 ];
 
 const recommendedBookmarks = [
-  { title: 'Recommendation 1', url: 'https://example.com/recommendation1' },
-  { title: 'Recommendation 2', url: 'https://example.com/recommendation2' },
-  { title: 'Recommendation 3', url: 'https://example.com/recommendation3' }
+  {title: 'Recommendation 1', url: 'https://example.com/recommendation1'},
+  {title: 'Recommendation 2', url: 'https://example.com/recommendation2'},
+  {title: 'Recommendation 3', url: 'https://example.com/recommendation3'}
 ];
 
 const aboutUsText = 'Welcome to our Bookmark Navigation website. We provide a simple and efficient way to manage your bookmarks.';
@@ -85,7 +85,8 @@ const handleSortOrderChange = (newValue) => {
   padding: 20px;
   color: #666666;
 }
-.div-spacing{
+
+.div-spacing {
   padding: 1px;
 }
 </style>
