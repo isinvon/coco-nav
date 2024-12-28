@@ -38,7 +38,7 @@
 
     <el-dialog
         title="设置"
-        v-model:visible="settingsVisible"
+        v-model="settingsVisible"
         width="30%"
         :destroy-on-close="true"
     >
@@ -62,11 +62,7 @@
                 placeholder="引擎URL"
                 class="engine-input"
             />
-            <el-button
-                type="text"
-                icon="el-icon-circle-plus-outline"
-                @click="addEngine"
-            >
+            <el-button type="text" icon="el-icon-circle-plus-outline" @click="addEngine">
               添加引擎
             </el-button>
           </el-form-item>
