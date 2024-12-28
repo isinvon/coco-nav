@@ -154,14 +154,6 @@ const addEngine = () => {
   .search-input {
     width: 600px;
     border-radius: 50px;
-
-    input {
-      border-radius: 50px !important;
-      font-size: 16px;
-      height: 50px;
-      outline: none; /* 去除点击后的边框 */
-      box-shadow: none; /* 去除可能的阴影效果 */
-    }
   }
 
 
