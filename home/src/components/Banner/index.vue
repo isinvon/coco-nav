@@ -1,3 +1,4 @@
+<!-- Banner 横幅 -->
 <template>
   <div class="banner" :style="{ background: bannerBackground }">
     <div class="search-container">
