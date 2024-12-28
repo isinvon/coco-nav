@@ -10,7 +10,7 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     components: {
       default: () => import('@/views/about.vue'),
     }
