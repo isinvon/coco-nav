@@ -93,7 +93,7 @@ const searchEngines = ref([
   {name: "Google", url: "https://www.google.com/search?q="},
   {name: "Bing", url: "https://www.bing.com/search?q="},
 ]);
-const bannerBackground = ref("url('https://picsum.photos/800/300') no-repeat center center / cover");
+const bannerBackground = ref("url('https://picsum.photos/2000/400') no-repeat center center / cover");
 const settingsVisible = ref(false);
 
 const settings = reactive({
