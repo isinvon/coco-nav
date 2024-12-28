@@ -151,13 +151,14 @@ const addEngine = () => {
   gap: 15px;
   align-items: center;
 
-  // 通过 ::v-deep 伪类选择器，设置 .el-input__wrapper 的样式来覆盖el-input默认样式,实现el-input圆角
-  .search-input::v-deep .el-input__wrapper {
-    width: 600px;
-    font-size: 16px;
-    border-radius: 12px !important;
+  .search-input {
+    // 使用 :deep() 伪类选择器，设置 .el-input__wrapper 的样式来覆盖 el-input 默认样式, 实现 el-input 圆角
+    :deep(.el-input__wrapper) {
+      width: 600px;
+      font-size: 16px;
+      border-radius: 12px;
+    }
   }
-
 
   .engine-btn {
     height: 45px; // 由engine-btn决定搜索框的高度,搜索框无需设置高度
