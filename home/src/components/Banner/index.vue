@@ -166,7 +166,7 @@ const addEngine = () => {
   }
 
   .settings-btn {
-    font-size: 24px;
+    font-size: 30px;
     background: none;
     color: gray;
     border: none;
