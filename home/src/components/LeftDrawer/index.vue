@@ -66,5 +66,6 @@ const handleSortOrderChange = (newValue) => {
 <style scoped>
 .sidebar-content {
   padding: 20px;
+  color: #666666;
 }
 </style>
