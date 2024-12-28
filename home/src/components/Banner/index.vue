@@ -158,6 +158,7 @@ const addEngine = () => {
       font-size: 16px;
       border-top-right-radius: 12px;   /* 右上角设置圆角 */
       border-bottom-right-radius: 12px;/* 右下角设置圆角 */
+      box-shadow: none;
     }
   }
 
