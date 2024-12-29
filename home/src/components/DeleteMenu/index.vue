@@ -23,6 +23,11 @@ const clearSelectedBookmarks = () => {
   deleteBookmarkStore.closeDeleteAndMultipleDelete()  // 关闭删除模式和多选删除模式
 }
 
+// 撤销操作
+const undo = () => {
+  deleteBookmarkStore.undo();
+};
+
 // 菜单按钮的操作逻辑
 const menuOperationLogic = () => {
   // 将style='top=xxx'挂载到 .wrapper 上，用于控制动画效果
@@ -67,7 +72,7 @@ const menuOperationLogic = () => {
           </button>
         </Tooltip>
         <Tooltip tooltipText="撤销" placement="bottom" effect="dark">
-          <button class="sub-circle">
+          <button @click="undo" class="sub-circle">
             <input class="hidden-sub-trigger" id="sub4" type="radio" name="sub-circle" value="1">
             <label for="sub4">
               <!--撤销-->
