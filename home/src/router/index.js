@@ -15,6 +15,13 @@ const routes = [
       default: () => import('@/views/about.vue'),
     }
   },
+  {
+    path: '/message',
+    name: 'message',
+    components: {
+      default: () => import('@/views/message.vue'),
+    }
+  }
 ];
 
 const router = createRouter({
