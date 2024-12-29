@@ -17,6 +17,12 @@ const isFirstClickMenu = ref(false)
 const recycleBinDrawerStore = useRecycleBinDrawerStore()
 const deleteBookmarkStore = useDeleteBookmarkStore()
 
+// 取消按钮点击时清空选中的书签
+const clearSelectedBookmarks = () => {
+  deleteBookmarkStore.selectedBookmarks = []  // 清空选中的书签
+  deleteBookmarkStore.closeDeleteAndMultipleDelete()  // 关闭删除模式和多选删除模式
+}
+
 // 菜单按钮的操作逻辑
 const menuOperationLogic = () => {
   // 将style='top=xxx'挂载到 .wrapper 上，用于控制动画效果
@@ -79,7 +85,7 @@ const menuOperationLogic = () => {
           </button>
         </Tooltip>
         <Tooltip tooltipText="取消" placement="bottom" effect="dark">
-          <button @click="deleteBookmarkStore.closeDeleteAndMultipleDelete()" class="sub-circle">
+          <button @click="clearSelectedBookmarks" class="sub-circle">
             <input class="hidden-sub-trigger" id="sub6" type="radio" name="sub-circle" value="1">
               <label for="sub6">
                 <!--取消-->
