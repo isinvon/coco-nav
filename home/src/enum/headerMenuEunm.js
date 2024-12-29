@@ -30,6 +30,16 @@ export const headerMenuEnum = [
         path: '/category'
     },
     {
+        name: 'products',
+        icon: '📂',
+        title: '产品',
+        path: '/products',
+        children: [
+            {name: 'Product 1', icon: '📦', title: '产品1', path: '/products/1'},
+            {name: 'Product 2', icon: '📦', title: '产品2', path: '/products/2'},
+        ],
+    },
+    {
         name: 'friendlink',
         icon: '🤝',
         title: '友链',
