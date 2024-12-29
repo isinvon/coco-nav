@@ -1,8 +1,8 @@
 @global-border-radius: 8px;
-@button-background-color: #af021d;
-@button-border-color: #af021d;
-@button-background-color-hover: #750a1b;
-@button-border-color-hover: #750a1b;
+@button-background-color: #BE3144;
+@button-border-color: #BE3144;
+@button-background-color-hover: #872341;
+@button-border-color-hover: #872341;
 
 .recycle-bin-header {
   display: flex;
@@ -18,7 +18,7 @@
     border-radius: @global-border-radius;
 
     &:hover {
-      background-color: #750a1b;
+      background-color: @button-background-color-hover;
       border-color: @button-border-color-hover;
     }
   }
@@ -68,7 +68,7 @@
 
         .bookmark-title {
           font-size: 14px;
-          color: #0969da;
+          color: #4381c7;
           font-weight: bold;
           text-decoration: none; // 默认无下划线
           white-space: nowrap; /* 禁止换行 */
@@ -97,8 +97,8 @@
       border-radius: @global-border-radius;
       margin-left: 10px;
       flex-shrink: 0; /* 防止按钮缩小 */
-      background-color: #a10202;
-      border-color: #8b0000;
+      background-color: @button-background-color;
+      border-color: @button-border-color;
 
       &:hover {
         background-color: @button-background-color-hover;
