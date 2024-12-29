@@ -57,6 +57,19 @@ export const useDeleteBookmarkStore = defineStore('deleteBookmark', {
             this.selectedBookmarks = [];
         },
 
+        // 删除单个书签
+        deleteBookmark(bookmarkId) {
+            const allBookmarks = this.getAllBookmarks(); // 假设这是全书签的列表
+            const bookmarkIndex = allBookmarks.findIndex(bookmark => bookmark.id === bookmarkId);
+            if (bookmarkIndex !== -1) {
+                // 保存删除的书签到 deletedBookmarks
+                const deleted = allBookmarks.splice(bookmarkIndex, 1)[0];
+                this.deletedBookmarks.push(deleted);
+                this.recentlyDeleted = deleted;  // 记录最近删除的书签
+                this.updateBookmarkList();  // 更新书签列表
+            }
+        },
+
         // 撤销最近一次删除
         undo() {
             if (this.recentlyDeleted) {
