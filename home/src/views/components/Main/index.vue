@@ -10,6 +10,7 @@ import Banner from '@/components/Banner/index.vue'
 import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer';
 import {Delete} from "@element-plus/icons-vue";
 import {useDeleteBookmarkStore} from "@/store/deleteBookmark.js";
+// import {watch} from "vue";
 
 const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore();
 const deleteBookmarkStore = useDeleteBookmarkStore();
@@ -108,6 +109,23 @@ const bookmarkList = [
   },
 ]
 
+// 监听 selectedBookmarks 数组的变化 // debug
+// watch(
+//     () => deleteBookmarkStore.selectedBookmarks,
+//     (newVal, oldVal) => {
+//       console.log('selectedBookmarks 变化了:', newVal);  // 输出新值
+//       console.log('之前的 selectedBookmarks:', oldVal);   // 输出旧值
+//
+//       // 如果 selectedBookmarks 数组有内容，可以执行其他操作
+//       if (newVal.length > 0) {
+//         // 比如，当有选中的书签时，可以启用删除按钮
+//         console.log('有书签被选中:', newVal);
+//       } else {
+//         // 当没有选中的书签时，可以禁用删除按钮
+//         console.log('没有选中的书签');
+//       }
+//     }
+// );
 </script>
 <template>
   <div class="container">
