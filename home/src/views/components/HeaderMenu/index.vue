@@ -53,11 +53,11 @@ function updateMenu() {
       <MenuItem
           v-for="(menuItem, index) in headerMenuEnum"
           :key="index"
-          :text="menuItem.title"
-          :href="menuItem.path"
+          :title="menuItem.title"
+          :path="menuItem.path"
           :icon="menuItem.icon"
-          :hasSubMenu="!!menuItem.subMenu"
-          :subMenu="menuItem.subMenu || []"
+          :hasChildren="!!menuItem.children"
+          :children="menuItem.children || []"
       />
 
       <!-- 头像 -->

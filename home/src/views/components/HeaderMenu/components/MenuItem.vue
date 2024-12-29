@@ -1,19 +1,21 @@
 <template>
-  <li :class="{'has-submenu': hasSubMenu}">
-    <a :href="href">
+  <li :class="{'has-submenu': hasChildren}">
+    <!-- 使用 router-link 替换 a 标签，以便支持路由跳转 -->
+    <router-link :to="path" class="menu-link">
       <!-- 显示图标 -->
       <span v-if="icon" class="menu-icon">{{ icon }}</span>
-      {{ text }}
+      {{ title }}
       <!-- 子菜单箭头 -->
-      <span v-if="hasSubMenu" class="dropdown-arrow"></span>
-    </a>
+      <span v-if="hasChildren" class="dropdown-arrow"></span>
+    </router-link>
     <!-- 子菜单 -->
-    <ul v-if="hasSubMenu && subMenu.length" class="sub-menus">
-      <li v-for="(subItem, index) in subMenu" :key="index">
-        <a :href="subItem.href">
-          <span v-if="subItem.icon" class="sub-menu-icon">{{ subItem.icon }}</span>
-          {{ subItem.text }}
-        </a>
+    <ul v-if="hasChildren && children.length" class="sub-menus">
+      <li v-for="(child, index) in children" :key="index">
+        <!-- 使用 router-link 替换 a 标签 -->
+        <router-link :to="child.path" class="submenu-link">
+          <span v-if="child.icon" class="sub-menu-icon">{{ child.icon }}</span>
+          {{ child.title }}
+        </router-link>
       </li>
     </ul>
   </li>
@@ -27,11 +29,11 @@
  *
  */
 const props = defineProps({
-  text: String,
-  href: String,
+  title: String,
+  path: String,
   icon: String,
-  hasSubMenu: Boolean,
-  subMenu: {
+  hasChildren: Boolean,
+  children: {
     type: Array,
     default: () => []
   }
@@ -54,7 +56,8 @@ const props = defineProps({
 li {
   position: relative;
 
-  a {
+  //使 router-link 看起来像 a 标签
+  .menu-link, .submenu-link {
     display: block;
     line-height: @line-height;
     padding: 0 14px;
@@ -106,7 +109,7 @@ li {
     width: 100%;
     background: white;
 
-    a {
+    .submenu-link {
       color: @text-color;
       font-size: @font-size;
       padding-left: @submenu-padding-left; /* 给子菜单项添加缩进 */
