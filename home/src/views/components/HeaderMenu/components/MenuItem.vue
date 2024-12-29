@@ -1,0 +1,121 @@
+<template>
+  <li :class="{'has-submenu': hasSubMenu}">
+    <a :href="href">
+      <!-- 显示图标 -->
+      <span v-if="icon" class="menu-icon">{{ icon }}</span>
+      {{ text }}
+      <!-- 子菜单箭头 -->
+      <span v-if="hasSubMenu" class="dropdown-arrow"></span>
+    </a>
+    <!-- 子菜单 -->
+    <ul v-if="hasSubMenu && subMenu.length" class="sub-menus">
+      <li v-for="(subItem, index) in subMenu" :key="index">
+        <a :href="subItem.href">
+          <span v-if="subItem.icon" class="sub-menu-icon">{{ subItem.icon }}</span>
+          {{ subItem.text }}
+        </a>
+      </li>
+    </ul>
+  </li>
+</template>
+
+<script setup>
+/**
+ * 菜单项
+ * @author sinvon
+ * @since 2024年12月29日17:00:14
+ *
+ */
+const props = defineProps({
+  text: String,
+  href: String,
+  icon: String,
+  hasSubMenu: Boolean,
+  subMenu: {
+    type: Array,
+    default: () => []
+  }
+})
+</script>
+
+<style scoped lang="less">
+@submenu-background: #ececec;
+@submenu-hover-background: #F2F3F4;
+@text-color: #59636e;
+@font-size: 12px;
+@line-height: 52px;
+@submenu-max-height: 300px;
+@submenu-width: 170px;
+@hover-background: #eaedf0;
+@border-radius: 10px;
+@submenu-border-radius: 10px; /* 子菜单的圆角 */
+@submenu-padding-left: 30px;
+
+li {
+  position: relative;
+
+  a {
+    display: block;
+    line-height: @line-height;
+    padding: 0 14px;
+    text-decoration: none;
+    color: @text-color;
+    font-size: @font-size;
+    border-radius: @border-radius;
+    transition: color 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
+
+    &:hover {
+      background: @hover-background;
+      border-radius: @border-radius;
+    }
+
+    .menu-icon {
+      margin-right: 8px;
+    }
+  }
+
+  &:hover {
+    ul.sub-menus {
+      max-height: @submenu-max-height;
+    }
+  }
+
+  .dropdown-arrow:after {
+    content: "\25BE";
+    margin-left: 5px;
+  }
+
+  ul.sub-menus {
+    max-height: 0;
+    overflow: hidden;
+    width: @submenu-width;
+    background: @submenu-background;
+    position: absolute;
+    z-index: 99;
+    display: block;
+    transition: max-height 0.3s ease-in-out;
+    border-radius: @submenu-border-radius;
+    margin-top: 5px;
+    left: 0; /* 使子菜单与父菜单对齐 */
+    padding: 0; /* 去掉 padding-left，避免额外的空白 */
+  }
+
+  ul.sub-menus li {
+    display: block;
+    text-align: left;
+    width: 100%;
+    background: white;
+
+    a {
+      color: @text-color;
+      font-size: @font-size;
+      padding-left: @submenu-padding-left; /* 给子菜单项添加缩进 */
+
+      &:hover {
+        background: @submenu-hover-background;
+        color: #1F2328;
+      }
+    }
+  }
+}
+</style>
