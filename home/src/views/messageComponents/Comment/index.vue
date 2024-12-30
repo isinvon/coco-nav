@@ -203,6 +203,7 @@ const showCommentInput = (item, reply = null) => {
 .container {
   padding: 10px;
   background-color: @background-color;
+  border-radius: 10px;
 }
 
 .comment {
