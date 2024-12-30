@@ -1,7 +1,5 @@
 <script setup lang="js">
 import Main from '@/views/components/Main/index.vue'
-import LeftDrawer from '@/components/LeftDrawer/index.vue'
-import RightDrawer from '@/components/RightDrawer/index.vue'
 import BookmarkDetailsDrawer from '@/components/BookmarkDetailsDrawer/index.vue'
 import Anchor from '@/components/Anchor/index.vue'
 import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
@@ -13,10 +11,6 @@ import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
     <!--锚点-->
     <Anchor class="home-anchor"/>
     <Main/>
-    <!--抽屉-->
-    <LeftDrawer/>
-    <!--抽屉-->
-    <RightDrawer/>
     <!--标签详情抽屉-->
     <BookmarkDetailsDrawer/>
     <!--添加书签的框-->

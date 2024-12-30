@@ -3,6 +3,8 @@ import HeaderMenu from "@/views/components/HeaderMenu/index.vue";
 import Footer from "@/views/components/Footer/index.vue";
 import newsList from "../mock/newList.js";
 import HotCard from "@/components/HotCard/index.vue";
+import RightDrawer from "@/components/RightDrawer/index.vue";
+import LeftDrawer from "@/components/LeftDrawer/index.vue";
 </script>
 
 <template>
@@ -19,6 +21,11 @@ import HotCard from "@/components/HotCard/index.vue";
         <Footer/>
       </el-main>
     </el-container>
+
+    <!--抽屉-->
+    <LeftDrawer/>
+    <!--抽屉-->
+    <RightDrawer/>
 
     <!--热点卡片-->
     <transition name="hot-card-animation">
