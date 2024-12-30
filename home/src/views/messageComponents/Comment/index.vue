@@ -230,8 +230,9 @@ const showCommentInput = (item, reply = null) => {
 
       .name {
         color: @primary-color;
-        font-weight: 500;
         font-size: 14px;
+        font-weight: normal;
+        margin-bottom: 5px;
       }
 
       .date {
@@ -307,6 +308,7 @@ const showCommentInput = (item, reply = null) => {
         .from-name {
           color: @primary-color;
           font-weight: bold;
+          margin-bottom: 5px;
         }
 
         .to-name {
