@@ -194,10 +194,10 @@ const showCommentInput = (item, reply = null) => {
 //@import "./index";
 
 // 全局背景色
-@background-color: #f8f9fa; // GitHub轻灰背景
+@background-color: #fafafa; // GitHub轻灰背景
 @primary-color: #24292f; // GitHub主色
-@secondary-color: #586069; // 次要文字色
-@border-color: #d0d7de; // 边框颜色
+@secondary-color: #89949f; // 次要文字色
+@border-color: #ececec; // 边框颜色
 @button-color: #2d333b; // 按钮背景色
 
 .container {
