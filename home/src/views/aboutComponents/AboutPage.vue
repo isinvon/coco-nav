@@ -2,8 +2,8 @@
   <div class="about-page">
     <!-- 页面顶部介绍 -->
     <div class="about-header">
-      <p>{{ archiveData.data.header.welcome }}</p>
-      <p>{{ archiveData.data.header.intro }}</p>
+      <p style="font-size: 20px">{{ archiveData.data.header.welcome }}</p>
+      <p style="font-size: 13px">{{ archiveData.data.header.intro }}</p>
     </div>
 
     <!-- 页面正文内容 -->
@@ -126,7 +126,7 @@ const props = defineProps({
 /* 小标题样式 */
 .section h2 {
   font-size: 1.6rem;
-  color: #2d333b; /* GitHub 副标题颜色 */
+  color: #57606a; /* GitHub 副标题颜色 */
   margin-bottom: 15px;
   font-weight: 600;
   line-height: 1.2;
