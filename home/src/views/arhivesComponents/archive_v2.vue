@@ -187,10 +187,14 @@ const paginateArchives = (archives) => {
 
 .archive-title {
   font-weight: 600;
-  color: #0366d6; /* GitHub 蓝色链接色 */
+  color: #666666; /* GitHub 蓝色链接色 */
   margin-right: 8px;  /* 标题与描述之间的间隔 */
   text-decoration: none;
   flex: 0 1 auto; /* 确保标题自适应宽度 */
+
+  &:hover {
+    color: #0366d6; /* 鼠标悬浮时链接变色 */
+  }
 }
 
 .archive-description {
