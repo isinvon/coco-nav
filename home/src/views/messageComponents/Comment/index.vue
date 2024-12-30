@@ -209,7 +209,7 @@ const showCommentInput = (item, reply = null) => {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  border-bottom: 1px solid @border-color;
+  //border-bottom: 1px solid @border-color;
   background-color: #ffffff;
   border-radius: 8px;
   margin-bottom: 10px;
