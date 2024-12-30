@@ -1,11 +1,13 @@
-<script setup>
-
-</script>
-
 <template>
-  <h1>关于我们页面</h1>
+  <div>
+    <AboutPage :archiveData="archiveData"/>
+  </div>
 </template>
 
-<style scoped lang="less">
+<script setup>
+import AboutPage from './aboutComponents/AboutPage.vue';
+import {archiveData} from '../../mock/archive.js';
+</script>
 
+<style lang="less" scoped>
 </style>
