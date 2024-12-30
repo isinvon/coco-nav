@@ -24,6 +24,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@iconify/vue": "^4.1.2",
     "element-plus": "^2.9.0",
+    "emoji-picker-element": "^1.26.0",
     "lodash": "^4.17.21",
     "markdown-it": "^14.1.0",
     "pinia": "^2.2.8",
