@@ -425,6 +425,14 @@ const showCommentInput = (item, reply = null) => {
         color: #777777;
       }
     }
+
+    .level {
+      margin-left: 1px;
+      margin-right: 5px;
+      font-weight: bold;
+      color: @secondary-color;
+      border-color: @secondary-color;
+    }
   }
 }
 
