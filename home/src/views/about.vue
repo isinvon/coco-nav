@@ -1,12 +1,12 @@
 <template>
   <div>
-    <AboutPage :archiveData="archiveData"/>
+    <AboutPage :aboutData="aboutData"/>
   </div>
 </template>
 
 <script setup>
 import AboutPage from './aboutComponents/AboutPage.vue';
-import {archiveData} from '../../mock/archive.js';
+import {aboutData} from '../../mock/about.js';
 </script>
 
 <style lang="less" scoped>

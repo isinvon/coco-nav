@@ -1,5 +1,5 @@
 // 归档
-const archiveData = {
+const aboutData = {
     status: "成功",
     code: 200,
     data: {
@@ -52,4 +52,4 @@ const archiveData = {
     }
 };
 
-export {archiveData};
+export {aboutData};

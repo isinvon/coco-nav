@@ -2,8 +2,8 @@
   <div class="about-page">
     <!-- 页面顶部介绍 -->
     <div class="about-header">
-      <p style="font-size: 20px">{{ archiveData.data.header.welcome }}</p>
-      <p style="font-size: 13px">{{ archiveData.data.header.intro }}</p>
+      <p style="font-size: 20px">{{ aboutData.data.header.welcome }}</p>
+      <p style="font-size: 13px">{{ aboutData.data.header.intro }}</p>
     </div>
 
     <!-- 页面正文内容 -->
@@ -11,14 +11,14 @@
       <!-- 项目介绍 -->
       <section class="section project-intro">
         <h2>项目介绍</h2>
-        <p>{{ archiveData.data.introduction }}</p>
+        <p>{{ aboutData.data.introduction }}</p>
       </section>
 
       <!-- 项目功能 -->
       <section class="section features">
         <h2>功能特点</h2>
         <ul>
-          <li v-for="(feature, index) in archiveData.data.features" :key="index">{{ feature }}</li>
+          <li v-for="(feature, index) in aboutData.data.features" :key="index">{{ feature }}</li>
         </ul>
       </section>
 
@@ -26,7 +26,7 @@
       <section class="section tech-stack">
         <h2>技术栈</h2>
         <div class="tech-grid">
-          <div v-for="(tech, index) in archiveData.data.techStack" :key="index" class="tech-item">
+          <div v-for="(tech, index) in aboutData.data.techStack" :key="index" class="tech-item">
             <h3>{{ tech.name }}</h3>
             <p>{{ tech.details }}</p>
           </div>
@@ -37,7 +37,7 @@
       <section class="section team">
         <h2>开发者信息</h2>
         <div class="team-members">
-          <div v-for="(member, index) in archiveData.data.team" :key="index" class="team-member">
+          <div v-for="(member, index) in aboutData.data.team" :key="index" class="team-member">
             <h3>{{ member.name }}</h3>
             <p>{{ member.role }}</p>
           </div>
@@ -48,7 +48,7 @@
       <section class="section history">
         <h2>发展历程</h2>
         <ul>
-          <li v-for="(event, index) in archiveData.data.history" :key="index">
+          <li v-for="(event, index) in aboutData.data.history" :key="index">
             <strong>{{ event.year }}年{{ event.month }}月：</strong> {{ event.description }}
           </li>
         </ul>
@@ -58,11 +58,11 @@
       <section class="section contact">
         <h2>联系我们</h2>
         <ul>
-          <li><strong>GitHub：</strong> <a :href="archiveData.data.contact.github" target="_blank">{{
-              archiveData.data.contact.github
+          <li><strong>GitHub：</strong> <a :href="aboutData.data.contact.github" target="_blank">{{
+              aboutData.data.contact.github
             }}</a></li>
-          <li><strong>邮箱：</strong> <a :href="'mailto:' + archiveData.data.contact.email">{{
-              archiveData.data.contact.email
+          <li><strong>邮箱：</strong> <a :href="'mailto:' + aboutData.data.contact.email">{{
+              aboutData.data.contact.email
             }}</a></li>
         </ul>
       </section>
@@ -71,7 +71,7 @@
       <section class="section contributors">
         <h2>贡献者</h2>
         <ul>
-          <li v-for="(contributor, index) in archiveData.data.contributors" :key="index">{{ contributor }}</li>
+          <li v-for="(contributor, index) in aboutData.data.contributors" :key="index">{{ contributor }}</li>
         </ul>
       </section>
     </div>
@@ -80,7 +80,7 @@
 
 <script setup>
 const props = defineProps({
-  archiveData: {
+  aboutData: {
     type: Object,
     required: true
   }
