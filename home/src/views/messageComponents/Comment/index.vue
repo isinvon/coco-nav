@@ -42,10 +42,10 @@
             </span>
           </div>
         </div>
-        <div class="write-reply" v-if="item.reply.length > 0" @click="showCommentInput(item)">
-          <i class="el-icon-edit"></i>
-          <span class="add-comment">添加新评论</span>
-        </div>
+        <!--<div class="write-reply" v-if="item.reply.length > 0" @click="showCommentInput(item)">-->
+        <!--  <i class="el-icon-edit"></i>-->
+        <!--  <span class="add-comment">添加新评论</span>-->
+        <!--</div>-->
         <transition name="fade">
           <div class="input-wrapper" v-if="showItemId === item.id">
             <el-input class="gray-bg-input"
