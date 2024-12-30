@@ -130,5 +130,214 @@ const showCommentInput = (item, reply = null) => {
 </script>
 
 <style scoped lang="less">
-@import "./index";
+//@import "./index";
+
+// 全局背景色
+@background-color: #f8f9fa; // GitHub轻灰背景
+@primary-color: #24292f; // GitHub主色
+@secondary-color: #586069; // 次要文字色
+@border-color: #d0d7de; // 边框颜色
+@button-color: #2d333b; // 按钮背景色
+
+.container {
+  padding: 10px;
+  background-color: @background-color;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-bottom: 1px solid @border-color;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+
+  .info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .avatar {
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        color: @primary-color;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .date {
+        color: @secondary-color;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .content {
+    font-size: 14px;
+    color: @primary-color;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: @secondary-color;
+
+    .like {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+
+      &:hover, &.active {
+        color: @primary-color;
+      }
+
+      .iconfont {
+        font-size: 16px;
+        margin-right: 5px;
+      }
+    }
+
+    .comment-reply {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color;
+      }
+
+      .iconfont {
+        font-size: 16px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .reply {
+    margin-top: 10px;
+    padding-left: 20px;
+    border-left: 2px solid @border-color;
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed @border-color;
+
+      .reply-content {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        color: @primary-color;
+
+        .from-name {
+          color: @primary-color;
+          font-weight: bold;
+        }
+
+        .to-name {
+          color: @primary-color;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+      }
+
+      .reply-bottom {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: @secondary-color;
+
+        .reply-text {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+          cursor: pointer;
+
+          &:hover {
+            color: @primary-color;
+          }
+
+          .icon-comment {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    .write-reply {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: @secondary-color;
+      padding: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color;
+      }
+
+      .el-icon-edit {
+        margin-right: 5px;
+      }
+    }
+
+    .input-wrapper {
+      padding: 10px;
+
+      .gray-bg-input, .el-input__inner {
+        background-color: #f1f3f5; /* 淡灰背景 */
+        border-radius: 5px;
+        border: 1px solid #dcdfe6;
+      }
+
+      .btn-control {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 10px;
+
+        .cancel {
+          font-size: 16px;
+          color: @secondary-color;
+          margin-right: 20px;
+          cursor: pointer;
+
+          &:hover {
+            color: @primary-color;
+          }
+        }
+
+        .btn {
+          font-size: 16px;
+          background-color: @primary-color;
+          color: #fff;
+          border-radius: 5px;
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
