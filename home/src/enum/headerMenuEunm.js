@@ -12,10 +12,10 @@ export const headerMenuEnum = [
         path: '/about'
     },
     {
-        name: 'archives',
+        name: 'archive',
         icon: '📚',
         title: '归档',
-        path: '/archives'
+        path: '/archive'
     },
     {
         name: 'tag',

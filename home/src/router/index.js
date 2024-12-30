@@ -16,10 +16,10 @@ const routes = [
         }
     },
     {
-        path: '/archives',
-        name: 'archives',
+        path: '/archive',
+        name: 'archive',
         components: {
-            default: () => import('@/views/archives.vue'),
+            default: () => import('@/views/archive.vue'),
         }
     },
     {
