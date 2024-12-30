@@ -7,7 +7,16 @@
           <div class="name">
             {{ item.fromName }}
             <!--等级-->
-            <el-tag v-if="commentSetting.showLevel" type="warning" size="small">V{{ item.level }}</el-tag>
+            <el-tag
+                v-if="commentSetting.showLevel"
+                round
+                effect="plain"
+                size="small"
+                class="level"
+                style="color: #89949f;border-color: #89949f;font-weight: bold"
+            >
+              V{{ item.level }}
+            </el-tag>
           </div>
           <div class="date">{{ item.date }}</div>
         </div>
@@ -29,8 +38,17 @@
             <span class="from-name">
               {{ reply.fromName }}
               <!--等级-->
-            <el-tag v-if="commentSetting.showLevel" type="warning" size="small">V{{ item.level }}</el-tag>
-            </span><span>: </span>
+              <el-tag
+                  v-if="commentSetting.showLevel"
+                  round
+                  effect="plain"
+                  size="small"
+                  class="level"
+              >
+                V{{ item.level }}
+              </el-tag>
+            </span>
+            <span>: </span>
             <span class="to-name">@{{ reply.toName }}</span>
             <span>{{ reply.content }}</span>
           </div>
