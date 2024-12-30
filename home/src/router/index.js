@@ -16,6 +16,13 @@ const routes = [
         }
     },
     {
+        path: '/archives',
+        name: 'archives',
+        components: {
+            default: () => import('@/views/archives.vue'),
+        }
+    },
+    {
         path: '/friendlink',
         name: 'friendlink',
         components: {
