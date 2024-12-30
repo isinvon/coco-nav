@@ -10,6 +10,7 @@ const comment = {
             fromId: 'errhefe232213',  //评论者id
             fromName: '犀利的评论家',   //评论者昵称
             fromAvatar: 'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg', //评论者头像
+            level: 5, // 评论者账号等级
             likeNum: 3, //点赞人数
             content: '非常靠谱的程序员',  //评论内容
             reply: [  //回复，或子评论
@@ -19,6 +20,7 @@ const comment = {
                     fromId: 'observer223432',  //评论者id
                     fromName: '夕阳红',  //评论者昵称
                     fromAvatar: 'https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg', //评论者头像
+                    level: 3, // 评论者账号等级
                     toId: 'errhefe232213',  //被评论者id
                     toName: '犀利的评论家',  //被评论者昵称
                     toAvatar: 'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg',  //被评论者头像
@@ -26,11 +28,12 @@ const comment = {
                     date: '2018-07-05 08:35'   //评论时间
                 },
                 {
-                    id: '34523244545',
+                    id: '34523244546', //修改 id 避免重复
                     commentId: 'comment0001',
                     fromId: 'observer567422',
                     fromName: '清晨一缕阳光',
                     fromAvatar: 'http://imgsrc.baidu.com/imgad/pic/item/c2fdfc039245d688fcba1b80aec27d1ed21b245d.jpg',
+                    level: 2, // 评论者账号等级
                     toId: 'observer223432',
                     toName: '夕阳红',
                     toAvatar: 'https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg',
@@ -46,6 +49,7 @@ const comment = {
             fromId: 'errhefe232213',
             fromName: '毒蛇郭德纲',
             fromAvatar: 'http://ww1.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2q2p8pj30v90uzmzz.jpg',
+            level: 4, // 评论者账号等级
             likeNum: 0,
             content: '从没见过这么优秀的人',
             reply: []

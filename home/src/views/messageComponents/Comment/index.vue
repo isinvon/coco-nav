@@ -4,7 +4,11 @@
       <div class="info">
         <img class="avatar" :src="item.fromAvatar" width="36" height="36"/>
         <div class="right">
-          <div class="name">{{ item.fromName }}</div>
+          <div class="name">
+            {{ item.fromName }}
+            <!--等级-->
+            <el-tag v-if="commentSetting.showLevel" type="warning" size="small">V{{ item.level }}</el-tag>
+          </div>
           <div class="date">{{ item.date }}</div>
         </div>
       </div>
@@ -22,7 +26,11 @@
       <div class="reply">
         <div class="item" v-for="reply in item.reply" :key="reply.id">
           <div class="reply-content">
-            <span class="from-name">{{ reply.fromName }}</span><span>: </span>
+            <span class="from-name">
+              {{ reply.fromName }}
+              <!--等级-->
+            <el-tag v-if="commentSetting.showLevel" type="warning" size="small">V{{ item.level }}</el-tag>
+            </span><span>: </span>
             <span class="to-name">@{{ reply.toName }}</span>
             <span>{{ reply.content }}</span>
           </div>
@@ -59,19 +67,35 @@
 </template>
 
 <script setup>
-import {ref, defineProps} from 'vue';
+import {ref, defineProps, computed} from 'vue';
 
 // 定义 props
 const props = defineProps({
   comments: {
     type: Array,
     required: true
+  },
+  /**
+   * 评论设置
+   */
+  setting: {
+    type: Object,
+    required: true,
   }
 });
 
 // 数据和方法
 const inputComment = ref('');
 const showItemId = ref('');
+
+// 计算属性
+const commentSetting = computed(() => {
+  return {
+    showLevel: props.setting?.message?.comment?.show_level || false, // 使用可选链, 不会抛出错误, 只会返回undefined, 而设置默认返回false
+    // 以后可以扩展更多设置
+    // ...
+  };
+});
 
 const likeClick = (item) => {
   if (item.isLike === null) {
