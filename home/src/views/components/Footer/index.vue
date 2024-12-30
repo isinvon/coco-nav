@@ -28,6 +28,7 @@
 
 <style scoped lang="less">
 #simple-footer {
+  margin-top: 30px;
   font-size: 12px;
   font-family: Arial, sans-serif;
   text-align: center;
