@@ -404,7 +404,7 @@ const showCommentInput = (item, reply = null) => {
       top: 0;
       left: 0;
       z-index: 1000;
-      margin-top: 5px;
+      margin-top: -5px;
     }
 
     // emoji 按钮样式
