@@ -15,6 +15,11 @@ const setting = {
         archives: {
             // 模板(归档的几种显示样式,例如块状,条状)
             template: 2
+        },
+        // 标签
+        tag: {
+            // 模板(标签的几种显示样式)
+            template: 5
         }
     }
 };

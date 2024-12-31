@@ -35,6 +35,13 @@ const routes = [
         components: {
             default: () => import('@/views/message.vue'),
         }
+    },
+    {
+        path: '/tag',
+        name: 'tag',
+        components: {
+            default: () => import('@/views/tag.vue'),
+        }
     }
 ];
 
