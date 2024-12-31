@@ -1,195 +1,253 @@
-@import "../../../styles/message"; // 导入留言区的色号
+// 全局背景色
+@background-color: #fafafa; // GitHub轻灰背景
+@primary-color: #24292f; // GitHub主色
+@secondary-color: #89949f; // 次要文字色
+@border-color: #e7e7e7; // 边框颜色
+@button-color: #2d333b; // 按钮背景色
 
 .container {
-  padding: 0 10px;
-  box-sizing: border-box;
+  padding: 10px;
+  background-color: @background-color;
+  border-radius: 10px;
+}
 
-  .comment {
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  //border-bottom: 1px solid @border-color;
+  //background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+
+  .info {
     display: flex;
-    flex-direction: column;
-    padding: 10px;
-    border-bottom: 1px solid @border-fourth;
+    align-items: center;
+    margin-bottom: 10px;
 
-    .info {
+    .avatar {
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .right {
       display: flex;
-      align-items: center;
+      flex-direction: column;
 
-      .avatar {
-        border-radius: 50%;
-      }
-
-      .right {
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px;
-
-        .name {
-          font-size: 16px;
-          color: @text-main;
-          margin-bottom: 5px;
-          font-weight: 500;
-        }
-
-        .date {
-          font-size: 12px;
-          color: @text-minor;
-        }
-      }
-    }
-
-    .content {
-      font-size: 16px;
-      color: @text-main;
-      line-height: 20px;
-      padding: 10px 0;
-    }
-
-    .control {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      color: @text-minor;
-
-      .like {
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-        cursor: pointer;
-
-        &.active,
-        &:hover {
-          color: @color-main;
-        }
-
-        .iconfont {
-          font-size: 14px;
-          margin-right: 5px;
-        }
-      }
-
-      .comment-reply {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-
-        &:hover {
-          color: @text-333;
-        }
-
-        .iconfont {
-          font-size: 16px;
-          margin-right: 5px;
-        }
-      }
-    }
-
-    .reply {
-      margin: 10px 0;
-      border-left: 2px solid @border-first;
-
-      .item {
-        margin: 0 10px;
-        padding: 10px 0;
-        border-bottom: 1px dashed @border-third;
-
-        .reply-content {
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          color: @text-main;
-
-          .from-name {
-            color: @color-main;
-          }
-
-          .to-name {
-            color: @color-main;
-            margin-left: 5px;
-            margin-right: 5px;
-          }
-        }
-
-        .reply-bottom {
-          display: flex;
-          align-items: center;
-          margin-top: 6px;
-          font-size: 12px;
-          color: @text-minor;
-
-          .reply-text {
-            display: flex;
-            align-items: center;
-            margin-left: 10px;
-            cursor: pointer;
-
-            &:hover {
-              color: @text-333;
-            }
-
-            .icon-comment {
-              margin-right: 5px;
-            }
-          }
-        }
-      }
-
-      .write-reply {
-        display: flex;
-        align-items: center;
+      .name {
+        color: @primary-color;
         font-size: 14px;
-        color: @text-minor;
-        padding: 10px;
-        cursor: pointer;
-
-        &:hover {
-          color: @text-main;
-        }
-
-        .el-icon-edit {
-          margin-right: 5px;
-        }
+        font-weight: normal;
+        margin-bottom: 5px;
       }
 
-      .fade-enter-active,
-      .fade-leave-active {
-        transition: opacity 0.5s;
-      }
-
-      .fade-enter,
-      .fade-leave-to {
-        opacity: 0;
-      }
-
-      .input-wrapper {
-        padding: 10px;
-
-        .gray-bg-input,
-        .el-input__inner {
-          background-color: #fff;
-        }
-
-        .btn-control {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          padding-top: 10px;
-
-          .cancel {
-            font-size: 16px;
-            color: @text-normal;
-            margin-right: 20px;
-            cursor: pointer;
-
-            &:hover {
-              color: @text-333;
-            }
-          }
-
-          .btn {
-            font-size: 16px;
-          }
-        }
+      .date {
+        color: @secondary-color;
+        font-size: 12px;
       }
     }
   }
+
+  .content {
+    font-size: 14px;
+    color: @primary-color;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: @secondary-color;
+
+    .like {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+
+      &:hover, &.active {
+        color: @primary-color;
+      }
+
+      .iconfont {
+        font-size: 16px;
+        margin-right: 5px;
+      }
+    }
+
+    .comment-reply {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color;
+      }
+
+      .iconfont {
+        font-size: 16px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .reply {
+    margin-top: 10px;
+    padding-left: 20px;
+    border-left: 2px solid @border-color;
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed @border-color;
+
+      .reply-content {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        color: @primary-color;
+
+        .from-name {
+          color: @primary-color;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        .to-name {
+          color: @primary-color;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+      }
+
+      .reply-bottom {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: @secondary-color;
+
+        .reply-text {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+          cursor: pointer;
+
+          &:hover {
+            color: @primary-color;
+          }
+
+          .icon-comment {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    .write-reply {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: @secondary-color;
+      padding: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color;
+      }
+
+      .el-icon-edit {
+        margin-right: 5px;
+      }
+    }
+
+    .input-wrapper {
+      padding: 10px;
+
+      .gray-bg-input, .el-input__inner {
+        background-color: #f1f3f5; /* 淡灰背景 */
+        border-radius: 5px;
+        border: 1px solid #dcdfe6;
+      }
+
+      .btn-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+
+        .cancel {
+          font-size: 16px;
+          color: @secondary-color;
+          margin-right: 20px;
+          cursor: pointer;
+
+          &:hover {
+            color: @primary-color;
+          }
+        }
+
+        .btn {
+          font-size: 16px;
+          background-color: @primary-color;
+          color: #fff;
+          border-radius: 5px;
+          padding: 5px 10px;
+        }
+      }
+    }
+
+    .emoji-picker-container {
+      border: 1px solid #eaeaea;
+      border-radius: 12px;
+      width: auto; // 你可以根据需求调整宽度
+      height: auto;
+      overflow-y: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      margin-top: -5px;
+    }
+
+    // emoji 按钮样式
+    .emoji-button {
+      position: relative;
+      color: #888888;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:active {
+        outline: none;
+        //向下偏移
+        transform: translateY(2px);
+        color: #777777;
+      }
+    }
+
+    .level {
+      margin-left: 1px;
+      margin-right: 5px;
+      font-weight: bold;
+      color: @secondary-color;
+      border-color: @secondary-color;
+    }
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
