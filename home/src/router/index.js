@@ -42,6 +42,13 @@ const routes = [
         components: {
             default: () => import('@/views/tag.vue'),
         }
+    },
+    {
+        path: '/test',
+        name: 'test',
+        components: {
+            default: () => import('@/views/test.vue'),
+        }
     }
 ];
 
