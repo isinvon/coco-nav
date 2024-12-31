@@ -20,9 +20,9 @@ const isLoading = ref(true); // 加载状态
 
 // 动态加载的 CommonPage 组件数组
 const commonPageComponents = [
-  import('@/components/CommentPage/CommenPage_v1.vue'),
-  import('@/components/CommentPage/CommenPage_v2.vue'),
-  import('@/components/CommentPage/CommenPage_v3.vue'),
+  import('@/components/CommentPage/CommenPage_v1/index.vue'),
+  import('@/components/CommentPage/CommenPage_v2/index.vue'),
+  import('@/components/CommentPage/CommenPage_v3/index.vue'),
 ];
 
 onMounted(() => {
