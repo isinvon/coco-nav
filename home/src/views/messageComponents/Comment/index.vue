@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import {ref, computed} from 'vue';
+import {ref, computed, onMounted, onUnmounted} from 'vue';
 import EmojiSelect from "./components/EmojiSelect.vue";
 
 // 定义 props
@@ -158,6 +158,24 @@ const toggleEmojiPanel = (item) => {
   }
 };
 
+// 监听点击事件，关闭表情面板
+const handleClickOutside = (event) => {
+  const emojiPanel = document.querySelector('.emoji-picker-container');
+  const emojiButton = document.querySelector('.emoji-button');
+
+  // 如果点击的是表情面板或按钮内的元素，则不做处理
+  if (emojiPanel && emojiPanel.contains(event.target)) {
+    return;
+  }
+
+  if (emojiButton && emojiButton.contains(event.target)) {
+    return;
+  }
+
+  // 否则关闭表情面板
+  showEmojiPanel.value = false;
+};
+
 const likeClick = (item) => {
   if (item.isLike === null) {
     item.isLike = true;
@@ -188,6 +206,16 @@ const showCommentInput = (item, reply = null) => {
   }
   showItemId.value = item.id;
 };
+
+// 在组件挂载时添加事件监听
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside);
+});
+
+// 在组件卸载时移除事件监听
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+});
 </script>
 
 <style scoped lang="less">
