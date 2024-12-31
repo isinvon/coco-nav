@@ -7,8 +7,10 @@
 <script setup>
 /**
  * 词云组件, 轻灰色, 弹性动画
+ * @author sinvon
+ * @since 2024年12月31日16:48:11
  */
-import { onMounted, ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import cloud from 'd3-cloud';
 import * as d3 from 'd3';
 

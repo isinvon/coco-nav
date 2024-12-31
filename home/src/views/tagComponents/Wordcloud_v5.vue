@@ -18,6 +18,8 @@
 <script setup>
 /**
  * 词云组件, 朦胧轻灰墨色, 弹动动画
+ * @author sinvon
+ * @since 2024年12月31日16:48:11
  */
 import {onMounted, ref} from 'vue';
 import cloud from 'd3-cloud';

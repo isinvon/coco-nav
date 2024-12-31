@@ -7,6 +7,8 @@
 <script setup>
 /**
  * 标签云组件, 更浅的灰色, 弹性动画
+ * @author sinvon
+ * @since 2024年12月31日16:48:11
  */
 import {onMounted, ref} from 'vue';
 import cloud from 'd3-cloud';
