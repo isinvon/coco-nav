@@ -230,7 +230,10 @@ const addLink = () => {
 
 .link-name {
   font-size: 16px;
-  color: #24292f;
+  color: #666666;
+  &:hover {
+    color: #0366d6;
+  }
 }
 
 .link-description {
