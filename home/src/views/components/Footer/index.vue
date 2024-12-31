@@ -45,7 +45,7 @@
 @import './index';
 /* 为 SVG 图标添加垂直对齐 */
 .footer-icon {
-  vertical-align: middle; /* 确保图标与文本垂直居中对齐 */
+  vertical-align: top; /* 确保图标与文本垂直居中对齐 */
   margin-right: 5px; /* 调整图标与文本之间的间距 */
 }
 </style>
