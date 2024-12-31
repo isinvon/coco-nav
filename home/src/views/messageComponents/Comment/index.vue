@@ -25,7 +25,10 @@
       <div class="control">
         <span class="like" :class="{ active: item.isLike }" @click="likeClick(item)">
           <i class="iconfont icon-like"></i>
-          <span class="like-num">{{ item.likeNum > 0 ? item.likeNum + '人赞' : '赞' }}</span>
+          <span class="like-num">
+            <span v-if="item.isLike" class="liked">❤ {{item.likeNum}}</span>
+            <span v-else>❤ {{item.likeNum}}</span>
+          </span>
         </span>
         <span class="comment-reply" @click="showCommentInput(item)">
           <i class="iconfont icon-comment"></i>
@@ -60,10 +63,6 @@
             </span>
           </div>
         </div>
-        <!--<div class="write-reply" v-if="item.reply.length > 0" @click="showCommentInput(item)">-->
-        <!--  <i class="el-icon-edit"></i>-->
-        <!--  <span class="add-comment">添加新评论</span>-->
-        <!--</div>-->
         <transition name="fade">
           <div class="input-wrapper" v-if="showItemId === item.id">
             <el-input class="gray-bg-input"

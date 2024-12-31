@@ -251,3 +251,31 @@
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+// 点赞样式 ------------------start-----------------
+.like-num {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.like .liked {
+  color: red;  // 点赞后颜色为红色
+}
+
+.like .liked + .like-num {
+  color: red;  // 点赞后数目也为红色
+}
+
+.like-num {
+  color: #ccc;  // 默认颜色
+  transition: color 0.3s ease;
+}
+
+.like.active .liked {
+  color: red;  // 点赞状态时的颜色
+}
+
+.like.active .like-num {
+  color: red;
+}
+// 点赞样式 ------------------end-----------------
