@@ -1,4 +1,9 @@
 <script setup>
+/**
+ * Powered by coco-nav
+ * Copyright 2024 Sinvon
+ * You are not allowed to remove this attribution without permission.
+ */
 </script>
 
 <template>
@@ -23,6 +28,11 @@
       <li><a href="#">Training</a></li>
       <li><a href="#">Blog</a></li>
     </ul>
+    <!-- Power by -->
+    <div class="footer-powered-by">
+      <span>Powered by</span>
+      <a href="https://github.com/isinvon/coco-nav" target="_blank">coco-nav</a>
+    </div>
   </footer>
 </template>
 

@@ -1,0 +1,57 @@
+#simple-footer {
+  margin-top: 30px;
+  font-size: 12px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 10px 0;
+  color: #59636e; /* 默认字体颜色 */
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  gap: 15px; /* 控制链接间距 */
+  margin-bottom: 15px;
+}
+
+.footer-links li {
+  margin: 0;
+}
+
+.footer-links a {
+  text-decoration: none; /* 初始无下划线 */
+  color: #59636e; /* 默认颜色 */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* 平滑过渡 */
+}
+
+.footer-links a:hover {
+  color: #0073e6; /* 悬浮时链接颜色 */
+  text-decoration: underline; /* 悬浮时显示下划线 */
+}
+
+/* 样式调整 - Powered by部分 */
+.footer-powered-by {
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #59636e; /* 与链接颜色一致 */
+}
+
+.footer-powered-by span {
+  margin-right: 5px;
+  font-style: italic;
+}
+
+.footer-powered-by a {
+  font-weight: bold;
+  color: #0073e6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-powered-by a:hover {
+  color: #005bb5;
+  text-decoration: underline; /* 悬浮时显示下划线 */
+}
