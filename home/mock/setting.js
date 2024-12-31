@@ -20,6 +20,11 @@ const setting = {
         tag: {
             // 模板(标签的几种显示样式)
             template: 5
+        },
+        // markdown设置
+        markdown: {
+            // 模板(markdown的几种显示样式)
+            template: 3
         }
     }
 };
