@@ -60,8 +60,13 @@ const submitComment = () => {
       id: Date.now(),
       content: newComment.value,
       user: '匿名用户',
-      avatar: 'https://randomuser.me/api/portraits/men/1.jpg', // 可以替换为实际头像
-      time: new Date().toLocaleString(),
+      fromAvatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+      date: new Date().toLocaleString(),  // 评论时间
+      ownerId: 'talents100020', // 文章的id
+      fromId: 'errhefe232213',  // 评论者id
+      fromName: '程序猿小弟',   // 评论者昵称
+      level: 5, // 评论者账号等级
+      likeNum: 0, // 点赞人数
     };
     commentData.value.push(comment); // 将新评论加入评论数据
     newComment.value = ''; // 清空输入框
