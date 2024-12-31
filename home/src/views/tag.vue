@@ -63,6 +63,7 @@ const wordcloudComponents = [
   import('./tagComponents/Wordcloud_v3.vue'),
   import('./tagComponents/Wordcloud_v4.vue'),
   import('./tagComponents/Wordcloud_v5.vue'),
+  import('./tagComponents/Wordcloud_v6.vue'),
 ];
 
 const templateVersion = ref(0);
