@@ -160,3 +160,42 @@
 ::v-deep(.markdown-content ol li) {
   list-style-type: decimal;
 }
+
+
+// 预览图片 --------------- start ----------------
+
+
+
+/* 图片预览覆盖层 */
+.preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.preview-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 图片放大动画 */
+.preview-overlay img:active {
+  transform: scale(1.1);
+}
+
+/* 关闭预览层的效果 */
+.preview-overlay:hover {
+  cursor: pointer;
+}
+
+// 预览图片 --------------- end ----------------
