@@ -37,9 +37,10 @@
 <!--抽离封装后-->
 
 <template>
+  <!-- 动态加载的 wordcloud 组件 -->
   <component :is="currentWordcloudComponent" :tags="tags" v-if="currentWordcloudComponent"/>
-  <!-- 如果超过5, 使用自定义的 el-tag -->
-  <div v-else class="tag-container">
+  <!-- 如果没有加载组件且标签数量超过5，显示自定义的 el-tag -->
+  <div v-if="!isLoading && !currentWordcloudComponent && tags.length > 5" class="tag-container">
     <el-tag v-for="tag in tags" class="custom-tag" :key="tag.text" size="large" type="info" effect="light">
       <router-link :to="tag.path" class="custom-router-link">{{ tag.text }}</router-link>
     </el-tag>
@@ -69,6 +70,7 @@ const wordcloudComponents = [
 const templateVersion = ref(0);
 const tags = ref([]);
 const currentWordcloudComponent = ref(null);
+const isLoading = ref(true);
 
 onMounted(() => {
   templateVersion.value = settingData.setting.data.tag.template;
@@ -78,9 +80,11 @@ onMounted(() => {
   if (templateVersion.value <= 6 && templateVersion.value > 0) {
     wordcloudComponents[templateVersion.value - 1].then((module) => {
       currentWordcloudComponent.value = module.default;
+      isLoading.value = false; // 加载完毕，设置为false
     });
   } else {
     currentWordcloudComponent.value = null;
+    isLoading.value = false; // 无效模板时也设置为false
   }
 });
 </script>
