@@ -1,28 +1,30 @@
 <template>
-  <!--左边-->
-  <el-row :gutter="20">
-    <el-col :span="3">
-      <div class="grid-content ep-bg-purple"/>
-    </el-col>
-    <el-col :span="12">
-      <div class="grid-content ep-bg-purple"/>
-      <!-- 评论区整体结构 -->
-      <div class="comment-section">
-        <!-- 评论显示区 -->
-        <Comment :comments="commentData" :setting="settingData"></Comment>
-        <!-- 提交评论表单 -->
-        <div class="comment-form">
-          <textarea v-model="newComment" placeholder="请输入你的留言..." rows="3"></textarea>
-          <button @click="submitComment" :disabled="isSubmitting">提交评论</button>
+  <div class="container">
+    <!--左边-->
+    <el-row :gutter="20">
+      <el-col :span="3">
+        <div class="grid-content ep-bg-purple"/>
+      </el-col>
+      <el-col :span="12">
+        <div class="grid-content ep-bg-purple"/>
+        <!-- 评论区整体结构 -->
+        <div class="comment-section">
+          <!-- 评论显示区 -->
+          <Comment :comments="commentData" :setting="settingData"></Comment>
+          <!-- 提交评论表单 -->
+          <div class="comment-form">
+            <textarea v-model="newComment" placeholder="请输入你的留言..." rows="3"></textarea>
+            <button @click="submitComment" :disabled="isSubmitting">提交评论</button>
+          </div>
         </div>
-      </div>
-    </el-col>
-    <!--右边-->
-    <el-col :span="5">
-      <div class="grid-content ep-bg-purple"/>
-      <RightAside/>
-    </el-col>
-  </el-row>
+      </el-col>
+      <!--右边-->
+      <el-col :span="5">
+        <div class="grid-content ep-bg-purple"/>
+        <RightAside/>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script setup>
@@ -71,6 +73,11 @@ const submitComment = () => {
 </script>
 
 <style lang="less" scoped>
+
+.container {
+  border-radius: 10px;
+}
+
 .comment-section {
   width: 100%;
   max-width: 800px;
