@@ -7,7 +7,7 @@ export const headerMenuEnum = [
     },
     {
         name: 'about',
-        icon: '🔍',
+        icon: '♾️',
         title: '关于',
         path: '/about'
     },
