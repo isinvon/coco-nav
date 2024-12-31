@@ -23,7 +23,7 @@ const handleEmojiClick = (event) => {
 
 <style lang="less" scoped>
 .emoji-picker {
-  width: 400px;
+  width: 350px;
   height: 300px;
 }
 </style>
