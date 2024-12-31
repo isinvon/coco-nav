@@ -81,13 +81,11 @@ const submitComment = () => {
 
 .comment-section {
   width: 100%;
-  max-width: 800px;
   margin: 0 auto;
 }
 
 .comment-form {
   margin-top: 20px;
-  max-width: 750px;
 }
 
 .comment-form textarea {
