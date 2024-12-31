@@ -11,7 +11,12 @@
     <ul class="footer-links">
       <!-- 版权部分 -->
       <li class="footer-copyright">
-        <a href="https://github.com/isinvon/coco-nav" target="_blank">🐱</a>
+        <a href="https://github.com/isinvon/coco-nav" target="_blank">
+          <!-- 添加垂直对齐样式 -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="footer-icon">
+            <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/>
+          </svg>
+        </a>
         © 2024 Sinvon
       </li>
       <!-- 其他链接 -->
@@ -37,47 +42,10 @@
 </template>
 
 <style scoped lang="less">
-#simple-footer {
-  margin-top: 30px;
-  font-size: 12px;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 10px 0;
-  color: #59636e; /* 默认字体颜色 */
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: inline-flex;
-  gap: 15px; /* 控制链接间距 */
-}
-
-.footer-links li {
-  margin: 0;
-}
-
-.footer-links a {
-  text-decoration: none; /* 初始无下划线 */
-  color: #59636e; /* 默认颜色 */
-  transition: color 0.3s ease, text-decoration 0.3s ease; /* 平滑过渡 */
-}
-
-.footer-links a:hover {
-  color: #0073e6; /* 悬浮时链接颜色 */
-  text-decoration: underline; /* 悬浮时显示下划线 */
-}
-
-/* 特定样式：覆盖全局样式，禁止 footer-copyright 内链接显示下划线 */
-.footer-copyright a {
-  text-decoration: none !important; /* 强制无下划线 */
-  color: #59636e; /* 默认颜色 */
-  transition: color 0.3s ease; /* 添加悬浮颜色变化 */
-}
-
-.footer-copyright a:hover {
-  color: #0073e6; /* 悬浮时颜色变化 */
-  text-decoration: none !important; /* 悬浮时也无下划线 */
+@import './index';
+/* 为 SVG 图标添加垂直对齐 */
+.footer-icon {
+  vertical-align: middle; /* 确保图标与文本垂直居中对齐 */
+  margin-right: 5px; /* 调整图标与文本之间的间距 */
 }
 </style>
