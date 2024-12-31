@@ -61,7 +61,7 @@ import { ref, computed } from 'vue';
 
 // 模拟的友链数据
 const links = ref([
-  { name: 'GitHub', url: 'https://github.com', icon: 'https://github.githubassets.com/images/modules/logos_page/Octocat.png', description: '全球最大的开发者社区', date: '2023-01-01', category: '开发者' },
+  { name: 'Element', url: 'https://element-plus.org', icon: 'https://element-plus.org/images/element-plus-logo.svg', description: '全球最大的开发者社区', date: '2023-01-01', category: '开发者' },
   { name: 'Vue.js', url: 'https://vuejs.org', icon: 'https://vuejs.org/images/logo.png', description: '前端框架', date: '2022-03-15', category: '开发者' },
   { name: 'Stack Overflow', url: 'https://stackoverflow.com', icon: 'https://stackoverflow.com/favicon.ico', description: '编程问答社区', date: '2021-08-10', category: '工具' },
   { name: 'MDN Web Docs', url: 'https://developer.mozilla.org', icon: 'https://developer.mozilla.org/favicon.ico', description: '前端开发文档', date: '2020-06-22', category: '工具' },
