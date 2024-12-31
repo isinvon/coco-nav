@@ -39,7 +39,7 @@ function updateMenu() {
       <!-- ExpandButton-->
       <ExpandButton/>
       <!-- 热点按钮 -->
-      <HotButton @click='hotCardStore.toggleHotCardOpenState()'/>
+      <HotButton class="hot-button" @click='hotCardStore.toggleHotCardOpenState()'/>
     </div>
 
     <input type='checkbox' id='responsive-menu' @click='updateMenu()'>
