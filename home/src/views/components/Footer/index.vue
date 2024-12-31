@@ -25,6 +25,7 @@
       <li><a href="/api">API</a></li>
       <li><a href="/training">Training</a></li>
       <li><a href="/blog">Blog</a></li>
+      <li><a href="/test">Test</a></li>
     </ul>
     <!-- Power by -->
     <div class="footer-powered-by">
