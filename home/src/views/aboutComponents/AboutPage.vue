@@ -93,7 +93,9 @@ const props = defineProps({
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   padding: 20px;
-  background-color: #f6f8fa; /* GitHub 轻灰背景 */
+  background-color: #f6f8fa; /* GitHub 淡灰色背景 */
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* 页头样式 */
