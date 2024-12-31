@@ -33,6 +33,7 @@ import Comment from './messageComponents/Comment/index.vue';
 import RightAside from './messageComponents/RightAside/index.vue';
 import * as CommentData from '../../mock/message.js';
 import * as SettingData from '../../mock/setting.js';
+import { ElMessage } from 'element-plus'; // 引入Element Plus的Message组件
 
 const commentData = ref([]);
 const settingData = ref([]);
@@ -65,6 +66,9 @@ const submitComment = () => {
     commentData.value.push(comment); // 将新评论加入评论数据
     newComment.value = ''; // 清空输入框
     isSubmitting.value = false; // 恢复按钮状态
+
+    // 提交评论成功后弹出消息提示
+    ElMessage.success('评论提交成功！');
   }, 1000);
 };
 </script>
@@ -104,6 +108,9 @@ const submitComment = () => {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  &:focus {
+    outline: none;
+  }
 }
 
 .comment-form button:disabled {
