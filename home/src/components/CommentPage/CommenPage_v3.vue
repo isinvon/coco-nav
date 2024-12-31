@@ -1,5 +1,5 @@
 <script setup>
-import {ref, defineProps, computed} from 'vue';
+import {ref} from 'vue';
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 import markdownItHighlightjs from 'markdown-it-highlightjs';
@@ -34,46 +34,11 @@ const md = new MarkdownIt()
 
 // 渲染后的markdown内容
 const renderedMarkdown = ref(md.render(props.content));
-
-// 提取所有的图片URL
-const imageUrls = computed(() => {
-  const imgRegex = /!\[(.*?)\]\((.*?)\)|https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|webp)(?=\s|$)/gi;
-  let match;
-  const urls = [];
-  while ((match = imgRegex.exec(renderedMarkdown.value))) {
-    urls.push(match[2] || match[0]);
-  }
-  return urls;
-});
-
-// 处理图片点击事件
-const handleClick = (event) => {
-  const target = event.target;
-  if (target.tagName === 'IMG') {
-    const imageUrl = target.src;
-    const index = imageUrls.value.indexOf(imageUrl);
-    if (index !== -1) {
-      showViewer.value = true;
-      currentImageUrl.value = imageUrl;
-    }
-  }
-};
-
-const showViewer = ref(false);
-const currentImageUrl = ref('');
 </script>
 
 <template>
   <div class="markdown-card">
-    <div class="markdown-content" v-html="renderedMarkdown" @click="handleClick"></div>
-    <!-- 添加 el-image 组件以支持预览 -->
-    <el-image-viewer
-        v-if="showViewer"
-        :url-list="[currentImageUrl]"
-        :initial-index="0"
-        :hide-on-click-modal="true"
-        @close="showViewer = false"
-    />
+    <div class="markdown-content" v-html="renderedMarkdown"></div>
   </div>
 </template>
 
