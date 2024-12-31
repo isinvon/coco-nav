@@ -151,8 +151,8 @@ const toggleEmojiPanel = (item) => {
     // 计算面板的位置，确保它在按钮下方
     emojiPanelStyle.value = {
       position: 'absolute',
-      top: `${rect.bottom + window.scrollY}px`, // 需要考虑滚动条的偏移
-      left: `${rect.left}px`,
+      top: `${rect.bottom + window.scrollY -80}px`, // 需要考虑滚动条的偏移
+      left: `${rect.left -30}px`,
       zIndex: 1000
     };
   }
