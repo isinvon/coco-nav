@@ -25,7 +25,7 @@
 
     <!-- 排序方式选择 -->
     <div class="sort-container">
-      <label for="sort">排序方式:</label>
+      <label for="sort">排序方式 : </label>
       <select v-model="sortOption" id="sort">
         <option value="name">按名称排序</option>
         <option value="date">按创建时间排序</option>
@@ -178,6 +178,7 @@ const addLink = () => {
   text-align: center;
   margin-bottom: 20px;
   font-size: 14px;
+  color: #666666;
 }
 
 .sort-container select {
@@ -185,6 +186,8 @@ const addLink = () => {
   font-size: 14px;
   border-radius: 4px;
   border: 1px solid #d1d5da;
+  color: #666666;
+  margin-left: 10px;
 }
 
 .link-list {
