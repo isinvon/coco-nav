@@ -69,7 +69,7 @@ import Share from "../RightAside/components/Share.vue";
   display: flex;
   flex-direction: column; // 垂直方向
   gap: 0px;
-  padding: 20px;
+  padding: 10px;
   padding-left: 1px;
   //background-color: #f8f9fa; // 背景颜色
   //border: 1px solid #dee2e6; // 边框颜色
