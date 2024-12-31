@@ -3,6 +3,8 @@ import {computed, ref} from 'vue';
 
 /**
  * 评论相关的钩子
+ * @author sinvon
+ * @since 2024年12月31日19:40:50
  */
 export function useComment(props) {
     const inputComment = ref('');

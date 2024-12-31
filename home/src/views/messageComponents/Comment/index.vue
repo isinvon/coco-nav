@@ -99,6 +99,11 @@
 </template>
 
 <script setup>
+/**
+ * 评论组件
+ * @author: sinvon
+ * @since 2024年12月31日19:40:07
+ */
 import {onMounted, onUnmounted} from 'vue';
 import EmojiSelect from "./components/EmojiSelect.vue";
 // 导入评论相关的钩子
