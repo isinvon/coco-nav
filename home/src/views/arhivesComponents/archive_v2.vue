@@ -110,8 +110,9 @@ const paginateArchives = (archives) => {
 .archives-container {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   padding: 16px;
-  background-color: #f6f8fa; /* GitHub 浅灰色背景 */
+  background-color: #f6f8fa; /* GitHub 淡灰色背景 */
   border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* 搜索框容器 */
