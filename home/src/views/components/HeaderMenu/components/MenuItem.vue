@@ -70,6 +70,7 @@ li {
     &:hover {
       background: @hover-background;
       border-radius: @border-radius;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
     }
 
     .menu-icon {
