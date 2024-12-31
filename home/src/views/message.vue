@@ -100,6 +100,11 @@ const submitComment = () => {
   border: 1px solid #ddd;
   border-radius: 4px;
   resize: none;
+
+  &:focus{
+    outline: none; // 去除输入框的默认边框
+    border: 1px solid #a9a9a9; // 添加新的边框样式
+  }
 }
 
 .comment-form button {
