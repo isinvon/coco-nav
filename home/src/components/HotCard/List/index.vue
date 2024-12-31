@@ -81,6 +81,7 @@ const load = () => {
   padding: 0 10px;
   color: var(--el-color-primary);
   background: var(--el-color-primary-light-9);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 
   a {
     color: inherit;
@@ -99,5 +100,6 @@ const load = () => {
 .infinite-list .infinite-list-item.hot {
   background: #fef0f0; /* 红色背景 */
   color: #f56c6c;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 </style>
