@@ -14,18 +14,17 @@
         Copyright © 2024 Sinvon
       </li>
       <!-- 其他链接 -->
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Security</a></li>
-      <li><a href="#">Status</a></li>
-      <li><a href="#">Docs</a></li>
-      <li><a href="#">Contact GitHub</a></li>
-      <li><a href="#">Pricing</a></li>
-      <li><a href="#">API</a></li>
-      <li><a href="#">Training</a></li>
-      <li><a href="#">Blog</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/security">Security</a></li>
+      <li><a href="/docs">Docs</a></li>
+      <li><a href="/contact">Contact GitHub</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/api">API</a></li>
+      <li><a href="/training">Training</a></li>
+      <li><a href="/blog">Blog</a></li>
     </ul>
     <!-- Power by -->
     <div class="footer-powered-by">
