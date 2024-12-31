@@ -99,8 +99,10 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted, onUnmounted} from 'vue';
+import {onMounted, onUnmounted} from 'vue';
 import EmojiSelect from "./components/EmojiSelect.vue";
+// 导入评论相关的钩子
+import {useComment} from '@/hooks/useComment';
 
 // 定义 props
 const props = defineProps({
@@ -117,94 +119,30 @@ const props = defineProps({
   }
 });
 
-// 数据和方法
-const inputComment = ref('');
-const showItemId = ref('');
-const showEmojiPanel = ref(false);
-const emojiPanelStyle = ref({});
-const emojis = ['😀', '😂', '😍', '😢', '😎', '😜', '😇', '🤔', '🤗', '😅'];  // 可自定义表情
-
-// 计算属性
-const commentSetting = computed(() => {
-  return {
-    showLevel: props.setting?.message?.comment?.show_level || false, // 使用可选链, 不会抛出错误, 只会返回undefined, 而设置默认返回false
-    // 以后可以扩展更多设置
-    // ...
-  };
-});
-
-// 插入表情
-const insertEmoji = (emoji) => {
-  inputComment.value += emoji;
-  showEmojiPanel.value = false;  // 选择表情后关闭面板
-};
-
-// 显示/隐藏表情面板
-const toggleEmojiPanel = (item) => {
-  showEmojiPanel.value = !showEmojiPanel.value;
-
-  if (showEmojiPanel.value) {
-    // 获取按钮的位置
-    const button = document.querySelector('.emoji-button');
-    const rect = button.getBoundingClientRect();
-
-    // 计算面板的位置，确保它在按钮下方
-    emojiPanelStyle.value = {
-      position: 'absolute',
-      top: `${rect.bottom + window.scrollY -80}px`, // 需要考虑滚动条的偏移
-      left: `${rect.left -30}px`,
-      zIndex: 1000
-    };
-  }
-};
+// 使用评论相关的钩子
+const {
+  inputComment,
+  showItemId,
+  showEmojiPanel,
+  emojiPanelStyle,
+  commentSetting,
+  insertEmoji,
+  toggleEmojiPanel,
+  likeClick,
+  cancel,
+  commitComment,
+  showCommentInput
+} = useComment(props);
 
 // 监听点击事件，关闭表情面板
 const handleClickOutside = (event) => {
   const emojiPanel = document.querySelector('.emoji-picker-container');
   const emojiButton = document.querySelector('.emoji-button');
 
-  // 如果点击的是表情面板或按钮内的元素，则不做处理
-  if (emojiPanel && emojiPanel.contains(event.target)) {
-    return;
-  }
+  if (emojiPanel && emojiPanel.contains(event.target)) return;
+  if (emojiButton && emojiButton.contains(event.target)) return;
 
-  if (emojiButton && emojiButton.contains(event.target)) {
-    return;
-  }
-
-  // 否则关闭表情面板
   showEmojiPanel.value = false;
-};
-
-const likeClick = (item) => {
-  if (item.isLike === null) {
-    item.isLike = true;
-    item.likeNum++;
-  } else {
-    if (item.isLike) {
-      item.likeNum--;
-    } else {
-      item.likeNum++;
-    }
-    item.isLike = !item.isLike;
-  }
-};
-
-const cancel = () => {
-  showItemId.value = '';
-};
-
-const commitComment = () => {
-  console.log(inputComment.value);
-};
-
-const showCommentInput = (item, reply = null) => {
-  if (reply) {
-    inputComment.value = `@${reply.fromName} `;
-  } else {
-    inputComment.value = '';
-  }
-  showItemId.value = item.id;
 };
 
 // 在组件挂载时添加事件监听
