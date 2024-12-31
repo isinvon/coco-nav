@@ -40,9 +40,8 @@
   <component :is="currentWordcloudComponent" :tags="tags" v-if="currentWordcloudComponent"/>
   <!-- 如果超过5, 使用自定义的 el-tag -->
   <div v-else class="tag-container">
-    <el-tag v-for="tag in tags" :key="tag.text" class="tag-item" size="large" type="info" effect="light"
-            style="font-size: 15px;padding: 10px;margin: 10px;color: #666666;background-color: #f6f6f6;">
-      <router-link :to="tag.path">{{ tag.text }}</router-link>
+    <el-tag v-for="tag in tags" class="custom-tag" :key="tag.text" size="large" type="info" effect="light">
+      <router-link :to="tag.path" class="custom-router-link">{{ tag.text }}</router-link>
     </el-tag>
   </div>
 </template>
@@ -84,3 +83,34 @@ onMounted(() => {
   }
 });
 </script>
+<style lang="less" scoped>
+.custom-tag {
+  font-size: 15px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f6f6f6;
+  color: #808080;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #8f8f8f;
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    color: #ffffff;
+    background-color: #8f8f8f;
+    transition: all 0.3s ease;
+    // 向下偏移
+    transform: translateY(2px);
+  }
+
+}
+
+/* 设置 router-link 的字体颜色 */
+.custom-router-link {
+  color: inherit; /* 继承父级 el-tag 的字体颜色 */
+  text-decoration: none; /* 如果你想去掉下划线 */
+}
+</style>
