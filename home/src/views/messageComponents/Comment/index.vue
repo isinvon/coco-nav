@@ -197,7 +197,7 @@ const showCommentInput = (item, reply = null) => {
 @background-color: #fafafa; // GitHub轻灰背景
 @primary-color: #24292f; // GitHub主色
 @secondary-color: #89949f; // 次要文字色
-@border-color: #ececec; // 边框颜色
+@border-color: #e7e7e7; // 边框颜色
 @button-color: #2d333b; // 按钮背景色
 
 .container {
@@ -211,7 +211,7 @@ const showCommentInput = (item, reply = null) => {
   flex-direction: column;
   padding: 10px;
   //border-bottom: 1px solid @border-color;
-  background-color: #ffffff;
+  //background-color: #ffffff;
   border-radius: 8px;
   margin-bottom: 10px;
 
