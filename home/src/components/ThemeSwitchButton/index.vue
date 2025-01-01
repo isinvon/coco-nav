@@ -1,7 +1,7 @@
 <template>
   <el-switch
       @click="toggleDarkMode"
-      v-model="value"
+      v-model="darkMode"
       :active-action-icon="Sunny"
       :inactive-action-icon="Moon"
       :size="size"
@@ -17,12 +17,16 @@
  */
 import {ref} from 'vue'
 import {Moon, Sunny} from '@element-plus/icons-vue'
-import useDark from '@/hooks/useDark'; // 引入自定义钩子
+import {useDarkThemeStore} from "@/store/darkThemeStore.js"; // 引入自定义钩子
 
-// 获取夜间暗色主题切换的 钩子
-const {toggleDarkMode} = useDark(); // 使用钩子来控制暗黑模式
+const darkThemeStore = useDarkThemeStore()
 
-const value = ref(true)
+const darkMode = ref(darkThemeStore.isDarkMode)
+
+function toggleDarkMode() {
+  console.log('darkMode', darkMode.value)
+  darkThemeStore.toggleDarkMode(darkMode.value) // 调用自定义钩子来切换暗黑模式
+}
 
 const props = defineProps({
   /**
