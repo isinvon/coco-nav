@@ -9,52 +9,50 @@ import RightDrawer from "@/components/RightDrawer/index.vue";
 import LeftDrawer from "@/components/LeftDrawer/index.vue";
 import LoadingSpinner from './components/LoadingSpinner/index.vue';
 import {useLoading} from '@/hooks/useLoading';
-import {useGrayScale} from "@/hooks/useGrayScale.js";
+// import {useGrayScale} from "@/hooks/useGrayScale.js";
 // import {useGrayScaleStore} from "@/store/grayScaleStore.js";
+// useGrayScale() // 调用 useGrayScale 钩子, 初始化灰度调节的逻辑
+// const grayScale = useGrayScaleStore(); // 从store 中获取灰度调节的值,确保调节的时候实时更新页面灰度
 
 // 调用 useHot 钩子来处理点击外部区域的逻辑
 useHot();
 
 // 使用 useLoading 钩子
 const {isLoading} = useLoading();
-
-
-useGrayScale() // 调用 useGrayScale 钩子, 初始化灰度调节的逻辑
-// const grayScale = useGrayScaleStore(); // 从store 中获取灰度调节的值,确保调节的时候实时更新页面灰度
 </script>
 
 <template>
-    <!--灰度调节-->
-    <!--<el-container-->
-    <!--    class="common-layout"-->
-    <!--    :style="{ filter: `grayscale(${grayScale.grayScaleLevel}%)`, transition: 'filter 0.3s ease' }"-->
-    <!--&gt;-->
+  <!--灰度调节-->
+  <!--<el-container-->
+  <!--    class="common-layout"-->
+  <!--    :style="{ filter: `grayscale(${grayScale.grayScaleLevel}%)`, transition: 'filter 0.3s ease' }"-->
+  <!--&gt;-->
   <el-container>
-      <el-header>
-        <!--头部菜单-->
-        <HeaderMenu/>
-      </el-header>
-      <el-main class="main-container">
-        <!--路由-->
-        <router-view></router-view>
-        <!--页脚-->
-        <Footer/>
-      </el-main>
-    </el-container>
+    <el-header>
+      <!--头部菜单-->
+      <HeaderMenu/>
+    </el-header>
+    <el-main class="main-container">
+      <!--路由-->
+      <router-view></router-view>
+      <!--页脚-->
+      <Footer/>
+    </el-main>
+  </el-container>
 
-    <!--抽屉-->
-    <LeftDrawer/>
-    <!--抽屉-->
-    <RightDrawer/>
+  <!--抽屉-->
+  <LeftDrawer/>
+  <!--抽屉-->
+  <RightDrawer/>
 
-    <!--热点卡片-->
-    <transition name="hot-card-animation">
-      <HotCard
-          v-if="useHotCardStore().isOpen"
-          class="hot-card"
-          :newsList="newsList"
-      />
-    </transition>
+  <!--热点卡片-->
+  <transition name="hot-card-animation">
+    <HotCard
+        v-if="useHotCardStore().isOpen"
+        class="hot-card"
+        :newsList="newsList"
+    />
+  </transition>
 
   <!-- 加载动画 -->
   <LoadingSpinner v-if="isLoading"/>
