@@ -193,6 +193,10 @@ const addEngine = () => {
       outline: none; /* 去除点击后的边框 */
       box-shadow: none; /* 去除可能的阴影效果 */
     }
+
+    &:active {
+      transform: scale(0.8);
+    }
   }
 }
 
