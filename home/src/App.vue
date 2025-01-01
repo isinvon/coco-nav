@@ -31,6 +31,8 @@ useHot();
     <LeftDrawer/>
     <!--抽屉-->
     <RightDrawer/>
+    <!--标签详情抽屉-->
+    <BookmarkDetailsDrawer/>
 
     <!--热点卡片-->
     <transition name="hot-card-animation">
