@@ -18,7 +18,7 @@ import {useLoading} from '@/hooks/useLoading';
 useHot();
 
 // 使用 useLoading 钩子
-const {isLoading} = useLoading();
+// const {isLoading} = useLoading();
 </script>
 
 <template>
@@ -54,8 +54,8 @@ const {isLoading} = useLoading();
     />
   </transition>
 
-  <!-- 加载动画 -->
-  <LoadingSpinner v-if="isLoading"/>
+  <!-- 加载动画(暂时不需要这个,因为用了进度条代替加载动画了) -->
+  <!--<LoadingSpinner v-if="isLoading"/>-->
 </template>
 
 <style lang="less" scoped>
