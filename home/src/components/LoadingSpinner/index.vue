@@ -1,6 +1,6 @@
 <template>
-  <div class="loading-spinner">
-    <div class="spinner"></div>
+  <div class="loading-spanner">
+    <div class="load"></div>
   </div>
 </template>
 
@@ -12,29 +12,38 @@
  */
 </script>
 <style lang="less" scoped>
-.loading-spinner {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0, 0, 0, 0.3);
-display: flex;
-justify-content: center;
-align-items: center;
+.loading-spanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(164, 164, 164, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.spinner {
-border: 4px solid rgba(255, 255, 255, 0.3);
-border-top: 4px solid #fff;
-border-radius: 50%;
-width: 50px;
-height: 50px;
-animation: spin 1s linear infinite;
+.load {
+  width: 40px;
+  aspect-ratio: 1;
+  background: #ababab;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  animation: l2 2s infinite cubic-bezier(0.3, 1, 0, 1);
 }
 
-@keyframes spin {
-0% { transform: rotate(0deg); }
-100% { transform: rotate(360deg); }
+@keyframes l2 {
+  25% {
+    clip-path: polygon(0 0, 100% 0, 0 100%)
+  }
+  50% {
+    clip-path: polygon(0 0, 100% 100%, 0 100%)
+  }
+  75% {
+    clip-path: polygon(100% 0, 100% 100%, 0 100%)
+  }
+  100% {
+    clip-path: polygon(100% 0, 100% 100%, 0 0)
+  }
 }
 </style>
