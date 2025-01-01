@@ -1,6 +1,6 @@
 <template>
   <el-switch
-      @click="toggleDarkMode"
+      @change="toggleDarkMode"
       v-model="darkMode"
       :active-action-icon="Sunny"
       :inactive-action-icon="Moon"
@@ -15,7 +15,7 @@
  * @author: sinvon
  * @since 2025年1月1日21:26:59
  */
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import {Moon, Sunny} from '@element-plus/icons-vue'
 import {useDarkThemeStore} from "@/store/darkThemeStore.js"; // 引入自定义钩子
 
@@ -24,7 +24,6 @@ const darkThemeStore = useDarkThemeStore()
 const darkMode = ref(darkThemeStore.isDarkMode)
 
 function toggleDarkMode() {
-  console.log('darkMode', darkMode.value)
   darkThemeStore.toggleDarkMode(darkMode.value) // 调用自定义钩子来切换暗黑模式
 }
 
@@ -38,6 +37,11 @@ const props = defineProps({
     default: 'small'
   }
 })
+
+// 页面加载时，初始化 switch 的值
+onMounted(() => {
+  darkMode.value = darkThemeStore.isDarkMode;
+});
 </script>
 
 <style lang="less" scoped>

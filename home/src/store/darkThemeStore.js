@@ -12,7 +12,7 @@ import Storage from '@/utils/Storage.js'
  */
 export const useDarkThemeStore = defineStore('darkTheme', {
     state: () => ({
-        isDarkMode: Storage.getItem('darkMode') || true,  // 默认为亮色模式
+        isDarkMode: Storage.getItem('darkMode') || false,  // 默认为亮色模式
     }),
     actions: {
         toggleDarkMode(event) {

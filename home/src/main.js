@@ -9,9 +9,12 @@ import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css"; // 引入暗黑主题的 CSS
 // 全局样式
 import "./styles/index.less";
+import {initTheme} from "@/hooks/initTheme.js";
 
 createApp(App)
     .use(router)
     .use(ElementPlus)
     .use(createPinia())  // 使用 Pinia
     .mount("#app");
+
+initTheme();
