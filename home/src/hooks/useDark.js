@@ -1,6 +1,12 @@
 import * as DarkReader from 'darkreader';
 import {useDarkThemeStore} from "@/store/darkThemeStore.js";
 
+/**
+ * 夜间/暗色主题的钩子
+ * @author sinvon
+ * @since 2025年1月1日21:30:40
+ * @returns {{toggleDarkMode: toggleDarkMode}}
+ */
 export default function useDark() {
     const darkStore = useDarkThemeStore();  // 使用状态管理
 

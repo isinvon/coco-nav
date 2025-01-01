@@ -20,7 +20,7 @@ import useDark from '@/hooks/useDark'; // 引入自定义钩子
 const rightDrawerStore = useRightDrawerStore()
 const hotCardStore = useHotCardStore()
 
-// 获取状态管理的 store 和钩子
+// 获取夜间暗色主题切换的 钩子
 const {toggleDarkMode} = useDark(); // 使用钩子来控制暗黑模式
 
 // 切换抽屉状态
