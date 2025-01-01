@@ -15,13 +15,9 @@ import HotButton from "./components/HotButton/index.vue";
 import {useHotCardStore} from "@/store/hotCard.js";
 import MenuItem from "./components/MenuItem.vue";
 import {headerMenuEnum} from "@/enum/headerMenuEunm.js";
-import useDark from '@/hooks/useDark'; // 引入自定义钩子
 
 const rightDrawerStore = useRightDrawerStore()
 const hotCardStore = useHotCardStore()
-
-// 获取夜间暗色主题切换的 钩子
-const {toggleDarkMode} = useDark(); // 使用钩子来控制暗黑模式
 
 // 切换抽屉状态
 const toggleDrawer = () => {
@@ -66,7 +62,7 @@ function updateMenu() {
       />
 
       <!-- 控制暗黑模式的按钮 -->
-      <ThemeSwitchButton @click="toggleDarkMode" size="small" style="margin-left: 8px"/>
+      <ThemeSwitchButton size="small" style="margin-left: 8px"/>
       <el-divider direction="vertical" style="margin-left: 8px;margin-right: 8px"/>
       <!-- 头像 -->
       <Avatar @click='toggleDrawer' :src="'https://avatars.githubusercontent.com/u/102167772?v=4'"
