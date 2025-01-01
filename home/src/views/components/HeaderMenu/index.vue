@@ -65,11 +65,10 @@ function updateMenu() {
           :children="menuItem.children || []"
       />
 
-      <!-- 头像 -->
-      <el-divider direction="vertical" style="margin-left: 5px"/>
       <!-- 控制暗黑模式的按钮 -->
-      <ThemeSwitchButton @click="toggleDarkMode" size="small"/>
-      <el-divider direction="vertical" style="margin-left: 5px"/>
+      <ThemeSwitchButton @click="toggleDarkMode" size="small" style="margin-left: 8px"/>
+      <el-divider direction="vertical" style="margin-left: 8px;margin-right: 8px"/>
+      <!-- 头像 -->
       <Avatar @click='toggleDrawer' :src="'https://avatars.githubusercontent.com/u/102167772?v=4'"
               style="cursor: pointer"/>
     </ul>
