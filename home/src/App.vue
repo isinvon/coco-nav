@@ -8,17 +8,21 @@ import HotCard from "@/components/HotCard/index.vue";
 import RightDrawer from "@/components/RightDrawer/index.vue";
 import LeftDrawer from "@/components/LeftDrawer/index.vue";
 import LoadingSpinner from './components/LoadingSpinner/index.vue';
-import {useLoading} from '@/hooks/useLoading'; // 引入 useLoading 钩子
+import {useLoading} from '@/hooks/useLoading';
+import {useGrayScale} from "@/hooks/useGrayScale.js"; // 引入 useLoading 钩子
 
 // 调用 useHot 钩子来处理点击外部区域的逻辑
 useHot();
 
 // 使用 useLoading 钩子
 const {isLoading} = useLoading();
+
+// 调用 useGrayScale 钩子
+const {grayScaleLevel} = useGrayScale()
 </script>
 
 <template>
-  <div class="common-layout">
+  <div class="common-layout" :style="{ filter: `grayscale(${grayScaleLevel}%)`, transition: 'filter 0.3s ease' }">
     <el-container>
       <el-header>
         <!--头部菜单-->
