@@ -9,7 +9,8 @@ import RightDrawer from "@/components/RightDrawer/index.vue";
 import LeftDrawer from "@/components/LeftDrawer/index.vue";
 import LoadingSpinner from './components/LoadingSpinner/index.vue';
 import {useLoading} from '@/hooks/useLoading';
-import {useGrayScale} from "@/hooks/useGrayScale.js"; // 引入 useLoading 钩子
+import {useGrayScale} from "@/hooks/useGrayScale.js";
+import {useGrayScaleStore} from "@/store/grayScaleStore.js";
 
 // 调用 useHot 钩子来处理点击外部区域的逻辑
 useHot();
@@ -17,13 +18,16 @@ useHot();
 // 使用 useLoading 钩子
 const {isLoading} = useLoading();
 
-// 调用 useGrayScale 钩子
-const {grayScaleLevel} = useGrayScale()
+
+useGrayScale() // 调用 useGrayScale 钩子, 初始化灰度调节的逻辑
+const grayScale = useGrayScaleStore(); // 从store 中获取灰度调节的值,确保调节的时候实时更新页面灰度
 </script>
 
 <template>
-  <div class="common-layout" :style="{ filter: `grayscale(${grayScaleLevel}%)`, transition: 'filter 0.3s ease' }">
-    <el-container>
+    <el-container
+        class="common-layout"
+        :style="{ filter: `grayscale(${grayScale.grayScaleLevel}%)`, transition: 'filter 0.3s ease' }"
+    >
       <el-header>
         <!--头部菜单-->
         <HeaderMenu/>
@@ -49,7 +53,6 @@ const {grayScaleLevel} = useGrayScale()
           :newsList="newsList"
       />
     </transition>
-  </div>
 
   <!-- 加载动画 -->
   <LoadingSpinner v-if="isLoading"/>
