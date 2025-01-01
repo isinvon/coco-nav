@@ -7,9 +7,14 @@ import newsList from "../mock/newList.js";
 import HotCard from "@/components/HotCard/index.vue";
 import RightDrawer from "@/components/RightDrawer/index.vue";
 import LeftDrawer from "@/components/LeftDrawer/index.vue";
+import LoadingSpinner from './components/LoadingSpinner/index.vue';
+import {useLoading} from '@/hooks/useLoading'; // 引入 useLoading 钩子
 
 // 调用 useHot 钩子来处理点击外部区域的逻辑
 useHot();
+
+// 使用 useLoading 钩子
+const {isLoading} = useLoading();
 </script>
 
 <template>
@@ -41,6 +46,9 @@ useHot();
       />
     </transition>
   </div>
+
+  <!-- 加载动画 -->
+  <LoadingSpinner v-if="isLoading"/>
 </template>
 
 <style lang="less" scoped>
