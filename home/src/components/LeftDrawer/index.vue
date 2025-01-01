@@ -1,7 +1,6 @@
 <template>
   <el-drawer direction="ltr" v-model="leftDrawerStore.isOpen" title="我是左边的抽屉" :with-header="false">
     <div class="sidebar-content">
-      <span>Hi there!</span>
       <UserInfoSection :userInfo="userInfo"/>
 
       <div class="div-spacing"/>
@@ -80,9 +79,8 @@ const handleSortOrderChange = (newValue) => {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .sidebar-content {
-  padding: 20px;
   color: #666666;
 }
 
