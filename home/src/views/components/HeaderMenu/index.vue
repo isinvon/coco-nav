@@ -18,6 +18,13 @@ import {headerMenuEnum} from "@/enum/headerMenuEunm.js";
 const rightDrawerStore = useRightDrawerStore()
 const hotCardStore = useHotCardStore()
 
+import { useDarkThemeStore } from '@/store/darkThemeStore.js'; // 引入 Pinia store
+import useDark from '@/hooks/useDark'; // 引入自定义钩子
+
+// 获取状态管理的 store 和钩子
+const darkThemeStore = useDarkThemeStore();  // 使用 Pinia store 获取 dark 状态
+const { toggleDarkMode } = useDark(); // 使用钩子来控制暗黑模式
+
 // 切换抽屉状态
 const toggleDrawer = () => {
   rightDrawerStore.toggleDrawer()
@@ -61,6 +68,11 @@ function updateMenu() {
       />
 
       <!-- 头像 -->
+      <el-divider direction="vertical" style="margin-left: 5px"/>
+      <!-- 控制暗黑模式的按钮 -->
+      <el-button @click="toggleDarkMode" type="text" circle>
+        {{ darkThemeStore.isDarkMode ? '☀ ' : '🌙' }}
+      </el-button>
       <el-divider direction="vertical" style="margin-left: 5px"/>
       <Avatar @click='toggleDrawer' :src="'https://avatars.githubusercontent.com/u/102167772?v=4'"
               style="cursor: pointer"/>

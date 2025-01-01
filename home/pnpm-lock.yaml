@@ -20,6 +20,9 @@ importers:
       d3-cloud:
         specifier: ^1.2.7
         version: 1.2.7
+      darkreader:
+        specifier: ^4.9.96
+        version: 4.9.96
       element-plus:
         specifier: ^2.9.0
         version: 2.9.0(vue@3.5.13)
@@ -672,6 +675,9 @@ packages:
     resolution: {integrity: sha512-e1U46jVP+w7Iut8Jt8ri1YsPOvFpg46k+K8TpCb0P+zjCkjkPnV7WzfDJzMHy1LnA+wj5pLT1wjO901gLXeEhA==}
     engines: {node: '>=12'}
 
+  darkreader@4.9.96:
+    resolution: {integrity: sha512-zda3BfSF9KRNee59pWZBMeblay0THGFPob9gf2UeUes8mIMM+bHKg0EyPTcSgHholyBwRAmpRMosmPl34YAoaA==}
+
   dayjs@1.11.13:
     resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
@@ -801,6 +807,9 @@ packages:
   make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
     engines: {node: '>=6'}
+
+  malevic@0.20.2:
+    resolution: {integrity: sha512-s44yEUyfDaONt7nPT7NDQ+Z2oAswErG70ok2Q95bJFh1Bdcn4dZQVMrLE02ZIjTtYfQ/LFOVxF+yB3bdGw/GtQ==}
 
   markdown-it-highlightjs@4.2.0:
     resolution: {integrity: sha512-NC7pXE8KkOl6xWJVRNt8p6wgJVznXKsE0HgYGdk6DD2tn1l4L9f0ALf3VIoGVkotNU1uGQatSxfBF1zZPUMmuQ==}
@@ -1645,6 +1654,10 @@ snapshots:
       d3-transition: 3.0.1(d3-selection@3.0.0)
       d3-zoom: 3.0.0
 
+  darkreader@4.9.96:
+    dependencies:
+      malevic: 0.20.2
+
   dayjs@1.11.13: {}
 
   delaunator@5.0.1:
@@ -1797,6 +1810,8 @@ snapshots:
       pify: 4.0.1
       semver: 5.7.2
     optional: true
+
+  malevic@0.20.2: {}
 
   markdown-it-highlightjs@4.2.0:
     dependencies:
