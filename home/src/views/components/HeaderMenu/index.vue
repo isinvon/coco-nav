@@ -8,22 +8,20 @@
 import ExpandButton from "@/views/components/HeaderMenu/components/ExpandButton.vue";
 import AddBookmarkButton from "@/views/components/HeaderMenu/components/AddBookmarkButton.vue";
 import Avatar from '@/components/Avatar/index.vue'
+import ThemeSwitchButton from '@/components/ThemeSwitchButton/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
 import HotButton from "./components/HotButton/index.vue";
 import {useHotCardStore} from "@/store/hotCard.js";
 import MenuItem from "./components/MenuItem.vue";
 import {headerMenuEnum} from "@/enum/headerMenuEunm.js";
+import useDark from '@/hooks/useDark'; // 引入自定义钩子
 
 const rightDrawerStore = useRightDrawerStore()
 const hotCardStore = useHotCardStore()
 
-import { useDarkThemeStore } from '@/store/darkThemeStore.js'; // 引入 Pinia store
-import useDark from '@/hooks/useDark'; // 引入自定义钩子
-
 // 获取状态管理的 store 和钩子
-const darkThemeStore = useDarkThemeStore();  // 使用 Pinia store 获取 dark 状态
-const { toggleDarkMode } = useDark(); // 使用钩子来控制暗黑模式
+const {toggleDarkMode} = useDark(); // 使用钩子来控制暗黑模式
 
 // 切换抽屉状态
 const toggleDrawer = () => {
@@ -70,9 +68,7 @@ function updateMenu() {
       <!-- 头像 -->
       <el-divider direction="vertical" style="margin-left: 5px"/>
       <!-- 控制暗黑模式的按钮 -->
-      <el-button @click="toggleDarkMode" type="text" circle>
-        {{ darkThemeStore.isDarkMode ? '☀ ' : '🌙' }}
-      </el-button>
+      <ThemeSwitchButton @click="toggleDarkMode" size="small"/>
       <el-divider direction="vertical" style="margin-left: 5px"/>
       <Avatar @click='toggleDrawer' :src="'https://avatars.githubusercontent.com/u/102167772?v=4'"
               style="cursor: pointer"/>
