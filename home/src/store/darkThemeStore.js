@@ -1,5 +1,3 @@
-// src/store/useDarkStore.js
-
 import {defineStore} from 'pinia';
 import * as DarkReader from 'darkreader';
 import Storage from '@/utils/Storage.js'
@@ -18,23 +16,9 @@ export const useDarkThemeStore = defineStore('darkTheme', {
         toggleDarkMode(event) {
             this.isDarkMode = event;
             Storage.setItem('darkMode', event);
-            console.log('切换暗黑模式:', this.isDarkMode)
+            // console.log('切换暗黑模式:', this.isDarkMode) // debug
 
             // ================= 暗黑切换的逻辑 ========= start ========
-            // 计算鼠标点击位置
-            const x = event.clientX;
-            const y = event.clientY;
-            // 计算最大圆的半径
-            const endRadius = Math.hypot(
-                Math.max(x, window.innerWidth - x),
-                Math.max(y, window.innerHeight - y)
-            );
-
-            // 设置 CSS 变量，控制圆心和半径
-            document.documentElement.style.setProperty('--x', `${x}px`);
-            document.documentElement.style.setProperty('--y', `${y}px`);
-            document.documentElement.style.setProperty('--r', `${endRadius}px`);
-
             // 使用 document.startViewTransition 进行页面过渡
             if (document.startViewTransition) {
                 // 如果支持 View Transition API，则使用该方法进行过渡
