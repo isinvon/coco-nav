@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.SearchLogMapper">
+    
+    <resultMap type="SearchLog" id="SearchLogResult">
+        <result property="searchLogId"    column="search_log_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="keyword"    column="keyword"    />
+        <result property="searchTime"    column="search_time"    />
+        <result property="ip"    column="ip"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSearchLogVo">
+        select search_log_id, user_id, keyword, search_time, ip, create_time, update_time from coco_search_log
+    </sql>
+
+    <select id="selectSearchLogList" parameterType="SearchLog" resultMap="SearchLogResult">
+        <include refid="selectSearchLogVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="keyword != null  and keyword != ''"> and keyword = #{keyword}</if>
+            <if test="searchTime != null "> and search_time = #{searchTime}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+        </where>
+    </select>
+    
+    <select id="selectSearchLogBySearchLogId" parameterType="Long" resultMap="SearchLogResult">
+        <include refid="selectSearchLogVo"/>
+        where search_log_id = #{searchLogId}
+    </select>
+
+    <insert id="insertSearchLog" parameterType="SearchLog" useGeneratedKeys="true" keyProperty="searchLogId">
+        insert into coco_search_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="keyword != null and keyword != ''">keyword,</if>
+            <if test="searchTime != null">search_time,</if>
+            <if test="ip != null">ip,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="keyword != null and keyword != ''">#{keyword},</if>
+            <if test="searchTime != null">#{searchTime},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSearchLog" parameterType="SearchLog">
+        update coco_search_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="keyword != null and keyword != ''">keyword = #{keyword},</if>
+            <if test="searchTime != null">search_time = #{searchTime},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where search_log_id = #{searchLogId}
+    </update>
+
+    <delete id="deleteSearchLogBySearchLogId" parameterType="Long">
+        delete from coco_search_log where search_log_id = #{searchLogId}
+    </delete>
+
+    <delete id="deleteSearchLogBySearchLogIds" parameterType="String">
+        delete from coco_search_log where search_log_id in 
+        <foreach item="searchLogId" collection="array" open="(" separator="," close=")">
+            #{searchLogId}
+        </foreach>
+    </delete>
+</mapper>

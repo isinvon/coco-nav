@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import ${packageName}.domain.${ClassName};
-import ${packageName}.service.I${ClassName}Service;
+import ${packageName}.service.I${ClassName}CustomService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -35,7 +35,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 public class ${ClassName}Controller extends BaseController
 {
     @Autowired
-    private I${ClassName}Service ${className}Service;
+    private I${ClassName}CustomService ${className}CustomService;
 
     /**
      * 查询${functionName}列表
@@ -46,13 +46,13 @@ public class ${ClassName}Controller extends BaseController
     public TableDataInfo list(${ClassName} ${className})
     {
         startPage();
-        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        List<${ClassName}> list = ${className}CustomService.select${ClassName}List(${className});
         return getDataTable(list);
     }
 #elseif($table.tree)
     public AjaxResult list(${ClassName} ${className})
     {
-        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        List<${ClassName}> list = ${className}CustomService.select${ClassName}List(${className});
         return success(list);
     }
 #end
@@ -65,7 +65,7 @@ public class ${ClassName}Controller extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, ${ClassName} ${className})
     {
-        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        List<${ClassName}> list = ${className}CustomService.select${ClassName}List(${className});
         ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}.class);
         util.exportExcel(response, list, "${functionName}数据");
     }
@@ -77,7 +77,7 @@ public class ${ClassName}Controller extends BaseController
     @GetMapping(value = "/{${pkColumn.javaField}}")
     public AjaxResult getInfo(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField})
     {
-        return success(${className}Service.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}));
+        return success(${className}CustomService.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}));
     }
 
     /**
@@ -88,7 +88,7 @@ public class ${ClassName}Controller extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ${ClassName} ${className})
     {
-        return toAjax(${className}Service.insert${ClassName}(${className}));
+        return toAjax(${className}CustomService.insert${ClassName}(${className}));
     }
 
     /**
@@ -99,7 +99,7 @@ public class ${ClassName}Controller extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ${ClassName} ${className})
     {
-        return toAjax(${className}Service.update${ClassName}(${className}));
+        return toAjax(${className}CustomService.update${ClassName}(${className}));
     }
 
     /**
@@ -110,6 +110,6 @@ public class ${ClassName}Controller extends BaseController
 	@DeleteMapping("/{${pkColumn.javaField}s}")
     public AjaxResult remove(@PathVariable ${pkColumn.javaType}[] ${pkColumn.javaField}s)
     {
-        return toAjax(${className}Service.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s));
+        return toAjax(${className}CustomService.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s));
     }
 }

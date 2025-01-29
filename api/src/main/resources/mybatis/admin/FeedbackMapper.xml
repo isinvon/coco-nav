@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.FeedbackMapper">
+    
+    <resultMap type="Feedback" id="FeedbackResult">
+        <result property="feedbackId"    column="feedback_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="feedbackTypeId"    column="feedback_type_id"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFeedbackVo">
+        select feedback_id, user_id, feedback_type_id, content, status, create_time, update_time from coco_feedback
+    </sql>
+
+    <select id="selectFeedbackList" parameterType="Feedback" resultMap="FeedbackResult">
+        <include refid="selectFeedbackVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="feedbackTypeId != null "> and feedback_type_id = #{feedbackTypeId}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectFeedbackByFeedbackId" parameterType="Long" resultMap="FeedbackResult">
+        <include refid="selectFeedbackVo"/>
+        where feedback_id = #{feedbackId}
+    </select>
+
+    <insert id="insertFeedback" parameterType="Feedback" useGeneratedKeys="true" keyProperty="feedbackId">
+        insert into coco_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="feedbackTypeId != null">feedback_type_id,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="feedbackTypeId != null">#{feedbackTypeId},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFeedback" parameterType="Feedback">
+        update coco_feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="feedbackTypeId != null">feedback_type_id = #{feedbackTypeId},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where feedback_id = #{feedbackId}
+    </update>
+
+    <delete id="deleteFeedbackByFeedbackId" parameterType="Long">
+        delete from coco_feedback where feedback_id = #{feedbackId}
+    </delete>
+
+    <delete id="deleteFeedbackByFeedbackIds" parameterType="String">
+        delete from coco_feedback where feedback_id in 
+        <foreach item="feedbackId" collection="array" open="(" separator="," close=")">
+            #{feedbackId}
+        </foreach>
+    </delete>
+</mapper>

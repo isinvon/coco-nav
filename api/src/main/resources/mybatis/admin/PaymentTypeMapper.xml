@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.PaymentTypeMapper">
+    
+    <resultMap type="PaymentType" id="PaymentTypeResult">
+        <result property="paymentTypeId"    column="payment_type_id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+        <result property="rate"    column="rate"    />
+        <result property="config"    column="config"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPaymentTypeVo">
+        select payment_type_id, name, code, rate, config, status, create_time, update_time from coco_payment_type
+    </sql>
+
+    <select id="selectPaymentTypeList" parameterType="PaymentType" resultMap="PaymentTypeResult">
+        <include refid="selectPaymentTypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="rate != null "> and rate = #{rate}</if>
+            <if test="config != null  and config != ''"> and config = #{config}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectPaymentTypeByPaymentTypeId" parameterType="Long" resultMap="PaymentTypeResult">
+        <include refid="selectPaymentTypeVo"/>
+        where payment_type_id = #{paymentTypeId}
+    </select>
+
+    <insert id="insertPaymentType" parameterType="PaymentType" useGeneratedKeys="true" keyProperty="paymentTypeId">
+        insert into coco_payment_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="rate != null">rate,</if>
+            <if test="config != null">config,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="rate != null">#{rate},</if>
+            <if test="config != null">#{config},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePaymentType" parameterType="PaymentType">
+        update coco_payment_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="rate != null">rate = #{rate},</if>
+            <if test="config != null">config = #{config},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where payment_type_id = #{paymentTypeId}
+    </update>
+
+    <delete id="deletePaymentTypeByPaymentTypeId" parameterType="Long">
+        delete from coco_payment_type where payment_type_id = #{paymentTypeId}
+    </delete>
+
+    <delete id="deletePaymentTypeByPaymentTypeIds" parameterType="String">
+        delete from coco_payment_type where payment_type_id in 
+        <foreach item="paymentTypeId" collection="array" open="(" separator="," close=")">
+            #{paymentTypeId}
+        </foreach>
+    </delete>
+</mapper>

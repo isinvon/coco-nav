@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.CustomServiceMapper">
+    
+    <resultMap type="CustomService" id="CustomServiceResult">
+        <result property="customServiceId"    column="service_id"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="accountType"    column="account_type"    />
+        <result property="account"    column="account"    />
+        <result property="onlineStatus"    column="online_status"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCustomServiceVo">
+        select service_id, nickname, account_type, account, online_status, sort_order, create_time, update_time from coco_custom_service
+    </sql>
+
+    <select id="selectCustomServiceList" parameterType="CustomService" resultMap="CustomServiceResult">
+        <include refid="selectCustomServiceVo"/>
+        <where>  
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="accountType != null "> and account_type = #{accountType}</if>
+            <if test="account != null  and account != ''"> and account = #{account}</if>
+            <if test="onlineStatus != null "> and online_status = #{onlineStatus}</if>
+            <if test="sortOrder != null "> and sort_order = #{sortOrder}</if>
+        </where>
+    </select>
+    
+    <select id="selectCustomServiceByCustomServiceId" parameterType="Long" resultMap="CustomServiceResult">
+        <include refid="selectCustomServiceVo"/>
+        where service_id = #{customServiceId}
+    </select>
+
+    <insert id="insertCustomService" parameterType="CustomService" useGeneratedKeys="true" keyProperty="customServiceId">
+        insert into coco_custom_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname,</if>
+            <if test="accountType != null">account_type,</if>
+            <if test="account != null and account != ''">account,</if>
+            <if test="onlineStatus != null">online_status,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="accountType != null">#{accountType},</if>
+            <if test="account != null and account != ''">#{account},</if>
+            <if test="onlineStatus != null">#{onlineStatus},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCustomService" parameterType="CustomService">
+        update coco_custom_service
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+            <if test="accountType != null">account_type = #{accountType},</if>
+            <if test="account != null and account != ''">account = #{account},</if>
+            <if test="onlineStatus != null">online_status = #{onlineStatus},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where service_id = #{customServiceId}
+    </update>
+
+    <delete id="deleteCustomServiceByCustomServiceId" parameterType="Long">
+        delete from coco_custom_service where service_id = #{customServiceId}
+    </delete>
+
+    <delete id="deleteCustomServiceByCustomServiceIds" parameterType="String">
+        delete from coco_custom_service where service_id in 
+        <foreach item="customServiceId" collection="array" open="(" separator="," close=")">
+            #{customServiceId}
+        </foreach>
+    </delete>
+</mapper>

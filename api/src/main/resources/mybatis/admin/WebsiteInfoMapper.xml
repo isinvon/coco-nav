@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.WebsiteInfoMapper">
+    
+    <resultMap type="WebsiteInfo" id="WebsiteInfoResult">
+        <result property="websiteInfoId"    column="website_info_id"    />
+        <result property="title"    column="title"    />
+        <result property="keywords"    column="keywords"    />
+        <result property="description"    column="description"    />
+        <result property="icp"    column="icp"    />
+        <result property="version"    column="version"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectWebsiteInfoVo">
+        select website_info_id, title, keywords, description, icp, version, create_time, update_time from coco_website_info
+    </sql>
+
+    <select id="selectWebsiteInfoList" parameterType="WebsiteInfo" resultMap="WebsiteInfoResult">
+        <include refid="selectWebsiteInfoVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="keywords != null  and keywords != ''"> and keywords = #{keywords}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="icp != null  and icp != ''"> and icp = #{icp}</if>
+            <if test="version != null  and version != ''"> and version = #{version}</if>
+        </where>
+    </select>
+    
+    <select id="selectWebsiteInfoByWebsiteInfoId" parameterType="Long" resultMap="WebsiteInfoResult">
+        <include refid="selectWebsiteInfoVo"/>
+        where website_info_id = #{websiteInfoId}
+    </select>
+
+    <insert id="insertWebsiteInfo" parameterType="WebsiteInfo" useGeneratedKeys="true" keyProperty="websiteInfoId">
+        insert into coco_website_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="keywords != null">keywords,</if>
+            <if test="description != null">description,</if>
+            <if test="icp != null">icp,</if>
+            <if test="version != null and version != ''">version,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="keywords != null">#{keywords},</if>
+            <if test="description != null">#{description},</if>
+            <if test="icp != null">#{icp},</if>
+            <if test="version != null and version != ''">#{version},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWebsiteInfo" parameterType="WebsiteInfo">
+        update coco_website_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="keywords != null">keywords = #{keywords},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="icp != null">icp = #{icp},</if>
+            <if test="version != null and version != ''">version = #{version},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where website_info_id = #{websiteInfoId}
+    </update>
+
+    <delete id="deleteWebsiteInfoByWebsiteInfoId" parameterType="Long">
+        delete from coco_website_info where website_info_id = #{websiteInfoId}
+    </delete>
+
+    <delete id="deleteWebsiteInfoByWebsiteInfoIds" parameterType="String">
+        delete from coco_website_info where website_info_id in 
+        <foreach item="websiteInfoId" collection="array" open="(" separator="," close=")">
+            #{websiteInfoId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.VipTypeMapper">
+    
+    <resultMap type="VipType" id="VipTypeResult">
+        <result property="vipTypeId"    column="vip_type_id"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="duration"    column="duration"    />
+        <result property="price"    column="price"    />
+        <result property="privileges"    column="privileges"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVipTypeVo">
+        select vip_type_id, type_name, duration, price, privileges, create_time, update_time from coco_vip_type
+    </sql>
+
+    <select id="selectVipTypeList" parameterType="VipType" resultMap="VipTypeResult">
+        <include refid="selectVipTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+            <if test="duration != null "> and duration = #{duration}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="privileges != null  and privileges != ''"> and privileges = #{privileges}</if>
+        </where>
+    </select>
+    
+    <select id="selectVipTypeByVipTypeId" parameterType="Long" resultMap="VipTypeResult">
+        <include refid="selectVipTypeVo"/>
+        where vip_type_id = #{vipTypeId}
+    </select>
+
+    <insert id="insertVipType" parameterType="VipType" useGeneratedKeys="true" keyProperty="vipTypeId">
+        insert into coco_vip_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeName != null and typeName != ''">type_name,</if>
+            <if test="duration != null">duration,</if>
+            <if test="price != null">price,</if>
+            <if test="privileges != null">privileges,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeName != null and typeName != ''">#{typeName},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="price != null">#{price},</if>
+            <if test="privileges != null">#{privileges},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVipType" parameterType="VipType">
+        update coco_vip_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null and typeName != ''">type_name = #{typeName},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="privileges != null">privileges = #{privileges},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where vip_type_id = #{vipTypeId}
+    </update>
+
+    <delete id="deleteVipTypeByVipTypeId" parameterType="Long">
+        delete from coco_vip_type where vip_type_id = #{vipTypeId}
+    </delete>
+
+    <delete id="deleteVipTypeByVipTypeIds" parameterType="String">
+        delete from coco_vip_type where vip_type_id in 
+        <foreach item="vipTypeId" collection="array" open="(" separator="," close=")">
+            #{vipTypeId}
+        </foreach>
+    </delete>
+</mapper>

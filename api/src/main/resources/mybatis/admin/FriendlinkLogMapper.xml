@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.FriendlinkLogMapper">
+    
+    <resultMap type="FriendlinkLog" id="FriendlinkLogResult">
+        <result property="friendlinkLogId"    column="friendlink_log_id"    />
+        <result property="friendlinkId"    column="friendlink_id"    />
+        <result property="action"    column="action"    />
+        <result property="operatorId"    column="operator_id"    />
+        <result property="logTime"    column="log_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFriendlinkLogVo">
+        select friendlink_log_id, friendlink_id, action, operator_id, log_time, create_time, update_time from coco_friendlink_log
+    </sql>
+
+    <select id="selectFriendlinkLogList" parameterType="FriendlinkLog" resultMap="FriendlinkLogResult">
+        <include refid="selectFriendlinkLogVo"/>
+        <where>  
+            <if test="friendlinkId != null "> and friendlink_id = #{friendlinkId}</if>
+            <if test="action != null "> and action = #{action}</if>
+            <if test="operatorId != null "> and operator_id = #{operatorId}</if>
+            <if test="logTime != null "> and log_time = #{logTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectFriendlinkLogByFriendlinkLogId" parameterType="Long" resultMap="FriendlinkLogResult">
+        <include refid="selectFriendlinkLogVo"/>
+        where friendlink_log_id = #{friendlinkLogId}
+    </select>
+
+    <insert id="insertFriendlinkLog" parameterType="FriendlinkLog" useGeneratedKeys="true" keyProperty="friendlinkLogId">
+        insert into coco_friendlink_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="friendlinkId != null">friendlink_id,</if>
+            <if test="action != null">action,</if>
+            <if test="operatorId != null">operator_id,</if>
+            <if test="logTime != null">log_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="friendlinkId != null">#{friendlinkId},</if>
+            <if test="action != null">#{action},</if>
+            <if test="operatorId != null">#{operatorId},</if>
+            <if test="logTime != null">#{logTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFriendlinkLog" parameterType="FriendlinkLog">
+        update coco_friendlink_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="friendlinkId != null">friendlink_id = #{friendlinkId},</if>
+            <if test="action != null">action = #{action},</if>
+            <if test="operatorId != null">operator_id = #{operatorId},</if>
+            <if test="logTime != null">log_time = #{logTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where friendlink_log_id = #{friendlinkLogId}
+    </update>
+
+    <delete id="deleteFriendlinkLogByFriendlinkLogId" parameterType="Long">
+        delete from coco_friendlink_log where friendlink_log_id = #{friendlinkLogId}
+    </delete>
+
+    <delete id="deleteFriendlinkLogByFriendlinkLogIds" parameterType="String">
+        delete from coco_friendlink_log where friendlink_log_id in 
+        <foreach item="friendlinkLogId" collection="array" open="(" separator="," close=")">
+            #{friendlinkLogId}
+        </foreach>
+    </delete>
+</mapper>

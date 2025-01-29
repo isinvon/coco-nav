@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.BookmarkMapper">
+    
+    <resultMap type="Bookmark" id="BookmarkResult">
+        <result property="bookmarkId"    column="bookmark_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="title"    column="title"    />
+        <result property="url"    column="url"    />
+        <result property="bookmarkCategoryId"    column="bookmark_category_id"    />
+        <result property="icon"    column="icon"    />
+        <result property="clickCount"    column="click_count"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBookmarkVo">
+        select bookmark_id, user_id, title, url, bookmark_category_id, icon, click_count, sort_order, status, create_time, update_time from coco_bookmark
+    </sql>
+
+    <select id="selectBookmarkList" parameterType="Bookmark" resultMap="BookmarkResult">
+        <include refid="selectBookmarkVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="bookmarkCategoryId != null "> and bookmark_category_id = #{bookmarkCategoryId}</if>
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="clickCount != null "> and click_count = #{clickCount}</if>
+            <if test="sortOrder != null "> and sort_order = #{sortOrder}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBookmarkByBookmarkId" parameterType="Long" resultMap="BookmarkResult">
+        <include refid="selectBookmarkVo"/>
+        where bookmark_id = #{bookmarkId}
+    </select>
+
+    <insert id="insertBookmark" parameterType="Bookmark" useGeneratedKeys="true" keyProperty="bookmarkId">
+        insert into coco_bookmark
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="bookmarkCategoryId != null">bookmark_category_id,</if>
+            <if test="icon != null">icon,</if>
+            <if test="clickCount != null">click_count,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="bookmarkCategoryId != null">#{bookmarkCategoryId},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="clickCount != null">#{clickCount},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBookmark" parameterType="Bookmark">
+        update coco_bookmark
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="bookmarkCategoryId != null">bookmark_category_id = #{bookmarkCategoryId},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="clickCount != null">click_count = #{clickCount},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where bookmark_id = #{bookmarkId}
+    </update>
+
+    <delete id="deleteBookmarkByBookmarkId" parameterType="Long">
+        delete from coco_bookmark where bookmark_id = #{bookmarkId}
+    </delete>
+
+    <delete id="deleteBookmarkByBookmarkIds" parameterType="String">
+        delete from coco_bookmark where bookmark_id in 
+        <foreach item="bookmarkId" collection="array" open="(" separator="," close=")">
+            #{bookmarkId}
+        </foreach>
+    </delete>
+</mapper>

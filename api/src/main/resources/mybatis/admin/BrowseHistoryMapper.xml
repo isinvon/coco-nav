@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.BrowseHistoryMapper">
+    
+    <resultMap type="BrowseHistory" id="BrowseHistoryResult">
+        <result property="browseHistoryId"    column="history_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="bookmarkId"    column="bookmark_id"    />
+        <result property="viewTime"    column="view_time"    />
+        <result property="ip"    column="ip"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBrowseHistoryVo">
+        select history_id, user_id, bookmark_id, view_time, ip, create_time, update_time from coco_browse_history
+    </sql>
+
+    <select id="selectBrowseHistoryList" parameterType="BrowseHistory" resultMap="BrowseHistoryResult">
+        <include refid="selectBrowseHistoryVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="bookmarkId != null "> and bookmark_id = #{bookmarkId}</if>
+            <if test="viewTime != null "> and view_time = #{viewTime}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+        </where>
+    </select>
+    
+    <select id="selectBrowseHistoryByBrowseHistoryId" parameterType="Long" resultMap="BrowseHistoryResult">
+        <include refid="selectBrowseHistoryVo"/>
+        where history_id = #{browseHistoryId}
+    </select>
+
+    <insert id="insertBrowseHistory" parameterType="BrowseHistory" useGeneratedKeys="true" keyProperty="browseHistoryId">
+        insert into coco_browse_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="bookmarkId != null">bookmark_id,</if>
+            <if test="viewTime != null">view_time,</if>
+            <if test="ip != null">ip,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="bookmarkId != null">#{bookmarkId},</if>
+            <if test="viewTime != null">#{viewTime},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBrowseHistory" parameterType="BrowseHistory">
+        update coco_browse_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="bookmarkId != null">bookmark_id = #{bookmarkId},</if>
+            <if test="viewTime != null">view_time = #{viewTime},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where history_id = #{browseHistoryId}
+    </update>
+
+    <delete id="deleteBrowseHistoryByBrowseHistoryId" parameterType="Long">
+        delete from coco_browse_history where history_id = #{browseHistoryId}
+    </delete>
+
+    <delete id="deleteBrowseHistoryByBrowseHistoryIds" parameterType="String">
+        delete from coco_browse_history where history_id in 
+        <foreach item="browseHistoryId" collection="array" open="(" separator="," close=")">
+            #{browseHistoryId}
+        </foreach>
+    </delete>
+</mapper>

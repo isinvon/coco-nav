@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.admin.mapper.VipLogMapper">
+    
+    <resultMap type="VipLog" id="VipLogResult">
+        <result property="vipLogId"    column="vip_log_id"    />
+        <result property="vipId"    column="vip_id"    />
+        <result property="action"    column="action"    />
+        <result property="duration"    column="duration"    />
+        <result property="operatorId"    column="operator_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVipLogVo">
+        select vip_log_id, vip_id, action, duration, operator_id, create_time, update_time from coco_vip_log
+    </sql>
+
+    <select id="selectVipLogList" parameterType="VipLog" resultMap="VipLogResult">
+        <include refid="selectVipLogVo"/>
+        <where>  
+            <if test="vipId != null "> and vip_id = #{vipId}</if>
+            <if test="action != null "> and action = #{action}</if>
+            <if test="duration != null "> and duration = #{duration}</if>
+            <if test="operatorId != null "> and operator_id = #{operatorId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVipLogByVipLogId" parameterType="Long" resultMap="VipLogResult">
+        <include refid="selectVipLogVo"/>
+        where vip_log_id = #{vipLogId}
+    </select>
+
+    <insert id="insertVipLog" parameterType="VipLog" useGeneratedKeys="true" keyProperty="vipLogId">
+        insert into coco_vip_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vipId != null">vip_id,</if>
+            <if test="action != null">action,</if>
+            <if test="duration != null">duration,</if>
+            <if test="operatorId != null">operator_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vipId != null">#{vipId},</if>
+            <if test="action != null">#{action},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="operatorId != null">#{operatorId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVipLog" parameterType="VipLog">
+        update coco_vip_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="vipId != null">vip_id = #{vipId},</if>
+            <if test="action != null">action = #{action},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="operatorId != null">operator_id = #{operatorId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where vip_log_id = #{vipLogId}
+    </update>
+
+    <delete id="deleteVipLogByVipLogId" parameterType="Long">
+        delete from coco_vip_log where vip_log_id = #{vipLogId}
+    </delete>
+
+    <delete id="deleteVipLogByVipLogIds" parameterType="String">
+        delete from coco_vip_log where vip_log_id in 
+        <foreach item="vipLogId" collection="array" open="(" separator="," close=")">
+            #{vipLogId}
+        </foreach>
+    </delete>
+</mapper>

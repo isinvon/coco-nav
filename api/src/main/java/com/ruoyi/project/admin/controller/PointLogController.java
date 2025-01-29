@@ -1,0 +1,104 @@
+package com.ruoyi.project.admin.controller;
+
+import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
+import com.ruoyi.project.admin.domain.PointLog;
+import com.ruoyi.project.admin.service.IPointLogCustomService;
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.domain.AjaxResult;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.web.page.TableDataInfo;
+
+/**
+ * 积分流水Controller
+ * 
+ * @author sinvon
+ * @date 2025-01-30
+ */
+@RestController
+@RequestMapping("/admin/pointLog")
+public class PointLogController extends BaseController
+{
+    @Autowired
+    private IPointLogCustomService pointLogCustomService;
+
+    /**
+     * 查询积分流水列表
+     */
+    @PreAuthorize("@ss.hasPermi('admin:pointLog:list')")
+    @GetMapping("/list")
+    public TableDataInfo list(PointLog pointLog)
+    {
+        startPage();
+        List<PointLog> list = pointLogCustomService.selectPointLogList(pointLog);
+        return getDataTable(list);
+    }
+
+    /**
+     * 导出积分流水列表
+     */
+    @PreAuthorize("@ss.hasPermi('admin:pointLog:export')")
+    @Log(title = "积分流水", businessType = BusinessType.EXPORT)
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, PointLog pointLog)
+    {
+        List<PointLog> list = pointLogCustomService.selectPointLogList(pointLog);
+        ExcelUtil<PointLog> util = new ExcelUtil<PointLog>(PointLog.class);
+        util.exportExcel(response, list, "积分流水数据");
+    }
+
+    /**
+     * 获取积分流水详细信息
+     */
+    @PreAuthorize("@ss.hasPermi('admin:pointLog:query')")
+    @GetMapping(value = "/{pointLogId}")
+    public AjaxResult getInfo(@PathVariable("pointLogId") Long pointLogId)
+    {
+        return success(pointLogCustomService.selectPointLogByPointLogId(pointLogId));
+    }
+
+    /**
+     * 新增积分流水
+     */
+    @PreAuthorize("@ss.hasPermi('admin:pointLog:add')")
+    @Log(title = "积分流水", businessType = BusinessType.INSERT)
+    @PostMapping
+    public AjaxResult add(@RequestBody PointLog pointLog)
+    {
+        return toAjax(pointLogCustomService.insertPointLog(pointLog));
+    }
+
+    /**
+     * 修改积分流水
+     */
+    @PreAuthorize("@ss.hasPermi('admin:pointLog:edit')")
+    @Log(title = "积分流水", businessType = BusinessType.UPDATE)
+    @PutMapping
+    public AjaxResult edit(@RequestBody PointLog pointLog)
+    {
+        return toAjax(pointLogCustomService.updatePointLog(pointLog));
+    }
+
+    /**
+     * 删除积分流水
+     */
+    @PreAuthorize("@ss.hasPermi('admin:pointLog:remove')")
+    @Log(title = "积分流水", businessType = BusinessType.DELETE)
+	@DeleteMapping("/{pointLogIds}")
+    public AjaxResult remove(@PathVariable Long[] pointLogIds)
+    {
+        return toAjax(pointLogCustomService.deletePointLogByPointLogIds(pointLogIds));
+    }
+}
