@@ -7,11 +7,11 @@
  * @see 文件上传类型 accept 属性参考 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */
 import {reactive, ref} from 'vue'
-import {useAddBookmarkBoxStore} from '@/store/addBookmarkBox'
-import {showNotification} from "@/utils/notification";
-import MarkdownUpload from '@/components/AddBookmarkBox/MarkdownUpload/index.vue'
-import TagInput from '@/components/AddBookmarkBox/TagInput/index.vue'
-import BookmarkCategory from '@/components/AddBookmarkBox/BookmarkCategory/index.vue'
+import {useAddBookmarkBoxStore} from '@/store/addBookmarkBox.js'
+import {showNotification} from "@/utils/notification.js";
+import MarkdownUpload from '@/views/home/components/AddBookmarkBox/MarkdownUpload/index.vue'
+import TagInput from '@/views/home/components/AddBookmarkBox/TagInput/index.vue'
+import BookmarkCategory from '@/views/home/components/AddBookmarkBox/BookmarkCategory/index.vue'
 
 const bookmarkTitle = ref('')
 const bookmarkUrl = ref('')

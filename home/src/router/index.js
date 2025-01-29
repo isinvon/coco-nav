@@ -1,6 +1,6 @@
 // src/router/index.js
 import {createRouter, createWebHistory} from 'vue-router';
-import home from "@/views/home.vue";
+import home from "@/views/home/index.vue";
 // 进度条
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'// nprogress样式文件
@@ -25,42 +25,42 @@ const routes = [
         path: '/about',
         name: 'about',
         components: {
-            default: () => import('@/views/about.vue'),
+            default: () => import('@/views/about/index.vue'),
         }
     },
     {
         path: '/archive',
         name: 'archive',
         components: {
-            default: () => import('@/views/archive.vue'),
+            default: () => import('@/views/archive/index.vue'),
         }
     },
     {
         path: '/friendlink',
         name: 'friendlink',
         components: {
-            default: () => import('@/views/friendlink.vue'),
+            default: () => import('@/views/friendlink/index.vue'),
         }
     },
     {
         path: '/message',
         name: 'message',
         components: {
-            default: () => import('@/views/message.vue'),
+            default: () => import('@/views/message/index.vue'),
         }
     },
     {
         path: '/tag',
         name: 'tag',
         components: {
-            default: () => import('@/views/tag.vue'),
+            default: () => import('@/views/tag/index.vue'),
         }
     },
     {
         path: '/test',
         name: 'test',
         components: {
-            default: () => import('@/views/test.vue'),
+            default: () => import('@/views/test/index.vue'),
         }
     }
 ];

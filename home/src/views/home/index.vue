@@ -1,10 +1,10 @@
 <script setup lang="js">
 import Main from '@/views/components/Main/index.vue'
-import BookmarkDetailsDrawer from '@/components/BookmarkDetailsDrawer/index.vue'
-import Anchor from '@/components/Anchor/index.vue'
-import AddBookmarkBox from '@/components/AddBookmarkBox/index.vue'
-import DeleteMenu from '@/components/DeleteMenu/index.vue'
-import RecycleBinDrawer from '@/components/RecycleBinDrawer/index.vue'
+import BookmarkDetailsDrawer from '@/views/home/components/BookmarkDetailsDrawer/index.vue'
+import Anchor from '@/views/home/components/Anchor/index.vue'
+import AddBookmarkBox from './components/AddBookmarkBox/index.vue'
+import DeleteMenu from '@/views/home/components/DeleteMenu/index.vue'
+import RecycleBinDrawer from '@/views/home/components/RecycleBinDrawer/index.vue'
 </script>
 <template>
   <div class="common-layout">

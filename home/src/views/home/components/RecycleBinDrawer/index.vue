@@ -6,7 +6,7 @@
  * @since 2024年12月4日22:12:10
  */
 import InfiniteScroll from './InfiniteScrollBox/index.vue';
-import {useRecycleBinDrawerStore} from '@/store/recycleBinDrawer';
+import {useRecycleBinDrawerStore} from '@/store/recycleBinDrawer.js';
 import {ref} from 'vue';
 import {throttle} from 'lodash';
 import {ElMessageBox, ElMessage} from 'element-plus';
@@ -97,5 +97,5 @@ const deleteBookmark = (index) => {
 </template>
 
 <style scoped lang="less">
-@import "./index";
+@import "index";
 </style>

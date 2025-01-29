@@ -6,14 +6,14 @@
  *  @date: 2024年12月1日23:50:54
  */
 import {Share, Star} from '@element-plus/icons-vue'
-import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer'
+import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer.js'
 // markdown 组件
 import MarkdownIt from 'markdown-it';
 import {computed, ref} from "vue";
 // 相关导航组件
-import RelateNavigation from "@/components/RelateNavigation/index.vue";
+import RelateNavigation from "@/views/home/components/BookmarkDetailsDrawer/components/RelateNavigation/index.vue";
 // 广告组件
-import Advertisement from "@/components/Advertisement/index.vue";
+import Advertisement from "@/views/home/components/BookmarkDetailsDrawer/components/Advertisement/index.vue";
 
 const bookmarkDetailsDrawerStore = useBookmarkDetailsDrawerStore()
 

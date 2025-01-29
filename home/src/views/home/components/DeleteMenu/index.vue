@@ -7,8 +7,8 @@
  *
  */
 import Tooltip from '@/components/Tooltip/index.vue'
-import {useDeleteBookmarkStore} from "@/store/deleteBookmark";
-import {useRecycleBinDrawerStore} from '@/store/recycleBinDrawer'
+import {useDeleteBookmarkStore} from "@/store/deleteBookmark.js";
+import {useRecycleBinDrawerStore} from '@/store/recycleBinDrawer.js'
 import {ref} from "vue";
 
 // 判断菜单是否是上一次收缩回去之后重新计时的第一次点击
@@ -117,5 +117,5 @@ const menuOperationLogic = () => {
 </template>
 
 <style scoped lang="less">
-@import url("./index");
+@import url("index");
 </style>

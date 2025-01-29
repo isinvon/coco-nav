@@ -11,7 +11,7 @@
 /**
  * 测试页面
  */
-import * as SettingData from '../../mock/setting.js'
+import * as SettingData from '../../../mock/setting.js'
 import {onMounted, ref} from "vue";
 
 const templateVersion = ref(0) // 模板版本

@@ -15,12 +15,12 @@
 <!--</template>-->
 
 <!--<script setup>-->
-<!--import Wordcloud_v1 from './tagComponents/Wordcloud_v1.vue';-->
-<!--import Wordcloud_v2 from './tagComponents/Wordcloud_v2.vue';-->
-<!--import Wordcloud_v3 from './tagComponents/Wordcloud_v3.vue';-->
-<!--import Wordcloud_v4 from './tagComponents/Wordcloud_v4.vue';-->
-<!--import Wordcloud_v5 from './tagComponents/Wordcloud_v5.vue';-->
-<!--import Wordcloud_v6 from "./tagComponents/Wordcloud_v6.vue";-->
+<!--import Wordcloud_v1 from './components/Wordcloud_v1.vue';-->
+<!--import Wordcloud_v2 from './components/Wordcloud_v2.vue';-->
+<!--import Wordcloud_v3 from './components/Wordcloud_v3.vue';-->
+<!--import Wordcloud_v4 from './components/Wordcloud_v4.vue';-->
+<!--import Wordcloud_v5 from './components/Wordcloud_v5.vue';-->
+<!--import Wordcloud_v6 from "./components/Wordcloud_v6.vue";-->
 <!--import * as tagData from "../../mock/tag.js";-->
 <!--import * as settingData from "../../mock/setting.js";-->
 <!--import {onMounted, ref} from "vue";-->
@@ -54,17 +54,17 @@
  * @since 2024年12月31日16:48:11
  */
 import {ref, onMounted} from 'vue';
-import * as tagData from '../../mock/tag.js';
-import * as settingData from '../../mock/setting.js';
+import * as tagData from '../../../mock/tag.js';
+import * as settingData from '../../../mock/setting.js';
 
 // 动态加载的 Wordcloud 组件数组
 const wordcloudComponents = [
-  import('./tagComponents/Wordcloud_v1.vue'),
-  import('./tagComponents/Wordcloud_v2.vue'),
-  import('./tagComponents/Wordcloud_v3.vue'),
-  import('./tagComponents/Wordcloud_v4.vue'),
-  import('./tagComponents/Wordcloud_v5.vue'),
-  import('./tagComponents/Wordcloud_v6.vue'),
+  import('./components/Wordcloud_v1.vue'),
+  import('./components/Wordcloud_v2.vue'),
+  import('./components/Wordcloud_v3.vue'),
+  import('./components/Wordcloud_v4.vue'),
+  import('./components/Wordcloud_v5.vue'),
+  import('./components/Wordcloud_v6.vue'),
 ];
 
 const templateVersion = ref(0);

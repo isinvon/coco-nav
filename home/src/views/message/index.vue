@@ -29,10 +29,10 @@
  * 留言区组件
  */
 import {ref, onMounted} from 'vue';
-import Comment from './messageComponents/Comment/index.vue';
-import RightAside from './messageComponents/RightAside/index.vue';
-import * as CommentData from '../../mock/message.js';
-import * as SettingData from '../../mock/setting.js';
+import Comment from './components/Comment/index.vue';
+import RightAside from './components/RightAside/index.vue';
+import * as CommentData from '../../../mock/message.js';
+import * as SettingData from '../../../mock/setting.js';
 import { ElMessage } from 'element-plus'; // 引入Element Plus的Message组件
 
 const commentData = ref([]);

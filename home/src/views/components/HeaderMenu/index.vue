@@ -8,7 +8,7 @@
 import ExpandButton from "@/views/components/HeaderMenu/components/ExpandButton.vue";
 import AddBookmarkButton from "@/views/components/HeaderMenu/components/AddBookmarkButton.vue";
 import Avatar from '@/components/Avatar/index.vue'
-import ThemeSwitchButton from '@/components/ThemeSwitchButton/index.vue'
+import ThemeSwitchButton from '@/views/components/HeaderMenu/components/ThemeSwitchButton/index.vue'
 // 右边抽屉全局状态管理
 import {useRightDrawerStore} from '@/store/rightDrawer'
 import HotButton from "./components/HotButton/index.vue";

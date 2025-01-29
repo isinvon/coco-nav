@@ -5,7 +5,7 @@
  * @since 2024年12月2日14:56:16
  */
 import MIcon from "@/components/MIcon/index.vue";
-import Banner from '@/components/Banner/index.vue'
+import Banner from '@/views/components/Main/components/Banner/index.vue'
 // 书签详情抽屉全局状态管理
 import {useBookmarkDetailsDrawerStore} from '@/store/bookmarkDetailsDrawer';
 import {Delete} from "@element-plus/icons-vue";

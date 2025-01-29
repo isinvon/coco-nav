@@ -6,9 +6,9 @@
 </template>
 
 <script setup>
-import Archives_v1 from "@/views/arhivesComponents/archive_v1.vue";
-import Archives_v2 from "@/views/arhivesComponents/archive_v2.vue";
-import * as SettingData from '../../mock/setting.js';
+import Archives_v1 from "@/views/archive/components/archive_v1.vue";
+import Archives_v2 from "@/views/archive/components/archive_v2.vue";
+import * as SettingData from '../../../mock/setting.js';
 import {onMounted, ref} from "vue";
 
 // 归档的显示样式
