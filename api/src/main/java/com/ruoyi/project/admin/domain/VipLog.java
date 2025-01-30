@@ -3,8 +3,8 @@ package com.ruoyi.project.admin.domain;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
+
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 
 /**
