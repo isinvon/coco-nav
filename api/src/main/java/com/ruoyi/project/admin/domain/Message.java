@@ -1,5 +1,6 @@
 package com.ruoyi.project.admin.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,6 +16,7 @@ import java.io.Serial;
  * @date 2025-01-30
  */
 @Data
+@TableName("coco_message")
 public class Message extends BaseEntity
 {
     private static final long serialVersionUID = 1L;

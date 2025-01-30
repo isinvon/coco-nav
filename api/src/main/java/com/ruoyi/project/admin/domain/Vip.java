@@ -1,6 +1,8 @@
 package com.ruoyi.project.admin.domain;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
@@ -15,6 +17,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @date 2025-01-30
  */
 @Data
+@TableName("coco_vip")
 public class Vip extends BaseEntity
 {
     private static final long serialVersionUID = 1L;

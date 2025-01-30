@@ -2,6 +2,7 @@ package com.ruoyi.project.admin.domain;
 
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,6 +16,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @date 2025-01-30
  */
 @Data
+@TableName("coco_vip_type")
 public class VipType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
