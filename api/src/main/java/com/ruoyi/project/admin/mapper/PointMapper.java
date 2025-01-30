@@ -1,20 +1,20 @@
 package com.ruoyi.project.admin.mapper;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ruoyi.project.admin.domain.Point;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.Point;
 
 /**
  * 积分账户Mapper接口
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
-public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point> 
-{
+public interface PointMapper extends BaseMapper<Point> {
     /**
      * 查询积分账户
-     * 
+     *
      * @param pointId 积分账户主键
      * @return 积分账户
      */
@@ -22,7 +22,7 @@ public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point>
 
     /**
      * 查询积分账户列表
-     * 
+     *
      * @param point 积分账户
      * @return 积分账户集合
      */
@@ -30,7 +30,7 @@ public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point>
 
     /**
      * 新增积分账户
-     * 
+     *
      * @param point 积分账户
      * @return 结果
      */
@@ -38,7 +38,7 @@ public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point>
 
     /**
      * 修改积分账户
-     * 
+     *
      * @param point 积分账户
      * @return 结果
      */
@@ -46,7 +46,7 @@ public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point>
 
     /**
      * 删除积分账户
-     * 
+     *
      * @param pointId 积分账户主键
      * @return 结果
      */
@@ -54,7 +54,7 @@ public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point>
 
     /**
      * 批量删除积分账户
-     * 
+     *
      * @param pointIds 需要删除的数据主键集合
      * @return 结果
      */
