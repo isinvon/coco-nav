@@ -36,6 +36,9 @@ logging:
   level:
     com.ruoyi: debug
     org.springframework: warn
+    # mybatis-plus日志, 只在debug模式下打印sql, 否则不打印(生产环境不打印)
+    com.baomidou.mybatisplus: debug
+  config: classpath:logback-spring.xml
 
 # 用户配置
 user:
@@ -106,14 +109,19 @@ mybatis:
   # 加载全局的配置文件
   configLocation: classpath:mybatis/mybatis-config.xml
 
-#mybatis-plus:
-#  mapper-locations: classpath*:/mapper/**/*.xml
-#  global-config:
-#    db-config:
-#      logic-delete-field: deleted  # global logic deletion field name
-#      logic-delete-value: 1 # default 1
-#      logic-not-delete-value: 0 # default 0
-#      id-type: auto
+# mybatis-plus开启日志
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 实体类的主键生成策略都是采用ASSIGN_ID(默认雪花算法id)
+      id-type: assign_id
+      logic-delete-value: 1 # 逻辑删除值(默认为1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为0)
 
 # PageHelper分页插件
 pagehelper:
@@ -149,13 +157,3 @@ gen:
   tablePrefix: sys_
   # 是否允许生成文件覆盖到本地（自定义路径），默认不允许
   allowOverwrite: false
-
-#logging:
-#  level:
-#    com.ruoyi:
-#      admin: debug
-#      common: debug
-#      framework: debug
-#      system: debug
-#      monitor: debug
-#      tool: debug
