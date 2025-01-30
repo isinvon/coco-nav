@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.Area;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.Area;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface AreaMapper 
+public interface AreaMapper extends BaseMapper<Area>
 {
     /**
      * 查询地区信息

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.PointLogMapper;
 import com.ruoyi.project.admin.domain.PointLog;
-import com.ruoyi.project.admin.service.IPointLogCustomService;
+import com.ruoyi.project.admin.service.custom.PointLogCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class PointLogServiceImpl implements IPointLogCustomService
+public class PointLogServiceImpl implements PointLogCustomService
 {
     @Autowired
     private PointLogMapper pointLogMapper;

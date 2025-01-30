@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.BookmarkCategory;
-import com.ruoyi.project.admin.service.IBookmarkCategoryCustomService;
+import com.ruoyi.project.admin.service.BookmarkCategoryCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class BookmarkCategoryController extends BaseController
 {
     @Autowired
-    private IBookmarkCategoryCustomService bookmarkCategoryCustomService;
+    private BookmarkCategoryCustomService bookmarkCategoryCustomService;
 
     /**
      * 查询书签分类列表

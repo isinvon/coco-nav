@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.Setting;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.Setting;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface SettingMapper 
+public interface SettingMapper extends BaseMapper<Setting>
 {
     /**
      * 查询系统设置

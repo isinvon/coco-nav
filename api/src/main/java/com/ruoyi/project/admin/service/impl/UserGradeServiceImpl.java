@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.UserGradeMapper;
 import com.ruoyi.project.admin.domain.UserGrade;
-import com.ruoyi.project.admin.service.IUserGradeCustomService;
+import com.ruoyi.project.admin.service.custom.UserGradeCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class UserGradeServiceImpl implements IUserGradeCustomService
+public class UserGradeServiceImpl implements UserGradeCustomService
 {
     @Autowired
     private UserGradeMapper userGradeMapper;

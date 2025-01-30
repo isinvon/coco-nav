@@ -1,6 +1,8 @@
 package com.ruoyi.project.admin.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.project.admin.domain.Advertisement;
 
 /**
@@ -9,7 +11,7 @@ import com.ruoyi.project.admin.domain.Advertisement;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface AdvertisementMapper 
+public interface AdvertisementMapper extends BaseMapper<Advertisement>
 {
     /**
      * 查询广告管理

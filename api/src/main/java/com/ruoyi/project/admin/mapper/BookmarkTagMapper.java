@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.BookmarkTag;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.BookmarkTag;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface BookmarkTagMapper 
+public interface BookmarkTagMapper extends BaseMapper<BookmarkTag>
 {
     /**
      * 查询书签标签

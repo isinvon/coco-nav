@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.FriendlinkMapper;
 import com.ruoyi.project.admin.domain.Friendlink;
-import com.ruoyi.project.admin.service.IFriendlinkCustomService;
+import com.ruoyi.project.admin.service.custom.FriendlinkCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class FriendlinkServiceImpl implements IFriendlinkCustomService
+public class FriendlinkServiceImpl implements FriendlinkCustomService
 {
     @Autowired
     private FriendlinkMapper friendlinkMapper;

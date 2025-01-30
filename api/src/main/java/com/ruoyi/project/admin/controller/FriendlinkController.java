@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.Friendlink;
-import com.ruoyi.project.admin.service.IFriendlinkCustomService;
+import com.ruoyi.project.admin.service.FriendlinkCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/admin/friendlink")
 public class FriendlinkController extends BaseController {
     @Autowired
-    private IFriendlinkCustomService friendlinkCustomService;
+    private FriendlinkCustomService friendlinkCustomService;
 
     /**
      * 查询友情链接列表

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.WebsiteInfoMapper;
 import com.ruoyi.project.admin.domain.WebsiteInfo;
-import com.ruoyi.project.admin.service.IWebsiteInfoCustomService;
+import com.ruoyi.project.admin.service.custom.WebsiteInfoCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class WebsiteInfoServiceImpl implements IWebsiteInfoCustomService
+public class WebsiteInfoServiceImpl implements WebsiteInfoCustomService
 {
     @Autowired
     private WebsiteInfoMapper websiteInfoMapper;

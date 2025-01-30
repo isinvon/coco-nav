@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.AdvertisementLog;
-import com.ruoyi.project.admin.service.IAdvertisementLogCustomService;
+import com.ruoyi.project.admin.service.AdvertisementLogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class AdvertisementLogController extends BaseController
 {
     @Autowired
-    private IAdvertisementLogCustomService advertisementLogCustomService;
+    private AdvertisementLogCustomService advertisementLogCustomService;
 
     /**
      * 查询广告操作日志列表

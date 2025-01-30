@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.InviteCode;
-import com.ruoyi.project.admin.service.IInviteCodeCustomService;
+import com.ruoyi.project.admin.service.InviteCodeCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class InviteCodeController extends BaseController
 {
     @Autowired
-    private IInviteCodeCustomService inviteCodeCustomService;
+    private InviteCodeCustomService inviteCodeCustomService;
 
     /**
      * 查询邀请码管理列表

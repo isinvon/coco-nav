@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.Notice;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.Notice;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface NoticeMapper 
+public interface NoticeMapper extends BaseMapper<Notice>
 {
     /**
      * 查询通知管理

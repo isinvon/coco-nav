@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.Point;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.Point;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface PointMapper 
+public interface PointMapper extends BaseMapper<Point> extends BaseMapper<Point> 
 {
     /**
      * 查询积分账户

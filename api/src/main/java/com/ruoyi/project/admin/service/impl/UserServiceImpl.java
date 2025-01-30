@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.UserMapper;
 import com.ruoyi.project.admin.domain.User;
-import com.ruoyi.project.admin.service.IUserCustomService;
+import com.ruoyi.project.admin.service.custom.UserCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class UserServiceImpl implements IUserCustomService
+public class UserServiceImpl implements UserCustomService
 {
     @Autowired
     private UserMapper userMapper;

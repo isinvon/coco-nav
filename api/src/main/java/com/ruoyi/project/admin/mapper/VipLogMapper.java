@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.VipLog;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.VipLog;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface VipLogMapper 
+public interface VipLogMapper extends BaseMapper<VipLog>
 {
     /**
      * 查询VIP操作日志

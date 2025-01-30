@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.MessageMapper;
 import com.ruoyi.project.admin.domain.Message;
-import com.ruoyi.project.admin.service.IMessageCustomService;
+import com.ruoyi.project.admin.service.custom.MessageCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class MessageServiceImpl implements IMessageCustomService
+public class MessageServiceImpl implements MessageCustomService
 {
     @Autowired
     private MessageMapper messageMapper;

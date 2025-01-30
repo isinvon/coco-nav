@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.UserLoginLogMapper;
 import com.ruoyi.project.admin.domain.UserLoginLog;
-import com.ruoyi.project.admin.service.IUserLoginLogCustomService;
+import com.ruoyi.project.admin.service.custom.UserLoginLogCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class UserLoginLogServiceImpl implements IUserLoginLogCustomService
+public class UserLoginLogServiceImpl implements UserLoginLogCustomService
 {
     @Autowired
     private UserLoginLogMapper userLoginLogMapper;

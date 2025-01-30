@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.FriendlinkLog;
-import com.ruoyi.project.admin.service.IFriendlinkLogCustomService;
+import com.ruoyi.project.admin.service.FriendlinkLogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class FriendlinkLogController extends BaseController
 {
     @Autowired
-    private IFriendlinkLogCustomService friendlinkLogCustomService;
+    private FriendlinkLogCustomService friendlinkLogCustomService;
 
     /**
      * 查询友链操作日志列表

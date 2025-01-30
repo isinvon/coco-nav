@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.Message;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.Message;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface MessageMapper 
+public interface MessageMapper extends BaseMapper<Message>
 {
     /**
      * 查询留言管理

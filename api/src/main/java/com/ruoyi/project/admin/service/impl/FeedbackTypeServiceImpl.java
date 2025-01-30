@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.FeedbackTypeMapper;
 import com.ruoyi.project.admin.domain.FeedbackType;
-import com.ruoyi.project.admin.service.IFeedbackTypeCustomService;
+import com.ruoyi.project.admin.service.custom.FeedbackTypeCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class FeedbackTypeServiceImpl implements IFeedbackTypeCustomService
+public class FeedbackTypeServiceImpl implements FeedbackTypeCustomService
 {
     @Autowired
     private FeedbackTypeMapper feedbackTypeMapper;

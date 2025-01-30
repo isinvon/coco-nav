@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.PaymentTypeMapper;
 import com.ruoyi.project.admin.domain.PaymentType;
-import com.ruoyi.project.admin.service.IPaymentTypeCustomService;
+import com.ruoyi.project.admin.service.custom.PaymentTypeCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class PaymentTypeServiceImpl implements IPaymentTypeCustomService
+public class PaymentTypeServiceImpl implements PaymentTypeCustomService
 {
     @Autowired
     private PaymentTypeMapper paymentTypeMapper;

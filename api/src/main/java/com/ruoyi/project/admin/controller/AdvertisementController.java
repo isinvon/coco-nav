@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.Advertisement;
-import com.ruoyi.project.admin.service.IAdvertisementCustomService;
+import com.ruoyi.project.admin.service.custom.AdvertisementCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/admin/advertisement")
 public class AdvertisementController extends BaseController {
     @Autowired
-    private IAdvertisementCustomService advertisementCustomService;
+    private AdvertisementCustomService advertisementCustomService;
 
     /**
      * 查询广告管理列表

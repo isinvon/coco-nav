@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.project.admin.mapper.FeedbackMapper;
 import com.ruoyi.project.admin.domain.Feedback;
-import com.ruoyi.project.admin.service.IFeedbackCustomService;
+import com.ruoyi.project.admin.service.custom.FeedbackCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class FeedbackServiceImpl implements IFeedbackCustomService
+public class FeedbackServiceImpl implements FeedbackCustomService
 {
     @Autowired
     private FeedbackMapper feedbackMapper;

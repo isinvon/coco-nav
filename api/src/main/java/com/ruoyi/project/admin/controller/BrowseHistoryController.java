@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.BrowseHistory;
-import com.ruoyi.project.admin.service.IBrowseHistoryCustomService;
+import com.ruoyi.project.admin.service.BrowseHistoryCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class BrowseHistoryController extends BaseController
 {
     @Autowired
-    private IBrowseHistoryCustomService browseHistoryCustomService;
+    private BrowseHistoryCustomService browseHistoryCustomService;
 
     /**
      * 查询用户浏览历史列表

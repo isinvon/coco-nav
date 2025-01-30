@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.FeedbackType;
-import com.ruoyi.project.admin.service.IFeedbackTypeCustomService;
+import com.ruoyi.project.admin.service.FeedbackTypeCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class FeedbackTypeController extends BaseController
 {
     @Autowired
-    private IFeedbackTypeCustomService feedbackTypeCustomService;
+    private FeedbackTypeCustomService feedbackTypeCustomService;
 
     /**
      * 查询反馈类型列表

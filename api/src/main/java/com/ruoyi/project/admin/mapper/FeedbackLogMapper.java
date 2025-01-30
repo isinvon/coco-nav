@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.FeedbackLog;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.FeedbackLog;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface FeedbackLogMapper 
+public interface FeedbackLogMapper extends BaseMapper<FeedbackLog>
 {
     /**
      * 查询反馈处理日志

@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.InviteCode;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.InviteCode;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface InviteCodeMapper 
+public interface InviteCodeMapper extends BaseMapper<InviteCode>
 {
     /**
      * 查询邀请码管理

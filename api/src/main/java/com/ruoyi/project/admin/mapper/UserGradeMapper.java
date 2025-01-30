@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.UserGrade;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.UserGrade;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface UserGradeMapper 
+public interface UserGradeMapper extends BaseMapper<UserGrade>
 {
     /**
      * 查询用户等级

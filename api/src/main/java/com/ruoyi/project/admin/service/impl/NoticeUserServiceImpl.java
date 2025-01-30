@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.NoticeUserMapper;
 import com.ruoyi.project.admin.domain.NoticeUser;
-import com.ruoyi.project.admin.service.INoticeUserCustomService;
+import com.ruoyi.project.admin.service.custom.NoticeUserCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class NoticeUserServiceImpl implements INoticeUserCustomService
+public class NoticeUserServiceImpl implements NoticeUserCustomService
 {
     @Autowired
     private NoticeUserMapper noticeUserMapper;

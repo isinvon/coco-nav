@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.PointMapper;
 import com.ruoyi.project.admin.domain.Point;
-import com.ruoyi.project.admin.service.IPointCustomService;
+import com.ruoyi.project.admin.service.custom.PointCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class PointServiceImpl implements IPointCustomService
+public class PointServiceImpl implements PointCustomService
 {
     @Autowired
     private PointMapper pointMapper;

@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.VipType;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.VipType;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface VipTypeMapper 
+public interface VipTypeMapper extends BaseMapper<VipType>
 {
     /**
      * 查询VIP类型

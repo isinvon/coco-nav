@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.FriendlinkLog;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.FriendlinkLog;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface FriendlinkLogMapper 
+public interface FriendlinkLogMapper extends BaseMapper<FriendlinkLog>
 {
     /**
      * 查询友链操作日志

@@ -2,11 +2,11 @@ package com.ruoyi.project.admin.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.project.admin.service.custom.BookmarkCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BookmarkMapper;
 import com.ruoyi.project.admin.domain.Bookmark;
-import com.ruoyi.project.admin.service.IBookmarkCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class BookmarkServiceImpl implements IBookmarkCustomService
+public class BookmarkServiceImpl implements BookmarkCustomService
 {
     @Autowired
     private BookmarkMapper bookmarkMapper;

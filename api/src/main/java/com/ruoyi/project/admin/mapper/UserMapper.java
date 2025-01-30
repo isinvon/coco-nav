@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.User;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.User;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface UserMapper 
+public interface UserMapper extends BaseMapper<User>
 {
     /**
      * 查询用户管理

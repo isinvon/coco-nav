@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BrowseHistoryMapper;
 import com.ruoyi.project.admin.domain.BrowseHistory;
-import com.ruoyi.project.admin.service.IBrowseHistoryCustomService;
+import com.ruoyi.project.admin.service.custom.BrowseHistoryCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class BrowseHistoryServiceImpl implements IBrowseHistoryCustomService
+public class BrowseHistoryServiceImpl implements BrowseHistoryCustomService
 {
     @Autowired
     private BrowseHistoryMapper browseHistoryMapper;

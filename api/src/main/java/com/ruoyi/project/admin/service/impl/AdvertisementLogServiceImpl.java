@@ -1,11 +1,13 @@
 package com.ruoyi.project.admin.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.project.admin.service.custom.AdvertisementLogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.project.admin.mapper.AdvertisementLogMapper;
 import com.ruoyi.project.admin.domain.AdvertisementLog;
-import com.ruoyi.project.admin.service.IAdvertisementLogCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class AdvertisementLogServiceImpl implements IAdvertisementLogCustomService
+public class AdvertisementLogServiceImpl extends ServiceImpl<AdvertisementLogMapper,AdvertisementLog> implements AdvertisementLogCustomService, AdvertisementLogService
 {
     @Autowired
     private AdvertisementLogMapper advertisementLogMapper;
@@ -93,4 +95,5 @@ public class AdvertisementLogServiceImpl implements IAdvertisementLogCustomServi
     {
         return advertisementLogMapper.deleteAdvertisementLogByAdvertisementLogId(advertisementLogId);
     }
+
 }

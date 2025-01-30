@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.FeedbackLogMapper;
 import com.ruoyi.project.admin.domain.FeedbackLog;
-import com.ruoyi.project.admin.service.IFeedbackLogCustomService;
+import com.ruoyi.project.admin.service.custom.FeedbackLogCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class FeedbackLogServiceImpl implements IFeedbackLogCustomService
+public class FeedbackLogServiceImpl implements FeedbackLogCustomService
 {
     @Autowired
     private FeedbackLogMapper feedbackLogMapper;

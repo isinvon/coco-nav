@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.SettingLog;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.SettingLog;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface SettingLogMapper 
+public interface SettingLogMapper extends BaseMapper<SettingLog>
 {
     /**
      * 查询设置变更日志

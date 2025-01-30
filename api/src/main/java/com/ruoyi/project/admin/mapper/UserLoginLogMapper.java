@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.UserLoginLog;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.UserLoginLog;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface UserLoginLogMapper 
+public interface UserLoginLogMapper extends BaseMapper<UserLoginLog>
 {
     /**
      * 查询用户登录日志

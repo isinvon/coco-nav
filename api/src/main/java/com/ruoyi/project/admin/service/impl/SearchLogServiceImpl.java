@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.SearchLogMapper;
 import com.ruoyi.project.admin.domain.SearchLog;
-import com.ruoyi.project.admin.service.ISearchLogCustomService;
+import com.ruoyi.project.admin.service.custom.SearchLogCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class SearchLogServiceImpl implements ISearchLogCustomService
+public class SearchLogServiceImpl implements SearchLogCustomService
 {
     @Autowired
     private SearchLogMapper searchLogMapper;

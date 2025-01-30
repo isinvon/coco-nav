@@ -2,10 +2,10 @@ package com.ruoyi.project.admin.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.project.admin.service.custom.AreaCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.project.admin.mapper.AreaMapper;
 import com.ruoyi.project.admin.domain.Area;
-import com.ruoyi.project.admin.service.IAreaCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class AreaServiceImpl implements IAreaCustomService
+public class AreaServiceImpl implements AreaCustomService
 {
     @Autowired
     private AreaMapper areaMapper;

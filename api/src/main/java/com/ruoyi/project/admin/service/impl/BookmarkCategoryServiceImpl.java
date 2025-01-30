@@ -2,11 +2,11 @@ package com.ruoyi.project.admin.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.project.admin.service.custom.BookmarkCategoryCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BookmarkCategoryMapper;
 import com.ruoyi.project.admin.domain.BookmarkCategory;
-import com.ruoyi.project.admin.service.IBookmarkCategoryCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class BookmarkCategoryServiceImpl implements IBookmarkCategoryCustomService
+public class BookmarkCategoryServiceImpl implements BookmarkCategoryCustomService
 {
     @Autowired
     private BookmarkCategoryMapper bookmarkCategoryMapper;

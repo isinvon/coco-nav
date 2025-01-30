@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.project.admin.domain.FeedbackLog;
-import com.ruoyi.project.admin.service.IFeedbackLogCustomService;
+import com.ruoyi.project.admin.service.FeedbackLogCustomService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -34,7 +33,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 @RequestMapping("/admin/feedbackLog")
 public class FeedbackLogController extends BaseController {
     @Autowired
-    private IFeedbackLogCustomService feedbackLogCustomService;
+    private FeedbackLogCustomService feedbackLogCustomService;
 
     /**
      * 查询反馈处理日志列表

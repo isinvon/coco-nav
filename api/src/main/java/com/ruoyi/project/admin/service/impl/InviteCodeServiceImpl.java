@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.InviteCodeMapper;
 import com.ruoyi.project.admin.domain.InviteCode;
-import com.ruoyi.project.admin.service.IInviteCodeCustomService;
+import com.ruoyi.project.admin.service.custom.InviteCodeCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class InviteCodeServiceImpl implements IInviteCodeCustomService
+public class InviteCodeServiceImpl implements InviteCodeCustomService
 {
     @Autowired
     private InviteCodeMapper inviteCodeMapper;

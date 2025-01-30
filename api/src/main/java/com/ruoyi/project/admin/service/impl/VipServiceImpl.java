@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.VipMapper;
 import com.ruoyi.project.admin.domain.Vip;
-import com.ruoyi.project.admin.service.IVipCustomService;
+import com.ruoyi.project.admin.service.custom.VipCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class VipServiceImpl implements IVipCustomService
+public class VipServiceImpl implements VipCustomService
 {
     @Autowired
     private VipMapper vipMapper;

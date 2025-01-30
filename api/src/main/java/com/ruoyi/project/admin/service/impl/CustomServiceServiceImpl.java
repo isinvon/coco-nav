@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.CustomServiceMapper;
 import com.ruoyi.project.admin.domain.CustomService;
-import com.ruoyi.project.admin.service.ICustomServiceCustomService;
+import com.ruoyi.project.admin.service.custom.CustomServiceCustomService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class CustomServiceServiceImpl implements ICustomServiceCustomService
+public class CustomServiceServiceImpl implements CustomServiceCustomService
 {
     @Autowired
     private CustomServiceMapper customServiceMapper;

@@ -1,4 +1,5 @@
 package com.ruoyi.project.admin.mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.BrowseHistory;
@@ -9,7 +10,7 @@ import com.ruoyi.project.admin.domain.BrowseHistory;
  * @author sinvon
  * @date 2025-01-30
  */
-public interface BrowseHistoryMapper 
+public interface BrowseHistoryMapper extends BaseMapper<BrowseHistory>
 {
     /**
      * 查询用户浏览历史

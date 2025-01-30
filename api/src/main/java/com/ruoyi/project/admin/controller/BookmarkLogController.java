@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.BookmarkLog;
-import com.ruoyi.project.admin.service.IBookmarkLogCustomService;
+import com.ruoyi.project.admin.service.BookmarkLogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class BookmarkLogController extends BaseController
 {
     @Autowired
-    private IBookmarkLogCustomService bookmarkLogCustomService;
+    private BookmarkLogCustomService bookmarkLogCustomService;
 
     /**
      * 查询书签操作日志列表
