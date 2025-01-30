@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class SettingController extends BaseController
     /**
      * 查询系统设置列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:setting:list')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LIST)
     @GetMapping("/list")
     public TableDataInfo list(Setting setting)
     {
@@ -49,7 +52,7 @@ public class SettingController extends BaseController
     /**
      * 导出系统设置列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:setting:export')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_EXPORT)
     @Log(title = "系统设置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Setting setting)
@@ -62,7 +65,7 @@ public class SettingController extends BaseController
     /**
      * 获取系统设置详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:setting:query')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_QUERY)
     @GetMapping(value = "/{settingId}")
     public AjaxResult getInfo(@PathVariable("settingId") Long settingId)
     {
@@ -72,7 +75,7 @@ public class SettingController extends BaseController
     /**
      * 新增系统设置
      */
-    @PreAuthorize("@ss.hasPermi('admin:setting:add')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_ADD)
     @Log(title = "系统设置", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Setting setting)
@@ -83,7 +86,7 @@ public class SettingController extends BaseController
     /**
      * 修改系统设置
      */
-    @PreAuthorize("@ss.hasPermi('admin:setting:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_EDIT)
     @Log(title = "系统设置", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Setting setting)
@@ -94,7 +97,7 @@ public class SettingController extends BaseController
     /**
      * 删除系统设置
      */
-    @PreAuthorize("@ss.hasPermi('admin:setting:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_REMOVE)
     @Log(title = "系统设置", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{settingIds}")
     public AjaxResult remove(@PathVariable Long[] settingIds)

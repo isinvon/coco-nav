@@ -1,25 +1,20 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.BookmarkLog;
-import com.ruoyi.project.admin.service.IBookmarkLogCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.BookmarkLog;
+import com.ruoyi.project.admin.service.IBookmarkLogCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 书签操作日志Controller
@@ -37,7 +32,7 @@ public class BookmarkLogController extends BaseController
     /**
      * 查询书签操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(BookmarkLog bookmarkLog)
     {
@@ -49,7 +44,7 @@ public class BookmarkLogController extends BaseController
     /**
      * 导出书签操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_EXPORT)
     @Log(title = "书签操作日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BookmarkLog bookmarkLog)
@@ -62,7 +57,7 @@ public class BookmarkLogController extends BaseController
     /**
      * 获取书签操作日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_QUERY)
     @GetMapping(value = "/{bookmarkLogId}")
     public AjaxResult getInfo(@PathVariable("bookmarkLogId") Long bookmarkLogId)
     {
@@ -72,7 +67,7 @@ public class BookmarkLogController extends BaseController
     /**
      * 新增书签操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_ADD)
     @Log(title = "书签操作日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BookmarkLog bookmarkLog)
@@ -83,7 +78,7 @@ public class BookmarkLogController extends BaseController
     /**
      * 修改书签操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_EDIT)
     @Log(title = "书签操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookmarkLog bookmarkLog)
@@ -94,7 +89,7 @@ public class BookmarkLogController extends BaseController
     /**
      * 删除书签操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_REMOVE)
     @Log(title = "书签操作日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{bookmarkLogIds}")
     public AjaxResult remove(@PathVariable Long[] bookmarkLogIds)

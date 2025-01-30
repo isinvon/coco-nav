@@ -1,25 +1,20 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.BookmarkArticle;
-import com.ruoyi.project.admin.service.IBookmarkArticleCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.BookmarkArticle;
+import com.ruoyi.project.admin.service.IBookmarkArticleCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 书签文章Controller
@@ -37,7 +32,7 @@ public class BookmarkArticleController extends BaseController
     /**
      * 查询书签文章列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkArticle:list')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_ARTICLE_LIST)
     @GetMapping("/list")
     public TableDataInfo list(BookmarkArticle bookmarkArticle)
     {
@@ -49,7 +44,7 @@ public class BookmarkArticleController extends BaseController
     /**
      * 导出书签文章列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkArticle:export')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_ARTICLE_EXPORT)
     @Log(title = "书签文章", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BookmarkArticle bookmarkArticle)
@@ -62,7 +57,7 @@ public class BookmarkArticleController extends BaseController
     /**
      * 获取书签文章详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkArticle:query')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_ARTICLE_QUERY)
     @GetMapping(value = "/{articleId}")
     public AjaxResult getInfo(@PathVariable("articleId") Long articleId)
     {
@@ -72,7 +67,7 @@ public class BookmarkArticleController extends BaseController
     /**
      * 新增书签文章
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkArticle:add')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_ARTICLE_ADD)
     @Log(title = "书签文章", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BookmarkArticle bookmarkArticle)
@@ -83,7 +78,7 @@ public class BookmarkArticleController extends BaseController
     /**
      * 修改书签文章
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkArticle:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_ARTICLE_EDIT)
     @Log(title = "书签文章", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookmarkArticle bookmarkArticle)
@@ -94,7 +89,7 @@ public class BookmarkArticleController extends BaseController
     /**
      * 删除书签文章
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkArticle:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_ARTICLE_REMOVE)
     @Log(title = "书签文章", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{articleIds}")
     public AjaxResult remove(@PathVariable Long[] articleIds)

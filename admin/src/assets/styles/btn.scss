@@ -1,10 +1,19 @@
 @import './variables.module.scss';
 
+// 定义新的轻奢风格颜色变量
+$light-gray: #f6f8fa; // GitHub 轻灰色
+$medium-gray: #e1e4e8; // 用于边框和悬停效果
+$dark-gray: #24292e; // 深灰色用于文字
+
 @mixin colorBtn($color) {
   background: $color;
+  color: #fff; // 按钮文字颜色初始为白色
+  border: 1px solid transparent; // 初始透明边框
 
   &:hover {
-    color: $color;
+    background: $light-gray; // 悬停时背景变为轻灰色
+    color: $color; // 悬停时文字变为按钮颜色
+    border-color: $color; // 悬停时边框变为按钮颜色
 
     &:before,
     &:after {
@@ -14,46 +23,48 @@
 }
 
 .blue-btn {
-  @include colorBtn($blue)
+  @include colorBtn($blue);
 }
 
 .light-blue-btn {
-  @include colorBtn($light-blue)
+  @include colorBtn($light-blue);
 }
 
 .red-btn {
-  @include colorBtn($red)
+  @include colorBtn($red);
 }
 
 .pink-btn {
-  @include colorBtn($pink)
+  @include colorBtn($pink);
 }
 
 .green-btn {
-  @include colorBtn($green)
+  @include colorBtn($green);
 }
 
 .tiffany-btn {
-  @include colorBtn($tiffany)
+  @include colorBtn($tiffany);
 }
 
 .yellow-btn {
-  @include colorBtn($yellow)
+  @include colorBtn($yellow);
 }
 
 .pan-btn {
   font-size: 14px;
-  color: #fff;
+  color: $dark-gray; // 文字颜色使用深灰色
   padding: 14px 36px;
   border-radius: 12px;
-  border: none;
+  border: 1px solid $medium-gray; // 初始边框为中灰色
   outline: none;
   transition: 600ms ease all;
   position: relative;
   display: inline-block;
+  background: $light-gray; // 背景使用轻灰色
 
   &:hover {
     background: #fff;
+    color: $dark-gray;
 
     &:before,
     &:after {
@@ -71,6 +82,7 @@
     height: 2px;
     width: 0;
     transition: 400ms ease all;
+    background: $medium-gray; // 线条颜色为中灰色
   }
 
   &::after {
@@ -86,8 +98,8 @@
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
-  background: #fff;
-  color: #fff;
+  background: $light-gray; // 背景使用轻灰色
+  color: $dark-gray; // 文字颜色使用深灰色
   -webkit-appearance: none;
   text-align: center;
   box-sizing: border-box;
@@ -96,4 +108,10 @@
   padding: 10px 15px;
   font-size: 14px;
   border-radius: 12px;
+  border: 1px solid $medium-gray; // 边框为中灰色
+
+  &:hover {
+    background: #fff;
+    border-color: $dark-gray; // 悬停时边框变为深灰色
+  }
 }

@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class BookmarkTagController extends BaseController
     /**
      * 查询书签标签列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkTag:list')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(BookmarkTag bookmarkTag)
     {
@@ -49,7 +52,7 @@ public class BookmarkTagController extends BaseController
     /**
      * 导出书签标签列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkTag:export')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_EXPORT)
     @Log(title = "书签标签", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BookmarkTag bookmarkTag)
@@ -62,7 +65,7 @@ public class BookmarkTagController extends BaseController
     /**
      * 获取书签标签详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkTag:query')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_QUERY)
     @GetMapping(value = "/{bookmarkTagId}")
     public AjaxResult getInfo(@PathVariable("bookmarkTagId") Long bookmarkTagId)
     {
@@ -72,7 +75,7 @@ public class BookmarkTagController extends BaseController
     /**
      * 新增书签标签
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkTag:add')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_ADD)
     @Log(title = "书签标签", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BookmarkTag bookmarkTag)
@@ -83,7 +86,7 @@ public class BookmarkTagController extends BaseController
     /**
      * 修改书签标签
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkTag:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_EDIT)
     @Log(title = "书签标签", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookmarkTag bookmarkTag)
@@ -94,7 +97,7 @@ public class BookmarkTagController extends BaseController
     /**
      * 删除书签标签
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkTag:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_REMOVE)
     @Log(title = "书签标签", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{bookmarkTagIds}")
     public AjaxResult remove(@PathVariable Long[] bookmarkTagIds)

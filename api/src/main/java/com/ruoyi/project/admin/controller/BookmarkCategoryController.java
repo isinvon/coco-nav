@@ -1,25 +1,20 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.BookmarkCategory;
-import com.ruoyi.project.admin.service.IBookmarkCategoryCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.BookmarkCategory;
+import com.ruoyi.project.admin.service.IBookmarkCategoryCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 书签分类Controller
@@ -37,7 +32,7 @@ public class BookmarkCategoryController extends BaseController
     /**
      * 查询书签分类列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkCategory:list')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_CATEGORY_LIST)
     @GetMapping("/list")
     public TableDataInfo list(BookmarkCategory bookmarkCategory)
     {
@@ -49,7 +44,7 @@ public class BookmarkCategoryController extends BaseController
     /**
      * 导出书签分类列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkCategory:export')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_CATEGORY_EXPORT)
     @Log(title = "书签分类", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BookmarkCategory bookmarkCategory)
@@ -62,7 +57,7 @@ public class BookmarkCategoryController extends BaseController
     /**
      * 获取书签分类详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkCategory:query')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_CATEGORY_QUERY)
     @GetMapping(value = "/{bookmarkCategoryId}")
     public AjaxResult getInfo(@PathVariable("bookmarkCategoryId") Long bookmarkCategoryId)
     {
@@ -72,7 +67,7 @@ public class BookmarkCategoryController extends BaseController
     /**
      * 新增书签分类
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkCategory:add')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_CATEGORY_ADD)
     @Log(title = "书签分类", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BookmarkCategory bookmarkCategory)
@@ -83,7 +78,7 @@ public class BookmarkCategoryController extends BaseController
     /**
      * 修改书签分类
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkCategory:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_CATEGORY_EDIT)
     @Log(title = "书签分类", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookmarkCategory bookmarkCategory)
@@ -94,7 +89,7 @@ public class BookmarkCategoryController extends BaseController
     /**
      * 删除书签分类
      */
-    @PreAuthorize("@ss.hasPermi('admin:bookmarkCategory:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_CATEGORY_REMOVE)
     @Log(title = "书签分类", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{bookmarkCategoryIds}")
     public AjaxResult remove(@PathVariable Long[] bookmarkCategoryIds)

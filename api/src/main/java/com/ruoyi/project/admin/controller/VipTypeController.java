@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class VipTypeController extends BaseController
     /**
      * 查询VIP类型列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipType:list')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_TYPE_LIST)
     @GetMapping("/list")
     public TableDataInfo list(VipType vipType)
     {
@@ -49,7 +52,7 @@ public class VipTypeController extends BaseController
     /**
      * 导出VIP类型列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipType:export')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_TYPE_EXPORT)
     @Log(title = "VIP类型", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, VipType vipType)
@@ -62,7 +65,7 @@ public class VipTypeController extends BaseController
     /**
      * 获取VIP类型详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipType:query')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_TYPE_QUERY)
     @GetMapping(value = "/{vipTypeId}")
     public AjaxResult getInfo(@PathVariable("vipTypeId") Long vipTypeId)
     {
@@ -72,7 +75,7 @@ public class VipTypeController extends BaseController
     /**
      * 新增VIP类型
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipType:add')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_TYPE_ADD)
     @Log(title = "VIP类型", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody VipType vipType)
@@ -83,7 +86,7 @@ public class VipTypeController extends BaseController
     /**
      * 修改VIP类型
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipType:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_TYPE_EDIT)
     @Log(title = "VIP类型", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody VipType vipType)
@@ -94,7 +97,7 @@ public class VipTypeController extends BaseController
     /**
      * 删除VIP类型
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipType:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_TYPE_REMOVE)
     @Log(title = "VIP类型", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{vipTypeIds}")
     public AjaxResult remove(@PathVariable Long[] vipTypeIds)

@@ -1,25 +1,21 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.CustomService;
-import com.ruoyi.project.admin.service.ICustomServiceCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.CustomService;
+import com.ruoyi.project.admin.service.ICustomServiceCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 客服信息Controller
@@ -37,7 +33,7 @@ public class CustomServiceController extends BaseController
     /**
      * 查询客服信息列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:customService:list')")
+    @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_LIST)
     @GetMapping("/list")
     public TableDataInfo list(CustomService customService)
     {
@@ -49,7 +45,7 @@ public class CustomServiceController extends BaseController
     /**
      * 导出客服信息列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:customService:export')")
+    @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_EXPORT)
     @Log(title = "客服信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CustomService customService)
@@ -62,7 +58,7 @@ public class CustomServiceController extends BaseController
     /**
      * 获取客服信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:customService:query')")
+    @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_QUERY)
     @GetMapping(value = "/{customServiceId}")
     public AjaxResult getInfo(@PathVariable("customServiceId") Long customServiceId)
     {
@@ -72,7 +68,7 @@ public class CustomServiceController extends BaseController
     /**
      * 新增客服信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:customService:add')")
+    @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_ADD)
     @Log(title = "客服信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CustomService customService)
@@ -83,7 +79,7 @@ public class CustomServiceController extends BaseController
     /**
      * 修改客服信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:customService:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_EDIT)
     @Log(title = "客服信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CustomService customService)
@@ -94,7 +90,7 @@ public class CustomServiceController extends BaseController
     /**
      * 删除客服信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:customService:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_REMOVE)
     @Log(title = "客服信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{customServiceIds}")
     public AjaxResult remove(@PathVariable Long[] customServiceIds)

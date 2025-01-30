@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class NoticeController extends BaseController
     /**
      * 查询通知管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:notice:list')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_LIST)
     @GetMapping("/list")
     public TableDataInfo list(Notice notice)
     {
@@ -49,7 +52,7 @@ public class NoticeController extends BaseController
     /**
      * 导出通知管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:notice:export')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_EXPORT)
     @Log(title = "通知管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Notice notice)
@@ -62,7 +65,7 @@ public class NoticeController extends BaseController
     /**
      * 获取通知管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:notice:query')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_QUERY)
     @GetMapping(value = "/{noticeId}")
     public AjaxResult getInfo(@PathVariable("noticeId") Long noticeId)
     {
@@ -72,7 +75,7 @@ public class NoticeController extends BaseController
     /**
      * 新增通知管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:notice:add')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_ADD)
     @Log(title = "通知管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Notice notice)
@@ -83,7 +86,7 @@ public class NoticeController extends BaseController
     /**
      * 修改通知管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:notice:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_EDIT)
     @Log(title = "通知管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Notice notice)
@@ -94,7 +97,7 @@ public class NoticeController extends BaseController
     /**
      * 删除通知管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:notice:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_REMOVE)
     @Log(title = "通知管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{noticeIds}")
     public AjaxResult remove(@PathVariable Long[] noticeIds)

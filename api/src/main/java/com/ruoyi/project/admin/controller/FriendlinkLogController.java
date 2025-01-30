@@ -1,25 +1,20 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.FriendlinkLog;
-import com.ruoyi.project.admin.service.IFriendlinkLogCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.FriendlinkLog;
+import com.ruoyi.project.admin.service.IFriendlinkLogCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 友链操作日志Controller
@@ -37,7 +32,7 @@ public class FriendlinkLogController extends BaseController
     /**
      * 查询友链操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:friendlinkLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(FriendlinkLog friendlinkLog)
     {
@@ -49,7 +44,7 @@ public class FriendlinkLogController extends BaseController
     /**
      * 导出友链操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:friendlinkLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LOG_EXPORT)
     @Log(title = "友链操作日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FriendlinkLog friendlinkLog)
@@ -62,7 +57,7 @@ public class FriendlinkLogController extends BaseController
     /**
      * 获取友链操作日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:friendlinkLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LOG_QUERY)
     @GetMapping(value = "/{friendlinkLogId}")
     public AjaxResult getInfo(@PathVariable("friendlinkLogId") Long friendlinkLogId)
     {
@@ -72,7 +67,7 @@ public class FriendlinkLogController extends BaseController
     /**
      * 新增友链操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:friendlinkLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LOG_ADD)
     @Log(title = "友链操作日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FriendlinkLog friendlinkLog)
@@ -83,7 +78,7 @@ public class FriendlinkLogController extends BaseController
     /**
      * 修改友链操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:friendlinkLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LOG_EDIT)
     @Log(title = "友链操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FriendlinkLog friendlinkLog)
@@ -94,7 +89,7 @@ public class FriendlinkLogController extends BaseController
     /**
      * 删除友链操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:friendlinkLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LOG_REMOVE)
     @Log(title = "友链操作日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{friendlinkLogIds}")
     public AjaxResult remove(@PathVariable Long[] friendlinkLogIds)

@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class SettingLogController extends BaseController
     /**
      * 查询设置变更日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:settingLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(SettingLog settingLog)
     {
@@ -49,7 +52,7 @@ public class SettingLogController extends BaseController
     /**
      * 导出设置变更日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:settingLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LOG_EXPORT)
     @Log(title = "设置变更日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SettingLog settingLog)
@@ -62,7 +65,7 @@ public class SettingLogController extends BaseController
     /**
      * 获取设置变更日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:settingLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LOG_QUERY)
     @GetMapping(value = "/{settingLogId}")
     public AjaxResult getInfo(@PathVariable("settingLogId") Long settingLogId)
     {
@@ -72,7 +75,7 @@ public class SettingLogController extends BaseController
     /**
      * 新增设置变更日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:settingLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LOG_ADD)
     @Log(title = "设置变更日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SettingLog settingLog)
@@ -83,7 +86,7 @@ public class SettingLogController extends BaseController
     /**
      * 修改设置变更日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:settingLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LOG_EDIT)
     @Log(title = "设置变更日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SettingLog settingLog)
@@ -94,7 +97,7 @@ public class SettingLogController extends BaseController
     /**
      * 删除设置变更日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:settingLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_SETTING_LOG_REMOVE)
     @Log(title = "设置变更日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{settingLogIds}")
     public AjaxResult remove(@PathVariable Long[] settingLogIds)

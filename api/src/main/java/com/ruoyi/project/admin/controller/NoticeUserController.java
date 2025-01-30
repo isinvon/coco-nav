@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class NoticeUserController extends BaseController
     /**
      * 查询通知用户关系列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:noticeUser:list')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_USER_LIST)
     @GetMapping("/list")
     public TableDataInfo list(NoticeUser noticeUser)
     {
@@ -49,7 +52,7 @@ public class NoticeUserController extends BaseController
     /**
      * 导出通知用户关系列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:noticeUser:export')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_USER_EXPORT)
     @Log(title = "通知用户关系", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, NoticeUser noticeUser)
@@ -62,7 +65,7 @@ public class NoticeUserController extends BaseController
     /**
      * 获取通知用户关系详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:noticeUser:query')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_USER_QUERY)
     @GetMapping(value = "/{relationId}")
     public AjaxResult getInfo(@PathVariable("relationId") Long relationId)
     {
@@ -72,7 +75,7 @@ public class NoticeUserController extends BaseController
     /**
      * 新增通知用户关系
      */
-    @PreAuthorize("@ss.hasPermi('admin:noticeUser:add')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_USER_ADD)
     @Log(title = "通知用户关系", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody NoticeUser noticeUser)
@@ -83,7 +86,7 @@ public class NoticeUserController extends BaseController
     /**
      * 修改通知用户关系
      */
-    @PreAuthorize("@ss.hasPermi('admin:noticeUser:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_USER_EDIT)
     @Log(title = "通知用户关系", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody NoticeUser noticeUser)
@@ -94,7 +97,7 @@ public class NoticeUserController extends BaseController
     /**
      * 删除通知用户关系
      */
-    @PreAuthorize("@ss.hasPermi('admin:noticeUser:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_NOTICE_USER_REMOVE)
     @Log(title = "通知用户关系", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{relationIds}")
     public AjaxResult remove(@PathVariable Long[] relationIds)

@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class UserLoginLogController extends BaseController
     /**
      * 查询用户登录日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:userLoginLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LOGIN_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(UserLoginLog userLoginLog)
     {
@@ -49,7 +52,7 @@ public class UserLoginLogController extends BaseController
     /**
      * 导出用户登录日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:userLoginLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LOGIN_LOG_EXPORT)
     @Log(title = "用户登录日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserLoginLog userLoginLog)
@@ -62,7 +65,7 @@ public class UserLoginLogController extends BaseController
     /**
      * 获取用户登录日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:userLoginLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LOGIN_LOG_QUERY)
     @GetMapping(value = "/{userLoginLogId}")
     public AjaxResult getInfo(@PathVariable("userLoginLogId") Long userLoginLogId)
     {
@@ -72,7 +75,7 @@ public class UserLoginLogController extends BaseController
     /**
      * 新增用户登录日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:userLoginLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LOGIN_LOG_ADD)
     @Log(title = "用户登录日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UserLoginLog userLoginLog)
@@ -83,7 +86,7 @@ public class UserLoginLogController extends BaseController
     /**
      * 修改用户登录日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:userLoginLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LOGIN_LOG_EDIT)
     @Log(title = "用户登录日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UserLoginLog userLoginLog)
@@ -94,7 +97,7 @@ public class UserLoginLogController extends BaseController
     /**
      * 删除用户登录日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:userLoginLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LOGIN_LOG_REMOVE)
     @Log(title = "用户登录日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{userLoginLogIds}")
     public AjaxResult remove(@PathVariable Long[] userLoginLogIds)

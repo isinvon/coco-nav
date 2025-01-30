@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class UserController extends BaseController
     /**
      * 查询用户管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:user:list')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_LIST)
     @GetMapping("/list")
     public TableDataInfo list(User user)
     {
@@ -49,7 +52,7 @@ public class UserController extends BaseController
     /**
      * 导出用户管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:user:export')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_EXPORT)
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, User user)
@@ -62,7 +65,7 @@ public class UserController extends BaseController
     /**
      * 获取用户管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:user:query')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_QUERY)
     @GetMapping(value = "/{userId}")
     public AjaxResult getInfo(@PathVariable("userId") Long userId)
     {
@@ -72,7 +75,7 @@ public class UserController extends BaseController
     /**
      * 新增用户管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:user:add')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_ADD)
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody User user)
@@ -83,7 +86,7 @@ public class UserController extends BaseController
     /**
      * 修改用户管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:user:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_EDIT)
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody User user)
@@ -94,7 +97,7 @@ public class UserController extends BaseController
     /**
      * 删除用户管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:user:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_REMOVE)
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{userIds}")
     public AjaxResult remove(@PathVariable Long[] userIds)

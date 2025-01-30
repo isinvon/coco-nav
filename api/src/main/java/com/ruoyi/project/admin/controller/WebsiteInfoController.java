@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class WebsiteInfoController extends BaseController
     /**
      * 查询网站信息列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:websiteInfo:list')")
+    @CustomPermission(PermissionConstants.ADMIN_WEBSITE_INFO_LIST)
     @GetMapping("/list")
     public TableDataInfo list(WebsiteInfo websiteInfo)
     {
@@ -49,7 +52,7 @@ public class WebsiteInfoController extends BaseController
     /**
      * 导出网站信息列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:websiteInfo:export')")
+    @CustomPermission(PermissionConstants.ADMIN_WEBSITE_INFO_EXPORT)
     @Log(title = "网站信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, WebsiteInfo websiteInfo)
@@ -62,7 +65,7 @@ public class WebsiteInfoController extends BaseController
     /**
      * 获取网站信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:websiteInfo:query')")
+    @CustomPermission(PermissionConstants.ADMIN_WEBSITE_INFO_QUERY)
     @GetMapping(value = "/{websiteInfoId}")
     public AjaxResult getInfo(@PathVariable("websiteInfoId") Long websiteInfoId)
     {
@@ -72,7 +75,7 @@ public class WebsiteInfoController extends BaseController
     /**
      * 新增网站信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:websiteInfo:add')")
+    @CustomPermission(PermissionConstants.ADMIN_WEBSITE_INFO_ADD)
     @Log(title = "网站信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody WebsiteInfo websiteInfo)
@@ -83,7 +86,7 @@ public class WebsiteInfoController extends BaseController
     /**
      * 修改网站信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:websiteInfo:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_WEBSITE_INFO_EDIT)
     @Log(title = "网站信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody WebsiteInfo websiteInfo)
@@ -94,7 +97,7 @@ public class WebsiteInfoController extends BaseController
     /**
      * 删除网站信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:websiteInfo:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_WEBSITE_INFO_REMOVE)
     @Log(title = "网站信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{websiteInfoIds}")
     public AjaxResult remove(@PathVariable Long[] websiteInfoIds)

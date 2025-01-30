@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class VipLogController extends BaseController
     /**
      * 查询VIP操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(VipLog vipLog)
     {
@@ -49,7 +52,7 @@ public class VipLogController extends BaseController
     /**
      * 导出VIP操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_EXPORT)
     @Log(title = "VIP操作日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, VipLog vipLog)
@@ -62,7 +65,7 @@ public class VipLogController extends BaseController
     /**
      * 获取VIP操作日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_QUERY)
     @GetMapping(value = "/{vipLogId}")
     public AjaxResult getInfo(@PathVariable("vipLogId") Long vipLogId)
     {
@@ -72,7 +75,7 @@ public class VipLogController extends BaseController
     /**
      * 新增VIP操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_ADD)
     @Log(title = "VIP操作日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody VipLog vipLog)
@@ -83,7 +86,7 @@ public class VipLogController extends BaseController
     /**
      * 修改VIP操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_EDIT)
     @Log(title = "VIP操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody VipLog vipLog)
@@ -94,7 +97,7 @@ public class VipLogController extends BaseController
     /**
      * 删除VIP操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:vipLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_REMOVE)
     @Log(title = "VIP操作日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{vipLogIds}")
     public AjaxResult remove(@PathVariable Long[] vipLogIds)

@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class PointController extends BaseController
     /**
      * 查询积分账户列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:point:list')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LIST)
     @GetMapping("/list")
     public TableDataInfo list(Point point)
     {
@@ -49,7 +52,7 @@ public class PointController extends BaseController
     /**
      * 导出积分账户列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:point:export')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_EXPORT)
     @Log(title = "积分账户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Point point)
@@ -62,7 +65,7 @@ public class PointController extends BaseController
     /**
      * 获取积分账户详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:point:query')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_QUERY)
     @GetMapping(value = "/{pointId}")
     public AjaxResult getInfo(@PathVariable("pointId") Long pointId)
     {
@@ -72,7 +75,7 @@ public class PointController extends BaseController
     /**
      * 新增积分账户
      */
-    @PreAuthorize("@ss.hasPermi('admin:point:add')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_ADD)
     @Log(title = "积分账户", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Point point)
@@ -83,7 +86,7 @@ public class PointController extends BaseController
     /**
      * 修改积分账户
      */
-    @PreAuthorize("@ss.hasPermi('admin:point:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_EDIT)
     @Log(title = "积分账户", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Point point)
@@ -94,7 +97,7 @@ public class PointController extends BaseController
     /**
      * 删除积分账户
      */
-    @PreAuthorize("@ss.hasPermi('admin:point:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_REMOVE)
     @Log(title = "积分账户", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{pointIds}")
     public AjaxResult remove(@PathVariable Long[] pointIds)

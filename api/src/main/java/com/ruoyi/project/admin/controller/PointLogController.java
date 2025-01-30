@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class PointLogController extends BaseController
     /**
      * 查询积分流水列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:pointLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(PointLog pointLog)
     {
@@ -49,7 +52,7 @@ public class PointLogController extends BaseController
     /**
      * 导出积分流水列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:pointLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LOG_EXPORT)
     @Log(title = "积分流水", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PointLog pointLog)
@@ -62,7 +65,7 @@ public class PointLogController extends BaseController
     /**
      * 获取积分流水详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:pointLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LOG_QUERY)
     @GetMapping(value = "/{pointLogId}")
     public AjaxResult getInfo(@PathVariable("pointLogId") Long pointLogId)
     {
@@ -72,7 +75,7 @@ public class PointLogController extends BaseController
     /**
      * 新增积分流水
      */
-    @PreAuthorize("@ss.hasPermi('admin:pointLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LOG_ADD)
     @Log(title = "积分流水", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PointLog pointLog)
@@ -83,7 +86,7 @@ public class PointLogController extends BaseController
     /**
      * 修改积分流水
      */
-    @PreAuthorize("@ss.hasPermi('admin:pointLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LOG_EDIT)
     @Log(title = "积分流水", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PointLog pointLog)
@@ -94,7 +97,7 @@ public class PointLogController extends BaseController
     /**
      * 删除积分流水
      */
-    @PreAuthorize("@ss.hasPermi('admin:pointLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_POINT_LOG_REMOVE)
     @Log(title = "积分流水", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{pointLogIds}")
     public AjaxResult remove(@PathVariable Long[] pointLogIds)

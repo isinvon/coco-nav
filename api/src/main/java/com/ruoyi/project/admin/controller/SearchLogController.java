@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class SearchLogController extends BaseController
     /**
      * 查询搜索日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:searchLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_SEARCH_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(SearchLog searchLog)
     {
@@ -49,7 +52,7 @@ public class SearchLogController extends BaseController
     /**
      * 导出搜索日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:searchLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_SEARCH_LOG_EXPORT)
     @Log(title = "搜索日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SearchLog searchLog)
@@ -62,7 +65,7 @@ public class SearchLogController extends BaseController
     /**
      * 获取搜索日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:searchLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_SEARCH_LOG_QUERY)
     @GetMapping(value = "/{searchLogId}")
     public AjaxResult getInfo(@PathVariable("searchLogId") Long searchLogId)
     {
@@ -72,7 +75,7 @@ public class SearchLogController extends BaseController
     /**
      * 新增搜索日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:searchLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_SEARCH_LOG_ADD)
     @Log(title = "搜索日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SearchLog searchLog)
@@ -83,7 +86,7 @@ public class SearchLogController extends BaseController
     /**
      * 修改搜索日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:searchLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_SEARCH_LOG_EDIT)
     @Log(title = "搜索日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SearchLog searchLog)
@@ -94,7 +97,7 @@ public class SearchLogController extends BaseController
     /**
      * 删除搜索日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:searchLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_SEARCH_LOG_REMOVE)
     @Log(title = "搜索日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{searchLogIds}")
     public AjaxResult remove(@PathVariable Long[] searchLogIds)

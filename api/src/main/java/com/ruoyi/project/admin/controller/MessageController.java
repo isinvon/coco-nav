@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class MessageController extends BaseController
     /**
      * 查询留言管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:message:list')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LIST)
     @GetMapping("/list")
     public TableDataInfo list(Message message)
     {
@@ -49,7 +52,7 @@ public class MessageController extends BaseController
     /**
      * 导出留言管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:message:export')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_EXPORT)
     @Log(title = "留言管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Message message)
@@ -62,7 +65,7 @@ public class MessageController extends BaseController
     /**
      * 获取留言管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:message:query')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_QUERY)
     @GetMapping(value = "/{messageId}")
     public AjaxResult getInfo(@PathVariable("messageId") Long messageId)
     {
@@ -72,7 +75,7 @@ public class MessageController extends BaseController
     /**
      * 新增留言管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:message:add')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_ADD)
     @Log(title = "留言管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Message message)
@@ -83,7 +86,7 @@ public class MessageController extends BaseController
     /**
      * 修改留言管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:message:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_EDIT)
     @Log(title = "留言管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Message message)
@@ -94,7 +97,7 @@ public class MessageController extends BaseController
     /**
      * 删除留言管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:message:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_REMOVE)
     @Log(title = "留言管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{messageIds}")
     public AjaxResult remove(@PathVariable Long[] messageIds)

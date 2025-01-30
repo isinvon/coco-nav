@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class VipController extends BaseController
     /**
      * 查询VIP会员列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:vip:list')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_LIST)
     @GetMapping("/list")
     public TableDataInfo list(Vip vip)
     {
@@ -49,7 +52,7 @@ public class VipController extends BaseController
     /**
      * 导出VIP会员列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:vip:export')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_EXPORT)
     @Log(title = "VIP会员", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Vip vip)
@@ -62,7 +65,7 @@ public class VipController extends BaseController
     /**
      * 获取VIP会员详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:vip:query')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_QUERY)
     @GetMapping(value = "/{vipId}")
     public AjaxResult getInfo(@PathVariable("vipId") Long vipId)
     {
@@ -72,7 +75,7 @@ public class VipController extends BaseController
     /**
      * 新增VIP会员
      */
-    @PreAuthorize("@ss.hasPermi('admin:vip:add')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_ADD)
     @Log(title = "VIP会员", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Vip vip)
@@ -83,7 +86,7 @@ public class VipController extends BaseController
     /**
      * 修改VIP会员
      */
-    @PreAuthorize("@ss.hasPermi('admin:vip:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_EDIT)
     @Log(title = "VIP会员", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Vip vip)
@@ -94,7 +97,7 @@ public class VipController extends BaseController
     /**
      * 删除VIP会员
      */
-    @PreAuthorize("@ss.hasPermi('admin:vip:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_VIP_REMOVE)
     @Log(title = "VIP会员", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{vipIds}")
     public AjaxResult remove(@PathVariable Long[] vipIds)

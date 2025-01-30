@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class AreaController extends BaseController
     /**
      * 查询地区信息列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:area:list')")
+    @CustomPermission(PermissionConstants.ADMIN_AREA_LIST)
     @GetMapping("/list")
     public TableDataInfo list(Area area)
     {
@@ -49,7 +52,7 @@ public class AreaController extends BaseController
     /**
      * 导出地区信息列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:area:export')")
+    @CustomPermission(PermissionConstants.ADMIN_AREA_EXPORT)
     @Log(title = "地区信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Area area)
@@ -62,7 +65,7 @@ public class AreaController extends BaseController
     /**
      * 获取地区信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:area:query')")
+    @CustomPermission(PermissionConstants.ADMIN_AREA_QUERY)
     @GetMapping(value = "/{areaId}")
     public AjaxResult getInfo(@PathVariable("areaId") Long areaId)
     {
@@ -72,7 +75,7 @@ public class AreaController extends BaseController
     /**
      * 新增地区信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:area:add')")
+    @CustomPermission(PermissionConstants.ADMIN_AREA_ADD)
     @Log(title = "地区信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Area area)

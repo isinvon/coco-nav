@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class UserGradeController extends BaseController
     /**
      * 查询用户等级列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:userGrade:list')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_GRADE_LIST)
     @GetMapping("/list")
     public TableDataInfo list(UserGrade userGrade)
     {
@@ -49,7 +52,7 @@ public class UserGradeController extends BaseController
     /**
      * 导出用户等级列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:userGrade:export')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_GRADE_EXPORT)
     @Log(title = "用户等级", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserGrade userGrade)
@@ -62,7 +65,7 @@ public class UserGradeController extends BaseController
     /**
      * 获取用户等级详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:userGrade:query')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_GRADE_QUERY)
     @GetMapping(value = "/{userGradeId}")
     public AjaxResult getInfo(@PathVariable("userGradeId") Long userGradeId)
     {
@@ -72,7 +75,7 @@ public class UserGradeController extends BaseController
     /**
      * 新增用户等级
      */
-    @PreAuthorize("@ss.hasPermi('admin:userGrade:add')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_GRADE_ADD)
     @Log(title = "用户等级", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UserGrade userGrade)
@@ -83,7 +86,7 @@ public class UserGradeController extends BaseController
     /**
      * 修改用户等级
      */
-    @PreAuthorize("@ss.hasPermi('admin:userGrade:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_GRADE_EDIT)
     @Log(title = "用户等级", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UserGrade userGrade)
@@ -94,7 +97,7 @@ public class UserGradeController extends BaseController
     /**
      * 删除用户等级
      */
-    @PreAuthorize("@ss.hasPermi('admin:userGrade:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_USER_GRADE_REMOVE)
     @Log(title = "用户等级", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{userGradeIds}")
     public AjaxResult remove(@PathVariable Long[] userGradeIds)

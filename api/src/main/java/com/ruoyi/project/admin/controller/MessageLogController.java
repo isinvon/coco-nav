@@ -2,6 +2,9 @@ package com.ruoyi.project.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,7 @@ public class MessageLogController extends BaseController
     /**
      * 查询留言操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:messageLog:list')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LOG_LIST)
     @GetMapping("/list")
     public TableDataInfo list(MessageLog messageLog)
     {
@@ -49,7 +52,7 @@ public class MessageLogController extends BaseController
     /**
      * 导出留言操作日志列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:messageLog:export')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LOG_EXPORT)
     @Log(title = "留言操作日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, MessageLog messageLog)
@@ -62,7 +65,7 @@ public class MessageLogController extends BaseController
     /**
      * 获取留言操作日志详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:messageLog:query')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LOG_QUERY)
     @GetMapping(value = "/{messageLogId}")
     public AjaxResult getInfo(@PathVariable("messageLogId") Long messageLogId)
     {
@@ -72,7 +75,7 @@ public class MessageLogController extends BaseController
     /**
      * 新增留言操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:messageLog:add')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LOG_ADD)
     @Log(title = "留言操作日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody MessageLog messageLog)
@@ -83,7 +86,7 @@ public class MessageLogController extends BaseController
     /**
      * 修改留言操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:messageLog:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LOG_EDIT)
     @Log(title = "留言操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody MessageLog messageLog)
@@ -94,7 +97,7 @@ public class MessageLogController extends BaseController
     /**
      * 删除留言操作日志
      */
-    @PreAuthorize("@ss.hasPermi('admin:messageLog:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LOG_REMOVE)
     @Log(title = "留言操作日志", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{messageLogIds}")
     public AjaxResult remove(@PathVariable Long[] messageLogIds)
