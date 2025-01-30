@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.project.admin.domain.Area;
-import com.ruoyi.project.admin.service.AreaCustomService;
+import com.ruoyi.project.admin.service.custom.AreaCustomService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;

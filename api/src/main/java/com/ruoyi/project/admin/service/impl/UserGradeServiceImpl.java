@@ -1,4 +1,6 @@
 package com.ruoyi.project.admin.service.impl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.project.admin.service.UserGradeService;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class UserGradeServiceImpl implements UserGradeCustomService
+public class UserGradeServiceImpl extends ServiceImpl<UserGradeMapper,UserGrade> implements UserGradeCustomService, UserGradeService
 {
     @Autowired
     private UserGradeMapper userGradeMapper;

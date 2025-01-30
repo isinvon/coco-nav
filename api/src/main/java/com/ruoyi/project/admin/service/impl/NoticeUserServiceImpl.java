@@ -1,4 +1,6 @@
 package com.ruoyi.project.admin.service.impl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.project.admin.service.NoticeUserService;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2025-01-30
  */
 @Service
-public class NoticeUserServiceImpl implements NoticeUserCustomService
+public class NoticeUserServiceImpl extends ServiceImpl<NoticeUserMapper,NoticeUser> implements NoticeUserCustomService, NoticeUserService
 {
     @Autowired
     private NoticeUserMapper noticeUserMapper;
