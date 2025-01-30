@@ -175,7 +175,7 @@
 </template>
 
 <script setup name="User">
-import { listUser, getUser, delUser, addUser, updateUser } from "@/api/admin/user";
+import { listUser, getUser, delUser, addUser, updateUser } from "@/api/admin/member.js";
 
 const { proxy } = getCurrentInstance();
 
@@ -231,6 +231,7 @@ const { queryParams, form, rules } = toRefs(data);
 function getList() {
   loading.value = true;
   listUser(queryParams.value).then(response => {
+    console.log(response)
     userList.value = response.rows;
     total.value = response.total;
     loading.value = false;

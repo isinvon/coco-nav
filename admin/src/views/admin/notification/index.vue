@@ -143,7 +143,7 @@
 </template>
 
 <script setup name="Notice">
-import { listNotice, getNotice, delNotice, addNotice, updateNotice } from "@/api/admin/notice";
+import { listNotice, getNotice, delNotice, addNotice, updateNotice } from "@/api/admin/notification.js";
 
 const { proxy } = getCurrentInstance();
 

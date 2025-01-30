@@ -111,7 +111,7 @@
 </template>
 
 <script setup name="Setting">
-import { listSetting, getSetting, delSetting, addSetting, updateSetting } from "@/api/admin/setting";
+import { listSetting, getSetting, delSetting, addSetting, updateSetting } from "@/api/admin/websiteSetting.js";
 
 const { proxy } = getCurrentInstance();
 
