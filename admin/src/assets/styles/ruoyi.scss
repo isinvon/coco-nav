@@ -78,8 +78,8 @@
 	.el-table__header-wrapper, .el-table__fixed-header-wrapper {
 		th {
 			word-break: break-word;
-			background-color: #f8f8f9 !important;
-			color: #515a6e;
+			background-color: #f6f8fa !important;
+			color: #24292e;
 			height: 40px !important;
 			font-size: 13px;
 		}
@@ -298,4 +298,10 @@
 /* 分割面板样式 */
 .splitpanes.default-theme .splitpanes__pane {
   background-color: var(--splitpanes-default-bg) !important;
+}
+
+// 修改卡片阴影
+.el-card {
+	box-shadow: none !important;
+	border: 1px solid #e1e4e8 !important;
 }

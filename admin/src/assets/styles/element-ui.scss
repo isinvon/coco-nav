@@ -94,3 +94,18 @@
 .el-dropdown .el-dropdown-link{
   color: var(--el-color-primary) !important;
 }
+
+.el-button {
+  border-radius: 12px;
+  box-shadow: none !important;
+
+  &--primary {
+    background-color: #f6f8fa;
+    border-color: #e1e4e8;
+    color: #24292e;
+
+    &:hover {
+      background-color: #e1e4e8;
+    }
+  }
+}

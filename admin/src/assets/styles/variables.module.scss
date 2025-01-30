@@ -1,6 +1,6 @@
-// base color
-$blue: #324157;
-$light-blue: #333c46;
+// 基础颜色
+$blue: #0366d6; // GitHub蓝色
+$light-blue: #f6f8fa; // GitHub轻灰色
 $red: #C03639;
 $pink: #E65D6E;
 $green: #30B08F;
@@ -9,9 +9,9 @@ $yellow: #FEC171;
 $panGreen: #30B08F;
 
 // 默认主题变量
-$menuText: #bfcbd9;
+$menuText: #24292e; // GitHub文字颜色
 $menuActiveText: #409eff;
-$menuBg: #304156;
+$menuBg: #f6f8fa; // 主背景色
 $menuHover: #263445;
 
 // 浅色主题theme-light
@@ -24,19 +24,28 @@ $menuLightActiveText: #409EFF;
 $base-sidebar-width: 200px;
 $sideBarWidth: 200px;
 
-// 菜单暗色变量
-$base-menu-color: #bfcbd9;
-$base-menu-color-active: #f4f4f5;
-$base-menu-background: #304156;
-$base-sub-menu-background: #1f2d3d;
-$base-sub-menu-hover: #001528;
+// 菜单浅灰色风格变量
+$base-menu-color: #24292e; // GitHub主文字色
+$base-menu-color-active: #0366d6; // GitHub主题蓝色
+$base-menu-background: #f6f8fa; // GitHub轻灰色背景
+$base-sub-menu-background: #ffffff; // 纯白子菜单背景
+$base-sub-menu-hover: #e1e4e8; // GitHub悬停灰色
 
-// 组件变量
-$--color-primary: #409EFF;
-$--color-success: #67C23A;
-$--color-warning: #E6A23C;
-$--color-danger: #F56C6C;
-$--color-info: #909399;
+// 可选补充调整（根据实际需要添加）
+$menu-light-border: #e1e4e8; // GitHub边框色
+$menu-item-hover-bg: #f3f4f6; // 悬停浅灰色
+
+//// 组件变量
+$--color-primary: #e36209; // GitHub橙色 (用于主要按钮/链接)
+$--color-success: #28a745; // GitHub绿色 (成功状态)
+$--color-warning: #ffd33d; // GitHub金黄 (警告状态)
+$--color-danger: #d73a49; // GitHub红色 (危险操作)
+$--color-info: #6a737d; // GitHub灰蓝 (信息提示)
+
+// 配套扩展颜色（可选）
+$github-warm-gray: #f6f8fa; // GitHub背景灰
+$github-border-gray: #e1e4e8; // GitHub边框灰
+$github-text-dark: #24292e; // GitHub深文字
 
 :export {
   menuText: $menuText;
@@ -71,10 +80,10 @@ $--color-info: #909399;
   --sidebar-bg: #{$menuBg};
   --sidebar-text: #{$menuText};
   --menu-hover: #{$menuHover};
-  
+
   --navbar-bg: #ffffff;
   --navbar-text: #303133;
-  
+
   /* splitpanes default-theme 变量 */
   --splitpanes-default-bg: #ffffff;
 
@@ -119,7 +128,7 @@ html.dark {
   --blockquote-bg: #1d1e1f;
   --blockquote-border: #303030;
   --blockquote-text: #d0d0d0;
-  
+
   /* Cron 时间表达式 模式变量 */
   --cron-border: #303030;
 
@@ -127,11 +136,12 @@ html.dark {
   --splitpanes-default-bg: #141414;
 
   /* 侧边栏菜单覆盖 */
-   .sidebar-container {
+  .sidebar-container {
     .el-menu-item, .menu-title {
       color: var(--el-text-color-regular);
     }
-    & .theme-dark .nest-menu .el-sub-menu>.el-sub-menu__title,
+
+    & .theme-dark .nest-menu .el-sub-menu > .el-sub-menu__title,
     & .theme-dark .el-sub-menu .el-menu-item {
       background-color: var(--el-bg-color) !important;
     }
@@ -199,9 +209,9 @@ html.dark {
       background-color: var(--el-bg-color-overlay);
     }
   }
-  
+
   /* 下拉菜单样式覆盖 */
-  .el-dropdown-menu__item:not(.is-disabled):focus, .el-dropdown-menu__item:not(.is-disabled):hover{
+  .el-dropdown-menu__item:not(.is-disabled):focus, .el-dropdown-menu__item:not(.is-disabled):hover {
     background-color: var(--navbar-hover) !important;
   }
 
@@ -211,7 +221,7 @@ html.dark {
     border-left-color: var(--blockquote-border) !important;
     color: var(--blockquote-text) !important;
   }
-  
+
   /* 时间表达式标题样式覆盖 */
   .popup-result .title {
     background: var(--cron-border);
