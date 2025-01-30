@@ -2,8 +2,10 @@
 <configuration>
     <!-- 合并日志路径和模式配置 -->
     <property name="LOG_PATH" value="/home/ruoyi/logs" />
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %-40.40logger{39} : %msg%n" />
-    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n" />
+    <!-- 优化后的日志格式，包含类名、方法名和行号 -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %-40.40logger{39} [%class{36}.%method:%line] : %msg%n" />
+    <!-- 控制台彩色日志格式，使用更多颜色区分不同级别 -->
+    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %green([%-50.50class]) %cyan([%method:%line]) >>> %msg%n" />
     <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
 
     <!-- 控制台输出 -->
@@ -92,6 +94,36 @@
         </encoder>
     </appender>
 
+    <!-- 异步文件日志 -->
+    <appender name="ASYNC_SERVER_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="serverFileLog" />
+        <!-- 队列大小 -->
+        <queueSize>512</queueSize>
+        <!-- 丢弃策略，当队列满时，只保留 ERROR 级别日志 -->
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <!-- 异步系统信息日志 -->
+    <appender name="ASYNC_FILE_INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="file_info" />
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <!-- 异步系统错误日志 -->
+    <appender name="ASYNC_FILE_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="file_error" />
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <!-- 异步用户访问日志 -->
+    <appender name="ASYNC_SYS_USER" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="sys-user" />
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
     <!-- 系统模块日志级别控制  -->
     <logger name="com.ruoyi" level="info" />
     <!-- Spring日志级别控制  -->
@@ -100,13 +132,13 @@
     <!-- 根日志配置，合并两个配置的 appender 引用 -->
     <root level="info">
         <appender-ref ref="consoleLog" />
-        <appender-ref ref="serverFileLog" />
-        <appender-ref ref="file_info" />
-        <appender-ref ref="file_error" />
+        <appender-ref ref="ASYNC_SERVER_FILE" />
+        <appender-ref ref="ASYNC_FILE_INFO" />
+        <appender-ref ref="ASYNC_FILE_ERROR" />
     </root>
 
     <!-- 系统用户操作日志 -->
     <logger name="sys-user" level="info">
-        <appender-ref ref="sys-user" />
+        <appender-ref ref="ASYNC_SYS_USER" />
     </logger>
 </configuration>
