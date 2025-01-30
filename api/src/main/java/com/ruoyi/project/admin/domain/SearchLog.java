@@ -3,6 +3,7 @@ package com.ruoyi.project.admin.domain;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -13,6 +14,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class SearchLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -36,63 +38,4 @@ public class SearchLog extends BaseEntity
     /** IP地址 */
     @Excel(name = "IP地址")
     private String ip;
-
-    public void setSearchLogId(Long searchLogId) 
-    {
-        this.searchLogId = searchLogId;
-    }
-
-    public Long getSearchLogId() 
-    {
-        return searchLogId;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setKeyword(String keyword) 
-    {
-        this.keyword = keyword;
-    }
-
-    public String getKeyword() 
-    {
-        return keyword;
-    }
-    public void setSearchTime(Date searchTime) 
-    {
-        this.searchTime = searchTime;
-    }
-
-    public Date getSearchTime() 
-    {
-        return searchTime;
-    }
-    public void setIp(String ip) 
-    {
-        this.ip = ip;
-    }
-
-    public String getIp() 
-    {
-        return ip;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("searchLogId", getSearchLogId())
-            .append("userId", getUserId())
-            .append("keyword", getKeyword())
-            .append("searchTime", getSearchTime())
-            .append("ip", getIp())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -11,6 +12,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class PointLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -45,93 +47,4 @@ public class PointLog extends BaseEntity
     /** 变动说明 */
     @Excel(name = "变动说明")
     private String description;
-
-    public void setPointLogId(Long pointLogId) 
-    {
-        this.pointLogId = pointLogId;
-    }
-
-    public Long getPointLogId() 
-    {
-        return pointLogId;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setChangeType(Integer changeType) 
-    {
-        this.changeType = changeType;
-    }
-
-    public Integer getChangeType() 
-    {
-        return changeType;
-    }
-    public void setAmount(Integer amount) 
-    {
-        this.amount = amount;
-    }
-
-    public Integer getAmount() 
-    {
-        return amount;
-    }
-    public void setBalance(Integer balance) 
-    {
-        this.balance = balance;
-    }
-
-    public Integer getBalance() 
-    {
-        return balance;
-    }
-    public void setSource(String source) 
-    {
-        this.source = source;
-    }
-
-    public String getSource() 
-    {
-        return source;
-    }
-    public void setAction(Integer action) 
-    {
-        this.action = action;
-    }
-
-    public Integer getAction() 
-    {
-        return action;
-    }
-    public void setDescription(String description) 
-    {
-        this.description = description;
-    }
-
-    public String getDescription() 
-    {
-        return description;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("pointLogId", getPointLogId())
-            .append("userId", getUserId())
-            .append("changeType", getChangeType())
-            .append("amount", getAmount())
-            .append("balance", getBalance())
-            .append("source", getSource())
-            .append("action", getAction())
-            .append("description", getDescription())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

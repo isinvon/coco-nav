@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -11,6 +12,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class BookmarkCategory extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -37,73 +39,4 @@ public class BookmarkCategory extends BaseEntity
     /** 分类颜色代码 */
     @Excel(name = "分类颜色代码")
     private String color;
-
-    public void setBookmarkCategoryId(Long bookmarkCategoryId) 
-    {
-        this.bookmarkCategoryId = bookmarkCategoryId;
-    }
-
-    public Long getBookmarkCategoryId() 
-    {
-        return bookmarkCategoryId;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
-
-    public String getName() 
-    {
-        return name;
-    }
-    public void setParentId(Long parentId) 
-    {
-        this.parentId = parentId;
-    }
-
-    public Long getParentId() 
-    {
-        return parentId;
-    }
-    public void setSortOrder(Integer sortOrder) 
-    {
-        this.sortOrder = sortOrder;
-    }
-
-    public Integer getSortOrder() 
-    {
-        return sortOrder;
-    }
-    public void setColor(String color) 
-    {
-        this.color = color;
-    }
-
-    public String getColor() 
-    {
-        return color;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("bookmarkCategoryId", getBookmarkCategoryId())
-            .append("userId", getUserId())
-            .append("name", getName())
-            .append("parentId", getParentId())
-            .append("sortOrder", getSortOrder())
-            .append("color", getColor())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

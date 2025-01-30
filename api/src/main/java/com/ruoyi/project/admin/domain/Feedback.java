@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -11,6 +12,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class Feedback extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -33,63 +35,4 @@ public class Feedback extends BaseEntity
     /** 0-待处理 1-已处理 */
     @Excel(name = "0-待处理 1-已处理")
     private Integer status;
-
-    public void setFeedbackId(Long feedbackId) 
-    {
-        this.feedbackId = feedbackId;
-    }
-
-    public Long getFeedbackId() 
-    {
-        return feedbackId;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setFeedbackTypeId(Long feedbackTypeId) 
-    {
-        this.feedbackTypeId = feedbackTypeId;
-    }
-
-    public Long getFeedbackTypeId() 
-    {
-        return feedbackTypeId;
-    }
-    public void setContent(String content) 
-    {
-        this.content = content;
-    }
-
-    public String getContent() 
-    {
-        return content;
-    }
-    public void setStatus(Integer status) 
-    {
-        this.status = status;
-    }
-
-    public Integer getStatus() 
-    {
-        return status;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("feedbackId", getFeedbackId())
-            .append("userId", getUserId())
-            .append("feedbackTypeId", getFeedbackTypeId())
-            .append("content", getContent())
-            .append("status", getStatus())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

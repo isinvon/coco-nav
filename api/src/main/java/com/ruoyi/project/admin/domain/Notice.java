@@ -3,6 +3,7 @@ package com.ruoyi.project.admin.domain;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -13,6 +14,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class Notice extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -45,83 +47,4 @@ public class Notice extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "过期时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date expireTime;
-
-    public void setNoticeId(Long noticeId) 
-    {
-        this.noticeId = noticeId;
-    }
-
-    public Long getNoticeId() 
-    {
-        return noticeId;
-    }
-    public void setTitle(String title) 
-    {
-        this.title = title;
-    }
-
-    public String getTitle() 
-    {
-        return title;
-    }
-    public void setContent(String content) 
-    {
-        this.content = content;
-    }
-
-    public String getContent() 
-    {
-        return content;
-    }
-    public void setType(Integer type) 
-    {
-        this.type = type;
-    }
-
-    public Integer getType() 
-    {
-        return type;
-    }
-    public void setSenderId(Long senderId) 
-    {
-        this.senderId = senderId;
-    }
-
-    public Long getSenderId() 
-    {
-        return senderId;
-    }
-    public void setSendTime(Date sendTime) 
-    {
-        this.sendTime = sendTime;
-    }
-
-    public Date getSendTime() 
-    {
-        return sendTime;
-    }
-    public void setExpireTime(Date expireTime) 
-    {
-        this.expireTime = expireTime;
-    }
-
-    public Date getExpireTime() 
-    {
-        return expireTime;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("noticeId", getNoticeId())
-            .append("title", getTitle())
-            .append("content", getContent())
-            .append("type", getType())
-            .append("senderId", getSenderId())
-            .append("sendTime", getSendTime())
-            .append("expireTime", getExpireTime())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

@@ -3,6 +3,8 @@ package com.ruoyi.project.admin.domain;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -13,6 +15,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class Advertisement extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -57,113 +60,4 @@ public class Advertisement extends BaseEntity
     /** 广告的高度 */
     @Excel(name = "广告的高度")
     private Integer height;
-
-    public void setAdvertisementId(Long advertisementId) 
-    {
-        this.advertisementId = advertisementId;
-    }
-
-    public Long getAdvertisementId() 
-    {
-        return advertisementId;
-    }
-    public void setTitle(String title) 
-    {
-        this.title = title;
-    }
-
-    public String getTitle() 
-    {
-        return title;
-    }
-    public void setContent(String content) 
-    {
-        this.content = content;
-    }
-
-    public String getContent() 
-    {
-        return content;
-    }
-    public void setStartTime(Date startTime) 
-    {
-        this.startTime = startTime;
-    }
-
-    public Date getStartTime() 
-    {
-        return startTime;
-    }
-    public void setEndTime(Date endTime) 
-    {
-        this.endTime = endTime;
-    }
-
-    public Date getEndTime() 
-    {
-        return endTime;
-    }
-    public void setStatus(Integer status) 
-    {
-        this.status = status;
-    }
-
-    public Integer getStatus() 
-    {
-        return status;
-    }
-    public void setClickCount(Integer clickCount) 
-    {
-        this.clickCount = clickCount;
-    }
-
-    public Integer getClickCount() 
-    {
-        return clickCount;
-    }
-    public void setSortOrder(Integer sortOrder) 
-    {
-        this.sortOrder = sortOrder;
-    }
-
-    public Integer getSortOrder() 
-    {
-        return sortOrder;
-    }
-    public void setWidth(Integer width) 
-    {
-        this.width = width;
-    }
-
-    public Integer getWidth() 
-    {
-        return width;
-    }
-    public void setHeight(Integer height) 
-    {
-        this.height = height;
-    }
-
-    public Integer getHeight() 
-    {
-        return height;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("advertisementId", getAdvertisementId())
-            .append("title", getTitle())
-            .append("content", getContent())
-            .append("startTime", getStartTime())
-            .append("endTime", getEndTime())
-            .append("status", getStatus())
-            .append("clickCount", getClickCount())
-            .append("sortOrder", getSortOrder())
-            .append("width", getWidth())
-            .append("height", getHeight())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

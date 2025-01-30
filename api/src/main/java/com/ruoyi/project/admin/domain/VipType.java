@@ -3,6 +3,7 @@ package com.ruoyi.project.admin.domain;
 import java.math.BigDecimal;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -13,6 +14,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class VipType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -35,63 +37,4 @@ public class VipType extends BaseEntity
     /** 特权说明 */
     @Excel(name = "特权说明")
     private String privileges;
-
-    public void setVipTypeId(Long vipTypeId) 
-    {
-        this.vipTypeId = vipTypeId;
-    }
-
-    public Long getVipTypeId() 
-    {
-        return vipTypeId;
-    }
-    public void setTypeName(String typeName) 
-    {
-        this.typeName = typeName;
-    }
-
-    public String getTypeName() 
-    {
-        return typeName;
-    }
-    public void setDuration(Long duration) 
-    {
-        this.duration = duration;
-    }
-
-    public Long getDuration() 
-    {
-        return duration;
-    }
-    public void setPrice(BigDecimal price) 
-    {
-        this.price = price;
-    }
-
-    public BigDecimal getPrice() 
-    {
-        return price;
-    }
-    public void setPrivileges(String privileges) 
-    {
-        this.privileges = privileges;
-    }
-
-    public String getPrivileges() 
-    {
-        return privileges;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("vipTypeId", getVipTypeId())
-            .append("typeName", getTypeName())
-            .append("duration", getDuration())
-            .append("price", getPrice())
-            .append("privileges", getPrivileges())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

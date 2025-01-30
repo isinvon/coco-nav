@@ -3,6 +3,7 @@ package com.ruoyi.project.admin.domain;
 import java.math.BigDecimal;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -13,6 +14,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author sinvon
  * @date 2025-01-30
  */
+@Data
 public class PaymentType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -39,73 +41,4 @@ public class PaymentType extends BaseEntity
     /** 0-停用 1-启用 */
     @Excel(name = "0-停用 1-启用")
     private Integer status;
-
-    public void setPaymentTypeId(Long paymentTypeId) 
-    {
-        this.paymentTypeId = paymentTypeId;
-    }
-
-    public Long getPaymentTypeId() 
-    {
-        return paymentTypeId;
-    }
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
-
-    public String getName() 
-    {
-        return name;
-    }
-    public void setCode(String code) 
-    {
-        this.code = code;
-    }
-
-    public String getCode() 
-    {
-        return code;
-    }
-    public void setRate(BigDecimal rate) 
-    {
-        this.rate = rate;
-    }
-
-    public BigDecimal getRate() 
-    {
-        return rate;
-    }
-    public void setConfig(String config) 
-    {
-        this.config = config;
-    }
-
-    public String getConfig() 
-    {
-        return config;
-    }
-    public void setStatus(Integer status) 
-    {
-        this.status = status;
-    }
-
-    public Integer getStatus() 
-    {
-        return status;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("paymentTypeId", getPaymentTypeId())
-            .append("name", getName())
-            .append("code", getCode())
-            .append("rate", getRate())
-            .append("config", getConfig())
-            .append("status", getStatus())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }
