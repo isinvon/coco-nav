@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-const url = ref('https://gitee.com/y_project/RuoYi-Vue');
+const url = ref('https://github.com/isinvon/coco-nav');
 
 function goto() {
   window.open(url.value)
