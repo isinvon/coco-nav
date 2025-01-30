@@ -38,7 +38,7 @@ logging:
     org.springframework: warn
     # mybatis-plus日志, 只在debug模式下打印sql, 否则不打印(生产环境不打印)
     com.baomidou.mybatisplus: debug
-  config: classpath:logback-spring.xml
+  config: classpath:logback.xml
 
 # 用户配置
 user:
