@@ -1,50 +1,43 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.Message;
-import com.ruoyi.project.admin.service.custom.MessageCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.Message;
+import com.ruoyi.project.admin.service.MessageService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 留言管理Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/message")
-public class MessageController extends BaseController
-{
-    @Autowired
-    private MessageCustomService messageCustomService;
+public class MessageController extends BaseController {
+    @Resource
+    private MessageService messageService;
 
     /**
      * 查询留言管理列表
      */
     @CustomPermission(PermissionConstants.ADMIN_MESSAGE_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Message message)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<Message> list = messageCustomService.selectMessageList(message);
+        List<Message> list = messageService.list();
         return getDataTable(list);
     }
 
@@ -54,10 +47,9 @@ public class MessageController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_MESSAGE_EXPORT)
     @Log(title = "留言管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Message message)
-    {
-        List<Message> list = messageCustomService.selectMessageList(message);
-        ExcelUtil<Message> util = new ExcelUtil<Message>(Message.class);
+    public void export(HttpServletResponse response) {
+        List<Message> list = messageService.list();
+        ExcelUtil<Message> util = new ExcelUtil<>(Message.class);
         util.exportExcel(response, list, "留言管理数据");
     }
 
@@ -66,9 +58,8 @@ public class MessageController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_MESSAGE_QUERY)
     @GetMapping(value = "/{messageId}")
-    public AjaxResult getInfo(@PathVariable("messageId") Long messageId)
-    {
-        return success(messageCustomService.selectMessageByMessageId(messageId));
+    public AjaxResult getInfo(@PathVariable("messageId") Long messageId) {
+        return success(messageService.getById(messageId));
     }
 
     /**
@@ -77,9 +68,8 @@ public class MessageController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_MESSAGE_ADD)
     @Log(title = "留言管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Message message)
-    {
-        return toAjax(messageCustomService.insertMessage(message));
+    public AjaxResult add(@RequestBody Message message) {
+        return toAjax(messageService.save(message));
     }
 
     /**
@@ -88,9 +78,10 @@ public class MessageController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_MESSAGE_EDIT)
     @Log(title = "留言管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Message message)
-    {
-        return toAjax(messageCustomService.updateMessage(message));
+    public AjaxResult edit(@RequestBody Message message) {
+        LambdaQueryWrapper<Message> qw = new LambdaQueryWrapper<>();
+        qw.eq(Message::getMessageId, message.getMessageId());
+        return toAjax(messageService.update(message, qw));
     }
 
     /**
@@ -98,9 +89,9 @@ public class MessageController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_MESSAGE_REMOVE)
     @Log(title = "留言管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{messageIds}")
-    public AjaxResult remove(@PathVariable Long[] messageIds)
-    {
-        return toAjax(messageCustomService.deleteMessageByMessageIds(messageIds));
+    @DeleteMapping("/{messageIds}")
+    public AjaxResult remove(@PathVariable Long[] messageIds) {
+        List<Long> idList = Arrays.asList(messageIds);
+        return toAjax(messageService.removeByIds(idList));
     }
 }
