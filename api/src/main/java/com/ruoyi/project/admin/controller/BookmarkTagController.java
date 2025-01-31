@@ -11,9 +11,9 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.BookmarkTag;
 import com.ruoyi.project.admin.service.BookmarkTagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/bookmarkTag")
 public class BookmarkTagController extends BaseController {
-    @Autowired
+    @Resource
     private BookmarkTagService bookmarkTagService;
 
     /**
