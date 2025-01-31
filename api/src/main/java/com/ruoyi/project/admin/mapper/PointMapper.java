@@ -2,6 +2,7 @@ package com.ruoyi.project.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.project.admin.domain.Point;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author sinvon
  * @date 2025-01-30
  */
+@Mapper
 public interface PointMapper extends BaseMapper<Point> {
     /**
      * 查询积分账户

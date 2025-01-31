@@ -3,6 +3,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.BrowseHistory;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 用户浏览历史Mapper接口
@@ -10,6 +11,7 @@ import com.ruoyi.project.admin.domain.BrowseHistory;
  * @author sinvon
  * @date 2025-01-30
  */
+@Mapper
 public interface BrowseHistoryMapper extends BaseMapper<BrowseHistory>
 {
     /**

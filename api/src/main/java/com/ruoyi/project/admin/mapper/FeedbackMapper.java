@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.project.admin.domain.Feedback;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 用户反馈Mapper接口
@@ -11,6 +12,7 @@ import com.ruoyi.project.admin.domain.Feedback;
  * @author sinvon
  * @date 2025-01-30
  */
+@Mapper
 public interface FeedbackMapper extends BaseMapper<Feedback>
 {
     /**

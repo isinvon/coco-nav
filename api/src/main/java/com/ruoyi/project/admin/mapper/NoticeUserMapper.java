@@ -3,6 +3,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.NoticeUser;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 通知用户关系Mapper接口
@@ -10,6 +11,7 @@ import com.ruoyi.project.admin.domain.NoticeUser;
  * @author sinvon
  * @date 2025-01-30
  */
+@Mapper
 public interface NoticeUserMapper extends BaseMapper<NoticeUser>
 {
     /**

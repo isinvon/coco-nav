@@ -3,6 +3,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import com.ruoyi.project.admin.domain.VipType;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * VIP类型Mapper接口
@@ -10,6 +11,7 @@ import com.ruoyi.project.admin.domain.VipType;
  * @author sinvon
  * @date 2025-01-30
  */
+@Mapper
 public interface VipTypeMapper extends BaseMapper<VipType>
 {
     /**
