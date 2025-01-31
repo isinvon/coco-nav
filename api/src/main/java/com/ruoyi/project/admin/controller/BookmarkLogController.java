@@ -1,5 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -9,35 +10,34 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.BookmarkLog;
-import com.ruoyi.project.admin.service.custom.BookmarkLogCustomService;
+import com.ruoyi.project.admin.service.BookmarkLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * 书签操作日志Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/bookmarkLog")
-public class BookmarkLogController extends BaseController
-{
+public class BookmarkLogController extends BaseController {
     @Autowired
-    private BookmarkLogCustomService bookmarkLogCustomService;
+    private BookmarkLogService bookmarkLogService;
 
     /**
      * 查询书签操作日志列表
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(BookmarkLog bookmarkLog)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<BookmarkLog> list = bookmarkLogCustomService.selectBookmarkLogList(bookmarkLog);
+        List<BookmarkLog> list = bookmarkLogService.list();
         return getDataTable(list);
     }
 
@@ -47,10 +47,9 @@ public class BookmarkLogController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_EXPORT)
     @Log(title = "书签操作日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, BookmarkLog bookmarkLog)
-    {
-        List<BookmarkLog> list = bookmarkLogCustomService.selectBookmarkLogList(bookmarkLog);
-        ExcelUtil<BookmarkLog> util = new ExcelUtil<BookmarkLog>(BookmarkLog.class);
+    public void export(HttpServletResponse response) {
+        List<BookmarkLog> list = bookmarkLogService.list();
+        ExcelUtil<BookmarkLog> util = new ExcelUtil<>(BookmarkLog.class);
         util.exportExcel(response, list, "书签操作日志数据");
     }
 
@@ -59,9 +58,8 @@ public class BookmarkLogController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_QUERY)
     @GetMapping(value = "/{bookmarkLogId}")
-    public AjaxResult getInfo(@PathVariable("bookmarkLogId") Long bookmarkLogId)
-    {
-        return success(bookmarkLogCustomService.selectBookmarkLogByBookmarkLogId(bookmarkLogId));
+    public AjaxResult getInfo(@PathVariable("bookmarkLogId") Long bookmarkLogId) {
+        return success(bookmarkLogService.getById(bookmarkLogId));
     }
 
     /**
@@ -70,9 +68,8 @@ public class BookmarkLogController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_ADD)
     @Log(title = "书签操作日志", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody BookmarkLog bookmarkLog)
-    {
-        return toAjax(bookmarkLogCustomService.insertBookmarkLog(bookmarkLog));
+    public AjaxResult add(@RequestBody BookmarkLog bookmarkLog) {
+        return toAjax(bookmarkLogService.save(bookmarkLog));
     }
 
     /**
@@ -81,9 +78,10 @@ public class BookmarkLogController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_EDIT)
     @Log(title = "书签操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody BookmarkLog bookmarkLog)
-    {
-        return toAjax(bookmarkLogCustomService.updateBookmarkLog(bookmarkLog));
+    public AjaxResult edit(@RequestBody BookmarkLog bookmarkLog) {
+        LambdaQueryWrapper<BookmarkLog> qw = new LambdaQueryWrapper<>();
+        qw.eq(BookmarkLog::getBookmarkLogId, bookmarkLog.getBookmarkLogId());
+        return toAjax(bookmarkLogService.update(bookmarkLog, qw));
     }
 
     /**
@@ -91,9 +89,9 @@ public class BookmarkLogController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LOG_REMOVE)
     @Log(title = "书签操作日志", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{bookmarkLogIds}")
-    public AjaxResult remove(@PathVariable Long[] bookmarkLogIds)
-    {
-        return toAjax(bookmarkLogCustomService.deleteBookmarkLogByBookmarkLogIds(bookmarkLogIds));
+    @DeleteMapping("/{bookmarkLogIds}")
+    public AjaxResult remove(@PathVariable Long[] bookmarkLogIds) {
+        List<Long> idList = Arrays.asList(bookmarkLogIds);
+        return toAjax(bookmarkLogService.removeByIds(idList));
     }
 }
