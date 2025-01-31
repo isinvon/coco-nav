@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.project.admin.service.AdvertisementLogService;
 import com.ruoyi.project.admin.service.custom.AdvertisementLogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.project.admin.mapper.AdvertisementLogMapper;
