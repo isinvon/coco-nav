@@ -1,50 +1,43 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.Notice;
-import com.ruoyi.project.admin.service.custom.NoticeCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.Notice;
+import com.ruoyi.project.admin.service.NoticeService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 通知管理Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/notice")
-public class NoticeController extends BaseController
-{
-    @Autowired
-    private NoticeCustomService noticeCustomService;
+public class NoticeController extends BaseController {
+    @Resource
+    private NoticeService noticeService;
 
     /**
      * 查询通知管理列表
      */
     @CustomPermission(PermissionConstants.ADMIN_NOTICE_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Notice notice)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<Notice> list = noticeCustomService.selectNoticeList(notice);
+        List<Notice> list = noticeService.list();
         return getDataTable(list);
     }
 
@@ -54,10 +47,9 @@ public class NoticeController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_NOTICE_EXPORT)
     @Log(title = "通知管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Notice notice)
-    {
-        List<Notice> list = noticeCustomService.selectNoticeList(notice);
-        ExcelUtil<Notice> util = new ExcelUtil<Notice>(Notice.class);
+    public void export(HttpServletResponse response) {
+        List<Notice> list = noticeService.list();
+        ExcelUtil<Notice> util = new ExcelUtil<>(Notice.class);
         util.exportExcel(response, list, "通知管理数据");
     }
 
@@ -66,9 +58,8 @@ public class NoticeController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_NOTICE_QUERY)
     @GetMapping(value = "/{noticeId}")
-    public AjaxResult getInfo(@PathVariable("noticeId") Long noticeId)
-    {
-        return success(noticeCustomService.selectNoticeByNoticeId(noticeId));
+    public AjaxResult getInfo(@PathVariable("noticeId") Long noticeId) {
+        return success(noticeService.getById(noticeId));
     }
 
     /**
@@ -77,9 +68,8 @@ public class NoticeController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_NOTICE_ADD)
     @Log(title = "通知管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Notice notice)
-    {
-        return toAjax(noticeCustomService.insertNotice(notice));
+    public AjaxResult add(@RequestBody Notice notice) {
+        return toAjax(noticeService.save(notice));
     }
 
     /**
@@ -88,9 +78,10 @@ public class NoticeController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_NOTICE_EDIT)
     @Log(title = "通知管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Notice notice)
-    {
-        return toAjax(noticeCustomService.updateNotice(notice));
+    public AjaxResult edit(@RequestBody Notice notice) {
+        LambdaQueryWrapper<Notice> qw = new LambdaQueryWrapper<>();
+        qw.eq(Notice::getNoticeId, notice.getNoticeId());
+        return toAjax(noticeService.update(notice, qw));
     }
 
     /**
@@ -98,9 +89,9 @@ public class NoticeController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_NOTICE_REMOVE)
     @Log(title = "通知管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{noticeIds}")
-    public AjaxResult remove(@PathVariable Long[] noticeIds)
-    {
-        return toAjax(noticeCustomService.deleteNoticeByNoticeIds(noticeIds));
+    @DeleteMapping("/{noticeIds}")
+    public AjaxResult remove(@PathVariable Long[] noticeIds) {
+        List<Long> idList = Arrays.asList(noticeIds);
+        return toAjax(noticeService.removeByIds(idList));
     }
 }
