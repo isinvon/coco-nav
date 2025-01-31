@@ -78,7 +78,7 @@ public class AreaController extends BaseController {
     /**
      * 修改地区信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:area:edit')")
+    @CustomPermission(PermissionConstants.ADMIN_AREA_EDIT)
     @Log(title = "地区信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Area area) {
@@ -90,7 +90,7 @@ public class AreaController extends BaseController {
     /**
      * 删除地区信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:area:remove')")
+    @CustomPermission(PermissionConstants.ADMIN_AREA_REMOVE)
     @Log(title = "地区信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{areaIds}")
     public AjaxResult remove(@PathVariable Long[] areaIds) {
