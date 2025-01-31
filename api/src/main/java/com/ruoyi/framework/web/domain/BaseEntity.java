@@ -1,5 +1,6 @@
 package com.ruoyi.framework.web.domain;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -43,15 +44,15 @@ public class BaseEntity implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN)
-    @TableField("create_time")
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = "GMT+8")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 更新时间
      */
-    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN)
-    @TableField("update_time")
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = "GMT+8")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**
