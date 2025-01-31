@@ -6,7 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="Bookmark" id="BookmarkResult">
         <result property="bookmarkId"    column="bookmark_id"    />
-        <result property="userId"    column="user_id"    />
         <result property="title"    column="title"    />
         <result property="url"    column="url"    />
         <result property="bookmarkCategoryId"    column="bookmark_category_id"    />
@@ -19,13 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBookmarkVo">
-        select bookmark_id, user_id, title, url, bookmark_category_id, icon, click_count, sort_order, status, create_time, update_time from coco_bookmark
+        select bookmark_id, title, url, bookmark_category_id, icon, click_count, sort_order, status, create_time, update_time from coco_bookmark
     </sql>
 
     <select id="selectBookmarkList" parameterType="Bookmark" resultMap="BookmarkResult">
         <include refid="selectBookmarkVo"/>
         <where>  
-            <if test="userId != null "> and user_id = #{userId}</if>
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="url != null  and url != ''"> and url = #{url}</if>
             <if test="bookmarkCategoryId != null "> and bookmark_category_id = #{bookmarkCategoryId}</if>
@@ -44,7 +42,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertBookmark" parameterType="Bookmark" useGeneratedKeys="true" keyProperty="bookmarkId">
         insert into coco_bookmark
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null">user_id,</if>
             <if test="title != null and title != ''">title,</if>
             <if test="url != null and url != ''">url,</if>
             <if test="bookmarkCategoryId != null">bookmark_category_id,</if>
@@ -56,7 +53,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userId != null">#{userId},</if>
             <if test="title != null and title != ''">#{title},</if>
             <if test="url != null and url != ''">#{url},</if>
             <if test="bookmarkCategoryId != null">#{bookmarkCategoryId},</if>
@@ -72,7 +68,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateBookmark" parameterType="Bookmark">
         update coco_bookmark
         <trim prefix="SET" suffixOverrides=",">
-            <if test="userId != null">user_id = #{userId},</if>
             <if test="title != null and title != ''">title = #{title},</if>
             <if test="url != null and url != ''">url = #{url},</if>
             <if test="bookmarkCategoryId != null">bookmark_category_id = #{bookmarkCategoryId},</if>

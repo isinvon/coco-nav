@@ -84,7 +84,6 @@
     <el-table v-loading="loading" :data="bookmarkList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="书签ID" align="center" prop="bookmarkId" />
-      <el-table-column label="所属用户ID" align="center" prop="userId" />
       <el-table-column label="网站标题" align="center" prop="title" />
       <el-table-column label="网站地址" align="center" prop="url" />
       <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId" />
@@ -157,7 +156,6 @@ const data = reactive({
   queryParams: {
     pageNum: 1,
     pageSize: 10,
-    userId: null,
     title: null,
     url: null,
     bookmarkCategoryId: null,
@@ -167,9 +165,6 @@ const data = reactive({
     status: null,
   },
   rules: {
-    userId: [
-      { required: true, message: "所属用户ID不能为空", trigger: "blur" }
-    ],
     title: [
       { required: true, message: "网站标题不能为空", trigger: "blur" }
     ],
@@ -207,7 +202,6 @@ function cancel() {
 function reset() {
   form.value = {
     bookmarkId: null,
-    userId: null,
     title: null,
     url: null,
     bookmarkCategoryId: null,

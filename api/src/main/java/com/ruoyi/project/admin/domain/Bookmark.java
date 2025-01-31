@@ -22,10 +22,6 @@ public class Bookmark extends BaseEntity
     /** 书签ID */
     private Long bookmarkId;
 
-    /** 所属用户ID */
-    @Excel(name = "所属用户ID")
-    private Long userId;
-
     /** 网站标题 */
     @Excel(name = "网站标题")
     private String title;
