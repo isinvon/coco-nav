@@ -59,9 +59,7 @@ public class AdvertisementLogController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_ADVERTISEMENT_LOG_QUERY)
     @GetMapping(value = "/{advertisementLogId}")
     public AjaxResult getInfo(@PathVariable("advertisementLogId") Long advertisementLogId) {
-        LambdaQueryWrapper<AdvertisementLog> qw = new LambdaQueryWrapper<>();
-        qw.eq(AdvertisementLog::getAdvertisementLogId, advertisementLogId);
-        return success(advertisementLogService.getOne(qw));
+        return success(advertisementLogService.getById(advertisementLogId));
     }
 
     /**

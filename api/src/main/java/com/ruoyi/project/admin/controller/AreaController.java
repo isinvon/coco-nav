@@ -60,9 +60,7 @@ public class AreaController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_AREA_QUERY)
     @GetMapping(value = "/{areaId}")
     public AjaxResult getInfo(@PathVariable("areaId") Long areaId) {
-        LambdaQueryWrapper<Area> qw = new LambdaQueryWrapper<>();
-        qw.eq(Area::getAreaId, areaId);
-        return success(areaService.getOne(qw));
+        return success(areaService.getById(areaId));
     }
 
     /**
