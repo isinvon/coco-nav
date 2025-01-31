@@ -1,5 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -9,11 +10,12 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.Friendlink;
-import com.ruoyi.project.admin.service.custom.FriendlinkCustomService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ruoyi.project.admin.service.FriendlinkService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,17 +27,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/friendlink")
 public class FriendlinkController extends BaseController {
-    @Autowired
-    private FriendlinkCustomService friendlinkCustomService;
+    @Resource
+    private FriendlinkService friendlinkService;
 
     /**
      * 查询友情链接列表
      */
     @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Friendlink friendlink) {
+    public TableDataInfo list() {
         startPage();
-        List<Friendlink> list = friendlinkCustomService.selectFriendlinkList(friendlink);
+        List<Friendlink> list = friendlinkService.list();
         return getDataTable(list);
     }
 
@@ -45,9 +47,9 @@ public class FriendlinkController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_EXPORT)
     @Log(title = "友情链接", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Friendlink friendlink) {
-        List<Friendlink> list = friendlinkCustomService.selectFriendlinkList(friendlink);
-        ExcelUtil<Friendlink> util = new ExcelUtil<Friendlink>(Friendlink.class);
+    public void export(HttpServletResponse response) {
+        List<Friendlink> list = friendlinkService.list();
+        ExcelUtil<Friendlink> util = new ExcelUtil<>(Friendlink.class);
         util.exportExcel(response, list, "友情链接数据");
     }
 
@@ -57,7 +59,7 @@ public class FriendlinkController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_FRIENDLINK_QUERY)
     @GetMapping(value = "/{friendlinkId}")
     public AjaxResult getInfo(@PathVariable("friendlinkId") Long friendlinkId) {
-        return success(friendlinkCustomService.selectFriendlinkByFriendlinkId(friendlinkId));
+        return success(friendlinkService.getById(friendlinkId));
     }
 
     /**
@@ -67,7 +69,7 @@ public class FriendlinkController extends BaseController {
     @Log(title = "友情链接", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Friendlink friendlink) {
-        return toAjax(friendlinkCustomService.insertFriendlink(friendlink));
+        return toAjax(friendlinkService.save(friendlink));
     }
 
     /**
@@ -77,7 +79,9 @@ public class FriendlinkController extends BaseController {
     @Log(title = "友情链接", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Friendlink friendlink) {
-        return toAjax(friendlinkCustomService.updateFriendlink(friendlink));
+        LambdaQueryWrapper<Friendlink> qw = new LambdaQueryWrapper<>();
+        qw.eq(Friendlink::getFriendlinkId, friendlink.getFriendlinkId());
+        return toAjax(friendlinkService.update(friendlink, qw));
     }
 
     /**
@@ -87,6 +91,7 @@ public class FriendlinkController extends BaseController {
     @Log(title = "友情链接", businessType = BusinessType.DELETE)
     @DeleteMapping("/{friendlinkIds}")
     public AjaxResult remove(@PathVariable Long[] friendlinkIds) {
-        return toAjax(friendlinkCustomService.deleteFriendlinkByFriendlinkIds(friendlinkIds));
+        List<Long> idList = Arrays.asList(friendlinkIds);
+        return toAjax(friendlinkService.removeByIds(idList));
     }
 }
