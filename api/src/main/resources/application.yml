@@ -101,17 +101,19 @@ token:
   expireTime: 30
   
 # MyBatis配置
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.ruoyi.project.**.domain
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mybatis/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
+#mybatis:
+#  # 搜索指定包别名
+#  typeAliasesPackage: com.ruoyi.project.**.domain
+#  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+#  mapperLocations: classpath*:mybatis/**/*Mapper.xml
+#  # 加载全局的配置文件
+#  configLocation: classpath:mybatis/mybatis-config.xml
 
 # mybatis-plus开启日志
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
+  #  mapper扫描
+#  type-aliases-package: com.ruoyi.project.**
   configuration:
     #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
     map-underscore-to-camel-case: true
