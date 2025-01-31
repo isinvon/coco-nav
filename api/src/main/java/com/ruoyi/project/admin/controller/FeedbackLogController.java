@@ -1,27 +1,22 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.FeedbackLog;
-import com.ruoyi.project.admin.service.custom.FeedbackLogCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.FeedbackLog;
+import com.ruoyi.project.admin.service.FeedbackLogService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 反馈处理日志Controller
@@ -32,17 +27,17 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 @RestController
 @RequestMapping("/admin/feedbackLog")
 public class FeedbackLogController extends BaseController {
-    @Autowired
-    private FeedbackLogCustomService feedbackLogCustomService;
+    @Resource
+    private FeedbackLogService feedbackLogService;
 
     /**
      * 查询反馈处理日志列表
      */
     @CustomPermission(PermissionConstants.ADMIN_FEEDBACK_LOG_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(FeedbackLog feedbackLog) {
+    public TableDataInfo list() {
         startPage();
-        List<FeedbackLog> list = feedbackLogCustomService.selectFeedbackLogList(feedbackLog);
+        List<FeedbackLog> list = feedbackLogService.list();
         return getDataTable(list);
     }
 
@@ -52,9 +47,9 @@ public class FeedbackLogController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_FEEDBACK_LOG_EXPORT)
     @Log(title = "反馈处理日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, FeedbackLog feedbackLog) {
-        List<FeedbackLog> list = feedbackLogCustomService.selectFeedbackLogList(feedbackLog);
-        ExcelUtil<FeedbackLog> util = new ExcelUtil<FeedbackLog>(FeedbackLog.class);
+    public void export(HttpServletResponse response) {
+        List<FeedbackLog> list = feedbackLogService.list();
+        ExcelUtil<FeedbackLog> util = new ExcelUtil<>(FeedbackLog.class);
         util.exportExcel(response, list, "反馈处理日志数据");
     }
 
@@ -64,7 +59,7 @@ public class FeedbackLogController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_FEEDBACK_LOG_QUERY)
     @GetMapping(value = "/{feedbackLogId}")
     public AjaxResult getInfo(@PathVariable("feedbackLogId") Long feedbackLogId) {
-        return success(feedbackLogCustomService.selectFeedbackLogByFeedbackLogId(feedbackLogId));
+        return success(feedbackLogService.getById(feedbackLogId));
     }
 
     /**
@@ -74,7 +69,7 @@ public class FeedbackLogController extends BaseController {
     @Log(title = "反馈处理日志", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FeedbackLog feedbackLog) {
-        return toAjax(feedbackLogCustomService.insertFeedbackLog(feedbackLog));
+        return toAjax(feedbackLogService.save(feedbackLog));
     }
 
     /**
@@ -84,7 +79,9 @@ public class FeedbackLogController extends BaseController {
     @Log(title = "反馈处理日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FeedbackLog feedbackLog) {
-        return toAjax(feedbackLogCustomService.updateFeedbackLog(feedbackLog));
+        LambdaQueryWrapper<FeedbackLog> qw = new LambdaQueryWrapper<>();
+        qw.eq(FeedbackLog::getFeedbackLogId, feedbackLog.getFeedbackLogId());
+        return toAjax(feedbackLogService.update(feedbackLog, qw));
     }
 
     /**
@@ -94,6 +91,7 @@ public class FeedbackLogController extends BaseController {
     @Log(title = "反馈处理日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{feedbackLogIds}")
     public AjaxResult remove(@PathVariable Long[] feedbackLogIds) {
-        return toAjax(feedbackLogCustomService.deleteFeedbackLogByFeedbackLogIds(feedbackLogIds));
+        List<Long> idList = Arrays.asList(feedbackLogIds);
+        return toAjax(feedbackLogService.removeByIds(idList));
     }
 }
