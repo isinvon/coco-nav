@@ -1,27 +1,22 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.Feedback;
-import com.ruoyi.project.admin.service.custom.FeedbackCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.Feedback;
+import com.ruoyi.project.admin.service.FeedbackService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 用户反馈Controller
@@ -32,17 +27,17 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 @RestController
 @RequestMapping("/admin/feedback")
 public class FeedbackController extends BaseController {
-    @Autowired
-    private FeedbackCustomService feedbackCustomService;
+    @Resource
+    private FeedbackService feedbackService;
 
     /**
      * 查询用户反馈列表
      */
     @CustomPermission(PermissionConstants.ADMIN_FEEDBACK_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Feedback feedback) {
+    public TableDataInfo list() {
         startPage();
-        List<Feedback> list = feedbackCustomService.selectFeedbackList(feedback);
+        List<Feedback> list = feedbackService.list();
         return getDataTable(list);
     }
 
@@ -52,9 +47,9 @@ public class FeedbackController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_FEEDBACK_EXPORT)
     @Log(title = "用户反馈", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Feedback feedback) {
-        List<Feedback> list = feedbackCustomService.selectFeedbackList(feedback);
-        ExcelUtil<Feedback> util = new ExcelUtil<Feedback>(Feedback.class);
+    public void export(HttpServletResponse response) {
+        List<Feedback> list = feedbackService.list();
+        ExcelUtil<Feedback> util = new ExcelUtil<>(Feedback.class);
         util.exportExcel(response, list, "用户反馈数据");
     }
 
@@ -64,7 +59,7 @@ public class FeedbackController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_FEEDBACK_QUERY)
     @GetMapping(value = "/{feedbackId}")
     public AjaxResult getInfo(@PathVariable("feedbackId") Long feedbackId) {
-        return success(feedbackCustomService.selectFeedbackByFeedbackId(feedbackId));
+        return success(feedbackService.getById(feedbackId));
     }
 
     /**
@@ -74,7 +69,7 @@ public class FeedbackController extends BaseController {
     @Log(title = "用户反馈", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Feedback feedback) {
-        return toAjax(feedbackCustomService.insertFeedback(feedback));
+        return toAjax(feedbackService.save(feedback));
     }
 
     /**
@@ -84,7 +79,9 @@ public class FeedbackController extends BaseController {
     @Log(title = "用户反馈", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Feedback feedback) {
-        return toAjax(feedbackCustomService.updateFeedback(feedback));
+        LambdaQueryWrapper<Feedback> qw = new LambdaQueryWrapper<>();
+        qw.eq(Feedback::getFeedbackId, feedback.getFeedbackId());
+        return toAjax(feedbackService.update(feedback, qw));
     }
 
     /**
@@ -94,6 +91,7 @@ public class FeedbackController extends BaseController {
     @Log(title = "用户反馈", businessType = BusinessType.DELETE)
     @DeleteMapping("/{feedbackIds}")
     public AjaxResult remove(@PathVariable Long[] feedbackIds) {
-        return toAjax(feedbackCustomService.deleteFeedbackByFeedbackIds(feedbackIds));
+        List<Long> idList = Arrays.asList(feedbackIds);
+        return toAjax(feedbackService.removeByIds(idList));
     }
 }
