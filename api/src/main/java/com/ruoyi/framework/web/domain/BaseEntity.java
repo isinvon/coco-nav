@@ -10,6 +10,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -72,4 +73,13 @@ public class BaseEntity implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_EMPTY) // 只返回非空的字段
     @TableField(exist = false)
     private Map<String, Object> params;
+
+
+    // 手动添加 getParams 方法，保证 params 不为 null
+    public Map<String, Object> getParams() {
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        return params;
+    }
 }
