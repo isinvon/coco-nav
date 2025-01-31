@@ -1,5 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -9,35 +10,34 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.CustomService;
-import com.ruoyi.project.admin.service.custom.CustomServiceCustomService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ruoyi.project.admin.service.CustomServiceService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * 客服信息Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/customService")
-public class CustomServiceController extends BaseController
-{
-    @Autowired
-    private CustomServiceCustomService customServiceCustomService;
+public class CustomServiceController extends BaseController {
+    @Resource
+    private CustomServiceService customServiceService;
 
     /**
      * 查询客服信息列表
      */
     @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(CustomService customService)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<CustomService> list = customServiceCustomService.selectCustomServiceList(customService);
+        List<CustomService> list = customServiceService.list();
         return getDataTable(list);
     }
 
@@ -47,10 +47,9 @@ public class CustomServiceController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_EXPORT)
     @Log(title = "客服信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, CustomService customService)
-    {
-        List<CustomService> list = customServiceCustomService.selectCustomServiceList(customService);
-        ExcelUtil<CustomService> util = new ExcelUtil<CustomService>(CustomService.class);
+    public void export(HttpServletResponse response) {
+        List<CustomService> list = customServiceService.list();
+        ExcelUtil<CustomService> util = new ExcelUtil<>(CustomService.class);
         util.exportExcel(response, list, "客服信息数据");
     }
 
@@ -59,9 +58,8 @@ public class CustomServiceController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_QUERY)
     @GetMapping(value = "/{customServiceId}")
-    public AjaxResult getInfo(@PathVariable("customServiceId") Long customServiceId)
-    {
-        return success(customServiceCustomService.selectCustomServiceByCustomServiceId(customServiceId));
+    public AjaxResult getInfo(@PathVariable("customServiceId") Long customServiceId) {
+        return success(customServiceService.getById(customServiceId));
     }
 
     /**
@@ -70,9 +68,8 @@ public class CustomServiceController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_ADD)
     @Log(title = "客服信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody CustomService customService)
-    {
-        return toAjax(customServiceCustomService.insertCustomService(customService));
+    public AjaxResult add(@RequestBody CustomService customService) {
+        return toAjax(customServiceService.save(customService));
     }
 
     /**
@@ -81,9 +78,10 @@ public class CustomServiceController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_EDIT)
     @Log(title = "客服信息", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody CustomService customService)
-    {
-        return toAjax(customServiceCustomService.updateCustomService(customService));
+    public AjaxResult edit(@RequestBody CustomService customService) {
+        LambdaQueryWrapper<CustomService> qw = new LambdaQueryWrapper<>();
+        qw.eq(CustomService::getCustomServiceId, customService.getCustomServiceId());
+        return toAjax(customServiceService.update(customService, qw));
     }
 
     /**
@@ -91,9 +89,9 @@ public class CustomServiceController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_CUSTOMER_SERVICE_REMOVE)
     @Log(title = "客服信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{customServiceIds}")
-    public AjaxResult remove(@PathVariable Long[] customServiceIds)
-    {
-        return toAjax(customServiceCustomService.deleteCustomServiceByCustomServiceIds(customServiceIds));
+    @DeleteMapping("/{customServiceIds}")
+    public AjaxResult remove(@PathVariable Long[] customServiceIds) {
+        List<Long> idList = Arrays.asList(customServiceIds);
+        return toAjax(customServiceService.removeByIds(idList));
     }
 }
