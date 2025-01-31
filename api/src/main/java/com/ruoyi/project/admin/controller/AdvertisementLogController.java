@@ -11,10 +11,9 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.AdvertisementLog;
 import com.ruoyi.project.admin.service.AdvertisementLogService;
-import com.ruoyi.project.admin.service.custom.AdvertisementLogCustomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/advertisementLog")
 public class AdvertisementLogController extends BaseController {
-    @Autowired
+    @Resource
     private AdvertisementLogService advertisementLogService;
 
     /**
