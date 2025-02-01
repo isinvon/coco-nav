@@ -1,6 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +79,9 @@ public class FriendlinkLogController extends BaseController {
     @Log(title = "友链操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FriendlinkLog friendlinkLog) {
-        LambdaQueryWrapper<FriendlinkLog> qw = new LambdaQueryWrapper<>();
-        qw.eq(FriendlinkLog::getFriendlinkLogId, friendlinkLog.getFriendlinkLogId());
-        return toAjax(friendlinkLogService.update(friendlinkLog, qw));
+        LambdaUpdateWrapper<FriendlinkLog> uw = new LambdaUpdateWrapper<>();
+        uw.eq(FriendlinkLog::getFriendlinkLogId, friendlinkLog.getFriendlinkLogId());
+        return toAjax(friendlinkLogService.update(friendlinkLog, uw));
     }
 
     /**

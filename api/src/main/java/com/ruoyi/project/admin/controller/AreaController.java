@@ -1,6 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -11,7 +11,6 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.Area;
 import com.ruoyi.project.admin.service.AreaService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -80,9 +79,9 @@ public class AreaController extends BaseController {
     @Log(title = "地区信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Area area) {
-        LambdaQueryWrapper<Area> qw = new LambdaQueryWrapper<>();
-        qw.eq(Area::getAreaId, area.getAreaId());
-        return toAjax(areaService.update(area, qw));
+        LambdaUpdateWrapper<Area> uw = new LambdaUpdateWrapper<>();
+        uw.eq(Area::getAreaId, area.getAreaId());
+        return toAjax(areaService.update(area, uw));
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +79,9 @@ public class FeedbackTypeController extends BaseController {
     @Log(title = "反馈类型", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FeedbackType feedbackType) {
-        LambdaQueryWrapper<FeedbackType> qw = new LambdaQueryWrapper<>();
-        qw.eq(FeedbackType::getFeedbackTypeId, feedbackType.getFeedbackTypeId());
-        return toAjax(feedbackTypeService.update(feedbackType, qw));
+        LambdaUpdateWrapper<FeedbackType> uw = new LambdaUpdateWrapper<>();
+        uw.eq(FeedbackType::getFeedbackTypeId, feedbackType.getFeedbackTypeId());
+        return toAjax(feedbackTypeService.update(feedbackType, uw));
     }
 
     /**

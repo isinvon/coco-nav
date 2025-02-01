@@ -1,6 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +79,9 @@ public class SettingLogController extends BaseController {
     @Log(title = "设置变更日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SettingLog settingLog) {
-        LambdaQueryWrapper<SettingLog> qw = new LambdaQueryWrapper<>();
-        qw.eq(SettingLog::getSettingLogId, settingLog.getSettingLogId());
-        return toAjax(settingLogService.update(settingLog, qw));
+        LambdaUpdateWrapper<SettingLog> uw = new LambdaUpdateWrapper<>();
+        uw.eq(SettingLog::getSettingLogId, settingLog.getSettingLogId());
+        return toAjax(settingLogService.update(settingLog, uw));
     }
 
     /**

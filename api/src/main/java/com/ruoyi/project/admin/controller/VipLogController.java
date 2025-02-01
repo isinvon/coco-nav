@@ -79,9 +79,9 @@ public class VipLogController extends BaseController {
     @Log(title = "VIP操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody VipLog vipLog) {
-        LambdaUpdateWrapper<VipLog> qw = new LambdaUpdateWrapper<>();
-        qw.eq(VipLog::getVipLogId, vipLog.getVipLogId());
-        return toAjax(vipLogService.update(vipLog, qw));
+        LambdaUpdateWrapper<VipLog> uw = new LambdaUpdateWrapper<>();
+        uw.eq(VipLog::getVipLogId, vipLog.getVipLogId());
+        return toAjax(vipLogService.update(vipLog, uw));
     }
 
     /**
