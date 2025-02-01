@@ -1,50 +1,43 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.Point;
-import com.ruoyi.project.admin.service.custom.PointCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.Point;
+import com.ruoyi.project.admin.service.PointService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 积分账户Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/point")
-public class PointController extends BaseController
-{
-    @Autowired
-    private PointCustomService pointCustomService;
+public class PointController extends BaseController {
+    @Resource
+    private PointService pointService;
 
     /**
      * 查询积分账户列表
      */
     @CustomPermission(PermissionConstants.ADMIN_POINT_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Point point)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<Point> list = pointCustomService.selectPointList(point);
+        List<Point> list = pointService.list();
         return getDataTable(list);
     }
 
@@ -54,10 +47,9 @@ public class PointController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_POINT_EXPORT)
     @Log(title = "积分账户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Point point)
-    {
-        List<Point> list = pointCustomService.selectPointList(point);
-        ExcelUtil<Point> util = new ExcelUtil<Point>(Point.class);
+    public void export(HttpServletResponse response) {
+        List<Point> list = pointService.list();
+        ExcelUtil<Point> util = new ExcelUtil<>(Point.class);
         util.exportExcel(response, list, "积分账户数据");
     }
 
@@ -66,9 +58,8 @@ public class PointController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_POINT_QUERY)
     @GetMapping(value = "/{pointId}")
-    public AjaxResult getInfo(@PathVariable("pointId") Long pointId)
-    {
-        return success(pointCustomService.selectPointByPointId(pointId));
+    public AjaxResult getInfo(@PathVariable("pointId") Long pointId) {
+        return success(pointService.getById(pointId));
     }
 
     /**
@@ -77,9 +68,8 @@ public class PointController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_POINT_ADD)
     @Log(title = "积分账户", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Point point)
-    {
-        return toAjax(pointCustomService.insertPoint(point));
+    public AjaxResult add(@RequestBody Point point) {
+        return toAjax(pointService.save(point));
     }
 
     /**
@@ -88,9 +78,10 @@ public class PointController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_POINT_EDIT)
     @Log(title = "积分账户", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Point point)
-    {
-        return toAjax(pointCustomService.updatePoint(point));
+    public AjaxResult edit(@RequestBody Point point) {
+        LambdaQueryWrapper<Point> qw = new LambdaQueryWrapper<>();
+        qw.eq(Point::getPointId, point.getPointId());
+        return toAjax(pointService.update(point, qw));
     }
 
     /**
@@ -98,9 +89,9 @@ public class PointController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_POINT_REMOVE)
     @Log(title = "积分账户", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{pointIds}")
-    public AjaxResult remove(@PathVariable Long[] pointIds)
-    {
-        return toAjax(pointCustomService.deletePointByPointIds(pointIds));
+    @DeleteMapping("/{pointIds}")
+    public AjaxResult remove(@PathVariable Long[] pointIds) {
+        List<Long> idList = Arrays.asList(pointIds);
+        return toAjax(pointService.removeByIds(idList));
     }
 }
