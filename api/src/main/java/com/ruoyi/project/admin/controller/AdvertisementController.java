@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.controller;
 
 import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -9,13 +10,16 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.Advertisement;
+import com.ruoyi.project.admin.domain.vo.AdvertisementVo;
 import com.ruoyi.project.admin.service.AdvertisementService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 广告管理Controller
@@ -35,10 +39,10 @@ public class AdvertisementController extends BaseController {
      */
     @CustomPermission(PermissionConstants.ADMIN_ADVERTISEMENT_LIST)
     @GetMapping("/list")
-    public TableDataInfo list() {
+    public TableDataInfo list(AdvertisementVo AdvertisementVo) {
         startPage();
-        List<Advertisement> list = advertisementService.list();
-        return getDataTable(list);
+        List<Advertisement> advertisementList = advertisementService.getAdvertisementList(AdvertisementVo);
+        return getDataTable(advertisementList);
     }
 
     /**
