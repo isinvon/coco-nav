@@ -12,10 +12,13 @@
       <el-form-item label="时间范围" prop="dateRange">
         <el-date-picker
             v-model="queryParams.dateRange"
-            type="daterange"
-            start-placeholder="请选择开始时间"
-            end-placeholder="请选择结束时间"
-            value-format="YYYY-MM-DD"
+            type="datetimerange"
+            start-placeholder="请选择开始日期时间"
+            end-placeholder="请选择结束日期时间"
+            format="YYYY-MM-DD HH:mm:ss"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            date-format="YYYY/MM/DD ddd"
+            time-format="A HH:mm:ss"
             clearable
             style="width: 100%"
         ></el-date-picker>
@@ -24,13 +27,16 @@
         <el-button-group>
           <el-button
               :type="queryParams.status === 1 ? 'success' : ''"
-              @click="queryParams.status = 1">正常</el-button>
+              @click="queryParams.status = 1">正常
+          </el-button>
           <el-button
               :type="queryParams.status === null ? 'info' : ''"
-              @click="queryParams.status = null">全部</el-button>
+              @click="queryParams.status = null">全部
+          </el-button>
           <el-button
               :type="queryParams.status === 0 ? 'danger' : ''"
-              @click="queryParams.status = 0">下架</el-button>
+              @click="queryParams.status = 0">下架
+          </el-button>
         </el-button-group>
       </el-form-item>
 
@@ -133,7 +139,7 @@
     />
 
     <!-- 添加或修改广告管理对话框 -->
-    <el-dialog :title="title" v-model="open" width="700px" append-to-body>
+    <el-dialog :title="title" v-model="open" width="600px" append-to-body>
       <el-form ref="advertisementRef" :model="form" :rules="rules" label-width="90px">
         <el-form-item label="广告标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入广告标题"/>
@@ -141,21 +147,20 @@
         <el-form-item label="广告内容">
           <editor v-model="form.content" :min-height="192"/>
         </el-form-item>
-        <el-form-item label="开始时间" prop="startTime">
-          <el-date-picker clearable
-                          v-model="form.startTime"
-                          type="date"
-                          value-format="YYYY-MM-DD"
-                          placeholder="请选择开始时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="结束时间" prop="endTime">
-          <el-date-picker clearable
-                          v-model="form.endTime"
-                          type="date"
-                          value-format="YYYY-MM-DD"
-                          placeholder="请选择结束时间">
-          </el-date-picker>
+
+        <el-form-item label="时间范围" prop="dateRange">
+          <el-date-picker
+              v-model="queryParams.dateRange"
+              type="datetimerange"
+              start-placeholder="请选择开始日期时间"
+              end-placeholder="请选择结束日期时间"
+              format="YYYY-MM-DD HH:mm:ss"
+              value-format="YYYY-MM-DD HH:mm:ss"
+              date-format="YYYY/MM/DD ddd"
+              time-format="A HH:mm:ss"
+              clearable
+              style="width: 100%"
+          ></el-date-picker>
         </el-form-item>
         <!--<el-form-item label="点击次数" prop="clickCount">-->
         <!--  <el-input v-model="form.clickCount" placeholder="请输入点击次数" />-->
