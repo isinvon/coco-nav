@@ -107,7 +107,7 @@
 
     <el-table v-loading="loading" :data="advertisementList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="广告ID" align="center" prop="id" />
+      <!--<el-table-column label="广告ID" align="center" prop="id" />-->
       <el-table-column label="广告标题" align="center" prop="title" />
       <el-table-column label="广告内容" align="center" prop="content" />
       <el-table-column label="开始时间" align="center" prop="startTime" width="180">
