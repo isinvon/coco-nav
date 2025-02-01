@@ -25,6 +25,7 @@ public class BaseEntity implements Serializable {
      * 主键ID
      */
     @TableId(type = IdType.ASSIGN_ID)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
     /**
