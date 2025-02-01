@@ -1,50 +1,43 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.Setting;
-import com.ruoyi.project.admin.service.custom.SettingCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.Setting;
+import com.ruoyi.project.admin.service.SettingService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 系统设置Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/setting")
-public class SettingController extends BaseController
-{
-    @Autowired
-    private SettingCustomService settingCustomService;
+public class SettingController extends BaseController {
+    @Resource
+    private SettingService settingService;
 
     /**
      * 查询系统设置列表
      */
     @CustomPermission(PermissionConstants.ADMIN_SETTING_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Setting setting)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<Setting> list = settingCustomService.selectSettingList(setting);
+        List<Setting> list = settingService.list();
         return getDataTable(list);
     }
 
@@ -54,10 +47,9 @@ public class SettingController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_SETTING_EXPORT)
     @Log(title = "系统设置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Setting setting)
-    {
-        List<Setting> list = settingCustomService.selectSettingList(setting);
-        ExcelUtil<Setting> util = new ExcelUtil<Setting>(Setting.class);
+    public void export(HttpServletResponse response) {
+        List<Setting> list = settingService.list();
+        ExcelUtil<Setting> util = new ExcelUtil<>(Setting.class);
         util.exportExcel(response, list, "系统设置数据");
     }
 
@@ -66,9 +58,8 @@ public class SettingController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_SETTING_QUERY)
     @GetMapping(value = "/{settingId}")
-    public AjaxResult getInfo(@PathVariable("settingId") Long settingId)
-    {
-        return success(settingCustomService.selectSettingBySettingId(settingId));
+    public AjaxResult getInfo(@PathVariable("settingId") Long settingId) {
+        return success(settingService.getById(settingId));
     }
 
     /**
@@ -77,9 +68,8 @@ public class SettingController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_SETTING_ADD)
     @Log(title = "系统设置", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Setting setting)
-    {
-        return toAjax(settingCustomService.insertSetting(setting));
+    public AjaxResult add(@RequestBody Setting setting) {
+        return toAjax(settingService.save(setting));
     }
 
     /**
@@ -88,9 +78,10 @@ public class SettingController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_SETTING_EDIT)
     @Log(title = "系统设置", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Setting setting)
-    {
-        return toAjax(settingCustomService.updateSetting(setting));
+    public AjaxResult edit(@RequestBody Setting setting) {
+        LambdaQueryWrapper<Setting> qw = new LambdaQueryWrapper<>();
+        qw.eq(Setting::getSettingId, setting.getSettingId());
+        return toAjax(settingService.update(setting, qw));
     }
 
     /**
@@ -98,9 +89,9 @@ public class SettingController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_SETTING_REMOVE)
     @Log(title = "系统设置", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{settingIds}")
-    public AjaxResult remove(@PathVariable Long[] settingIds)
-    {
-        return toAjax(settingCustomService.deleteSettingBySettingIds(settingIds));
+    @DeleteMapping("/{settingIds}")
+    public AjaxResult remove(@PathVariable Long[] settingIds) {
+        List<Long> idList = Arrays.asList(settingIds);
+        return toAjax(settingService.removeByIds(idList));
     }
 }
