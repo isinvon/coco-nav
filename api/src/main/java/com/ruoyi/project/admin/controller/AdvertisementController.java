@@ -39,9 +39,9 @@ public class AdvertisementController extends BaseController {
      */
     @CustomPermission(PermissionConstants.ADMIN_ADVERTISEMENT_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(AdvertisementVo AdvertisementVo) {
+    public TableDataInfo list(AdvertisementVo advertisementVo) {
         startPage();
-        List<Advertisement> advertisementList = advertisementService.getAdvertisementList(AdvertisementVo);
+        List<Advertisement> advertisementList = advertisementService.getAdvertisementList(advertisementVo);
         return getDataTable(advertisementList);
     }
 
