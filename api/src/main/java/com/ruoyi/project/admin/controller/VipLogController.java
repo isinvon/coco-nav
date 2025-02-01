@@ -1,50 +1,43 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.VipLog;
-import com.ruoyi.project.admin.service.custom.VipLogCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.VipLog;
+import com.ruoyi.project.admin.service.VipLogService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * VIP操作日志Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/vipLog")
-public class VipLogController extends BaseController
-{
-    @Autowired
-    private VipLogCustomService vipLogCustomService;
+public class VipLogController extends BaseController {
+    @Resource
+    private VipLogService vipLogService;
 
     /**
      * 查询VIP操作日志列表
      */
     @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(VipLog vipLog)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<VipLog> list = vipLogCustomService.selectVipLogList(vipLog);
+        List<VipLog> list = vipLogService.list();
         return getDataTable(list);
     }
 
@@ -54,10 +47,9 @@ public class VipLogController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_EXPORT)
     @Log(title = "VIP操作日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, VipLog vipLog)
-    {
-        List<VipLog> list = vipLogCustomService.selectVipLogList(vipLog);
-        ExcelUtil<VipLog> util = new ExcelUtil<VipLog>(VipLog.class);
+    public void export(HttpServletResponse response) {
+        List<VipLog> list = vipLogService.list();
+        ExcelUtil<VipLog> util = new ExcelUtil<>(VipLog.class);
         util.exportExcel(response, list, "VIP操作日志数据");
     }
 
@@ -66,9 +58,8 @@ public class VipLogController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_QUERY)
     @GetMapping(value = "/{vipLogId}")
-    public AjaxResult getInfo(@PathVariable("vipLogId") Long vipLogId)
-    {
-        return success(vipLogCustomService.selectVipLogByVipLogId(vipLogId));
+    public AjaxResult getInfo(@PathVariable("vipLogId") Long vipLogId) {
+        return success(vipLogService.getById(vipLogId));
     }
 
     /**
@@ -77,9 +68,8 @@ public class VipLogController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_ADD)
     @Log(title = "VIP操作日志", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody VipLog vipLog)
-    {
-        return toAjax(vipLogCustomService.insertVipLog(vipLog));
+    public AjaxResult add(@RequestBody VipLog vipLog) {
+        return toAjax(vipLogService.save(vipLog));
     }
 
     /**
@@ -88,9 +78,10 @@ public class VipLogController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_EDIT)
     @Log(title = "VIP操作日志", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody VipLog vipLog)
-    {
-        return toAjax(vipLogCustomService.updateVipLog(vipLog));
+    public AjaxResult edit(@RequestBody VipLog vipLog) {
+        LambdaUpdateWrapper<VipLog> qw = new LambdaUpdateWrapper<>();
+        qw.eq(VipLog::getVipLogId, vipLog.getVipLogId());
+        return toAjax(vipLogService.update(vipLog, qw));
     }
 
     /**
@@ -98,9 +89,9 @@ public class VipLogController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_VIP_LOG_REMOVE)
     @Log(title = "VIP操作日志", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{vipLogIds}")
-    public AjaxResult remove(@PathVariable Long[] vipLogIds)
-    {
-        return toAjax(vipLogCustomService.deleteVipLogByVipLogIds(vipLogIds));
+    @DeleteMapping("/{vipLogIds}")
+    public AjaxResult remove(@PathVariable Long[] vipLogIds) {
+        List<Long> idList = Arrays.asList(vipLogIds);
+        return toAjax(vipLogService.removeByIds(idList));
     }
 }
