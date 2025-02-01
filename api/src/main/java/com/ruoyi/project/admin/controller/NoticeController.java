@@ -1,6 +1,5 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +78,7 @@ public class NoticeController extends BaseController {
     @Log(title = "通知管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Notice notice) {
-        LambdaUpdateWrapper<Notice> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Notice::getId, notice.getId());
-        return toAjax(noticeService.update(notice, uw));
+        return toAjax(noticeService.updateById(notice));
     }
 
     /**

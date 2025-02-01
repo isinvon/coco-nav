@@ -1,6 +1,5 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +78,7 @@ public class InviteCodeController extends BaseController {
     @Log(title = "邀请码管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody InviteCode inviteCode) {
-        LambdaUpdateWrapper<InviteCode> uw = new LambdaUpdateWrapper<>();
-        uw.eq(InviteCode::getId, inviteCode.getId());
-        return toAjax(inviteCodeService.update(inviteCode, uw));
+        return toAjax(inviteCodeService.updateById(inviteCode));
     }
 
     /**

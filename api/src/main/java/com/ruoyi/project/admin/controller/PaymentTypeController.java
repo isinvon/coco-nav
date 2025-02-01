@@ -1,6 +1,5 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +78,7 @@ public class PaymentTypeController extends BaseController {
     @Log(title = "支付方式", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PaymentType paymentType) {
-        LambdaUpdateWrapper<PaymentType> uw = new LambdaUpdateWrapper<>();
-        uw.eq(PaymentType::getId, paymentType.getId());
-        return toAjax(paymentTypeService.update(paymentType, uw));
+        return toAjax(paymentTypeService.updateById(paymentType));
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +78,7 @@ public class BookmarkCategoryController extends BaseController {
     @Log(title = "书签分类", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookmarkCategory bookmarkCategory) {
-        LambdaUpdateWrapper<BookmarkCategory> uw = new LambdaUpdateWrapper<>();
-        uw.eq(BookmarkCategory::getId, bookmarkCategory.getId());
-        return toAjax(bookmarkCategoryService.update(bookmarkCategory, uw));
+        return toAjax(bookmarkCategoryService.updateById(bookmarkCategory));
     }
 
     /**

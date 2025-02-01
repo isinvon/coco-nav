@@ -1,6 +1,5 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +78,7 @@ public class VipController extends BaseController {
     @Log(title = "VIP会员", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Vip vip) {
-        LambdaUpdateWrapper<Vip> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Vip::getId, vip.getId());
-        return toAjax(vipService.update(vip, uw));
+        return toAjax(vipService.updateById(vip));
     }
 
     /**

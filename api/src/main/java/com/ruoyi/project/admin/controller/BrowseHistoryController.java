@@ -1,6 +1,5 @@
 package com.ruoyi.project.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -79,9 +78,7 @@ public class BrowseHistoryController extends BaseController {
     @Log(title = "用户浏览历史", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BrowseHistory browseHistory) {
-        LambdaUpdateWrapper<BrowseHistory> uw = new LambdaUpdateWrapper<>();
-        uw.eq(BrowseHistory::getId, browseHistory.getId());
-        return toAjax(browseHistoryService.update(browseHistory, uw));
+        return toAjax(browseHistoryService.updateById(browseHistory));
     }
 
     /**
