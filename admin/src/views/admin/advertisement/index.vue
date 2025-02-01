@@ -20,6 +20,19 @@
             style="width: 100%"
         ></el-date-picker>
       </el-form-item>
+      <el-form-item label="广告状态" prop="status">
+        <el-button-group>
+          <el-button
+              :type="queryParams.status === 1 ? 'success' : ''"
+              @click="queryParams.status = 1">正常</el-button>
+          <el-button
+              :type="queryParams.status === null ? 'info' : ''"
+              @click="queryParams.status = null">全部</el-button>
+          <el-button
+              :type="queryParams.status === 0 ? 'danger' : ''"
+              @click="queryParams.status = 0">下架</el-button>
+        </el-button-group>
+      </el-form-item>
 
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
