@@ -1,99 +1,54 @@
 package com.ruoyi.project.admin.service.impl;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.project.admin.service.AdvertisementService;
-import com.ruoyi.project.admin.service.custom.AdvertisementCustomService;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.ruoyi.project.admin.mapper.AdvertisementMapper;
 import com.ruoyi.project.admin.domain.Advertisement;
+import com.ruoyi.project.admin.domain.vo.AdvertisementVo;
+import com.ruoyi.project.admin.mapper.AdvertisementMapper;
+import com.ruoyi.project.admin.service.AdvertisementService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 广告管理Service业务层处理
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @Service
-public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, Advertisement> implements AdvertisementCustomService, AdvertisementService
-{
-    @Autowired
-    private AdvertisementMapper advertisementMapper;
+public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, Advertisement> implements AdvertisementService {
 
     /**
-     * 查询广告管理
-     * 
-     * @param advertisementId 广告管理主键
-     * @return 广告管理
+     * 获取广告列表并转换为 AdvertisementVo 类型
+     *
+     * @param advertisementVo 查询条件，包含标题、日期范围等字段
+     * @return 广告列表（AdvertisementVo 类型）
      */
     @Override
-    public Advertisement selectAdvertisementByAdvertisementId(Long advertisementId)
-    {
-        return advertisementMapper.selectAdvertisementByAdvertisementId(advertisementId);
-    }
+    public List<Advertisement> getAdvertisementList(AdvertisementVo advertisementVo) {
 
-    /**
-     * 查询广告管理列表
-     * 
-     * @param advertisement 广告管理
-     * @return 广告管理
-     */
-    @Override
-    public List<Advertisement> selectAdvertisementList(Advertisement advertisement)
-    {
-        return advertisementMapper.selectAdvertisementList(advertisement);
-    }
+        // 时间条件查询
+        Date startTime = null, endTime = null;
 
-    /**
-     * 新增广告管理
-     * 
-     * @param advertisement 广告管理
-     * @return 结果
-     */
-    @Override
-    public int insertAdvertisement(Advertisement advertisement)
-    {
-        advertisement.setCreateTime(DateUtils.getNowDate());
-        return advertisementMapper.insertAdvertisement(advertisement);
-    }
+        if (!ObjectUtils.isEmpty(advertisementVo.getDateRange()) && advertisementVo.getDateRange().length == 2) { // 先检查是否有 dateRange，避免空指针异常
+            startTime = advertisementVo.getDateRange()[0];
+            endTime = advertisementVo.getDateRange()[1];
+        }
 
-    /**
-     * 修改广告管理
-     * 
-     * @param advertisement 广告管理
-     * @return 结果
-     */
-    @Override
-    public int updateAdvertisement(Advertisement advertisement)
-    {
-        advertisement.setUpdateTime(DateUtils.getNowDate());
-        return advertisementMapper.updateAdvertisement(advertisement);
-    }
+        LambdaQueryWrapper<Advertisement> qw = new LambdaQueryWrapper<>(); // 调用查询方法获取广告数据
 
-    /**
-     * 批量删除广告管理
-     * 
-     * @param advertisementIds 需要删除的广告管理主键
-     * @return 结果
-     */
-    @Override
-    public int deleteAdvertisementByAdvertisementIds(Long[] advertisementIds)
-    {
-        return advertisementMapper.deleteAdvertisementByAdvertisementIds(advertisementIds);
-    }
+        if (startTime != null && endTime != null) { // 添加时间范围条件，避免 NullPointerException
+            qw.ge(Advertisement::getStartTime, startTime).le(Advertisement::getEndTime, endTime);
+        }
 
-    /**
-     * 删除广告管理信息
-     * 
-     * @param advertisementId 广告管理主键
-     * @return 结果
-     */
-    @Override
-    public int deleteAdvertisementByAdvertisementId(Long advertisementId)
-    {
-        return advertisementMapper.deleteAdvertisementByAdvertisementId(advertisementId);
+        // 标题条件查询
+        if (!ObjectUtils.isEmpty(advertisementVo.getTitle())) {
+            qw.like(Advertisement::getTitle, advertisementVo.getTitle());
+        }
+
+        return list(qw);
     }
 }
