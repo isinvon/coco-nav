@@ -1,5 +1,7 @@
 package com.ruoyi.project.admin.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.constant.DateConstants;
 import com.ruoyi.project.admin.domain.Advertisement;
 import lombok.Data;
 
@@ -22,5 +24,6 @@ public class AdvertisementVo extends Advertisement {
     /**
      * 日期范围 (startTime~endTime)
      */
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = DateConstants.TIME_ZONE)
     private Date[] dateRange;
 }

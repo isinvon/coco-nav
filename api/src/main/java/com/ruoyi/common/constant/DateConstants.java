@@ -11,4 +11,9 @@ public class DateConstants {
      * 日期格式
      */
     public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * 时区
+     */
+    public static final String TIME_ZONE = "GMT+8";
 }

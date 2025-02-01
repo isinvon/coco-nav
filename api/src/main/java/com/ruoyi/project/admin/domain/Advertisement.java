@@ -1,9 +1,8 @@
 package com.ruoyi.project.admin.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.constant.DateConstants;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
@@ -36,15 +35,15 @@ public class Advertisement extends BaseEntity {
     /**
      * 开始时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "开始时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = DateConstants.TIME_ZONE)
+    @Excel(name = "开始时间", width = 30, dateFormat = DateConstants.DATE_FORMAT_PATTERN)
     private Date startTime;
 
     /**
      * 结束时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "结束时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = DateConstants.TIME_ZONE)
+    @Excel(name = "结束时间", width = 30, dateFormat = DateConstants.DATE_FORMAT_PATTERN)
     private Date endTime;
 
     /**

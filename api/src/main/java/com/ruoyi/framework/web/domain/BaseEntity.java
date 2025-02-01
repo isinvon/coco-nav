@@ -50,14 +50,14 @@ public class BaseEntity implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = "GMT+8")
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = DateConstants.TIME_ZONE)
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 更新时间
      */
-    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = "GMT+8")
+    @JsonFormat(pattern = DateConstants.DATE_FORMAT_PATTERN, timezone = DateConstants.TIME_ZONE)
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
