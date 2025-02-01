@@ -83,14 +83,14 @@
       <!--<el-table-column label="广告ID" align="center" prop="id" />-->
       <el-table-column label="广告标题" align="center" prop="title"/>
       <el-table-column label="广告内容" align="center" prop="content"/>
-      <el-table-column label="开始时间" align="center" prop="startTime" width="120">
+      <el-table-column label="开始时间" align="center" prop="startTime" width="180">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="结束时间" align="center" prop="endTime" width="120">
+      <el-table-column label="结束时间" align="center" prop="endTime" width="180">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.endTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.endTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="状态" align="center" prop="status">
@@ -125,7 +125,7 @@
     />
 
     <!-- 添加或修改广告管理对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
+    <el-dialog :title="title" v-model="open" width="700px" append-to-body>
       <el-form ref="advertisementRef" :model="form" :rules="rules" label-width="90px">
         <el-form-item label="广告标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入广告标题"/>
@@ -152,8 +152,11 @@
         <!--<el-form-item label="点击次数" prop="clickCount">-->
         <!--  <el-input v-model="form.clickCount" placeholder="请输入点击次数" />-->
         <!--</el-form-item>-->
-        <el-form-item label="0-下架 1-正常" prop="status">
-          <el-input v-model="form.status" placeholder="请输入0-下架 1-正常"/>
+        <el-form-item label="状态" prop="status">
+          <el-radio-group v-model="form.status">
+            <el-radio :label="1">正常</el-radio>
+            <el-radio :label="0">下架</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
           <el-input v-model="form.sortOrder" placeholder="请输入排序值"/>
@@ -310,7 +313,7 @@ function handleUpdate(row) {
   getAdvertisement(_id).then(response => {
     form.value = response.data;
     open.value = true;
-    title.value = "修改广告管理";
+    title.value = "修改广告管理🚩";
   });
 }
 
