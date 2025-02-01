@@ -59,7 +59,7 @@
 
     <el-table v-loading="loading" :data="advertisementLogList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="日志ID" align="center" prop="advertisementLogId" />
+      <el-table-column label="日志ID" align="center" prop="id" />
       <el-table-column label="广告ID" align="center" prop="advertisementId" />
       <el-table-column label="操作类型" align="center" prop="action" />
       <el-table-column label="操作人ID" align="center" prop="operatorId" />
@@ -160,7 +160,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    advertisementLogId: null,
+    id: null,
     advertisementId: null,
     action: null,
     operatorId: null,
@@ -184,7 +184,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.advertisementLogId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -199,8 +199,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _advertisementLogId = row.advertisementLogId || ids.value
-  getAdvertisementLog(_advertisementLogId).then(response => {
+  const _id = row.id || ids.value
+  getAdvertisementLog(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改广告操作日志";
@@ -211,7 +211,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["advertisementLogRef"].validate(valid => {
     if (valid) {
-      if (form.value.advertisementLogId != null) {
+      if (form.value.id != null) {
         updateAdvertisementLog(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -230,9 +230,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _advertisementLogIds = row.advertisementLogId || ids.value;
-  proxy.$modal.confirm('是否确认删除广告操作日志编号为"' + _advertisementLogIds + '"的数据项？').then(function() {
-    return delAdvertisementLog(_advertisementLogIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除广告操作日志编号为"' + _ids + '"的数据项？').then(function() {
+    return delAdvertisementLog(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

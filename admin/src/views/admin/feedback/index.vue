@@ -51,7 +51,7 @@
 
     <el-table v-loading="loading" :data="feedbackList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="反馈ID" align="center" prop="feedbackId" />
+      <el-table-column label="反馈ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="反馈类型ID" align="center" prop="feedbackTypeId" />
       <el-table-column label="反馈内容" align="center" prop="content" />
@@ -154,7 +154,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    feedbackId: null,
+    id: null,
     userId: null,
     feedbackTypeId: null,
     content: null,
@@ -179,7 +179,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.feedbackId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -194,8 +194,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _feedbackId = row.feedbackId || ids.value
-  getFeedback(_feedbackId).then(response => {
+  const _id = row.id || ids.value
+  getFeedback(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改用户反馈";
@@ -206,7 +206,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["feedbackRef"].validate(valid => {
     if (valid) {
-      if (form.value.feedbackId != null) {
+      if (form.value.id != null) {
         updateFeedback(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -225,9 +225,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _feedbackIds = row.feedbackId || ids.value;
-  proxy.$modal.confirm('是否确认删除用户反馈编号为"' + _feedbackIds + '"的数据项？').then(function() {
-    return delFeedback(_feedbackIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除用户反馈编号为"' + _ids + '"的数据项？').then(function() {
+    return delFeedback(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

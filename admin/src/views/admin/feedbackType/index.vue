@@ -67,7 +67,7 @@
 
     <el-table v-loading="loading" :data="feedbackTypeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="类型ID" align="center" prop="feedbackTypeId" />
+      <el-table-column label="类型ID" align="center" prop="id" />
       <el-table-column label="类型名称" align="center" prop="typeName" />
       <el-table-column label="排序值" align="center" prop="sortOrder" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -163,7 +163,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    feedbackTypeId: null,
+    id: null,
     typeName: null,
     sortOrder: null,
     createTime: null,
@@ -186,7 +186,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.feedbackTypeId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -201,8 +201,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _feedbackTypeId = row.feedbackTypeId || ids.value
-  getFeedbackType(_feedbackTypeId).then(response => {
+  const _id = row.id || ids.value
+  getFeedbackType(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改反馈类型";
@@ -213,7 +213,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["feedbackTypeRef"].validate(valid => {
     if (valid) {
-      if (form.value.feedbackTypeId != null) {
+      if (form.value.id != null) {
         updateFeedbackType(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -232,9 +232,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _feedbackTypeIds = row.feedbackTypeId || ids.value;
-  proxy.$modal.confirm('是否确认删除反馈类型编号为"' + _feedbackTypeIds + '"的数据项？').then(function() {
-    return delFeedbackType(_feedbackTypeIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除反馈类型编号为"' + _ids + '"的数据项？').then(function() {
+    return delFeedbackType(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

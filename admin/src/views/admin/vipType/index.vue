@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="vipTypeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="类型ID" align="center" prop="vipTypeId" />
+      <el-table-column label="类型ID" align="center" prop="id" />
       <el-table-column label="VIP类型名称" align="center" prop="typeName" />
       <el-table-column label="有效期" align="center" prop="duration" />
       <el-table-column label="价格" align="center" prop="price" />
@@ -187,7 +187,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    vipTypeId: null,
+    id: null,
     typeName: null,
     duration: null,
     price: null,
@@ -212,7 +212,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.vipTypeId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -227,8 +227,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _vipTypeId = row.vipTypeId || ids.value
-  getVipType(_vipTypeId).then(response => {
+  const _id = row.id || ids.value
+  getVipType(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改VIP类型";
@@ -239,7 +239,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["vipTypeRef"].validate(valid => {
     if (valid) {
-      if (form.value.vipTypeId != null) {
+      if (form.value.id != null) {
         updateVipType(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -258,9 +258,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _vipTypeIds = row.vipTypeId || ids.value;
-  proxy.$modal.confirm('是否确认删除VIP类型编号为"' + _vipTypeIds + '"的数据项？').then(function() {
-    return delVipType(_vipTypeIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除VIP类型编号为"' + _ids + '"的数据项？').then(function() {
+    return delVipType(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

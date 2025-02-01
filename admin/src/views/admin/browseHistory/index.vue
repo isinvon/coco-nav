@@ -67,7 +67,7 @@
 
     <el-table v-loading="loading" :data="browseHistoryList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="历史记录ID" align="center" prop="browseHistoryId" />
+      <el-table-column label="历史记录ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="书签ID" align="center" prop="bookmarkId" />
       <el-table-column label="浏览时间" align="center" prop="viewTime" width="180">
@@ -182,7 +182,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    browseHistoryId: null,
+    id: null,
     userId: null,
     bookmarkId: null,
     viewTime: null,
@@ -207,7 +207,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.browseHistoryId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -222,8 +222,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _browseHistoryId = row.browseHistoryId || ids.value
-  getBrowseHistory(_browseHistoryId).then(response => {
+  const _id = row.id || ids.value
+  getBrowseHistory(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改用户浏览历史";
@@ -234,7 +234,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["browseHistoryRef"].validate(valid => {
     if (valid) {
-      if (form.value.browseHistoryId != null) {
+      if (form.value.id != null) {
         updateBrowseHistory(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -253,9 +253,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _browseHistoryIds = row.browseHistoryId || ids.value;
-  proxy.$modal.confirm('是否确认删除用户浏览历史编号为"' + _browseHistoryIds + '"的数据项？').then(function() {
-    return delBrowseHistory(_browseHistoryIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除用户浏览历史编号为"' + _ids + '"的数据项？').then(function() {
+    return delBrowseHistory(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

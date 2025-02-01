@@ -91,7 +91,7 @@
 
     <el-table v-loading="loading" :data="pointLogList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="日志ID" align="center" prop="pointLogId" />
+      <el-table-column label="日志ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="1-增加 2-扣除 3-冻结" align="center" prop="changeType" />
       <el-table-column label="变动数值" align="center" prop="amount" />
@@ -218,7 +218,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    pointLogId: null,
+    id: null,
     userId: null,
     changeType: null,
     amount: null,
@@ -246,7 +246,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.pointLogId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -261,8 +261,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _pointLogId = row.pointLogId || ids.value
-  getPointLog(_pointLogId).then(response => {
+  const _id = row.id || ids.value
+  getPointLog(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改积分流水";
@@ -273,7 +273,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["pointLogRef"].validate(valid => {
     if (valid) {
-      if (form.value.pointLogId != null) {
+      if (form.value.id != null) {
         updatePointLog(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -292,9 +292,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _pointLogIds = row.pointLogId || ids.value;
-  proxy.$modal.confirm('是否确认删除积分流水编号为"' + _pointLogIds + '"的数据项？').then(function() {
-    return delPointLog(_pointLogIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除积分流水编号为"' + _ids + '"的数据项？').then(function() {
+    return delPointLog(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

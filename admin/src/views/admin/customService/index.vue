@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="customServiceList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="客服ID" align="center" prop="customServiceId" />
+      <el-table-column label="客服ID" align="center" prop="id" />
       <el-table-column label="客服昵称" align="center" prop="nickname" />
       <el-table-column label="1-QQ 2-微信 3-电话" align="center" prop="accountType" />
       <el-table-column label="联系方式" align="center" prop="account" />
@@ -186,7 +186,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    customServiceId: null,
+    id: null,
     nickname: null,
     accountType: null,
     account: null,
@@ -212,7 +212,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.customServiceId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -227,8 +227,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _customServiceId = row.customServiceId || ids.value
-  getCustomService(_customServiceId).then(response => {
+  const _id = row.id || ids.value
+  getCustomService(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改客服信息";
@@ -239,7 +239,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["customServiceRef"].validate(valid => {
     if (valid) {
-      if (form.value.customServiceId != null) {
+      if (form.value.id != null) {
         updateCustomService(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -258,9 +258,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _customServiceIds = row.customServiceId || ids.value;
-  proxy.$modal.confirm('是否确认删除客服信息编号为"' + _customServiceIds + '"的数据项？').then(function() {
-    return delCustomService(_customServiceIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除客服信息编号为"' + _ids + '"的数据项？').then(function() {
+    return delCustomService(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

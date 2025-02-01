@@ -59,7 +59,7 @@
 
     <el-table v-loading="loading" :data="noticeUserList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="关联ID" align="center" prop="relationId" />
+      <el-table-column label="关联ID" align="center" prop="id" />
       <el-table-column label="通知ID" align="center" prop="noticeId" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="0-未读 1-已读" align="center" prop="readStatus" />
@@ -168,7 +168,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    relationId: null,
+    id: null,
     noticeId: null,
     userId: null,
     readStatus: null,
@@ -193,7 +193,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.relationId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -208,8 +208,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _relationId = row.relationId || ids.value
-  getNoticeUser(_relationId).then(response => {
+  const _id = row.id || ids.value
+  getNoticeUser(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改通知用户关系";
@@ -220,7 +220,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["noticeUserRef"].validate(valid => {
     if (valid) {
-      if (form.value.relationId != null) {
+      if (form.value.id != null) {
         updateNoticeUser(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -239,9 +239,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _relationIds = row.relationId || ids.value;
-  proxy.$modal.confirm('是否确认删除通知用户关系编号为"' + _relationIds + '"的数据项？').then(function() {
-    return delNoticeUser(_relationIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除通知用户关系编号为"' + _ids + '"的数据项？').then(function() {
+    return delNoticeUser(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

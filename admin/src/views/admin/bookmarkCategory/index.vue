@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="bookmarkCategoryList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId" />
+      <el-table-column label="分类ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="分类名称" align="center" prop="name" />
       <el-table-column label="父分类ID" align="center" prop="parentId" />
@@ -183,7 +183,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    bookmarkCategoryId: null,
+    id: null,
     userId: null,
     name: null,
     parentId: null,
@@ -209,7 +209,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.bookmarkCategoryId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -224,8 +224,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _bookmarkCategoryId = row.bookmarkCategoryId || ids.value
-  getBookmarkCategory(_bookmarkCategoryId).then(response => {
+  const _id = row.id || ids.value
+  getBookmarkCategory(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改书签分类";
@@ -236,7 +236,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["bookmarkCategoryRef"].validate(valid => {
     if (valid) {
-      if (form.value.bookmarkCategoryId != null) {
+      if (form.value.id != null) {
         updateBookmarkCategory(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -255,9 +255,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _bookmarkCategoryIds = row.bookmarkCategoryId || ids.value;
-  proxy.$modal.confirm('是否确认删除书签分类编号为"' + _bookmarkCategoryIds + '"的数据项？').then(function() {
-    return delBookmarkCategory(_bookmarkCategoryIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除书签分类编号为"' + _ids + '"的数据项？').then(function() {
+    return delBookmarkCategory(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

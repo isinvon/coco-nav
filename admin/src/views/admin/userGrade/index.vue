@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="userGradeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="等级ID" align="center" prop="userGradeId" />
+      <el-table-column label="等级ID" align="center" prop="id" />
       <el-table-column label="等级名称" align="center" prop="gradeName" />
       <el-table-column label="最低积分要求" align="center" prop="minPoints" />
       <el-table-column label="等级特权描述" align="center" prop="privileges" />
@@ -184,7 +184,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    userGradeId: null,
+    id: null,
     gradeName: null,
     minPoints: null,
     privileges: null,
@@ -209,7 +209,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.userGradeId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -224,8 +224,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _userGradeId = row.userGradeId || ids.value
-  getUserGrade(_userGradeId).then(response => {
+  const _id = row.id || ids.value
+  getUserGrade(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改用户等级";
@@ -236,7 +236,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["userGradeRef"].validate(valid => {
     if (valid) {
-      if (form.value.userGradeId != null) {
+      if (form.value.id != null) {
         updateUserGrade(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -255,9 +255,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _userGradeIds = row.userGradeId || ids.value;
-  proxy.$modal.confirm('是否确认删除用户等级编号为"' + _userGradeIds + '"的数据项？').then(function() {
-    return delUserGrade(_userGradeIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除用户等级编号为"' + _ids + '"的数据项？').then(function() {
+    return delUserGrade(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

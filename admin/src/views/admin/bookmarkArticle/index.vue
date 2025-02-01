@@ -51,7 +51,7 @@
 
     <el-table v-loading="loading" :data="bookmarkArticleList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="文章ID" align="center" prop="articleId" />
+      <el-table-column label="文章ID" align="center" prop="id" />
       <el-table-column label="书签ID" align="center" prop="bookmarkId" />
       <el-table-column label="文章内容" align="center" prop="content" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -144,7 +144,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    articleId: null,
+    id: null,
     bookmarkId: null,
     content: null,
     createTime: null,
@@ -167,7 +167,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.articleId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -182,8 +182,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _articleId = row.articleId || ids.value
-  getBookmarkArticle(_articleId).then(response => {
+  const _id = row.id || ids.value
+  getBookmarkArticle(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改书签文章";
@@ -194,7 +194,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["bookmarkArticleRef"].validate(valid => {
     if (valid) {
-      if (form.value.articleId != null) {
+      if (form.value.id != null) {
         updateBookmarkArticle(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -213,9 +213,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _articleIds = row.articleId || ids.value;
-  proxy.$modal.confirm('是否确认删除书签文章编号为"' + _articleIds + '"的数据项？').then(function() {
-    return delBookmarkArticle(_articleIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除书签文章编号为"' + _ids + '"的数据项？').then(function() {
+    return delBookmarkArticle(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

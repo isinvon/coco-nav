@@ -67,7 +67,7 @@
 
     <el-table v-loading="loading" :data="vipList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="VIP记录ID" align="center" prop="vipId" />
+      <el-table-column label="VIP记录ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="VIP类型ID" align="center" prop="vipTypeId" />
       <el-table-column label="开始时间" align="center" prop="startTime" width="180">
@@ -196,7 +196,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    vipId: null,
+    id: null,
     userId: null,
     vipTypeId: null,
     startTime: null,
@@ -222,7 +222,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.vipId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -237,8 +237,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _vipId = row.vipId || ids.value
-  getVip(_vipId).then(response => {
+  const _id = row.id || ids.value
+  getVip(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改VIP会员";
@@ -249,7 +249,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["vipRef"].validate(valid => {
     if (valid) {
-      if (form.value.vipId != null) {
+      if (form.value.id != null) {
         updateVip(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -268,9 +268,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _vipIds = row.vipId || ids.value;
-  proxy.$modal.confirm('是否确认删除VIP会员编号为"' + _vipIds + '"的数据项？').then(function() {
-    return delVip(_vipIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除VIP会员编号为"' + _ids + '"的数据项？').then(function() {
+    return delVip(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="InviteCodeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="邀请码ID" align="center" prop="inviteCodeId" />
+      <el-table-column label="邀请码ID" align="center" prop="id" />
       <el-table-column label="邀请码" align="center" prop="code" />
       <el-table-column label="创建人ID" align="center" prop="creatorId" />
       <el-table-column label="使用者ID" align="center" prop="userId" />
@@ -206,7 +206,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    inviteCodeId: null,
+    id: null,
     code: null,
     creatorId: null,
     userId: null,
@@ -232,7 +232,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.inviteCodeId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -247,8 +247,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _inviteCodeId = row.inviteCodeId || ids.value
-  getInviteCode(_inviteCodeId).then(response => {
+  const _id = row.id || ids.value
+  getInviteCode(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改邀请码管理";
@@ -259,7 +259,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["InviteCodeRef"].validate(valid => {
     if (valid) {
-      if (form.value.inviteCodeId != null) {
+      if (form.value.id != null) {
         updateInviteCode(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -278,9 +278,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _inviteCodeIds = row.inviteCodeId || ids.value;
-  proxy.$modal.confirm('是否确认删除邀请码管理编号为"' + _inviteCodeIds + '"的数据项？').then(function() {
-    return delInviteCode(_inviteCodeIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除邀请码管理编号为"' + _ids + '"的数据项？').then(function() {
+    return delInviteCode(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

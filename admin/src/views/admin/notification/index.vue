@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="noticeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="通知ID" align="center" prop="noticeId" />
+      <el-table-column label="通知ID" align="center" prop="id" />
       <el-table-column label="通知标题" align="center" prop="title" />
       <el-table-column label="通知内容" align="center" prop="content" />
       <el-table-column label="1-系统公告 2-个人消息" align="center" prop="type" />
@@ -215,7 +215,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    noticeId: null,
+    id: null,
     title: null,
     content: null,
     type: null,
@@ -242,7 +242,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.noticeId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -257,8 +257,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _noticeId = row.noticeId || ids.value
-  getNotice(_noticeId).then(response => {
+  const _id = row.id || ids.value
+  getNotice(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改通知管理";
@@ -269,7 +269,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["noticeRef"].validate(valid => {
     if (valid) {
-      if (form.value.noticeId != null) {
+      if (form.value.id != null) {
         updateNotice(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -288,9 +288,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _noticeIds = row.noticeId || ids.value;
-  proxy.$modal.confirm('是否确认删除通知管理编号为"' + _noticeIds + '"的数据项？').then(function() {
-    return delNotice(_noticeIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除通知管理编号为"' + _ids + '"的数据项？').then(function() {
+    return delNotice(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

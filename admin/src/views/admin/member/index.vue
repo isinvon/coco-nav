@@ -99,7 +99,7 @@
 
     <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="用户唯一ID" align="center" prop="userId" />
+      <el-table-column label="用户唯一ID" align="center" prop="id" />
       <el-table-column label="登录用户名" align="center" prop="username" />
       <el-table-column label="加密密码" align="center" prop="password" />
       <el-table-column label="绑定邮箱" align="center" prop="email" />
@@ -247,7 +247,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    userId: null,
+    id: null,
     username: null,
     password: null,
     email: null,
@@ -276,7 +276,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.userId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -291,8 +291,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _userId = row.userId || ids.value
-  getUser(_userId).then(response => {
+  const _id = row.id || ids.value
+  getUser(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改用户管理";
@@ -303,7 +303,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["userRef"].validate(valid => {
     if (valid) {
-      if (form.value.userId != null) {
+      if (form.value.id != null) {
         updateUser(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -322,9 +322,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _userIds = row.userId || ids.value;
-  proxy.$modal.confirm('是否确认删除用户管理编号为"' + _userIds + '"的数据项？').then(function() {
-    return delUser(_userIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除用户管理编号为"' + _ids + '"的数据项？').then(function() {
+    return delUser(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

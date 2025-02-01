@@ -83,7 +83,7 @@
 
     <el-table v-loading="loading" :data="websiteInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="信息ID" align="center" prop="websiteInfoId" />
+      <el-table-column label="信息ID" align="center" prop="id" />
       <el-table-column label="网站标题" align="center" prop="title" />
       <el-table-column label="SEO关键词" align="center" prop="keywords" />
       <el-table-column label="网站描述" align="center" prop="description" />
@@ -197,7 +197,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    websiteInfoId: null,
+    id: null,
     title: null,
     keywords: null,
     description: null,
@@ -223,7 +223,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.websiteInfoId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -238,8 +238,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _websiteInfoId = row.websiteInfoId || ids.value
-  getWebsiteInfo(_websiteInfoId).then(response => {
+  const _id = row.id || ids.value
+  getWebsiteInfo(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改网站信息";
@@ -250,7 +250,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["websiteInfoRef"].validate(valid => {
     if (valid) {
-      if (form.value.websiteInfoId != null) {
+      if (form.value.id != null) {
         updateWebsiteInfo(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -269,9 +269,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _websiteInfoIds = row.websiteInfoId || ids.value;
-  proxy.$modal.confirm('是否确认删除网站信息编号为"' + _websiteInfoIds + '"的数据项？').then(function() {
-    return delWebsiteInfo(_websiteInfoIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除网站信息编号为"' + _ids + '"的数据项？').then(function() {
+    return delWebsiteInfo(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

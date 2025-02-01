@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="areaList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="地区ID" align="center" prop="areaId" />
+      <el-table-column label="地区ID" align="center" prop="id" />
       <el-table-column label="地区名称" align="center" prop="name" />
       <el-table-column label="上级地区ID" align="center" prop="parentId" />
       <el-table-column label="行政级别：1-省 2-市 3-区" align="center" prop="level" />
@@ -181,7 +181,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    areaId: null,
+    id: null,
     name: null,
     parentId: null,
     level: null,
@@ -206,7 +206,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.areaId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -221,8 +221,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _areaId = row.areaId || ids.value
-  getArea(_areaId).then(response => {
+  const _id = row.id || ids.value
+  getArea(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改地区信息";
@@ -233,7 +233,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["areaRef"].validate(valid => {
     if (valid) {
-      if (form.value.areaId != null) {
+      if (form.value.id != null) {
         updateArea(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -252,9 +252,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _areaIds = row.areaId || ids.value;
-  proxy.$modal.confirm('是否确认删除地区信息编号为"' + _areaIds + '"的数据项？').then(function() {
-    return delArea(_areaIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除地区信息编号为"' + _ids + '"的数据项？').then(function() {
+    return delArea(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

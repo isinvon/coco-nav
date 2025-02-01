@@ -75,7 +75,7 @@
 
     <el-table v-loading="loading" :data="searchLogList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="日志ID" align="center" prop="searchLogId" />
+      <el-table-column label="日志ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="搜索关键词" align="center" prop="keyword" />
       <el-table-column label="搜索时间" align="center" prop="searchTime" width="180">
@@ -190,7 +190,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    searchLogId: null,
+    id: null,
     userId: null,
     keyword: null,
     searchTime: null,
@@ -215,7 +215,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.searchLogId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -230,8 +230,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _searchLogId = row.searchLogId || ids.value
-  getSearchLog(_searchLogId).then(response => {
+  const _id = row.id || ids.value
+  getSearchLog(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改搜索日志";
@@ -242,7 +242,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["searchLogRef"].validate(valid => {
     if (valid) {
-      if (form.value.searchLogId != null) {
+      if (form.value.id != null) {
         updateSearchLog(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -261,9 +261,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _searchLogIds = row.searchLogId || ids.value;
-  proxy.$modal.confirm('是否确认删除搜索日志编号为"' + _searchLogIds + '"的数据项？').then(function() {
-    return delSearchLog(_searchLogIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除搜索日志编号为"' + _ids + '"的数据项？').then(function() {
+    return delSearchLog(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

@@ -59,7 +59,7 @@
 
     <el-table v-loading="loading" :data="pointList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="积分账户ID" align="center" prop="pointId" />
+      <el-table-column label="积分账户ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="当前积分" align="center" prop="balance" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -155,7 +155,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    pointId: null,
+    id: null,
     userId: null,
     balance: null,
     createTime: null,
@@ -178,7 +178,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.pointId);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -193,8 +193,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _pointId = row.pointId || ids.value
-  getPoint(_pointId).then(response => {
+  const _id = row.id || ids.value
+  getPoint(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改积分账户";
@@ -205,7 +205,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["pointRef"].validate(valid => {
     if (valid) {
-      if (form.value.pointId != null) {
+      if (form.value.id != null) {
         updatePoint(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -224,9 +224,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _pointIds = row.pointId || ids.value;
-  proxy.$modal.confirm('是否确认删除积分账户编号为"' + _pointIds + '"的数据项？').then(function() {
-    return delPoint(_pointIds);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除积分账户编号为"' + _ids + '"的数据项？').then(function() {
+    return delPoint(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
