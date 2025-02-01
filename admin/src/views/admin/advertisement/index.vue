@@ -169,6 +169,9 @@
         <!--<el-form-item label="点击次数" prop="clickCount">-->
         <!--  <el-input v-model="form.clickCount" placeholder="请输入点击次数" />-->
         <!--</el-form-item>-->
+        <el-form-item label="0-下架 1-正常" prop="status">
+          <el-input v-model="form.status" placeholder="请输入0-下架 1-正常" />
+        </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
           <el-input v-model="form.sortOrder" placeholder="请输入排序值" />
         </el-form-item>
