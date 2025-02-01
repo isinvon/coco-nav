@@ -9,21 +9,16 @@
             @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="开始时间" prop="startTime">
-        <el-date-picker clearable
-                        v-model="queryParams.startTime"
-                        type="date"
-                        value-format="YYYY-MM-DD"
-                        placeholder="请选择开始时间">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="结束时间" prop="endTime">
-        <el-date-picker clearable
-                        v-model="queryParams.endTime"
-                        type="date"
-                        value-format="YYYY-MM-DD"
-                        placeholder="请选择结束时间">
-        </el-date-picker>
+      <el-form-item label="时间范围" prop="dateRange">
+        <el-date-picker
+            v-model="queryParams.dateRange"
+            type="daterange"
+            start-placeholder="请选择开始时间"
+            end-placeholder="请选择结束时间"
+            value-format="YYYY-MM-DD"
+            clearable
+            style="width: 100%"
+        ></el-date-picker>
       </el-form-item>
 
       <el-form-item>
@@ -187,6 +182,7 @@ import {
   addAdvertisement,
   updateAdvertisement
 } from "@/api/admin/advertisement";
+import {parseTime} from "@/utils/ruoyi.js";
 
 const {proxy} = getCurrentInstance();
 
@@ -209,6 +205,7 @@ const data = reactive({
     content: null,
     startTime: null,
     endTime: null,
+    dateRange: null,
     status: null,
     clickCount: null,
     sortOrder: null,
@@ -269,6 +266,7 @@ function reset() {
     content: null,
     startTime: null,
     endTime: null,
+    dateRange: null,
     status: null,
     clickCount: null,
     sortOrder: null,
