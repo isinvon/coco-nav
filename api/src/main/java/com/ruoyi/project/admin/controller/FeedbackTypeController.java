@@ -80,7 +80,7 @@ public class FeedbackTypeController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody FeedbackType feedbackType) {
         LambdaUpdateWrapper<FeedbackType> uw = new LambdaUpdateWrapper<>();
-        uw.eq(FeedbackType::getFeedbackTypeId, feedbackType.getFeedbackTypeId());
+        uw.eq(FeedbackType::getId, feedbackType.getId());
         return toAjax(feedbackTypeService.update(feedbackType, uw));
     }
 

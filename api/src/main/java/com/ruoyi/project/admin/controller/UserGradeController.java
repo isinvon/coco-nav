@@ -80,7 +80,7 @@ public class UserGradeController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody UserGrade userGrade) {
         LambdaUpdateWrapper<UserGrade> uw = new LambdaUpdateWrapper<>();
-        uw.eq(UserGrade::getUserGradeId, userGrade.getUserGradeId());
+        uw.eq(UserGrade::getId, userGrade.getId());
         return toAjax(userGradeService.update(userGrade, uw));
     }
 

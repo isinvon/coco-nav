@@ -80,7 +80,7 @@ public class UserLoginLogController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody UserLoginLog userLoginLog) {
         LambdaUpdateWrapper<UserLoginLog> uw = new LambdaUpdateWrapper<>();
-        uw.eq(UserLoginLog::getUserLoginLogId, userLoginLog.getUserLoginLogId());
+        uw.eq(UserLoginLog::getId, userLoginLog.getId());
         return toAjax(userLoginLogService.update(userLoginLog, uw));
     }
 

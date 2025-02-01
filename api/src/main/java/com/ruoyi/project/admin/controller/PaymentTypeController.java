@@ -80,7 +80,7 @@ public class PaymentTypeController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody PaymentType paymentType) {
         LambdaUpdateWrapper<PaymentType> uw = new LambdaUpdateWrapper<>();
-        uw.eq(PaymentType::getPaymentTypeId, paymentType.getPaymentTypeId());
+        uw.eq(PaymentType::getId, paymentType.getId());
         return toAjax(paymentTypeService.update(paymentType, uw));
     }
 

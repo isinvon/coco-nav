@@ -80,7 +80,7 @@ public class UserController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody User user) {
         LambdaUpdateWrapper<User> uw = new LambdaUpdateWrapper<>();
-        uw.eq(User::getUserId, user.getUserId());
+        uw.eq(User::getId, user.getId());
         return toAjax(userService.update(user, uw));
     }
 

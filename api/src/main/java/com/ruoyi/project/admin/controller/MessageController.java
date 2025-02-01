@@ -80,7 +80,7 @@ public class MessageController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody Message message) {
         LambdaUpdateWrapper<Message> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Message::getMessageId, message.getMessageId());
+        uw.eq(Message::getId, message.getId());
         return toAjax(messageService.update(message, uw));
     }
 

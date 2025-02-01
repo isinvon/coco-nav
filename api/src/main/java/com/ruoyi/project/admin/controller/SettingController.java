@@ -80,7 +80,7 @@ public class SettingController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody Setting setting) {
         LambdaUpdateWrapper<Setting> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Setting::getSettingId, setting.getSettingId());
+        uw.eq(Setting::getId, setting.getId());
         return toAjax(settingService.update(setting, uw));
     }
 

@@ -81,7 +81,7 @@ public class AdvertisementController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody Advertisement advertisement) {
         LambdaUpdateWrapper<Advertisement> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Advertisement::getAdvertisementId, advertisement.getAdvertisementId());
+        uw.eq(Advertisement::getId, advertisement.getId());
         return toAjax(advertisementService.update(advertisement, uw));
     }
 

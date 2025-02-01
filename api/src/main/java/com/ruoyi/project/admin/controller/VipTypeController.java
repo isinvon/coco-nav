@@ -80,7 +80,7 @@ public class VipTypeController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody VipType vipType) {
         LambdaUpdateWrapper<VipType> uw = new LambdaUpdateWrapper<>();
-        uw.eq(VipType::getVipTypeId, vipType.getVipTypeId());
+        uw.eq(VipType::getId, vipType.getId());
         return toAjax(vipTypeService.update(vipType, uw));
     }
 

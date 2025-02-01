@@ -80,7 +80,7 @@ public class SearchLogController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody SearchLog searchLog) {
         LambdaUpdateWrapper<SearchLog> uw = new LambdaUpdateWrapper<>();
-        uw.eq(SearchLog::getSearchLogId, searchLog.getSearchLogId());
+        uw.eq(SearchLog::getId, searchLog.getId());
         return toAjax(searchLogService.update(searchLog, uw));
     }
 

@@ -81,7 +81,7 @@ public class FriendlinkController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody Friendlink friendlink) {
         LambdaUpdateWrapper<Friendlink> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Friendlink::getFriendlinkId, friendlink.getFriendlinkId());
+        uw.eq(Friendlink::getId, friendlink.getId());
         return toAjax(friendlinkService.update(friendlink, uw));
     }
 

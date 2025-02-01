@@ -81,7 +81,7 @@ public class CustomServiceController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody CustomService customService) {
         LambdaUpdateWrapper<CustomService> uw = new LambdaUpdateWrapper<>();
-        uw.eq(CustomService::getCustomServiceId, customService.getCustomServiceId());
+        uw.eq(CustomService::getId, customService.getId());
         return toAjax(customServiceService.update(customService, uw));
     }
 

@@ -80,7 +80,7 @@ public class BookmarkCategoryController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody BookmarkCategory bookmarkCategory) {
         LambdaUpdateWrapper<BookmarkCategory> uw = new LambdaUpdateWrapper<>();
-        uw.eq(BookmarkCategory::getBookmarkCategoryId, bookmarkCategory.getBookmarkCategoryId());
+        uw.eq(BookmarkCategory::getId, bookmarkCategory.getId());
         return toAjax(bookmarkCategoryService.update(bookmarkCategory, uw));
     }
 

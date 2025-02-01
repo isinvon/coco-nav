@@ -80,7 +80,7 @@ public class PointController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody Point point) {
         LambdaUpdateWrapper<Point> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Point::getPointId, point.getPointId());
+        uw.eq(Point::getId, point.getId());
         return toAjax(pointService.update(point, uw));
     }
 

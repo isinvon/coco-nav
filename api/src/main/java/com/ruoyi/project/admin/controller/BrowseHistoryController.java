@@ -80,7 +80,7 @@ public class BrowseHistoryController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody BrowseHistory browseHistory) {
         LambdaUpdateWrapper<BrowseHistory> uw = new LambdaUpdateWrapper<>();
-        uw.eq(BrowseHistory::getBrowseHistoryId, browseHistory.getBrowseHistoryId());
+        uw.eq(BrowseHistory::getId, browseHistory.getId());
         return toAjax(browseHistoryService.update(browseHistory, uw));
     }
 

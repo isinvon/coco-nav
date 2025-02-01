@@ -80,7 +80,7 @@ public class InviteCodeController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody InviteCode inviteCode) {
         LambdaUpdateWrapper<InviteCode> uw = new LambdaUpdateWrapper<>();
-        uw.eq(InviteCode::getInviteCodeId, inviteCode.getInviteCodeId());
+        uw.eq(InviteCode::getId, inviteCode.getId());
         return toAjax(inviteCodeService.update(inviteCode, uw));
     }
 

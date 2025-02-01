@@ -80,6 +80,7 @@ public class WebsiteInfoController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody WebsiteInfo websiteInfo) {
         LambdaUpdateWrapper<WebsiteInfo> uw = new LambdaUpdateWrapper<>();
+        uw.eq(WebsiteInfo::getId, websiteInfo.getId());
         return toAjax(websiteInfoService.update(websiteInfo, uw));
     }
 

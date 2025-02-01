@@ -80,7 +80,7 @@ public class MessageLogController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody MessageLog messageLog) {
         LambdaUpdateWrapper<MessageLog> uw = new LambdaUpdateWrapper<>();
-        uw.eq(MessageLog::getMessageLogId, messageLog.getMessageLogId());
+        uw.eq(MessageLog::getId, messageLog.getId());
         return toAjax(messageLogService.update(messageLog, uw));
     }
 

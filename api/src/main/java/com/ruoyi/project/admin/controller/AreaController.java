@@ -80,7 +80,7 @@ public class AreaController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody Area area) {
         LambdaUpdateWrapper<Area> uw = new LambdaUpdateWrapper<>();
-        uw.eq(Area::getAreaId, area.getAreaId());
+        uw.eq(Area::getId, area.getId());
         return toAjax(areaService.update(area, uw));
     }
 

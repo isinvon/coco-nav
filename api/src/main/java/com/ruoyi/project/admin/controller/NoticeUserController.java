@@ -80,7 +80,7 @@ public class NoticeUserController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody NoticeUser noticeUser) {
         LambdaUpdateWrapper<NoticeUser> uw = new LambdaUpdateWrapper<>();
-        uw.eq(NoticeUser::getRelationId, noticeUser.getRelationId());
+        uw.eq(NoticeUser::getId, noticeUser.getId());
         return toAjax(noticeUserService.update(noticeUser, uw));
     }
 
