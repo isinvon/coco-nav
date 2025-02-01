@@ -25,38 +25,38 @@
           placeholder="请选择结束时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="点击次数" prop="clickCount">
-        <el-input
-          v-model="queryParams.clickCount"
-          placeholder="请输入点击次数"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="排序值" prop="sortOrder">
-        <el-input
-          v-model="queryParams.sortOrder"
-          placeholder="请输入排序值"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="广告的宽度" prop="width">
-        <el-input
-          v-model="queryParams.width"
-          placeholder="请输入广告的宽度"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="广告的高度" prop="height">
-        <el-input
-          v-model="queryParams.height"
-          placeholder="请输入广告的高度"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
+      <!--<el-form-item label="点击次数" prop="clickCount">-->
+      <!--  <el-input-->
+      <!--    v-model="queryParams.clickCount"-->
+      <!--    placeholder="请输入点击次数"-->
+      <!--    clearable-->
+      <!--    @keyup.enter="handleQuery"-->
+      <!--  />-->
+      <!--</el-form-item>-->
+      <!--<el-form-item label="排序值" prop="sortOrder">-->
+      <!--  <el-input-->
+      <!--    v-model="queryParams.sortOrder"-->
+      <!--    placeholder="请输入排序值"-->
+      <!--    clearable-->
+      <!--    @keyup.enter="handleQuery"-->
+      <!--  />-->
+      <!--</el-form-item>-->
+      <!--<el-form-item label="广告的宽度" prop="width">-->
+      <!--  <el-input-->
+      <!--    v-model="queryParams.width"-->
+      <!--    placeholder="请输入广告的宽度"-->
+      <!--    clearable-->
+      <!--    @keyup.enter="handleQuery"-->
+      <!--  />-->
+      <!--</el-form-item>-->
+      <!--<el-form-item label="广告的高度" prop="height">-->
+      <!--  <el-input-->
+      <!--    v-model="queryParams.height"-->
+      <!--    placeholder="请输入广告的高度"-->
+      <!--    clearable-->
+      <!--    @keyup.enter="handleQuery"-->
+      <!--  />-->
+      <!--</el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -166,9 +166,9 @@
             placeholder="请选择结束时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="点击次数" prop="clickCount">
-          <el-input v-model="form.clickCount" placeholder="请输入点击次数" />
-        </el-form-item>
+        <!--<el-form-item label="点击次数" prop="clickCount">-->
+        <!--  <el-input v-model="form.clickCount" placeholder="请输入点击次数" />-->
+        <!--</el-form-item>-->
         <el-form-item label="排序值" prop="sortOrder">
           <el-input v-model="form.sortOrder" placeholder="请输入排序值" />
         </el-form-item>
