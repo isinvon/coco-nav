@@ -7,8 +7,6 @@ import lombok.Data;
 
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 
-import java.io.Serial;
-
 /**
  * 留言管理对象 coco_message
  * 
