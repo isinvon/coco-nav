@@ -22,9 +22,6 @@ public class FriendlinkLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 日志ID */
-    private Long friendlinkLogId;
-
     /** 友链ID */
     @Excel(name = "友链ID")
     private Long friendlinkId;

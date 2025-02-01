@@ -21,9 +21,6 @@ public class PaymentType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 支付方式ID */
-    private Long paymentTypeId;
-
     /** 支付名称 */
     @Excel(name = "支付名称")
     private String name;

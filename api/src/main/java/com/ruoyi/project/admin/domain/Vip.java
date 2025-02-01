@@ -22,9 +22,6 @@ public class Vip extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** VIP记录ID */
-    private Long vipId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

@@ -22,9 +22,6 @@ public class SearchLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 日志ID */
-    private Long searchLogId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

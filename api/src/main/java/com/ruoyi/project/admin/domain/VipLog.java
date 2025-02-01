@@ -19,9 +19,6 @@ public class VipLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 日志ID */
-    private Long vipLogId;
-
     /** VIP记录ID */
     @Excel(name = "VIP记录ID")
     private Long vipId;

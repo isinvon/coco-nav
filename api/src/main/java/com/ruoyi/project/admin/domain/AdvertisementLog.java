@@ -1,5 +1,7 @@
 package com.ruoyi.project.admin.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
@@ -18,9 +20,6 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 public class AdvertisementLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
-
-    /** 日志ID */
-    private Long advertisementLogId;
 
     /** 广告ID */
     @Excel(name = "广告ID")

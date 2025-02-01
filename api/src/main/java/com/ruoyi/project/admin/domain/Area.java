@@ -19,9 +19,6 @@ public class Area extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 地区ID */
-    private Long areaId;
-
     /** 地区名称 */
     @Excel(name = "地区名称")
     private String name;

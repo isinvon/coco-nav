@@ -19,9 +19,6 @@ public class Feedback extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 反馈ID */
-    private Long feedbackId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

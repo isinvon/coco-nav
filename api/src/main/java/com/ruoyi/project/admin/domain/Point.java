@@ -19,9 +19,6 @@ public class Point extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 积分账户ID */
-    private Long pointId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

@@ -19,9 +19,6 @@ public class Setting extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 设置ID */
-    private Long settingId;
-
     /** 设置项键名 */
     @Excel(name = "设置项键名")
     private String key;

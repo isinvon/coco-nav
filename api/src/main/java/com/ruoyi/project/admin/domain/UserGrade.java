@@ -19,9 +19,6 @@ public class UserGrade extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 等级ID */
-    private Long userGradeId;
-
     /** 等级名称 */
     @Excel(name = "等级名称")
     private String gradeName;

@@ -19,9 +19,6 @@ public class FeedbackType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 类型ID */
-    private Long feedbackTypeId;
-
     /** 类型名称 */
     @Excel(name = "类型名称")
     private String typeName;

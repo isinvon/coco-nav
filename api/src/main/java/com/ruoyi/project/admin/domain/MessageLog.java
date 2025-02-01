@@ -19,9 +19,6 @@ public class MessageLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 日志ID */
-    private Long messageLogId;
-
     /** 留言ID */
     @Excel(name = "留言ID")
     private Long messageId;

@@ -19,9 +19,6 @@ public class WebsiteInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 信息ID */
-    private Long websiteInfoId;
-
     /** 网站标题 */
     @Excel(name = "网站标题")
     private String title;

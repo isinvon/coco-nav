@@ -22,9 +22,6 @@ public class NoticeUser extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 关联ID */
-    private Long relationId;
-
     /** 通知ID */
     @Excel(name = "通知ID")
     private Long noticeId;

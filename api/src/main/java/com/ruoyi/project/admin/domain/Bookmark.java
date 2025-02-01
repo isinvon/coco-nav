@@ -19,9 +19,6 @@ public class Bookmark extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 书签ID */
-    private Long bookmarkId;
-
     /** 网站标题 */
     @Excel(name = "网站标题")
     private String title;

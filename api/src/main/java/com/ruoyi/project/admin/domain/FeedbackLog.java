@@ -22,9 +22,6 @@ public class FeedbackLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 日志ID */
-    private Long feedbackLogId;
-
     /** 反馈ID */
     @Excel(name = "反馈ID")
     private Long feedbackId;

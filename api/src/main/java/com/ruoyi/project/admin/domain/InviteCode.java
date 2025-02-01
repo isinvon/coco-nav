@@ -22,9 +22,6 @@ public class InviteCode extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 邀请码ID */
-    private Long inviteCodeId;
-
     /** 邀请码 */
     @Excel(name = "邀请码")
     private String code;

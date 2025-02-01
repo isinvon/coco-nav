@@ -19,9 +19,6 @@ public class Friendlink extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 友链ID */
-    private Long friendlinkId;
-
     /** 网站作者 */
     @Excel(name = "网站作者")
     private String author;

@@ -19,9 +19,6 @@ public class BookmarkArticle extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 文章ID */
-    private Long articleId;
-
     /** 书签ID */
     @Excel(name = "书签ID")
     private Long bookmarkId;

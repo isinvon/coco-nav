@@ -19,9 +19,6 @@ public class CustomService extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 客服ID */
-    private Long customServiceId;
-
     /** 客服昵称 */
     @Excel(name = "客服昵称")
     private String nickname;

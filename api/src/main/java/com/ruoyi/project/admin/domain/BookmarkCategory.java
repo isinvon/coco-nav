@@ -19,9 +19,6 @@ public class BookmarkCategory extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 分类ID */
-    private Long bookmarkCategoryId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

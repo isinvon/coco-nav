@@ -22,9 +22,6 @@ public class BrowseHistory extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 历史记录ID */
-    private Long browseHistoryId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

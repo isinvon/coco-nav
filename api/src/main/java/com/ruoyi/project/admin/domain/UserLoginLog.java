@@ -22,9 +22,6 @@ public class UserLoginLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 日志ID */
-    private Long userLoginLogId;
-
     /** 用户ID */
     @Excel(name = "用户ID")
     private Long userId;

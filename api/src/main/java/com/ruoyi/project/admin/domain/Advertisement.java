@@ -1,5 +1,7 @@
 package com.ruoyi.project.admin.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -18,11 +20,6 @@ import java.util.Date;
 @TableName("coco_advertisement")
 public class Advertisement extends BaseEntity {
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 广告ID
-     */
-    private Long advertisementId;
 
     /**
      * 广告标题
