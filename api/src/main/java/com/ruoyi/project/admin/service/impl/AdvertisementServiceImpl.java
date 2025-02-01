@@ -30,6 +30,18 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
     @Override
     public List<Advertisement> getAdvertisementList(AdvertisementVo advertisementVo) {
 
+        LambdaQueryWrapper<Advertisement> qw = new LambdaQueryWrapper<>(); // 调用查询方法获取广告数据
+
+        // 标题条件查询
+        if (!ObjectUtils.isEmpty(advertisementVo.getTitle())) {
+            qw.like(Advertisement::getTitle, advertisementVo.getTitle());
+        }
+
+        // 状态条件查询
+        if (!ObjectUtils.isEmpty(advertisementVo.getStatus())) {
+            qw.eq(Advertisement::getStatus, advertisementVo.getStatus());
+        }
+
         // 时间条件查询
         Date startTime = null, endTime = null;
 
@@ -38,15 +50,9 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
             endTime = advertisementVo.getDateRange()[1];
         }
 
-        LambdaQueryWrapper<Advertisement> qw = new LambdaQueryWrapper<>(); // 调用查询方法获取广告数据
 
         if (startTime != null && endTime != null) { // 添加时间范围条件，避免 NullPointerException
             qw.ge(Advertisement::getStartTime, startTime).le(Advertisement::getEndTime, endTime);
-        }
-
-        // 标题条件查询
-        if (!ObjectUtils.isEmpty(advertisementVo.getTitle())) {
-            qw.like(Advertisement::getTitle, advertisementVo.getTitle());
         }
 
         return list(qw);
