@@ -1,50 +1,43 @@
 package com.ruoyi.project.admin.controller;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.framework.security.permission.CustomPermission;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.admin.domain.Vip;
-import com.ruoyi.project.admin.service.custom.VipCustomService;
+import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.Vip;
+import com.ruoyi.project.admin.service.VipService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * VIP会员Controller
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
 @RestController
 @RequestMapping("/admin/vip")
-public class VipController extends BaseController
-{
-    @Autowired
-    private VipCustomService vipCustomService;
+public class VipController extends BaseController {
+    @Resource
+    private VipService vipService;
 
     /**
      * 查询VIP会员列表
      */
     @CustomPermission(PermissionConstants.ADMIN_VIP_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Vip vip)
-    {
+    public TableDataInfo list() {
         startPage();
-        List<Vip> list = vipCustomService.selectVipList(vip);
+        List<Vip> list = vipService.list();
         return getDataTable(list);
     }
 
@@ -54,10 +47,9 @@ public class VipController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_VIP_EXPORT)
     @Log(title = "VIP会员", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Vip vip)
-    {
-        List<Vip> list = vipCustomService.selectVipList(vip);
-        ExcelUtil<Vip> util = new ExcelUtil<Vip>(Vip.class);
+    public void export(HttpServletResponse response) {
+        List<Vip> list = vipService.list();
+        ExcelUtil<Vip> util = new ExcelUtil<>(Vip.class);
         util.exportExcel(response, list, "VIP会员数据");
     }
 
@@ -66,9 +58,8 @@ public class VipController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_VIP_QUERY)
     @GetMapping(value = "/{vipId}")
-    public AjaxResult getInfo(@PathVariable("vipId") Long vipId)
-    {
-        return success(vipCustomService.selectVipByVipId(vipId));
+    public AjaxResult getInfo(@PathVariable("vipId") Long vipId) {
+        return success(vipService.getById(vipId));
     }
 
     /**
@@ -77,9 +68,8 @@ public class VipController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_VIP_ADD)
     @Log(title = "VIP会员", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Vip vip)
-    {
-        return toAjax(vipCustomService.insertVip(vip));
+    public AjaxResult add(@RequestBody Vip vip) {
+        return toAjax(vipService.save(vip));
     }
 
     /**
@@ -88,9 +78,10 @@ public class VipController extends BaseController
     @CustomPermission(PermissionConstants.ADMIN_VIP_EDIT)
     @Log(title = "VIP会员", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Vip vip)
-    {
-        return toAjax(vipCustomService.updateVip(vip));
+    public AjaxResult edit(@RequestBody Vip vip) {
+        LambdaQueryWrapper<Vip> qw = new LambdaQueryWrapper<>();
+        qw.eq(Vip::getVipId, vip.getVipId());
+        return toAjax(vipService.update(vip, qw));
     }
 
     /**
@@ -98,9 +89,9 @@ public class VipController extends BaseController
      */
     @CustomPermission(PermissionConstants.ADMIN_VIP_REMOVE)
     @Log(title = "VIP会员", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{vipIds}")
-    public AjaxResult remove(@PathVariable Long[] vipIds)
-    {
-        return toAjax(vipCustomService.deleteVipByVipIds(vipIds));
+    @DeleteMapping("/{vipIds}")
+    public AjaxResult remove(@PathVariable Long[] vipIds) {
+        List<Long> idList = Arrays.asList(vipIds);
+        return toAjax(vipService.removeByIds(idList));
     }
 }
