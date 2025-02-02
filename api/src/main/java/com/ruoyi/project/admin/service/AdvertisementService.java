@@ -10,6 +10,7 @@ import java.util.List;
  * @since :  2025/1/31 上午3:37
  */
 public interface AdvertisementService extends IService<Advertisement> {
-    List<Advertisement> getAdvertisementList(Advertisement advertisement);
     List<Advertisement> getAdvertisementListByQueryCondition(Advertisement advertisement);
+
+    Boolean add(Advertisement advertisement);
 }

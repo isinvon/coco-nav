@@ -69,7 +69,8 @@ public class AdvertisementController extends BaseController {
     @Log(title = "广告管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Advertisement advertisement) {
-        return toAjax(advertisementService.save(advertisement));
+
+        return toAjax(advertisementService.add(advertisement));
     }
 
     /**

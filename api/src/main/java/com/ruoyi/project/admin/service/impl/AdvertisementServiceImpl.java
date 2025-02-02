@@ -2,12 +2,17 @@ package com.ruoyi.project.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.common.enums.AdvertisementAction;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.project.admin.domain.Advertisement;
+import com.ruoyi.project.admin.domain.AdvertisementLog;
 import com.ruoyi.project.admin.mapper.AdvertisementMapper;
+import com.ruoyi.project.admin.service.AdvertisementLogService;
 import com.ruoyi.project.admin.service.AdvertisementService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +25,9 @@ import java.util.List;
 @Service
 public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, Advertisement> implements AdvertisementService {
 
+    @Resource
+    private AdvertisementLogService advertisementLogService;
+
     /**
      * 获取广告列表并转换为 AdvertisementVo 类型
      *
@@ -27,7 +35,7 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
      * @return 广告列表（AdvertisementVo 类型）
      */
     @Override
-    public List<Advertisement> getAdvertisementList(Advertisement advertisement) {
+    public List<Advertisement> getAdvertisementListByQueryCondition(Advertisement advertisement) {
 
         LambdaQueryWrapper<Advertisement> qw = new LambdaQueryWrapper<>(); // 调用查询方法获取广告数据
 
@@ -49,5 +57,28 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
         }
 
         return list(qw);
+    }
+
+    /**
+     * 添加广告
+     *
+     * @param advertisement 广告信息
+     * @return
+     */
+    @Override
+    public Boolean add(Advertisement advertisement) {
+        boolean save = save(advertisement);
+
+        // 添加成功, 记录广告操作日志
+        AdvertisementLog advertisementLog = new AdvertisementLog();
+        if (save) {
+            advertisementLog.setAction(AdvertisementAction.ADD.getCode());
+            advertisementLog.setAdvertisementId(advertisement.getId());
+            advertisementLog.setOperatorId(SecurityUtils.getUserId());
+            // 记录到 AdvertisementLog 表中
+            advertisementLogService.save(advertisementLog);
+        }
+
+        return save;
     }
 }
