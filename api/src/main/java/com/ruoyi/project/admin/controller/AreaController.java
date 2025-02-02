@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 地区信息Controller
@@ -91,4 +92,14 @@ public class AreaController extends BaseController {
     //     List<Long> idList = Arrays.asList(areaIds);
     //     return toAjax(areaService.removeByIds(idList));
     // }
+
+    /**
+     * 获取类型
+     */
+    @GetMapping("/index")
+    public AjaxResult index() {
+        return success(Map.of(
+                "areaDepthTypeList", Area.areaDepthTypeList // 地区深度类型
+        ));
+    }
 }

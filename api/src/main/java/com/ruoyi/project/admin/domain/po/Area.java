@@ -1,13 +1,16 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import com.ruoyi.project.admin.domain.bo.TypeBo;
 import lombok.Data;
 
 
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 地区信息对象 coco_area
@@ -41,4 +44,23 @@ public class Area implements Serializable
     /** 地区排序 */
     @Excel(name = "地区排序")
     private String sort;
+
+    /**
+     * 地区级别 - 省：1
+     */
+    public static final int AREA_DEPTH_PROVINCE = 1;
+    /**
+     * 地区级别 - 市：2
+     */
+    public static final int AREA_DEPTH_CITY = 2;
+    /**
+     * 地区级别 - 区：3
+     */
+    public static final int AREA_DEPTH_DISTRICT = 3;
+
+    public static final List<TypeBo> areaDepthTypeList = List.of(
+            new TypeBo(AREA_DEPTH_PROVINCE, "省", ThemeColor.CORAL_PINK.getHexCode()),
+            new TypeBo(AREA_DEPTH_CITY, "市", ThemeColor.PEACH_ORANGE.getHexCode()),
+            new TypeBo(AREA_DEPTH_DISTRICT, "区", ThemeColor.MINT_GREEN.getHexCode())
+    );
 }
