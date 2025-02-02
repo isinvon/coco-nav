@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.admin.domain.bo.TypeBo;
@@ -62,11 +63,11 @@ public class AdvertisementLog extends BaseEntity {
     public static final int ADVERTISEMENT_LOG_ACTION_DISABLE = 5;
 
     public static final List<TypeBo> advertisementLogActionTypeList = List.of(
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_ADD, "添加广告", "#7FC8A9"),  // 深一点的薄荷绿
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_EDIT, "修改广告", "#F4A261"), // 深一点的蜜桃橙
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_DELETE, "删除广告", "#E76F51"), // 深一点的珊瑚粉
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_ENABLE, "启用广告", "#457B9D"), // 深一点的天空蓝
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_DISABLE, "禁用广告", "#B0B0B0")  // 深一点的浅灰色
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_ADD, "添加广告", ThemeColor.MINT_GREEN.getColorName()),  // 深一点的薄荷绿
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_EDIT, "修改广告", ThemeColor.PEACH_ORANGE.getColorName()), // 深一点的蜜桃橙
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_DELETE, "删除广告", ThemeColor.CORAL_PINK.getColorName()), // 深一点的珊瑚粉
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_ENABLE, "启用广告", ThemeColor.SKY_BLUE.getColorName()), // 深一点的天空蓝
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_DISABLE, "禁用广告", ThemeColor.LIGHT_GRAY.getColorName())  // 深一点的浅灰色
     );
 
 }
