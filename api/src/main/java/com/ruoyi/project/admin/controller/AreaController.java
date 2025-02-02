@@ -36,7 +36,7 @@ public class AreaController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(Area area) {
         startPage();
-        List<Area> list = areaService.list();
+        List<Area> list = areaService.getAreaListByQueryCondition(area);
         return getDataTable(list);
     }
 
@@ -61,34 +61,34 @@ public class AreaController extends BaseController {
         return success(areaService.getById(areaId));
     }
 
-    /**
-     * 新增地区信息
-     */
-    @CustomPermission(PermissionConstants.ADMIN_AREA_ADD)
-    @Log(title = "地区信息", businessType = BusinessType.INSERT)
-    @PostMapping
-    public AjaxResult add(@RequestBody Area area) {
-        return toAjax(areaService.save(area));
-    }
+    // /**
+    //  * 新增地区信息
+    //  */
+    // @CustomPermission(PermissionConstants.ADMIN_AREA_ADD)
+    // @Log(title = "地区信息", businessType = BusinessType.INSERT)
+    // @PostMapping
+    // public AjaxResult add(@RequestBody Area area) {
+    //     return toAjax(areaService.save(area));
+    // }
 
-    /**
-     * 修改地区信息
-     */
-    @CustomPermission(PermissionConstants.ADMIN_AREA_EDIT)
-    @Log(title = "地区信息", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@RequestBody Area area) {
-        return toAjax(areaService.updateById(area));
-    }
+    // /**
+    //  * 修改地区信息
+    //  */
+    // @CustomPermission(PermissionConstants.ADMIN_AREA_EDIT)
+    // @Log(title = "地区信息", businessType = BusinessType.UPDATE)
+    // @PutMapping
+    // public AjaxResult edit(@RequestBody Area area) {
+    //     return toAjax(areaService.updateById(area));
+    // }
 
-    /**
-     * 删除地区信息
-     */
-    @CustomPermission(PermissionConstants.ADMIN_AREA_REMOVE)
-    @Log(title = "地区信息", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{areaIds}")
-    public AjaxResult remove(@PathVariable Long[] areaIds) {
-        List<Long> idList = Arrays.asList(areaIds);
-        return toAjax(areaService.removeByIds(idList));
-    }
+    // /**
+    //  * 删除地区信息
+    //  */
+    // @CustomPermission(PermissionConstants.ADMIN_AREA_REMOVE)
+    // @Log(title = "地区信息", businessType = BusinessType.DELETE)
+    // @DeleteMapping("/{areaIds}")
+    // public AjaxResult remove(@PathVariable Long[] areaIds) {
+    //     List<Long> idList = Arrays.asList(areaIds);
+    //     return toAjax(areaService.removeByIds(idList));
+    // }
 }
