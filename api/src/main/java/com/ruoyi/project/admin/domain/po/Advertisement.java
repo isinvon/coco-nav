@@ -75,4 +75,27 @@ public class Advertisement extends BaseEntity {
      */
     @Excel(name = "广告的高度")
     private Integer height;
+
+    // ============================================
+
+    /**
+     * 广告状态 0-下架
+     */
+    private static final Integer ADVERTISEMENT_STATUS_DISABLED = 0;
+    /**
+     * 广告状态 1-正常
+     */
+    private static final Integer ADVERTISEMENT_STATUS_ENABLED = 1;
+    /**
+     * 默认广告宽度
+     */
+    public static final int ADVERTISEMENT_DEFAULT_WIDTH = 1;
+    /**
+     * 默认广告高度
+     */
+    public static final int ADVERTISEMENT_DEFAULT_HEIGHT = 1;
+    /**
+     * 默认广告点击次数
+     */
+    public static final int ADVERTISEMENT_DEFAULT_CLICK_COUNT = 0;
 }
