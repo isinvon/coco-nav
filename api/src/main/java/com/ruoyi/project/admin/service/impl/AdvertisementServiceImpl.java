@@ -95,6 +95,7 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
             // 记录到 AdvertisementLog 表中
             advertisementLogService.save(advertisementLog);
         }
+
         return update;
     }
 
@@ -111,6 +112,8 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
             // 记录到 AdvertisementLog 表中
             advertisementLogService.save(advertisementLog);
         }
+
+        return remove;
     }
 
 }
