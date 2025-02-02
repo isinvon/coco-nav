@@ -32,19 +32,19 @@ public class BaseEntity implements Serializable {
      * 搜索值
      */
     @JsonIgnore
-    @TableField(value = "search_value")
+    @TableField(value = "search_value", exist = false)
     private String searchValue;
 
     /**
      * 创建者
      */
-    @TableField(value = "create_by")
+    @TableField(value = "create_by", exist = false)
     private String createBy;
 
     /**
      * 更新者
      */
-    @TableField(value = "update_by")
+    @TableField(value = "update_by", exist = false)
     private String updateBy;
 
     /**
@@ -65,13 +65,13 @@ public class BaseEntity implements Serializable {
      * 删除标志（0代表存在 1代表删除）(TableLogic的逻辑在application.yml中定义了)
      */
     @TableLogic
-    @TableField(value = "is_deleted")
+    @TableField(value = "is_deleted", exist = false)
     private Integer isDeleted;
 
     /**
      * 备注
      */
-    @TableField(value = "remark")
+    @TableField(value = "remark", exist = false)
     private String remark;
 
     /**
