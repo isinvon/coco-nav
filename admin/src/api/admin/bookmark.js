@@ -42,3 +42,11 @@ export function delBookmark(bookmarkId) {
     method: 'delete'
   })
 }
+
+// Index
+export function indexBookmark() {
+  return request({
+    url: '/admin/bookmark/index',
+    method: 'get'
+  })
+}
