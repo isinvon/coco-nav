@@ -270,7 +270,6 @@ const {queryParams, form, rules} = toRefs(data);
 /** 获取广告相关的类型 （index） */
 function getIndex() {
   indexAdvertisement().then(response => {
-    console.log(response)
     advertisementStatusTypeList.value = response.data.advertisementStatusTypeList;
   });
 }
