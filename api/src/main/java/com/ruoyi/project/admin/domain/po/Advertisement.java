@@ -3,11 +3,14 @@ package com.ruoyi.project.admin.domain.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.constant.DateConstants;
+import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import com.ruoyi.project.admin.domain.bo.TypeBo;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 广告管理对象 coco_advertisement
@@ -98,4 +101,9 @@ public class Advertisement extends BaseEntity {
      * 默认广告点击次数
      */
     public static final int ADVERTISEMENT_DEFAULT_CLICK_COUNT = 0;
+
+    public static final List<TypeBo> advertisementStatusTypeList = List.of(
+            new TypeBo(ADVERTISEMENT_STATUS_DISABLED, "下架", ThemeColor.CORAL_PINK.getColorName()), // 深一点的珊瑚粉
+            new TypeBo(ADVERTISEMENT_STATUS_ENABLED, "正常", ThemeColor.MINT_GREEN.getColorName())  // 深一点的天空蓝
+    );
 }

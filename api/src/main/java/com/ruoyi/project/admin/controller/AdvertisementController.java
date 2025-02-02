@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 广告管理Controller
@@ -93,4 +94,12 @@ public class AdvertisementController extends BaseController {
         List<Long> idList = Arrays.asList(advertisementIds);
         return toAjax(advertisementService.deleteAdvertisement(idList));
     }
+
+    @GetMapping("/index")
+    public AjaxResult index() {
+        return success(Map.of(
+                "advertisementStatusTypeList", Advertisement.advertisementStatusTypeList // 广告状态类型
+        ));
+    }
+
 }
