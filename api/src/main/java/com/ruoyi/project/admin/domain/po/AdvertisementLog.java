@@ -62,10 +62,11 @@ public class AdvertisementLog extends BaseEntity {
     public static final int ADVERTISEMENT_LOG_ACTION_DISABLE = 5;
 
     public static final List<TypeBo> advertisementLogActionTypeList = List.of(
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_ADD, "添加广告", "green"),
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_EDIT, "修改广告", "yellow"),
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_DELETE, "删除广告", "red"),
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_ENABLE, "启用广告", "blue"),
-            new TypeBo(ADVERTISEMENT_LOG_ACTION_DISABLE, "禁用广告", "gray")
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_ADD, "添加广告", "#7FC8A9"),  // 深一点的薄荷绿
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_EDIT, "修改广告", "#F4A261"), // 深一点的蜜桃橙
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_DELETE, "删除广告", "#E76F51"), // 深一点的珊瑚粉
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_ENABLE, "启用广告", "#457B9D"), // 深一点的天空蓝
+            new TypeBo(ADVERTISEMENT_LOG_ACTION_DISABLE, "禁用广告", "#B0B0B0")  // 深一点的浅灰色
     );
+
 }
