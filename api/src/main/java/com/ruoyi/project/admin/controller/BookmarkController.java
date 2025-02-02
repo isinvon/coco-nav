@@ -34,9 +34,9 @@ public class BookmarkController extends BaseController {
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LIST)
     @GetMapping("/list")
-    public TableDataInfo list() {
+    public TableDataInfo list(Bookmark bookmark) {
         startPage();
-        List<Bookmark> list = bookmarkService.list();
+        List<Bookmark> list = bookmarkService.getBookmarkListByQueryCondition(bookmark);
         return getDataTable(list);
     }
 
