@@ -1,5 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -50,6 +52,13 @@ public class Bookmark extends BaseEntity
     /** 0-禁用 1-启用 */
     @Excel(name = "0-禁用 1-启用")
     private Integer status;
+
+    /**
+     * 删除标志（0代表存在 1代表删除）
+     */
+    @TableLogic
+    @TableField(value = "is_deleted")
+    private Integer isDeleted;
 
     /**
      * 书签上架状态  禁用 - 0
