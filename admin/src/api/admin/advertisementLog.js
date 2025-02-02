@@ -42,3 +42,11 @@ export function delAdvertisementLog(advertisementLogId) {
     method: 'delete'
   })
 }
+
+// Index
+export function indexAdvertisementLog() {
+  return request({
+    url: '/admin/advertisementLog/index',
+    method: 'get',
+  })
+}

@@ -32,10 +32,22 @@
     <el-table v-loading="loading" :data="advertisementLogList">
       <el-table-column label="日志ID" align="center" prop="id" />
       <el-table-column label="广告ID" align="center" prop="advertisementId" />
-      <el-table-column label="操作类型" align="center" prop="action" />
+      <el-table-column label="操作类型" align="center" prop="action">
+        <template #default="scope">
+          <el-tag
+              v-if="advertisementLogActionTypeList.some(item => item.value === scope.row.action)"
+              :key="scope.row.action"
+              :color="advertisementLogActionTypeList.find(item => item.value === scope.row.action)?.color"
+              style="font-weight: bold;color: white"
+          >
+            {{ advertisementLogActionTypeList.find(item => item.value === scope.row.action)?.label }}
+          </el-tag>
+        </template>
+      </el-table-column>
+
       <el-table-column label="操作人ID" align="center" prop="operatorId" />
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -47,7 +59,7 @@
 </template>
 
 <script setup name="AdvertisementLog">
-import { listAdvertisementLog, getAdvertisementLog, delAdvertisementLog, addAdvertisementLog, updateAdvertisementLog } from "@/api/admin/advertisementLog";
+import { listAdvertisementLog, getAdvertisementLog, delAdvertisementLog, addAdvertisementLog, updateAdvertisementLog ,indexAdvertisementLog} from "@/api/admin/advertisementLog";
 
 const { proxy } = getCurrentInstance();
 
@@ -60,6 +72,8 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+// 广告操作日志类型
+const advertisementLogActionTypeList = ref([])
 
 const data = reactive({
   form: {},
@@ -84,6 +98,15 @@ function getList() {
   });
 }
 
+/**
+ * 获取广告日志操作类型
+ */
+function getIndex() {
+  indexAdvertisementLog().then(response => {
+    advertisementLogActionTypeList.value = response.data.advertisementLogActionTypeList;
+  });
+}
+
 /** 搜索按钮操作 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
@@ -104,4 +127,5 @@ function handleExport() {
 }
 
 getList();
+getIndex();
 </script>
