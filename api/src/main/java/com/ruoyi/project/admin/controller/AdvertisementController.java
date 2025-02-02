@@ -70,7 +70,7 @@ public class AdvertisementController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody Advertisement advertisement) {
 
-        return toAjax(advertisementService.add(advertisement));
+        return toAjax(advertisementService.addAdvertisement(advertisement));
     }
 
     /**

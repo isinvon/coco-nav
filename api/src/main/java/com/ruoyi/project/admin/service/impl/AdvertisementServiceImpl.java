@@ -66,7 +66,7 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
      * @return
      */
     @Override
-    public Boolean add(Advertisement advertisement) {
+    public Boolean addAdvertisement(Advertisement advertisement) {
         boolean save = save(advertisement);
 
         // 添加成功, 记录广告操作日志
@@ -81,4 +81,5 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
 
         return save;
     }
+
 }
