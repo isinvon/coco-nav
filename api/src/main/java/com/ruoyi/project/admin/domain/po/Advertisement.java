@@ -81,11 +81,11 @@ public class Advertisement extends BaseEntity {
     /**
      * 广告状态 0-下架
      */
-    private static final Integer ADVERTISEMENT_STATUS_DISABLED = 0;
+    public static final Integer ADVERTISEMENT_STATUS_DISABLED = 0;
     /**
      * 广告状态 1-正常
      */
-    private static final Integer ADVERTISEMENT_STATUS_ENABLED = 1;
+    public static final Integer ADVERTISEMENT_STATUS_ENABLED = 1;
     /**
      * 默认广告宽度
      */
