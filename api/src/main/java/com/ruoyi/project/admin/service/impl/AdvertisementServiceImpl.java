@@ -69,9 +69,9 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
     public Boolean addAdvertisement(Advertisement advertisement) {
         boolean save = save(advertisement);
 
-        // 添加成功, 记录广告操作日志
-        AdvertisementLog advertisementLog = new AdvertisementLog();
         if (save) {
+            // 添加成功, 记录广告操作日志
+            AdvertisementLog advertisementLog = new AdvertisementLog();
             advertisementLog.setAction(AdvertisementAction.ADD.getCode());
             advertisementLog.setAdvertisementId(advertisement.getId());
             advertisementLog.setOperatorId(SecurityUtils.getUserId());
@@ -80,6 +80,22 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
         }
 
         return save;
+    }
+
+    @Override
+    public Boolean updateAdvertisement(Advertisement advertisement) {
+        boolean update = updateById(advertisement);
+
+        if (update) {
+            // 修改成功, 记录广告操作日志
+            AdvertisementLog advertisementLog = new AdvertisementLog();
+            advertisementLog.setAction(AdvertisementAction.EDIT.getCode());
+            advertisementLog.setAdvertisementId(advertisement.getId());
+            advertisementLog.setOperatorId(SecurityUtils.getUserId());
+            // 记录到 AdvertisementLog 表中
+            advertisementLogService.save(advertisementLog);
+        }
+        return update;
     }
 
 }

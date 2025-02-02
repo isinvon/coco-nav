@@ -80,7 +80,7 @@ public class AdvertisementController extends BaseController {
     @Log(title = "广告管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Advertisement advertisement) {
-        return toAjax(advertisementService.updateById(advertisement));
+        return toAjax(advertisementService.updateAdvertisement(advertisement));
     }
 
     /**

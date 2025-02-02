@@ -13,4 +13,6 @@ public interface AdvertisementService extends IService<Advertisement> {
     List<Advertisement> getAdvertisementListByQueryCondition(Advertisement advertisement);
 
     Boolean addAdvertisement(Advertisement advertisement);
+
+    Boolean updateAdvertisement(Advertisement advertisement);
 }
