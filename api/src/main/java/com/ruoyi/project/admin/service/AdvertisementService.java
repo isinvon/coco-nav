@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface AdvertisementService extends IService<Advertisement> {
     List<Advertisement> getAdvertisementList(Advertisement advertisement);
+    List<Advertisement> getAdvertisementListByQueryCondition(Advertisement advertisement);
 }

@@ -37,7 +37,7 @@ public class AdvertisementController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(Advertisement advertisement) {
         startPage();
-        List<Advertisement> advertisementList = advertisementService.getAdvertisementList(advertisement);
+        List<Advertisement> advertisementList = advertisementService.getAdvertisementListByQueryCondition(advertisement);
         return getDataTable(advertisementList);
     }
 
