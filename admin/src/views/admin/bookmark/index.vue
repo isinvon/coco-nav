@@ -3,34 +3,26 @@
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="网站标题" prop="title">
         <el-input
-          v-model="queryParams.title"
-          placeholder="请输入网站标题"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.title"
+            placeholder="请输入网站标题"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="网站图标" prop="icon">
         <el-input
-          v-model="queryParams.icon"
-          placeholder="请输入网站图标"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.icon"
+            placeholder="请输入图标链接"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="点击次数" prop="clickCount">
+      <el-form-item label="网站链接" prop="url">
         <el-input
-          v-model="queryParams.clickCount"
-          placeholder="请输入点击次数"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="排序值" prop="sortOrder">
-        <el-input
-          v-model="queryParams.sortOrder"
-          placeholder="请输入排序值"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.url"
+            placeholder="请输入网站链接"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
@@ -42,88 +34,107 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['admin:bookmark:add']"
-        >新增</el-button>
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['admin:bookmark:add']"
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['admin:bookmark:edit']"
-        >修改</el-button>
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['admin:bookmark:edit']"
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['admin:bookmark:remove']"
-        >删除</el-button>
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['admin:bookmark:remove']"
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['admin:bookmark:export']"
-        >导出</el-button>
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['admin:bookmark:export']"
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="bookmarkList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="书签ID" align="center" prop="id" />
-      <el-table-column label="网站标题" align="center" prop="title" />
-      <el-table-column label="网站地址" align="center" prop="url" />
-      <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId" />
-      <el-table-column label="网站图标" align="center" prop="icon" />
-      <el-table-column label="点击次数" align="center" prop="clickCount" />
-      <el-table-column label="排序值" align="center" prop="sortOrder" />
-      <el-table-column label="0-删除 1-正常" align="center" prop="status" />
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="书签ID" align="center" prop="id"/>
+      <el-table-column label="网站标题" align="center" prop="title"/>
+      <el-table-column label="网站地址" align="center" prop="url"/>
+      <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId"/>
+      <el-table-column label="网站图标" align="center" prop="icon"/>
+      <el-table-column label="点击次数" align="center" prop="clickCount"/>
+      <el-table-column label="排序值" align="center" prop="sortOrder"/>
+      <el-table-column label="状态" align="center" prop="status">
+        <template #default="scope">
+          <TagTool
+              :value="scope.row.status"
+              :options="bookmarkStatusTypeList"
+          />
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:bookmark:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:bookmark:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
+                     v-hasPermi="['admin:bookmark:edit']">修改
+          </el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
+                     v-hasPermi="['admin:bookmark:remove']">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
     <!-- 添加或修改书签管理对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="bookmarkRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="网站标题" prop="title">
-          <el-input v-model="form.title" placeholder="请输入网站标题" />
+          <el-input v-model="form.title" placeholder="请输入网站标题"/>
         </el-form-item>
         <el-form-item label="网站地址" prop="url">
-          <el-input v-model="form.url" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.url" type="textarea" placeholder="请输入内容"/>
         </el-form-item>
         <el-form-item label="网站图标" prop="icon">
-          <el-input v-model="form.icon" placeholder="请输入网站图标" />
-        </el-form-item>
-        <el-form-item label="点击次数" prop="clickCount">
-          <el-input v-model="form.clickCount" placeholder="请输入点击次数" />
+          <el-input v-model="form.icon" placeholder="请输入网站图标"/>
         </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
-          <el-input v-model="form.sortOrder" placeholder="请输入排序值" />
+          <el-input-number v-model="form.sortOrder" :min="1" label="排序值"/>
+        </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <ButtonGroupTool
+              :options="bookmarkStatusTypeList"
+              :modelValue="form.status"
+              @update:modelValue="value => form.status = value"
+          />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -137,9 +148,10 @@
 </template>
 
 <script setup name="Bookmark">
-import { listBookmark, getBookmark, delBookmark, addBookmark, updateBookmark } from "@/api/admin/bookmark";
+import {listBookmark, getBookmark, delBookmark, addBookmark, updateBookmark, indexBookmark} from "@/api/admin/bookmark";
+import TagTool from "@/components/TagTool/index.vue";
 
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 
 const bookmarkList = ref([]);
 const open = ref(false);
@@ -150,6 +162,9 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const bookmarkStatusTypeList = ref([]); // 书签状态类型
+const bookmarkDeleteStatusList = ref([]); // 书签删除状态类型
+const bookmarkDefaultIcon = ref(''); // 书签默认图标
 
 const data = reactive({
   form: {},
@@ -166,21 +181,30 @@ const data = reactive({
   },
   rules: {
     title: [
-      { required: true, message: "网站标题不能为空", trigger: "blur" }
+      {required: true, message: "网站标题不能为空", trigger: "blur"}
     ],
     url: [
-      { required: true, message: "网站地址不能为空", trigger: "blur" }
+      {required: true, message: "网站地址不能为空", trigger: "blur"}
     ],
     createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
+      {required: true, message: "创建时间不能为空", trigger: "blur"}
     ],
     updateTime: [
-      { required: true, message: "更新时间不能为空", trigger: "blur" }
+      {required: true, message: "更新时间不能为空", trigger: "blur"}
     ]
   }
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const {queryParams, form, rules} = toRefs(data);
+
+/** Index */
+function getIndex() {
+  indexBookmark().then(response => {
+    bookmarkStatusTypeList.value = response.data.bookmarkStatusTypeList;
+    bookmarkDeleteStatusList.value = response.data.bookmarkDeleteStatusList;
+    bookmarkDefaultIcon.value = response.data.bookmarkDefaultIcon;
+  });
+}
 
 /** 查询书签管理列表 */
 function getList() {
@@ -207,8 +231,8 @@ function reset() {
     bookmarkCategoryId: null,
     icon: null,
     clickCount: null,
-    sortOrder: null,
-    status: null,
+    sortOrder: 1,
+    status: 1,
     createTime: null,
     updateTime: null
   };
@@ -276,12 +300,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除书签管理编号为"' + _ids + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除书签管理编号为"' + _ids + '"的数据项？').then(function () {
     return delBookmark(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */
@@ -292,4 +317,5 @@ function handleExport() {
 }
 
 getList();
+getIndex();
 </script>
