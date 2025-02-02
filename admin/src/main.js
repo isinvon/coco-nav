@@ -42,6 +42,8 @@ import ImageUpload from "@/components/ImageUpload"
 import ImagePreview from "@/components/ImagePreview"
 // 字典标签组件
 import DictTag from '@/components/DictTag'
+// 自定义Tag组件
+import TagTool from '@/components/TagTool'
 
 const app = createApp(App)
 
@@ -56,6 +58,7 @@ app.config.globalProperties.selectDictLabel = selectDictLabel
 app.config.globalProperties.selectDictLabels = selectDictLabels
 
 // 全局组件挂载
+app.component('TagTool', TagTool)
 app.component('DictTag', DictTag)
 app.component('Pagination', Pagination)
 app.component('FileUpload', FileUpload)
