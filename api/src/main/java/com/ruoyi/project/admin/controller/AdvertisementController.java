@@ -1,7 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 广告管理Controller
@@ -53,7 +50,7 @@ public class AdvertisementController extends BaseController {
     @PostMapping("/export")
     public void export(HttpServletResponse response) {
         List<Advertisement> list = advertisementService.list();
-        ExcelUtil<Advertisement> util = new ExcelUtil<Advertisement>(Advertisement.class);
+        ExcelUtil<Advertisement> util = new ExcelUtil<>(Advertisement.class);
         util.exportExcel(response, list, "广告管理数据");
     }
 
