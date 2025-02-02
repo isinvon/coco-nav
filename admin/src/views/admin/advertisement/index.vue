@@ -299,9 +299,13 @@ function reset() {
 /** 搜索按钮操作 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
-  // 将dateRange赋值给startTime和endTime
-  queryParams.value.startTime = queryParams.value.dateRange[0];
-  queryParams.value.endTime = queryParams.value.dateRange[1];
+
+  if (queryParams.value.dateRange != null){
+    // 将dateRange赋值给startTime和endTime
+    queryParams.value.startTime = queryParams.value.dateRange[0];
+    queryParams.value.endTime = queryParams.value.dateRange[1];
+  }
+  
   getList();
 }
 
@@ -341,9 +345,13 @@ function submitForm() {
   proxy.$refs["advertisementRef"].validate(valid => {
     if (valid) {
       if (form.value.id != null) {
-        // 将dateRange赋值给startTime和endTime
-        form.value.startTime = form.value.dateRange[0];
-        form.value.endTime = form.value.dateRange[1];
+
+        if(form.value.dateRange != null){
+          // 将dateRange赋值给startTime和endTime
+          form.value.startTime = form.value.dateRange[0];
+          form.value.endTime = form.value.dateRange[1];
+        }
+
         updateAdvertisement(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;

@@ -44,10 +44,8 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
         // 时间条件查询
         Date startTime = advertisement.getStartTime();
         Date endTime = advertisement.getEndTime();
-        if (startTime != null && endTime == null) { // 添加时间范围条件，避免 NullPointerException
-            qw.ge(Advertisement::getStartTime, startTime);
-        } else if (startTime == null && endTime != null) { // 添加时间范围条件，避免 NullPointerException
-            qw.le(Advertisement::getEndTime, endTime);
+        if (startTime != null && endTime != null) { // 添加时间范围条件，避免 NullPointerException
+            qw.ge(Advertisement::getStartTime, startTime).le(Advertisement::getEndTime, endTime);
         }
 
         return list(qw);
