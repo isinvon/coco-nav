@@ -95,6 +95,11 @@ public class AdvertisementController extends BaseController {
         return toAjax(advertisementService.deleteAdvertisement(idList));
     }
 
+    /**
+     * 获取类型
+     *
+     * @return
+     */
     @GetMapping("/index")
     public AjaxResult index() {
         return success(Map.of(

@@ -103,7 +103,7 @@ public class Advertisement extends BaseEntity {
     public static final int ADVERTISEMENT_DEFAULT_CLICK_COUNT = 0;
 
     public static final List<TypeBo> advertisementStatusTypeList = List.of(
-            new TypeBo(ADVERTISEMENT_STATUS_DISABLED, "下架", ThemeColor.CORAL_PINK.getColorName()), // 深一点的珊瑚粉
-            new TypeBo(ADVERTISEMENT_STATUS_ENABLED, "正常", ThemeColor.MINT_GREEN.getColorName())  // 深一点的天空蓝
+            new TypeBo(ADVERTISEMENT_STATUS_DISABLED, "下架", ThemeColor.CORAL_PINK.getHexCode()),
+            new TypeBo(ADVERTISEMENT_STATUS_ENABLED, "正常", ThemeColor.MINT_GREEN.getHexCode())
     );
 }
