@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 广告操作日志Controller
@@ -90,5 +91,18 @@ public class AdvertisementLogController extends BaseController {
     public AjaxResult remove(@PathVariable Long[] advertisementLogIds) {
         List<Long> idList = Arrays.asList(advertisementLogIds);
         return toAjax(advertisementLogService.removeByIds(idList));
+    }
+
+
+    /**
+     * 获取类型
+     *
+     * @return
+     */
+    @GetMapping("/index")
+    public AjaxResult index() {
+        return success(Map.of(
+                "advertisementLogActionTypeList", AdvertisementLog.advertisementLogActionTypeList // 广告日志操作类型
+        ));
     }
 }
