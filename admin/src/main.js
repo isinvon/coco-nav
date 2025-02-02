@@ -44,6 +44,8 @@ import ImagePreview from "@/components/ImagePreview"
 import DictTag from '@/components/DictTag'
 // 自定义Tag组件
 import TagTool from '@/components/TagTool'
+// 自定义ButtonGroup组件
+import ButtonGroupTool from '@/components/ButtonGroupTool'
 
 const app = createApp(App)
 
@@ -58,6 +60,7 @@ app.config.globalProperties.selectDictLabel = selectDictLabel
 app.config.globalProperties.selectDictLabels = selectDictLabels
 
 // 全局组件挂载
+app.component('ButtonGroupTool', ButtonGroupTool)
 app.component('TagTool', TagTool)
 app.component('DictTag', DictTag)
 app.component('Pagination', Pagination)
