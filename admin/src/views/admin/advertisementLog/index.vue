@@ -34,14 +34,10 @@
       <el-table-column label="广告ID" align="center" prop="advertisementId" />
       <el-table-column label="操作类型" align="center" prop="action">
         <template #default="scope">
-          <el-tag
-              v-if="advertisementLogActionTypeList.some(item => item.value === scope.row.action)"
-              :key="scope.row.action"
-              :color="advertisementLogActionTypeList.find(item => item.value === scope.row.action)?.color"
-              style="font-weight: bold;color: white"
-          >
-            {{ advertisementLogActionTypeList.find(item => item.value === scope.row.action)?.label }}
-          </el-tag>
+          <TagTool
+              :value="scope.row.action"
+              :options="advertisementLogActionTypeList"
+          />
         </template>
       </el-table-column>
 
