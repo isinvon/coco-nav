@@ -9,7 +9,6 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.Advertisement;
-import com.ruoyi.project.admin.domain.vo.AdvertisementVo;
 import com.ruoyi.project.admin.service.AdvertisementService;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,9 +35,9 @@ public class AdvertisementController extends BaseController {
      */
     @CustomPermission(PermissionConstants.ADMIN_ADVERTISEMENT_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(AdvertisementVo advertisementVo) {
+    public TableDataInfo list(Advertisement advertisement) {
         startPage();
-        List<Advertisement> advertisementList = advertisementService.getAdvertisementList(advertisementVo);
+        List<Advertisement> advertisementList = advertisementService.getAdvertisementList(advertisement);
         return getDataTable(advertisementList);
     }
 
