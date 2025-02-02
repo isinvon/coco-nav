@@ -1,11 +1,14 @@
 package com.ruoyi.common.enums;
 
+import lombok.Getter;
+
 /**
  * 广告操作 枚举
  *
  * @author : sinvon
  * @since : 2025/2/2 下午11:59
  */
+@Getter
 public enum AdvertisementAction {
     /**
      * 添加广告
@@ -34,14 +37,6 @@ public enum AdvertisementAction {
     AdvertisementAction(Integer code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     /**
