@@ -1,15 +1,19 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import com.ruoyi.project.admin.domain.bo.TypeBo;
 import lombok.Data;
 
 
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 
+import java.util.List;
+
 /**
  * 书签管理对象 coco_bookmark
- * 
+ *
  * @author sinvon
  * @date 2025-01-30
  */
@@ -43,7 +47,42 @@ public class Bookmark extends BaseEntity
     @Excel(name = "排序值")
     private Integer sortOrder;
 
-    /** 0-删除 1-正常 */
-    @Excel(name = "0-删除 1-正常")
+    /** 0-禁用 1-启用 */
+    @Excel(name = "0-禁用 1-启用")
     private Integer status;
+
+    /**
+     * 书签上架状态  禁用 - 0
+     */
+    public static final int BOOKMARK_STATUS_DISABLED = 0;
+
+    /**
+     * 书签上架状态  启用 - 1
+     */
+    public static final int BOOKMARK_STATUS_ENABLED = 1;
+
+    /**
+     *  书签删除状态 正常 - 0
+     */
+    public static final int BOOKMARK_DELETE_STATUS_NORMAL = 0;
+
+    /**
+     *  书签删除状态 删除 - 1
+     */
+    public static final int BOOKMARK_DELETE_STATUS_DELETED = 1;
+
+    /**
+     *  网站图标
+     */
+    public static final String BOOKMARK_ICON_DEFAULT = "https://element.eleme.io/favicon.ico";
+
+    public static final List<TypeBo> bookmarkStatusTypeList = List.of(
+            new TypeBo(BOOKMARK_STATUS_DISABLED, "禁用", ThemeColor.CORAL_PINK.getHexCode()),
+            new TypeBo(BOOKMARK_STATUS_ENABLED, "启用", ThemeColor.MINT_GREEN.getHexCode())
+    );
+
+    public static final List<TypeBo> bookmarkDeleteStatusList = List.of(
+            new TypeBo(BOOKMARK_DELETE_STATUS_DELETED, "删除", ThemeColor.CORAL_PINK.getHexCode()),
+            new TypeBo(BOOKMARK_DELETE_STATUS_NORMAL, "正常", ThemeColor.MINT_GREEN.getHexCode())
+    );
 }

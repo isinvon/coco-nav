@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书签管理Controller
@@ -90,5 +91,14 @@ public class BookmarkController extends BaseController {
     public AjaxResult remove(@PathVariable Long[] bookmarkIds) {
         List<Long> idList = Arrays.asList(bookmarkIds);
         return toAjax(bookmarkService.removeByIds(idList));
+    }
+
+    @GetMapping("/index")
+    public AjaxResult index() {
+        return success(Map.of(
+                "bookmarkStatusTypeList", Bookmark.bookmarkStatusTypeList, // 书签状态类型;
+                "bookmarkDeleteStatusList", Bookmark.bookmarkDeleteStatusList, // 书签删除状态类型
+                "bookmarkDefaultIcon", Bookmark.BOOKMARK_ICON_DEFAULT // 书签默认图标
+        ));
     }
 }
