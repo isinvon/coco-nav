@@ -109,9 +109,10 @@
       </el-table-column>
       <el-table-column label="状态" align="center" prop="status">
         <template #default="scope">
-          <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">
-            {{ scope.row.status === 1 ? '正常' : '下架' }}
-          </el-tag>
+          <TagTool
+              :value="scope.row.status"
+              :options="advertisementStatusTypeList"
+          />
         </template>
       </el-table-column>
       <el-table-column label="点击次数" align="center" prop="clickCount"/>
@@ -198,9 +199,11 @@ import {
   getAdvertisement,
   delAdvertisement,
   addAdvertisement,
-  updateAdvertisement
+  updateAdvertisement,
+  indexAdvertisement
 } from "@/api/admin/advertisement";
 import {parseTime} from "@/utils/ruoyi.js";
+import TagTool from "@/components/TagTool/index.vue";
 
 const {proxy} = getCurrentInstance();
 
@@ -213,6 +216,7 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const advertisementStatusTypeList = ref([]); // 广告状态类型
 
 const data = reactive({
   form: {},
@@ -263,6 +267,14 @@ const data = reactive({
 
 const {queryParams, form, rules} = toRefs(data);
 
+/** 获取广告相关的类型 （index） */
+function getIndex() {
+  indexAdvertisement().then(response => {
+    console.log(response)
+    advertisementStatusTypeList.value = response.data.advertisementStatusTypeList;
+  });
+}
+
 /** 查询广告管理列表 */
 function getList() {
   loading.value = true;
@@ -303,12 +315,12 @@ function reset() {
 function handleQuery() {
   queryParams.value.pageNum = 1;
 
-  if (queryParams.value.dateRange != null){
+  if (queryParams.value.dateRange != null) {
     // 将dateRange赋值给startTime和endTime
     queryParams.value.startTime = queryParams.value.dateRange[0];
     queryParams.value.endTime = queryParams.value.dateRange[1];
   }
-  
+
   getList();
 }
 
@@ -348,7 +360,7 @@ function submitForm() {
   proxy.$refs["advertisementRef"].validate(valid => {
     if (valid) {
 
-      if(form.value.dateRange != null){
+      if (form.value.dateRange != null) {
         // 将dateRange赋值给startTime和endTime
         form.value.startTime = form.value.dateRange[0];
         form.value.endTime = form.value.dateRange[1];
@@ -391,4 +403,5 @@ function handleExport() {
 }
 
 getList();
+getIndex();
 </script>
