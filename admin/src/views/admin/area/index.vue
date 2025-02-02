@@ -73,20 +73,10 @@
       <el-table-column label="地区名称" align="center" prop="name"/>
       <el-table-column label="行政级别" align="center" prop="depth">
         <template #default="scope">
-          <el-tag
-              effect="dark"
-              style="font-weight: bold;"
-              :type="scope.row.depth === 1 ? 'danger'
-            : scope.row.depth === 2 ? 'warning'
-            : scope.row.depth === 3 ? 'success'
-            : 'default'">
-            {{
-              scope.row.depth === 1 ? '省'
-                  : scope.row.depth === 2 ? '市'
-                      : scope.row.depth === 3 ? '区'
-                          : '未知'
-            }}
-          </el-tag>
+          <TagTool
+              :value="scope.row.depth"
+              :options="areaDepthTypeList"
+          />
         </template>
       </el-table-column>
       <el-table-column label="上级地区ID" align="center" prop="parentId"/>
@@ -103,7 +93,7 @@
 </template>
 
 <script setup name="Area">
-import {listArea, getArea, delArea, addArea, updateArea} from "@/api/admin/area";
+import {listArea, getArea, delArea, addArea, updateArea, indexArea} from "@/api/admin/area";
 
 const {proxy} = getCurrentInstance();
 
@@ -116,6 +106,7 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const areaDepthTypeList = ref([]);
 
 const data = reactive({
   form: {},
@@ -145,6 +136,16 @@ const data = reactive({
 });
 
 const {queryParams, form, rules} = toRefs(data);
+
+/**
+ * 获取地区相关类型
+ */
+function getIndex() {
+  indexArea().then(response => {
+    console.log(areaDepthTypeList)
+    areaDepthTypeList.value = response.data.areaDepthTypeList;
+  });
+}
 
 /** 查询地区信息列表 */
 function getList() {
@@ -242,4 +243,5 @@ function handleExport() {
 }
 
 getList();
+getIndex();
 </script>

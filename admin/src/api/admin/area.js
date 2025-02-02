@@ -42,3 +42,11 @@ export function delArea(areaId) {
     method: 'delete'
   })
 }
+
+// Index
+export function indexArea() {
+  return request({
+    url: '/admin/area/index',
+    method: 'get',
+  })
+}
