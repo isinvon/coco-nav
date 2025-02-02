@@ -8,7 +8,7 @@ import com.ruoyi.project.admin.service.custom.BookmarkLogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BookmarkLogMapper;
-import com.ruoyi.project.admin.domain.BookmarkLog;
+import com.ruoyi.project.admin.domain.po.BookmarkLog;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ruoyi.project.admin.domain.Message;
+import com.ruoyi.project.admin.domain.po.Message;
 
 /**
  * @author : sinvon

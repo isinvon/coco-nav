@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.PaymentType;
+import com.ruoyi.project.admin.domain.po.PaymentType;
 
 /**
  * 支付方式Service接口

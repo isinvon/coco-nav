@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.User;
+import com.ruoyi.project.admin.domain.po.User;
 
 /**
  * 用户管理Service接口

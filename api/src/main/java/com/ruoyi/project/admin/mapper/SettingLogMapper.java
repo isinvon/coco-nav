@@ -2,7 +2,7 @@ package com.ruoyi.project.admin.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.SettingLog;
+import com.ruoyi.project.admin.domain.po.SettingLog;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

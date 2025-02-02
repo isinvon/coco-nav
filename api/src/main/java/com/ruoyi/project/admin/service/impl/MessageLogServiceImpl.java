@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.MessageLogMapper;
-import com.ruoyi.project.admin.domain.MessageLog;
+import com.ruoyi.project.admin.domain.po.MessageLog;
 import com.ruoyi.project.admin.service.custom.MessageLogCustomService;
 import org.springframework.stereotype.Service;
 

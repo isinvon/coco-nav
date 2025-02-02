@@ -8,7 +8,7 @@ import com.ruoyi.project.admin.service.custom.BookmarkCategoryCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BookmarkCategoryMapper;
-import com.ruoyi.project.admin.domain.BookmarkCategory;
+import com.ruoyi.project.admin.domain.po.BookmarkCategory;
 import org.springframework.stereotype.Service;
 
 /**

@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.VipMapper;
-import com.ruoyi.project.admin.domain.Vip;
+import com.ruoyi.project.admin.domain.po.Vip;
 import com.ruoyi.project.admin.service.custom.VipCustomService;
 import org.springframework.stereotype.Service;
 

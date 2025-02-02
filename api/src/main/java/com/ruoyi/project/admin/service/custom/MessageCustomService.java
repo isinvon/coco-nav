@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.Message;
+import com.ruoyi.project.admin.domain.po.Message;
 
 /**
  * 留言管理Service接口

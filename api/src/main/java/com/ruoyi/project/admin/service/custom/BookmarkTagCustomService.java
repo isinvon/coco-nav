@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.BookmarkTag;
+import com.ruoyi.project.admin.domain.po.BookmarkTag;
 
 /**
  * 书签标签Service接口

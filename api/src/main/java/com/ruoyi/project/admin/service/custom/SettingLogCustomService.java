@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.SettingLog;
+import com.ruoyi.project.admin.domain.po.SettingLog;
 
 /**
  * 设置变更日志Service接口

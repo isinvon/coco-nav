@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.PointMapper;
-import com.ruoyi.project.admin.domain.Point;
+import com.ruoyi.project.admin.domain.po.Point;
 import com.ruoyi.project.admin.service.custom.PointCustomService;
 import org.springframework.stereotype.Service;
 

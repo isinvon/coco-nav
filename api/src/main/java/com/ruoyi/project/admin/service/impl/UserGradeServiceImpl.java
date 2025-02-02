@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.UserGradeMapper;
-import com.ruoyi.project.admin.domain.UserGrade;
+import com.ruoyi.project.admin.domain.po.UserGrade;
 import com.ruoyi.project.admin.service.custom.UserGradeCustomService;
 import org.springframework.stereotype.Service;
 

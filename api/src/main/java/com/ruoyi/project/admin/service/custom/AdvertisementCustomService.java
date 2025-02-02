@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.Advertisement;
+import com.ruoyi.project.admin.domain.po.Advertisement;
 
 /**
  * 广告管理Service接口

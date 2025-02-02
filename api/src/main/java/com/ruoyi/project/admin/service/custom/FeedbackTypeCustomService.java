@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.FeedbackType;
+import com.ruoyi.project.admin.domain.po.FeedbackType;
 
 /**
  * 反馈类型Service接口

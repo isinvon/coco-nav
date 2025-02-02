@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.UserGrade;
+import com.ruoyi.project.admin.domain.po.UserGrade;
 
 /**
  * 用户等级Service接口

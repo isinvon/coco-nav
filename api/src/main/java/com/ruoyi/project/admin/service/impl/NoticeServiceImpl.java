@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.NoticeMapper;
-import com.ruoyi.project.admin.domain.Notice;
+import com.ruoyi.project.admin.domain.po.Notice;
 import com.ruoyi.project.admin.service.custom.NoticeCustomService;
 import org.springframework.stereotype.Service;
 

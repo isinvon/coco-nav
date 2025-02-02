@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.PointLogMapper;
-import com.ruoyi.project.admin.domain.PointLog;
+import com.ruoyi.project.admin.domain.po.PointLog;
 import com.ruoyi.project.admin.service.custom.PointLogCustomService;
 import org.springframework.stereotype.Service;
 

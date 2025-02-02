@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.project.admin.domain.AdvertisementLog;
+import com.ruoyi.project.admin.domain.po.AdvertisementLog;
 import com.ruoyi.project.admin.mapper.AdvertisementLogMapper;
 import com.ruoyi.project.admin.service.AdvertisementLogService;
 import org.springframework.stereotype.Service;

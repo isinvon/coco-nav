@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BrowseHistoryMapper;
-import com.ruoyi.project.admin.domain.BrowseHistory;
+import com.ruoyi.project.admin.domain.po.BrowseHistory;
 import com.ruoyi.project.admin.service.custom.BrowseHistoryCustomService;
 import org.springframework.stereotype.Service;
 

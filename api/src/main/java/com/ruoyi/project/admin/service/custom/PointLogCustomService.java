@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.PointLog;
+import com.ruoyi.project.admin.domain.po.PointLog;
 
 /**
  * 积分流水Service接口

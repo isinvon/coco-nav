@@ -2,7 +2,7 @@ package com.ruoyi.project.admin.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.Vip;
+import com.ruoyi.project.admin.domain.po.Vip;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

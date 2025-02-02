@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.WebsiteInfoMapper;
-import com.ruoyi.project.admin.domain.WebsiteInfo;
+import com.ruoyi.project.admin.domain.po.WebsiteInfo;
 import com.ruoyi.project.admin.service.custom.WebsiteInfoCustomService;
 import org.springframework.stereotype.Service;
 

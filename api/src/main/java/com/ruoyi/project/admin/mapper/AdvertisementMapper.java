@@ -3,7 +3,7 @@ package com.ruoyi.project.admin.mapper;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ruoyi.project.admin.domain.Advertisement;
+import com.ruoyi.project.admin.domain.po.Advertisement;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

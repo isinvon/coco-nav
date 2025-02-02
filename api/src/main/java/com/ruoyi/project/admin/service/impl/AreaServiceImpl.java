@@ -2,7 +2,7 @@ package com.ruoyi.project.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.project.admin.domain.Area;
+import com.ruoyi.project.admin.domain.po.Area;
 import com.ruoyi.project.admin.mapper.AreaMapper;
 import com.ruoyi.project.admin.service.AreaService;
 import org.springframework.stereotype.Service;

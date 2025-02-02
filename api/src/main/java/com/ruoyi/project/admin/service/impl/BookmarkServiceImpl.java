@@ -8,7 +8,7 @@ import com.ruoyi.project.admin.service.custom.BookmarkCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.BookmarkMapper;
-import com.ruoyi.project.admin.domain.Bookmark;
+import com.ruoyi.project.admin.domain.po.Bookmark;
 import org.springframework.stereotype.Service;
 
 /**

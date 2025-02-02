@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.CustomService;
+import com.ruoyi.project.admin.domain.po.CustomService;
 
 /**
  * 客服信息Service接口

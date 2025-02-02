@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.FeedbackLogMapper;
-import com.ruoyi.project.admin.domain.FeedbackLog;
+import com.ruoyi.project.admin.domain.po.FeedbackLog;
 import com.ruoyi.project.admin.service.custom.FeedbackLogCustomService;
 import org.springframework.stereotype.Service;
 

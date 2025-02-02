@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.PaymentTypeMapper;
-import com.ruoyi.project.admin.domain.PaymentType;
+import com.ruoyi.project.admin.domain.po.PaymentType;
 import com.ruoyi.project.admin.service.custom.PaymentTypeCustomService;
 import org.springframework.stereotype.Service;
 

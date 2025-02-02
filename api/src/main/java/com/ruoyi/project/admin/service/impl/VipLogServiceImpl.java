@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.VipLogMapper;
-import com.ruoyi.project.admin.domain.VipLog;
+import com.ruoyi.project.admin.domain.po.VipLog;
 import com.ruoyi.project.admin.service.custom.VipLogCustomService;
 import org.springframework.stereotype.Service;
 

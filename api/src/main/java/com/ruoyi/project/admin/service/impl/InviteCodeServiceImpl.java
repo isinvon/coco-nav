@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.InviteCodeMapper;
-import com.ruoyi.project.admin.domain.InviteCode;
+import com.ruoyi.project.admin.domain.po.InviteCode;
 import com.ruoyi.project.admin.service.custom.InviteCodeCustomService;
 import org.springframework.stereotype.Service;
 

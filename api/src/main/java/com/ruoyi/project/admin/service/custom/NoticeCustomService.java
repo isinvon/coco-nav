@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.Notice;
+import com.ruoyi.project.admin.domain.po.Notice;
 
 /**
  * 通知管理Service接口

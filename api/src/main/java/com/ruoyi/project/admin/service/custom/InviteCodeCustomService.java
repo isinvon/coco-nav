@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.InviteCode;
+import com.ruoyi.project.admin.domain.po.InviteCode;
 
 /**
  * 邀请码管理Service接口

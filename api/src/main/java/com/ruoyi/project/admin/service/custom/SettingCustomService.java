@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.Setting;
+import com.ruoyi.project.admin.domain.po.Setting;
 
 /**
  * 系统设置Service接口

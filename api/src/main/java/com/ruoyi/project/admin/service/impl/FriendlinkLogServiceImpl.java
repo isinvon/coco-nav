@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.FriendlinkLogMapper;
-import com.ruoyi.project.admin.domain.FriendlinkLog;
+import com.ruoyi.project.admin.domain.po.FriendlinkLog;
 import com.ruoyi.project.admin.service.custom.FriendlinkLogCustomService;
 import org.springframework.stereotype.Service;
 

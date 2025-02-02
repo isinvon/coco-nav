@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.SearchLog;
+import com.ruoyi.project.admin.domain.po.SearchLog;
 
 /**
  * 搜索日志Service接口

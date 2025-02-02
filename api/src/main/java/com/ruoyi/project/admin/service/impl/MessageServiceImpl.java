@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ruoyi.project.admin.mapper.MessageMapper;
-import com.ruoyi.project.admin.domain.Message;
+import com.ruoyi.project.admin.domain.po.Message;
 import com.ruoyi.project.admin.service.custom.MessageCustomService;
 import org.springframework.stereotype.Service;
 

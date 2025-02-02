@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.UserLoginLog;
+import com.ruoyi.project.admin.domain.po.UserLoginLog;
 
 /**
  * 用户登录日志Service接口

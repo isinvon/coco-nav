@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.FeedbackLog;
+import com.ruoyi.project.admin.domain.po.FeedbackLog;
 
 /**
  * 反馈处理日志Service接口

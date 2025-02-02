@@ -1,7 +1,7 @@
 package com.ruoyi.project.admin.service.custom;
 
 import java.util.List;
-import com.ruoyi.project.admin.domain.AdvertisementLog;
+import com.ruoyi.project.admin.domain.po.AdvertisementLog;
 
 /**
  * 广告操作日志Service接口
