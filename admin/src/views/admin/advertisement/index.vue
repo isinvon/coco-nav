@@ -237,17 +237,20 @@ const data = reactive({
     content: [
       {required: true, message: "广告内容不能为空", trigger: "blur"}
     ],
-    startTime: [
-      {required: true, message: "开始时间不能为空", trigger: "blur"}
+    dateRange: [
+      {required: true, message: "时间范围不能为空", trigger: "blur"}
     ],
-    endTime: [
-      {required: true, message: "结束时间不能为空", trigger: "blur"}
+    status: [
+      {required: true, message: "状态不能为空", trigger: "blur"}
     ],
     width: [
       {required: true, message: "广告的宽度不能为空", trigger: "blur"}
     ],
     height: [
       {required: true, message: "广告的高度不能为空", trigger: "blur"}
+    ],
+    sortOrder: [
+      {required: true, message: "排序值不能为空", trigger: "blur"}
     ],
     createTime: [
       {required: true, message: "创建时间不能为空", trigger: "blur"}
@@ -344,14 +347,14 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["advertisementRef"].validate(valid => {
     if (valid) {
+
+      if(form.value.dateRange != null){
+        // 将dateRange赋值给startTime和endTime
+        form.value.startTime = form.value.dateRange[0];
+        form.value.endTime = form.value.dateRange[1];
+      }
+
       if (form.value.id != null) {
-
-        if(form.value.dateRange != null){
-          // 将dateRange赋值给startTime和endTime
-          form.value.startTime = form.value.dateRange[0];
-          form.value.endTime = form.value.dateRange[1];
-        }
-
         updateAdvertisement(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
