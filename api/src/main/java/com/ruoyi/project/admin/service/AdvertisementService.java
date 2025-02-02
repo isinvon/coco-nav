@@ -15,4 +15,6 @@ public interface AdvertisementService extends IService<Advertisement> {
     Boolean addAdvertisement(Advertisement advertisement);
 
     Boolean updateAdvertisement(Advertisement advertisement);
+
+    Boolean deleteAdvertisement(List<Long> idList);
 }

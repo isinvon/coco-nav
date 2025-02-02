@@ -98,4 +98,19 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
         return update;
     }
 
+    @Override
+    public Boolean deleteAdvertisement(List<Long> idList) {
+        boolean remove = removeByIds(idList);
+
+        if (remove) {
+            // 删除成功, 记录广告操作日志
+            AdvertisementLog advertisementLog = new AdvertisementLog();
+            advertisementLog.setAction(AdvertisementAction.DELETE.getCode());
+            advertisementLog.setAdvertisementId(idList.get(0));
+            advertisementLog.setOperatorId(SecurityUtils.getUserId());
+            // 记录到 AdvertisementLog 表中
+            advertisementLogService.save(advertisementLog);
+        }
+    }
+
 }

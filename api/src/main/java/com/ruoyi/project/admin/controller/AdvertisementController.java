@@ -91,6 +91,6 @@ public class AdvertisementController extends BaseController {
     @DeleteMapping("/{advertisementIds}")
     public AjaxResult remove(@PathVariable Long[] advertisementIds) {
         List<Long> idList = Arrays.asList(advertisementIds);
-        return toAjax(advertisementService.removeByIds(idList));
+        return toAjax(advertisementService.deleteAdvertisement(idList));
     }
 }
