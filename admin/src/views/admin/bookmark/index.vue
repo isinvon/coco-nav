@@ -83,7 +83,15 @@
       <el-table-column label="网站标题" align="center" prop="title"/>
       <el-table-column label="网站地址" align="center" prop="url"/>
       <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId"/>
-      <el-table-column label="网站图标" align="center" prop="icon"/>
+      <el-table-column label="网站图标" align="center" prop="icon">
+        <template #default="scope">
+          <el-image
+              :src="isHttpsUrl(scope.row.icon) ? scope.row.icon : bookmarkDefaultIcon"
+              fit="contain"
+              style="width: 30px; height: 30px;"
+          />
+        </template>
+      </el-table-column>
       <el-table-column label="点击次数" align="center" prop="clickCount">
         <template #default="scope">
           <el-tag
@@ -211,10 +219,15 @@ const data = reactive({
     url: [
       {required: true, message: "网站地址不能为空", trigger: "blur"},
       // 校验
-      {pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确的网址', trigger: 'blur'}
+      {pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确的网址链接', trigger: 'blur'}
     ],
     bookmarkCategoryId: [
       {required: true, message: "分类ID不能为空", trigger: "blur"}
+    ],
+    icon: [
+      {required: true, message: "网站图标不能为空", trigger: "blur"},
+        // 校验
+      {pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确的图标链接', trigger: 'blur'}
     ],
     createTime: [
       {required: true, message: "创建时间不能为空", trigger: "blur"}
@@ -384,6 +397,11 @@ function handleUpdateBookmarkSortOrder(row) {
   }
 }
 
+// 判断是否是HTTPS链接
+const isHttpsUrl = (url) => {
+  const urlPattern = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i;
+  return urlPattern.test(url);
+};
 
 getList();
 getIndex();
