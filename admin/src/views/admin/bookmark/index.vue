@@ -91,6 +91,9 @@
           <TagTool
               :value="scope.row.status"
               :options="bookmarkStatusTypeList"
+              @click="handleUpdateBookmarkStatus(scope.row)"
+              v-hasPermi="['admin:bookmark:edit']"
+              style="cursor: pointer"
           />
         </template>
       </el-table-column>
@@ -324,6 +327,28 @@ function handleExport() {
     ...queryParams.value
   }, `bookmark_${new Date().getTime()}.xlsx`)
 }
+
+/** 修改状态按钮操作 */
+function handleUpdateBookmarkStatus(row) {
+  // 拷贝插槽数据 row 到 form.value
+  form.value = row;
+
+  // 使用三元表达式切换 form.status
+  form.value.status = row.status === 0 ? 1 : 0;
+
+  // 执行更新操作
+  if (form.value.id != null) {
+    updateBookmark(form.value).then(response => {
+      // 使用三元表达式显示消息
+      form.value.status === 0
+          ? proxy.$modal.msgWarning("书签已禁用")
+          : proxy.$modal.msgSuccess("书签已启用");
+
+      getList();
+    });
+  }
+}
+
 
 getList();
 getIndex();
