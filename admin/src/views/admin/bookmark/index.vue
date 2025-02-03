@@ -111,11 +111,17 @@
       <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId"/>
       <el-table-column label="网站图标" align="center" prop="icon">
         <template #default="scope">
-          <el-image
-              :src="isHttpsUrl(scope.row.icon) ? scope.row.icon : bookmarkDefaultIcon"
-              fit="contain"
-              style="width: 30px; height: 30px;"
-          />
+          <Tooltip
+              placement="right"
+              effect="customized"
+              :tooltip-text="scope.row.icon"
+          >
+            <el-image
+                :src="isHttpsUrl(scope.row.icon) ? scope.row.icon : bookmarkDefaultIcon"
+                fit="contain"
+                style="width: 30px; height: 30px;"
+            />
+          </Tooltip>
         </template>
       </el-table-column>
       <el-table-column label="点击次数" align="center" prop="clickCount">
