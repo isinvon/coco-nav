@@ -79,7 +79,7 @@
 
     <el-table v-loading="loading" :data="bookmarkList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="书签ID" align="center" prop="id"/>
+      <!--<el-table-column label="书签ID" align="center" prop="id"/>-->
       <el-table-column label="网站标题" align="center" prop="title"/>
       <el-table-column label="网站地址" align="center" prop="url"/>
       <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId"/>
@@ -122,6 +122,9 @@
         </el-form-item>
         <el-form-item label="网站地址" prop="url">
           <el-input v-model="form.url" type="textarea" placeholder="请输入内容"/>
+        </el-form-item>
+        <el-form-item label="分类ID" prop="bookmarkCategoryId">
+          <el-input v-model="form.bookmarkCategoryId" placeholder="请输入分类ID"/>
         </el-form-item>
         <el-form-item label="网站图标" prop="icon">
           <el-input v-model="form.icon" placeholder="请输入网站图标"/>
@@ -184,7 +187,12 @@ const data = reactive({
       {required: true, message: "网站标题不能为空", trigger: "blur"}
     ],
     url: [
-      {required: true, message: "网站地址不能为空", trigger: "blur"}
+      {required: true, message: "网站地址不能为空", trigger: "blur"},
+      // 校验
+      {pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确的网址', trigger: 'blur'}
+    ],
+    bookmarkCategoryId: [
+      {required: true, message: "分类ID不能为空", trigger: "blur"}
     ],
     createTime: [
       {required: true, message: "创建时间不能为空", trigger: "blur"}
