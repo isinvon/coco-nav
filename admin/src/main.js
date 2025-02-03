@@ -46,6 +46,8 @@ import DictTag from '@/components/DictTag'
 import TagTool from '@/components/TagTool'
 // 自定义ButtonGroup组件
 import ButtonGroupTool from '@/components/ButtonGroupTool'
+// 自定义Tooltip组件
+import Tooltip from '@/components/Tooltip'
 
 const app = createApp(App)
 
@@ -60,6 +62,7 @@ app.config.globalProperties.selectDictLabel = selectDictLabel
 app.config.globalProperties.selectDictLabels = selectDictLabels
 
 // 全局组件挂载
+app.component('Tooltip', Tooltip)
 app.component('ButtonGroupTool', ButtonGroupTool)
 app.component('TagTool', TagTool)
 app.component('DictTag', DictTag)
