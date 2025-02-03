@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ruoyi.project.admin.domain.po.Bookmark;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : sinvon
@@ -17,4 +18,6 @@ public interface BookmarkService extends IService<Bookmark> {
     Boolean updateBookmark(Bookmark bookmark);
 
     Boolean deleteBookmark(List<Long> idList);
+
+    Map<String, String> getUrlInfoByCrawler(String url);
 }

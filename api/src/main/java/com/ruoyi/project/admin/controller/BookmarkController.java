@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.controller;
 
 import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.crawler.CrawlerUtil;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -91,6 +92,18 @@ public class BookmarkController extends BaseController {
     public AjaxResult remove(@PathVariable Long[] bookmarkIds) {
         List<Long> idList = Arrays.asList(bookmarkIds);
         return toAjax(bookmarkService.removeByIds(idList));
+    }
+
+    /**
+     * 获取 url 信息
+     *
+     * @param url 要爬取的网站链接
+     * @return AjaxResult , 返回 Map, 包含 icon、title 和 description
+     */
+    @GetMapping("/getUrlInfoByCrawler")
+    public AjaxResult getUrlInfoByCrawler(String url) {
+        Map<String, String> map = bookmarkService.getUrlInfoByCrawler(url);
+        return success(map);
     }
 
     @GetMapping("/index")

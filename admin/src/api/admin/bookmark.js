@@ -43,6 +43,15 @@ export function delBookmark(bookmarkId) {
   })
 }
 
+// url 爬虫爬取网站信息
+export function getUrlInfoByCrawler(url) {
+  return request({
+    url: '/admin/bookmark/getUrlInfoByCrawler',
+    method: 'get',
+    params: { url }
+  })
+}
+
 // Index
 export function indexBookmark() {
   return request({
