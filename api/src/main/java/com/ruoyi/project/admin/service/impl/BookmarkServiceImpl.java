@@ -2,13 +2,15 @@ package com.ruoyi.project.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.common.utils.crawler.CrawlerUtil;
 import com.ruoyi.project.admin.domain.po.Bookmark;
 import com.ruoyi.project.admin.mapper.BookmarkMapper;
 import com.ruoyi.project.admin.service.BookmarkService;
-import com.ruoyi.project.admin.service.custom.BookmarkCustomService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书签管理Service业务层处理
@@ -16,6 +18,7 @@ import java.util.List;
  * @author sinvon
  * @date 2025-01-30
  */
+@Slf4j
 @Service
 public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> implements BookmarkService {
     @Override
@@ -68,5 +71,16 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
         boolean remove = removeByIds(idList);
 
         return remove;
+    }
+
+    @Override
+    public Map<String, String> getUrlInfoByCrawler(String url) {
+        Map<String, String> map = null;
+        try {
+            map = CrawlerUtil.urlCrawl(url);
+        } catch (Exception e) {
+            log.info("网络请求失败或解析异常: {}", e.getMessage());
+        }
+        return map;
     }
 }

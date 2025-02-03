@@ -1,5 +1,6 @@
 package com.ruoyi.project.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.project.admin.service.BookmarkTagService;
 
@@ -22,4 +23,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookmarkTagServiceImpl extends ServiceImpl<BookmarkTagMapper, BookmarkTag> implements BookmarkTagService {
 
+    @Override
+    public List<BookmarkTag> getBookmarkTagListByQueryCondition(BookmarkTag bookmarkTag) {
+
+        LambdaQueryWrapper<BookmarkTag> qw = new LambdaQueryWrapper<>();
+
+        // 通过标签名称查询
+        if (bookmarkTag.getTagName() != null) {
+            qw.like(BookmarkTag::getTagName, bookmarkTag.getTagName());
+        }
+
+        return list(qw);
+    }
 }

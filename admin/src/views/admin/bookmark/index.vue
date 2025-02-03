@@ -178,6 +178,12 @@
 
     <!-- 添加或修改书签管理对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
+      <!--爬取网站信息按钮-->
+      <el-form-item label="">
+        <el-button type="primary" plain icon="Search" @click="urlCrawl(form.url)">
+          爬取网站信息
+        </el-button>
+      </el-form-item>
       <el-form ref="bookmarkRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="网站标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入网站标题"/>
@@ -213,7 +219,15 @@
 </template>
 
 <script setup name="Bookmark">
-import {listBookmark, getBookmark, delBookmark, addBookmark, updateBookmark, indexBookmark} from "@/api/admin/bookmark";
+import {
+  listBookmark,
+  getBookmark,
+  delBookmark,
+  addBookmark,
+  updateBookmark,
+  getUrlInfoByCrawler,
+  indexBookmark
+} from "@/api/admin/bookmark";
 import TagTool from "@/components/TagTool/index.vue";
 
 const {proxy} = getCurrentInstance();
@@ -437,11 +451,43 @@ function handleUpdateBookmarkSortOrder(row) {
   }
 }
 
-// 判断是否是HTTPS链接
+/** 判断是否是HTTPS链接 */
 const isHttpsUrl = (url) => {
   const urlPattern = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i;
   return urlPattern.test(url);
 };
+
+/** url信息爬虫 */
+function urlCrawl(url) {
+  if (url) {
+    // 校验是否为链接
+    const urlPattern = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i;
+    let b = urlPattern.test(url);
+    // 如果校验不通过
+    if (!b) {
+      proxy.$modal.msgWarning("请输入有效的网址");
+      return;
+    }
+  } else {
+    proxy.$modal.msgWarning("请先在网站地址框中输入链接");
+    return;
+  }
+
+  getUrlInfoByCrawler(url).then(response => {
+    if (response && response.data) {
+      // 更新表单字段
+      form.value.title = response.data.title || "未获取到标题";
+      form.value.icon = response.data.icon || bookmarkDefaultIcon.value;
+      // 爬取成功提示
+      proxy.$modal.msgSuccess("爬取成功");
+    } else {
+      proxy.$modal.msgError("爬取失败，请检查URL是否有效");
+    }
+  }).catch(error => {
+    proxy.$modal.msgError("爬取失败，请检查网络或URL");
+  });
+}
+
 
 getList();
 getIndex();
