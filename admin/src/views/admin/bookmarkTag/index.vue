@@ -61,7 +61,6 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="标签ID" align="center" prop="id" />
       <el-table-column label="标签名称" align="center" prop="tagName" />
-      <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:bookmarkTag:edit']">修改</el-button>
@@ -116,14 +115,10 @@ const data = reactive({
     pageNum: 1,
     pageSize: 10,
     tagName: null,
-    userId: null,
   },
   rules: {
     tagName: [
       { required: true, message: "标签名称不能为空", trigger: "blur" }
-    ],
-    userId: [
-      { required: true, message: "用户ID不能为空", trigger: "blur" }
     ],
     createTime: [
       { required: true, message: "创建时间不能为空", trigger: "blur" }
@@ -157,7 +152,6 @@ function reset() {
   form.value = {
     id: null,
     tagName: null,
-    userId: null,
     createTime: null,
     updateTime: null
   };
