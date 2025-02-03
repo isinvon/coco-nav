@@ -38,6 +38,11 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             qw.eq(Bookmark::getStatus, bookmark.getStatus());
         }
 
+        // 根据删除状态
+        if (bookmark.getIsDeleted() != null) {
+            qw.eq(Bookmark::getIsDeleted, bookmark.getIsDeleted());
+        }
+
         return list(qw);
     }
 
