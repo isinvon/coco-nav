@@ -68,21 +68,36 @@
         <template #default="scope">
           <el-tag
               v-if="scope.row.tagName"
+              class="bookmark-tag-name"
               :color="scope.row.color"
               effect="dark"
               size="default"
-              style="font-size: 16px;font-weight: bold;background-color: #4b4b4b; color: white; border: none">
+          >
             {{ scope.row.tagName }}
           </el-tag>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-                     v-hasPermi="['admin:bookmarkTag:edit']">修改
+          <el-button
+              class="action-btn edit-btn"
+              link
+              type="primary"
+              icon="Edit"
+              @click="handleUpdate(scope.row)"
+              v-hasPermi="['admin:bookmarkTag:edit']"
+          >
+            修改
           </el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                     v-hasPermi="['admin:bookmarkTag:remove']">删除
+          <el-button
+              class="action-btn delete-btn"
+              link
+              type="primary"
+              icon="Delete"
+              @click="handleDelete(scope.row)"
+              v-hasPermi="['admin:bookmarkTag:remove']"
+          >
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -262,3 +277,7 @@ function handleExport() {
 
 getList();
 </script>
+
+<style scoped>
+@import "index.scss";
+</style>

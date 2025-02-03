@@ -1,0 +1,37 @@
+// 标签名称
+.bookmark-tag-name {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #4b4b4b;
+  color: white;
+  border: none;
+  margin: 5px
+}
+
+
+// 操作按钮
+.action-btn {
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  margin: 0 4px;
+}
+
+.edit-btn {
+  color: #409eff;
+}
+
+.edit-btn:hover {
+  background-color: rgba(64, 158, 255, 0.1);
+  color: #409eff;
+}
+
+.delete-btn {
+  color: #f56c6c;
+}
+
+.delete-btn:hover {
+  background-color: rgba(245, 108, 108, 0.1);
+  color: #f56c6c;
+}
