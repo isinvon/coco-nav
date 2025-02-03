@@ -15,7 +15,7 @@
  * @description 状态标签组件
  * @since 2025年2月3日05:21:59
  */
-import {computed, defineProps} from 'vue'
+import {computed} from 'vue'
 
 /**
  * props:
