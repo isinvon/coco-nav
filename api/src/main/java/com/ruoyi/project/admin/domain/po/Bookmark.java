@@ -86,8 +86,8 @@ public class Bookmark extends BaseEntity
     public static final String BOOKMARK_ICON_DEFAULT = "https://element.eleme.io/favicon.ico";
 
     public static final List<TypeBo> bookmarkStatusTypeList = List.of(
-            new TypeBo(BOOKMARK_STATUS_DISABLED, "禁用", ThemeColor.CORAL_PINK.getHexCode()),
-            new TypeBo(BOOKMARK_STATUS_ENABLED, "启用", ThemeColor.MINT_GREEN.getHexCode())
+            new TypeBo(BOOKMARK_STATUS_DISABLED, "已禁用", ThemeColor.CORAL_PINK.getHexCode()),
+            new TypeBo(BOOKMARK_STATUS_ENABLED, "已启用", ThemeColor.MINT_GREEN.getHexCode())
     );
 
     public static final List<TypeBo> bookmarkDeleteStatusList = List.of(
