@@ -49,9 +49,12 @@ defineProps({
   </el-tooltip>
 </template>
 
-<style lang="scss" scoped>
+<!--不要使用scope, 因为 customized 的样式需要影响到整个项目的样式 -->
+<style lang="scss">
 .el-popper.is-customized {
   // Set padding to ensure the height is 32px
+  color: gray;
+  font-weight: bold;
   padding: 6px 12px;
   background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
 
