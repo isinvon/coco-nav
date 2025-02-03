@@ -85,7 +85,17 @@
       <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId"/>
       <el-table-column label="网站图标" align="center" prop="icon"/>
       <el-table-column label="点击次数" align="center" prop="clickCount"/>
-      <el-table-column label="排序值" align="center" prop="sortOrder"/>
+      <el-table-column label="排序值" align="center" prop="sortOrder">
+        <template #default="scope">
+          <el-input-number
+              v-model="scope.row.sortOrder"
+              :min="1"
+              label="排序值"
+              @change="handleUpdateBookmarkSortOrder(scope.row)"
+              v-hasPermi="['admin:bookmark:edit']"
+          />
+        </template>
+      </el-table-column>
       <el-table-column label="状态" align="center" prop="status">
         <template #default="scope">
           <TagTool
@@ -345,6 +355,22 @@ function handleUpdateBookmarkStatus(row) {
           : proxy.$modal.msgSuccess("书签已启用");
 
       getList();
+    });
+  }
+}
+
+/** 修改排序按钮操作 */
+function handleUpdateBookmarkSortOrder(row) {
+  // 拷贝插槽数据 row 到 form.value
+  form.value = row;
+
+  // 执行更新操作
+  if (form.value.id != null) {
+    updateBookmark(form.value).then(response => {
+      // 使用三元表达式显示消息
+      form.value.sortOrder === 1
+          ? proxy.$modal.msgSuccess("🔝书签已置顶")
+          : null;
     });
   }
 }
