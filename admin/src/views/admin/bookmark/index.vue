@@ -81,7 +81,21 @@
       <el-table-column type="selection" width="55" align="center"/>
       <!--<el-table-column label="书签ID" align="center" prop="id"/>-->
       <el-table-column label="网站标题" align="center" prop="title"/>
-      <el-table-column label="网站地址" align="center" prop="url"/>
+      <el-table-column label="网站地址" width="200px" align="center" prop="url">
+        <template #default="scope">
+          <Tooltip
+              placement="right"
+              effect="dark"
+              :tooltip-text="scope.row.url"
+          >
+            <a :href="scope.row.url" target="_blank">
+              <el-text tag="b" class="w-150px mb-2" type="primary" truncated>
+                {{ scope.row.url }}
+              </el-text>
+            </a>
+          </Tooltip>
+        </template>
+      </el-table-column>
       <el-table-column label="分类ID" align="center" prop="bookmarkCategoryId"/>
       <el-table-column label="网站图标" align="center" prop="icon">
         <template #default="scope">
@@ -219,15 +233,23 @@ const data = reactive({
     url: [
       {required: true, message: "网站地址不能为空", trigger: "blur"},
       // 校验
-      {pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确的网址链接', trigger: 'blur'}
+      {
+        pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/,
+        message: '请输入正确的网址链接',
+        trigger: 'blur'
+      }
     ],
     bookmarkCategoryId: [
       {required: true, message: "分类ID不能为空", trigger: "blur"}
     ],
     icon: [
       {required: true, message: "网站图标不能为空", trigger: "blur"},
-        // 校验
-      {pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确的图标链接', trigger: 'blur'}
+      // 校验
+      {
+        pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/,
+        message: '请输入正确的图标链接',
+        trigger: 'blur'
+      }
     ],
     createTime: [
       {required: true, message: "创建时间不能为空", trigger: "blur"}
