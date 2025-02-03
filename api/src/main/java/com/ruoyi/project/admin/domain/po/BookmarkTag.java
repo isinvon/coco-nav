@@ -22,8 +22,4 @@ public class BookmarkTag extends BaseEntity
     /** 标签名称 */
     @Excel(name = "标签名称")
     private String tagName;
-
-    /** 用户ID */
-    @Excel(name = "用户ID")
-    private Long userId;
 }
