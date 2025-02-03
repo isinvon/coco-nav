@@ -68,7 +68,6 @@
     <el-table v-loading="loading" :data="bookmarkCategoryList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="分类ID" align="center" prop="id" />
-      <el-table-column label="用户ID" align="center" prop="userId" />
       <el-table-column label="分类名称" align="center" prop="name" />
       <el-table-column label="父分类ID" align="center" prop="parentId" />
       <el-table-column label="排序值" align="center" prop="sortOrder" />
@@ -92,16 +91,16 @@
     <!-- 添加或修改书签分类对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="bookmarkCategoryRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="父级分类" prop="userId">
-          <!--<el-input v-model="form.userId" placeholder="请选择父级分类" />-->
-          <el-autocomplete
-              v-model="form.userId"
-              :fetch-suggestions="querySearch"
-              clearable
-              class="inline-input w-50"
-              placeholder="搜索父级分类"
-              @select="handleSelect"
-          />
+        <el-form-item label="父级分类" prop="parentId">
+          <el-input v-model="form.parentId" placeholder="请选择父级分类" />
+          <!--<el-autocomplete-->
+          <!--    v-model="form.parentId"-->
+          <!--    :fetch-suggestions="querySearch"-->
+          <!--    clearable-->
+          <!--    class="inline-input w-50"-->
+          <!--    placeholder="搜索父级分类"-->
+          <!--    @select="handleSelect"-->
+          <!--/>-->
         </el-form-item>
         <el-form-item label="分类名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入分类名称" />
@@ -144,16 +143,12 @@ const data = reactive({
   queryParams: {
     pageNum: 1,
     pageSize: 10,
-    userId: null,
     name: null,
     parentId: null,
     sortOrder: null,
     color: null,
   },
   rules: {
-    userId: [
-      { required: true, message: "用户ID不能为空", trigger: "blur" }
-    ],
     name: [
       { required: true, message: "分类名称不能为空", trigger: "blur" }
     ],
@@ -188,7 +183,6 @@ function cancel() {
 function reset() {
   form.value = {
     id: null,
-    userId: null,
     name: null,
     parentId: null,
     sortOrder: null,
