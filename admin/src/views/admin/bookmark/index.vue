@@ -233,6 +233,7 @@ function reset() {
     clickCount: null,
     sortOrder: 1,
     status: 1,
+    isDeleted: 0,
     createTime: null,
     updateTime: null
   };
