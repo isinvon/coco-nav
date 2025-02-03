@@ -17,14 +17,6 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="分类颜色代码" prop="color">
-        <el-input
-          v-model="queryParams.color"
-          placeholder="请输入分类颜色代码"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -80,7 +72,7 @@
       <el-table-column label="分类名称" align="center" prop="name" />
       <el-table-column label="父分类ID" align="center" prop="parentId" />
       <el-table-column label="排序值" align="center" prop="sortOrder" />
-      <el-table-column label="分类颜色代码" align="center" prop="color" />
+      <el-table-column label="颜色" align="center" prop="color" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:bookmarkCategory:edit']">修改</el-button>
@@ -88,7 +80,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -106,8 +98,9 @@
         <el-form-item label="排序值" prop="sortOrder">
           <el-input v-model="form.sortOrder" placeholder="请输入排序值" />
         </el-form-item>
-        <el-form-item label="分类颜色代码" prop="color">
-          <el-input v-model="form.color" placeholder="请输入分类颜色代码" />
+        <el-form-item label="颜色" prop="color">
+          <el-color-picker v-model="form.color" style="width: 30px"/>
+          <span :style="{color: form.color}">███████</span>
         </el-form-item>
       </el-form>
       <template #footer>
