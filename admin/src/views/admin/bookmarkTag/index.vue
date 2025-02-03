@@ -64,7 +64,18 @@
     <el-table v-loading="loading" :data="bookmarkTagList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <!--<el-table-column label="标签ID" align="center" prop="id" />-->
-      <el-table-column label="标签名称" align="center" prop="tagName"/>
+      <el-table-column label="标签名称" align="center" prop="tagName">
+        <template #default="scope">
+          <el-tag
+              v-if="scope.row.tagName"
+              :color="scope.row.color"
+              effect="dark"
+              size="default"
+              style="font-size: 16px;font-weight: bold;background-color: #4b4b4b; color: white; border: none">
+            {{ scope.row.tagName }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
