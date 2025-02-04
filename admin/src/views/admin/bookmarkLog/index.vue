@@ -32,7 +32,14 @@
       <!--<el-table-column type="selection" width="55" align="center" />-->
       <el-table-column label="日志ID" align="center" prop="id" />
       <el-table-column label="书签ID" align="center" prop="bookmarkId" />
-      <el-table-column label="操作类型" align="center" prop="action" />
+      <el-table-column label="操作类型" align="center" prop="action">
+        <template #default="scope">
+          <TagTool
+              :value="scope.row.action"
+              :options="bookmarkLogActionTypeList"
+          />
+        </template>
+      </el-table-column>
 
       <el-table-column label="操作详情" align="center" prop="actionDetails">
         <template #default="scope">
@@ -66,7 +73,7 @@
 </template>
 
 <script setup name="BookmarkLog">
-import { listBookmarkLog, getBookmarkLog, delBookmarkLog, addBookmarkLog, updateBookmarkLog } from "@/api/admin/bookmarkLog";
+import { listBookmarkLog, getBookmarkLog, delBookmarkLog, addBookmarkLog, updateBookmarkLog, indexBookmarkLog } from "@/api/admin/bookmarkLog";
 
 const { proxy } = getCurrentInstance();
 
@@ -79,6 +86,7 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const bookmarkLogActionTypeList = ref([])
 
 const data = reactive({
   form: {},
@@ -106,19 +114,13 @@ function getList() {
   });
 }
 
-// 表单重置
-function reset() {
-  form.value = {
-    id: null,
-    bookmarkId: null,
-    action: null,
-    actionDetails: "",
-    operatorId: null,
-    operatorName: null,
-    createTime: null,
-    updateTime: null
-  };
-  proxy.resetForm("bookmarkLogRef");
+/**
+ * 获取书签日志操作类型
+ */
+function getIndex() {
+  indexBookmarkLog().then(response => {
+    bookmarkLogActionTypeList.value = response.data.bookmarkLogActionTypeList;
+  });
 }
 
 /** 搜索按钮操作 */
@@ -140,17 +142,6 @@ function handleSelectionChange(selection) {
   multiple.value = !selection.length;
 }
 
-/** 修改按钮操作 */
-function handleUpdate(row) {
-  reset();
-  const _id = row.id || ids.value
-  getBookmarkLog(_id).then(response => {
-    form.value = response.data;
-    open.value = true;
-    title.value = "修改书签操作日志";
-  });
-}
-
 /** 导出按钮操作 */
 function handleExport() {
   proxy.download('admin/bookmarkLog/export', {
@@ -158,5 +149,6 @@ function handleExport() {
   }, `bookmarkLog_${new Date().getTime()}.xlsx`)
 }
 
+getIndex()
 getList();
 </script>
