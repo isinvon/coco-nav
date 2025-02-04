@@ -70,7 +70,7 @@ public class BookmarkController extends BaseController {
     @Log(title = "书签管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Bookmark bookmark) {
-        return toAjax(bookmarkService.save(bookmark));
+        return toAjax(bookmarkService.addBookmark(bookmark));
     }
 
     /**
@@ -80,7 +80,7 @@ public class BookmarkController extends BaseController {
     @Log(title = "书签管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Bookmark bookmark) {
-        return toAjax(bookmarkService.updateById(bookmark));
+        return toAjax(bookmarkService.updateBookmark(bookmark));
     }
 
     /**
@@ -91,7 +91,7 @@ public class BookmarkController extends BaseController {
     @DeleteMapping("/{bookmarkIds}")
     public AjaxResult remove(@PathVariable Long[] bookmarkIds) {
         List<Long> idList = Arrays.asList(bookmarkIds);
-        return toAjax(bookmarkService.removeByIds(idList));
+        return toAjax(bookmarkService.deleteBookmark(idList));
     }
 
     /**
