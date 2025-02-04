@@ -34,6 +34,12 @@ public class FriendlinkLog extends BaseEntity
     @Excel(name = "操作人ID")
     private Long operatorId;
 
+    /**
+     * 操作人名称
+     */
+    @Excel(name = "操作人名称")
+    private String operatorName;
+
     /** 操作时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd")

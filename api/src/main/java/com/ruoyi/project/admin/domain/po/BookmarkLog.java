@@ -41,6 +41,12 @@ public class BookmarkLog extends BaseEntity {
     private Long operatorId;
 
     /**
+     * 操作人名称
+     */
+    @Excel(name = "操作人名称")
+    private String operatorName;
+
+    /**
      * 操作类型 - 添加书签
      */
     public static final int BOOKMARK_LOG_ACTION_ADD = 1;

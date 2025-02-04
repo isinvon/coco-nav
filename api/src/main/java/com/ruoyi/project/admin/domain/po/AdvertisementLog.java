@@ -38,6 +38,12 @@ public class AdvertisementLog extends BaseEntity {
     @Excel(name = "操作人ID")
     private Long operatorId;
 
+    /**
+     * 操作人名称
+     */
+    @Excel(name = "操作人名称")
+    private String operatorName;
+
 
     // ======================================================
 
