@@ -2,13 +2,17 @@ package com.ruoyi.project.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.crawler.CrawlerUtil;
 import com.ruoyi.project.admin.domain.po.Bookmark;
+import com.ruoyi.project.admin.domain.po.BookmarkLog;
 import com.ruoyi.project.admin.mapper.BookmarkMapper;
+import com.ruoyi.project.admin.service.BookmarkLogService;
 import com.ruoyi.project.admin.service.BookmarkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +25,10 @@ import java.util.Map;
 @Slf4j
 @Service
 public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> implements BookmarkService {
+
+    @Resource
+    private BookmarkLogService bookmarkLogService;
+
     @Override
     public List<Bookmark> getBookmarkListByQueryCondition(Bookmark bookmark) {
 
@@ -54,6 +62,16 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
         boolean save = save(bookmark);
 
+        if (save) {
+            // 添加成功, 记录书签操作日志
+            BookmarkLog bookmarkLog = new BookmarkLog();
+            bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_ADD);
+            bookmarkLog.setBookmarkId(bookmark.getId());
+            bookmarkLog.setOperatorId(SecurityUtils.getUserId());
+            bookmarkLog.setOperatorName(SecurityUtils.getUsername());
+            bookmarkLogService.save(bookmarkLog);
+        }
+
         return save;
     }
 
@@ -62,6 +80,16 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
         boolean update = updateById(bookmark);
 
+        if (update) {
+            // 修改成功, 记录书签操作日志
+            BookmarkLog bookmarkLog = new BookmarkLog();
+            bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_EDIT);
+            bookmarkLog.setBookmarkId(bookmark.getId());
+            bookmarkLog.setOperatorId(SecurityUtils.getUserId());
+            bookmarkLog.setOperatorName(SecurityUtils.getUsername());
+            bookmarkLogService.save(bookmarkLog);
+        }
+
         return update;
     }
 
@@ -69,6 +97,16 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
     public Boolean deleteBookmark(List<Long> idList) {
 
         boolean remove = removeByIds(idList);
+
+        if (remove) {
+            // 删除成功, 记录书签操作日志
+            BookmarkLog bookmarkLog = new BookmarkLog();
+            bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_DELETE);
+            bookmarkLog.setBookmarkId(idList.get(0));
+            bookmarkLog.setOperatorId(SecurityUtils.getUserId());
+            bookmarkLog.setOperatorName(SecurityUtils.getUsername());
+            bookmarkLogService.save(bookmarkLog);
+        }
 
         return remove;
     }
