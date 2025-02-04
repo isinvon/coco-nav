@@ -30,6 +30,12 @@ public class FriendlinkLog extends BaseEntity
     @Excel(name = "操作类型")
     private Integer action;
 
+    /**
+     * 操作详情
+     */
+    @Excel(name = "操作详情")
+    private String actionDetails;
+
     /** 操作人ID */
     @Excel(name = "操作人ID")
     private Long operatorId;

@@ -35,6 +35,12 @@ public class BookmarkLog extends BaseEntity {
     private Integer action;
 
     /**
+     * 操作详情
+     */
+    @Excel(name = "操作详情")
+    private String actionDetails;
+
+    /**
      * 操作人ID
      */
     @Excel(name = "操作人ID")
