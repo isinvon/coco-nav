@@ -75,6 +75,7 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
             advertisementLog.setAction(AdvertisementAction.ADD.getCode());
             advertisementLog.setAdvertisementId(advertisement.getId());
             advertisementLog.setOperatorId(SecurityUtils.getUserId());
+            advertisementLog.setOperatorName(SecurityUtils.getUsername());
             // 记录到 AdvertisementLog 表中
             advertisementLogService.save(advertisementLog);
         }
@@ -92,6 +93,7 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
             advertisementLog.setAction(AdvertisementAction.EDIT.getCode());
             advertisementLog.setAdvertisementId(advertisement.getId());
             advertisementLog.setOperatorId(SecurityUtils.getUserId());
+            advertisementLog.setOperatorName(SecurityUtils.getUsername());
             // 记录到 AdvertisementLog 表中
             advertisementLogService.save(advertisementLog);
         }
@@ -109,6 +111,7 @@ public class AdvertisementServiceImpl extends ServiceImpl<AdvertisementMapper, A
             advertisementLog.setAction(AdvertisementAction.DELETE.getCode());
             advertisementLog.setAdvertisementId(idList.get(0));
             advertisementLog.setOperatorId(SecurityUtils.getUserId());
+            advertisementLog.setOperatorName(SecurityUtils.getUsername());
             // 记录到 AdvertisementLog 表中
             advertisementLogService.save(advertisementLog);
         }
