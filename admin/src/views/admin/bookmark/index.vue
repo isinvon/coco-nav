@@ -80,7 +80,7 @@
     <el-table v-loading="loading" :data="bookmarkList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <!--<el-table-column label="书签ID" align="center" prop="id"/>-->
-      <el-table-column label="网站标题" align="center" prop="title">
+      <el-table-column label="网站标题" align="left" prop="title">
         <template #default="scope">
           <Tooltip
               placement="right"
@@ -93,7 +93,7 @@
           </Tooltip>
         </template>
       </el-table-column>
-      <el-table-column label="网站地址" width="200px" align="center" prop="url">
+      <el-table-column label="网站地址" width="200" align="left" prop="url">
         <template #default="scope">
           <Tooltip
               placement="right"
@@ -125,7 +125,7 @@
         </template>
       </el-table-column>
       <!--网址描述-->
-      <el-table-column label="描述" align="center" prop="description">
+      <el-table-column label="描述" width="300" align="left" prop="description">
         <template #default="scope">
           <Tooltip
               placement="bottom"
