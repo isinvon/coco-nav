@@ -41,6 +41,22 @@
         </template>
       </el-table-column>
 
+      <el-table-column label="操作详情" align="center" prop="actionDetails">
+        <template #default="scope">
+          <Tooltip
+              placement="bottom"
+              effect="customized"
+              wrap-length="40"
+              :tooltip-text="scope.row.actionDetails"
+              class="custom-tooltip"
+          >
+            <el-text tag="b" class="w-150px mb-2" type="info" truncated>
+              {{ scope.row.actionDetails }}
+            </el-text>
+          </Tooltip>
+        </template>
+      </el-table-column>
+
       <el-table-column label="操作人ID" align="center" prop="operatorId" />
       <el-table-column label="操作人" align="center" prop="operatorName" />
       <el-table-column label="操作时间" align="center" prop="createTime" />
@@ -80,6 +96,7 @@ const data = reactive({
     pageSize: 10,
     advertisementId: null,
     action: null,
+    actionDetails: "",
     operatorId: null,
     operatorName: null,
     createTime: null,
