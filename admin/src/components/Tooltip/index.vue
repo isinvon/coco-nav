@@ -1,58 +1,87 @@
 <script setup>
+import {computed} from "vue";
+
 /**
  * @description 自定义 Tooltip 组件
- * @param {String} tooltipText - 提示文本内容
- * @param {String} placement - 提示位置，可选值为 top、bottom、left、right
- * @param {String} effect - 主题效果，可选值为 dark、light、customized
- * @example <Tooltip tooltipText="提示文本" placement="bottom" effect="dark"></Tooltip>
+ *
+ * @param {string} tooltipText - 提示文本内容，必填
+ * @param {('top'|'bottom'|'left'|'right')} [placement='bottom'] - 提示框位置，默认 'bottom'
+ * @param {('dark'|'light'|'customized')} [effect='dark'] - 主题效果，默认 'dark'
+ * @param {number} [wrapLength=30] - 多少个字符换行，默认 30
+ *
+ * @example <Tooltip tooltipText="这是一个提示" placement="top" effect="light" :wrapLength="20"></Tooltip>
+ *
  * @author sinvon
  * @since 2024年12月4日21:54:06
  * @module Tooltip
  */
-// 定义接受的属性
-defineProps({
+const props = defineProps({
   /**
-   * @type {String}
+   * @description 提示文本内容
+   * @type {string}
    * @required
    */
   tooltipText: {
     type: String,
-    required: true,
+    required: true
   },
+
   /**
+   * @description Tooltip 显示位置
    * @type {'top'|'bottom'|'left'|'right'}
    * @default 'bottom'
    */
   placement: {
     type: String,
-    default: 'bottom', // 默认位置为 top
-    validator: (value) => ['top', 'bottom', 'left', 'right'].includes(value),
+    default: "bottom"
   },
-  // TODO - Bug: 当父组件调用 Tooltip 的时候,effect=customized 不生效
+
   /**
+   * @description Tooltip 主题效果
    * @type {'dark'|'light'|'customized'}
    * @default 'dark'
    */
   effect: {
     type: String,
-    default: 'dark', // 默认主题效果为 dark
-    validator: (value) => ['dark', 'light', 'customized'].includes(value),
+    default: "dark"
   },
+
+  /**
+   * @description 多少个字符后自动换行
+   * @type {number}
+   * @default 30
+   */
+  wrapLength: {
+    type: Number,
+    default: 30
+  },
+});
+
+/**
+ * 计算格式化的文本，确保数据不会丢失。
+ * 使用正则表达式按 `wrapLength` 进行切分，并用 `<br>` 连接，保证文本完整显示。
+ * @type {import('vue').ComputedRef<string>}
+ */
+const formattedText = computed(() => {
+  if (!props.tooltipText) return "";
+  return props.tooltipText
+      .match(new RegExp(`.{1,${props.wrapLength}}`, "g")) // 按 `wrapLength` 切分
+      .join("<br>"); // 用 `<br>` 连接，保证换行
 });
 </script>
 
 <template>
-  <el-tooltip :content="tooltipText" :placement="placement" :effect="effect">
+  <!-- Element Plus Tooltip 组件 -->
+  <el-tooltip :content="formattedText" :placement="placement" :effect="effect" raw-content>
     <template #default>
       <slot>Default Tooltip</slot>
     </template>
   </el-tooltip>
 </template>
 
-<!--不要使用scope, 因为 customized 的样式需要影响到整个项目的样式 -->
+<!-- 自定义 Tooltip 样式 -->
 <style lang="scss">
 .el-popper.is-customized {
-  // Set padding to ensure the height is 32px
   color: gray;
   font-weight: bold;
   padding: 6px 12px;
