@@ -18,35 +18,6 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['admin:bookmarkLog:add']"
-        >新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['admin:bookmarkLog:edit']"
-        >修改</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['admin:bookmarkLog:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
           type="warning"
           plain
           icon="Download"
@@ -58,19 +29,13 @@
     </el-row>
 
     <el-table v-loading="loading" :data="bookmarkLogList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+      <!--<el-table-column type="selection" width="55" align="center" />-->
       <el-table-column label="日志ID" align="center" prop="id" />
       <el-table-column label="书签ID" align="center" prop="bookmarkId" />
       <el-table-column label="操作类型" align="center" prop="action" />
       <el-table-column label="操作人ID" align="center" prop="operatorId" />
       <el-table-column label="操作人名称" align="center" prop="operatorName" />
       <el-table-column label="操作时间" align="center" prop="createTime" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:bookmarkLog:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:bookmarkLog:remove']">删除</el-button>
-        </template>
-      </el-table-column>
     </el-table>
     
     <pagination
