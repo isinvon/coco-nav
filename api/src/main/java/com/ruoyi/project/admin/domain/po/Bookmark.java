@@ -33,6 +33,10 @@ public class Bookmark extends BaseEntity
     @Excel(name = "网站地址")
     private String url;
 
+    /** 网站描述 */
+    @Excel(name = "网站描述")
+    private String description;
+
     /** 分类ID */
     @Excel(name = "分类ID")
     private Long bookmarkCategoryId;

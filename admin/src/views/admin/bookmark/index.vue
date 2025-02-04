@@ -124,6 +124,22 @@
           </Tooltip>
         </template>
       </el-table-column>
+      <!--网址描述-->
+      <el-table-column label="描述" align="center" prop="description">
+        <template #default="scope">
+          <Tooltip
+              placement="bottom"
+              effect="customized"
+              wrap-length="40"
+              :tooltip-text="scope.row.description"
+              class="custom-tooltip"
+          >
+            <el-text tag="b" class="w-150px mb-2" type="info" truncated>
+              {{ scope.row.description }}
+            </el-text>
+          </Tooltip>
+        </template>
+      </el-table-column>
       <el-table-column label="点击次数" align="center" prop="clickCount">
         <template #default="scope">
           <el-tag
@@ -191,6 +207,9 @@
         <el-form-item label="网站地址" prop="url">
           <el-input v-model="form.url" type="textarea" placeholder="请输入内容"/>
         </el-form-item>
+        <el-form-item label="网址描述" prop="description">
+          <el-input v-model="form.description" type="textarea" placeholder="请输入网址描述"/>
+        </el-form-item>
         <el-form-item label="分类ID" prop="bookmarkCategoryId">
           <el-input v-model="form.bookmarkCategoryId" placeholder="请输入分类ID"/>
         </el-form-item>
@@ -252,6 +271,7 @@ const data = reactive({
     pageSize: 10,
     title: null,
     url: null,
+    description: null,
     bookmarkCategoryId: null,
     icon: null,
     clickCount: null,
@@ -270,6 +290,10 @@ const data = reactive({
         message: '请输入正确的网址链接',
         trigger: 'blur'
       }
+    ],
+    // 描述
+    description: [
+      {required: true, message: "网站描述不能为空", trigger: "blur"},
     ],
     bookmarkCategoryId: [
       {required: true, message: "分类ID不能为空", trigger: "blur"}
@@ -325,6 +349,7 @@ function reset() {
     id: null,
     title: null,
     url: null,
+    description: null,
     bookmarkCategoryId: null,
     icon: null,
     clickCount: null,
@@ -478,6 +503,7 @@ function urlCrawl(url) {
       // 更新表单字段
       form.value.title = response.data.title || "未获取到标题";
       form.value.icon = response.data.icon || bookmarkDefaultIcon.value;
+      form.value.description = response.data.description || "未获取到描述";
       // 爬取成功提示
       proxy.$modal.msgSuccess("爬取成功");
     } else {
