@@ -63,6 +63,7 @@
       <el-table-column label="书签ID" align="center" prop="bookmarkId" />
       <el-table-column label="操作类型" align="center" prop="action" />
       <el-table-column label="操作人ID" align="center" prop="operatorId" />
+      <el-table-column label="操作人名称" align="center" prop="operatorName" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:bookmarkLog:edit']">修改</el-button>
@@ -119,6 +120,7 @@ const data = reactive({
     bookmarkId: null,
     action: null,
     operatorId: null,
+    operatorName: null
   },
   rules: {
     bookmarkId: [
@@ -164,6 +166,7 @@ function reset() {
     bookmarkId: null,
     action: null,
     operatorId: null,
+    operatorName: null,
     createTime: null,
     updateTime: null
   };

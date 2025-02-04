@@ -42,6 +42,7 @@
       </el-table-column>
 
       <el-table-column label="操作人ID" align="center" prop="operatorId" />
+      <el-table-column label="操作人" align="center" prop="operatorName" />
     </el-table>
 
     <pagination
@@ -79,6 +80,7 @@ const data = reactive({
     advertisementId: null,
     action: null,
     operatorId: null,
+    operatorName: null
   },
 });
 
