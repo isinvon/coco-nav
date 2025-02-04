@@ -45,21 +45,6 @@
       v-model:limit="queryParams.pageSize"
       @pagination="getList"
     />
-
-    <!-- 添加或修改书签操作日志对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="bookmarkLogRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="操作类型" prop="action">
-          <el-input v-model="form.action" placeholder="请输入操作类型" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
-        </div>
-      </template>
-    </el-dialog>
   </div>
 </template>
 
@@ -89,23 +74,6 @@ const data = reactive({
     operatorName: null,
     createTime: null,
   },
-  rules: {
-    bookmarkId: [
-      { required: true, message: "书签ID不能为空", trigger: "blur" }
-    ],
-    action: [
-      { required: true, message: "操作类型不能为空", trigger: "blur" }
-    ],
-    operatorId: [
-      { required: true, message: "操作人ID不能为空", trigger: "blur" }
-    ],
-    createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
-    ],
-    updateTime: [
-      { required: true, message: "更新时间不能为空", trigger: "blur" }
-    ]
-  }
 });
 
 const { queryParams, form, rules } = toRefs(data);
@@ -118,12 +86,6 @@ function getList() {
     total.value = response.total;
     loading.value = false;
   });
-}
-
-// 取消按钮
-function cancel() {
-  open.value = false;
-  reset();
 }
 
 // 表单重置
@@ -159,13 +121,6 @@ function handleSelectionChange(selection) {
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  open.value = true;
-  title.value = "添加书签操作日志";
-}
-
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
@@ -175,38 +130,6 @@ function handleUpdate(row) {
     open.value = true;
     title.value = "修改书签操作日志";
   });
-}
-
-/** 提交按钮 */
-function submitForm() {
-  proxy.$refs["bookmarkLogRef"].validate(valid => {
-    if (valid) {
-      if (form.value.id != null) {
-        updateBookmarkLog(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          getList();
-        });
-      } else {
-        addBookmarkLog(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
-          open.value = false;
-          getList();
-        });
-      }
-    }
-  });
-}
-
-/** 删除按钮操作 */
-function handleDelete(row) {
-  const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除书签操作日志编号为"' + _ids + '"的数据项？').then(function() {
-    return delBookmarkLog(_ids);
-  }).then(() => {
-    getList();
-    proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
 }
 
 /** 导出按钮操作 */
