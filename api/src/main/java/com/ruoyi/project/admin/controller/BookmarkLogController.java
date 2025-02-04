@@ -8,6 +8,7 @@ import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.admin.domain.po.AdvertisementLog;
 import com.ruoyi.project.admin.domain.po.BookmarkLog;
 import com.ruoyi.project.admin.service.BookmarkLogService;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书签操作日志Controller
@@ -90,5 +92,18 @@ public class BookmarkLogController extends BaseController {
     public AjaxResult remove(@PathVariable Long[] bookmarkLogIds) {
         List<Long> idList = Arrays.asList(bookmarkLogIds);
         return toAjax(bookmarkLogService.removeByIds(idList));
+    }
+
+
+    /**
+     * 获取类型
+     *
+     * @return
+     */
+    @GetMapping("/index")
+    public AjaxResult index() {
+        return success(Map.of(
+                "bookmarkLogActionTypeList", BookmarkLog.bookmarkLogActionTypeList // 书签日志操作类型
+        ));
     }
 }
