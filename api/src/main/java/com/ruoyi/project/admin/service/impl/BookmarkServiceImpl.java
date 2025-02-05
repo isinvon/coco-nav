@@ -59,7 +59,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
     @Override
     public Boolean addBookmark(Bookmark bookmark) {
-
+        // 执行添加操作
         boolean save = save(bookmark);
 
         if (save) {
@@ -69,6 +69,27 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             bookmarkLog.setBookmarkId(bookmark.getId());
             bookmarkLog.setOperatorId(SecurityUtils.getUserId());
             bookmarkLog.setOperatorName(SecurityUtils.getUsername());
+
+            // 使用 StringBuilder 拼接所有字段信息
+            StringBuilder details = new StringBuilder();
+            details.append("书签信息: ");
+            details.append("标题【").append(bookmark.getTitle()).append("】, ");
+            details.append("地址【").append(bookmark.getUrl()).append("】, ");
+            details.append("描述【").append(bookmark.getDescription()).append("】, ");
+            details.append("分类ID【").append(bookmark.getBookmarkCategoryId()).append("】, ");
+            details.append("图标【").append(bookmark.getIcon()).append("】, ");
+            details.append("点击次数【").append(bookmark.getClickCount()).append("】, ");
+            details.append("排序值【").append(bookmark.getSortOrder()).append("】, ");
+            details.append("状态【").append(bookmark.getStatus()).append("】");
+
+            // 如果需要记录其他字段（例如创建时间、更新时间）可继续拼接
+            // details.append(" 创建时间【").append(bookmark.getCreateTime()).append("】, ");
+            // details.append(" 更新时间【").append(bookmark.getUpdateTime()).append("】");
+
+            // 将拼接好的详细信息记录到日志对象中
+            bookmarkLog.setActionDetails(details.toString());
+
+            // 保存日志记录
             bookmarkLogService.save(bookmarkLog);
         }
 
