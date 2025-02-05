@@ -77,16 +77,120 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
     @Override
     public Boolean updateBookmark(Bookmark bookmark) {
+        // 根据传入的书签ID查询数据库中原始记录
+        Bookmark oldBookmark = this.getById(bookmark.getId());
+        if (oldBookmark == null) {
+            // 如果旧记录不存在，可根据实际需求抛异常或者返回 false
+            log.error("更新失败，书签ID {} 对应的记录不存在", bookmark.getId());
+            return false;
+        }
 
+        // 使用 StringBuilder 拼接所有修改的详细信息
+        StringBuilder details = new StringBuilder();
+
+        // 对比各个字段（仅比较传入新值不为 null 的字段）
+        if (bookmark.getTitle() != null && !bookmark.getTitle().equals(oldBookmark.getTitle())) {
+            details.append("修改书签标题从: ")
+                    .append("【")
+                    .append(oldBookmark.getTitle())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getTitle())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getUrl() != null && !bookmark.getUrl().equals(oldBookmark.getUrl())) {
+            details.append("修改书签地址从: ")
+                    .append("【")
+                    .append(oldBookmark.getUrl())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getUrl())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getDescription() != null && !bookmark.getDescription().equals(oldBookmark.getDescription())) {
+            details.append("修改书签描述从: ")
+                    .append(oldBookmark.getDescription())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getDescription())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getIcon() != null && !bookmark.getIcon().equals(oldBookmark.getIcon())) {
+            details.append("修改书签图标从: ")
+                    .append("【")
+                    .append(oldBookmark.getIcon())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getIcon())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getBookmarkCategoryId() != null && !bookmark.getBookmarkCategoryId().equals(oldBookmark.getBookmarkCategoryId())) {
+            details.append("修改书签分类ID从: ")
+                    .append("【")
+                    .append(oldBookmark.getBookmarkCategoryId())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getBookmarkCategoryId())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getClickCount() != null && !bookmark.getClickCount().equals(oldBookmark.getClickCount())) {
+            details.append("修改点击次数从: ")
+                    .append("【")
+                    .append(oldBookmark.getClickCount())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getClickCount())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getSortOrder() != null && !bookmark.getSortOrder().equals(oldBookmark.getSortOrder())) {
+            details.append("修改排序值从: ")
+                    .append("【")
+                    .append(oldBookmark.getSortOrder())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getSortOrder())
+                    .append("】")
+            ;
+        }
+        if (bookmark.getStatus() != null && !bookmark.getStatus().equals(oldBookmark.getStatus())) {
+            details.append("修改状态从: ")
+                    .append("【")
+                    .append(oldBookmark.getStatus())
+                    .append("】")
+                    .append(" 修改为: ")
+                    .append("【")
+                    .append(bookmark.getStatus())
+                    .append("】")
+            ;
+        }
+
+        // 执行更新操作
         boolean update = updateById(bookmark);
-
         if (update) {
-            // 修改成功, 记录书签操作日志
+            // 更新成功，记录书签操作日志
             BookmarkLog bookmarkLog = new BookmarkLog();
             bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_EDIT);
             bookmarkLog.setBookmarkId(bookmark.getId());
             bookmarkLog.setOperatorId(SecurityUtils.getUserId());
             bookmarkLog.setOperatorName(SecurityUtils.getUsername());
+
+            // 将拼接好的详细信息记录到日志中
+            bookmarkLog.setActionDetails(details.toString());
+
+            // 保存日志记录
             bookmarkLogService.save(bookmarkLog);
         }
 
