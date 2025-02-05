@@ -1,289 +1,188 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="网站标题" prop="title">
-        <el-input
-          v-model="queryParams.title"
-          placeholder="请输入网站标题"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="SEO关键词" prop="keywords">
-        <el-input
-          v-model="queryParams.keywords"
-          placeholder="请输入SEO关键词"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="备案号" prop="icp">
-        <el-input
-          v-model="queryParams.icp"
-          placeholder="请输入备案号"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="系统版本" prop="version">
-        <el-input
-          v-model="queryParams.version"
-          placeholder="请输入系统版本"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-        <el-button icon="Refresh" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
+    <div v-loading="loading">
+      <div v-for="item in websiteInfoList" :key="item.id" class="record-item" :class="{ editing: isEditing(item) }">
+        <el-form :model="isEditing(item) ? editingRow : item" label-position="top" size="small" class="record-form">
+          <el-form-item label="网站标题">
+            <template v-if="isEditing(item)">
+              <el-input v-model="editingRow.title" placeholder="请输入网站标题" class="custom-input" />
+            </template>
+            <template v-else>
+              <span class="value">{{ item.title }}</span>
+            </template>
+          </el-form-item>
+          <el-form-item label="SEO关键词">
+            <template v-if="isEditing(item)">
+              <el-input v-model="editingRow.keywords" placeholder="请输入SEO关键词" class="custom-input" />
+            </template>
+            <template v-else>
+              <span class="value">{{ item.keywords }}</span>
+            </template>
+          </el-form-item>
+          <el-form-item label="网站描述">
+            <template v-if="isEditing(item)">
+              <el-input type="textarea" v-model="editingRow.description" placeholder="请输入网站描述" class="custom-input" />
+            </template>
+            <template v-else>
+              <span class="value">{{ item.description }}</span>
+            </template>
+          </el-form-item>
+          <el-form-item label="备案号">
+            <template v-if="isEditing(item)">
+              <el-input v-model="editingRow.icp" placeholder="请输入备案号" class="custom-input" />
+            </template>
+            <template v-else>
+              <span class="value">{{ item.icp }}</span>
+            </template>
+          </el-form-item>
+          <el-form-item label="系统版本">
+            <template v-if="isEditing(item)">
+              <el-input v-model="editingRow.version" placeholder="请输入系统版本" class="custom-input" />
+            </template>
+            <template v-else>
+              <span class="value">{{ item.version }}</span>
+            </template>
+          </el-form-item>
+        </el-form>
 
-    <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['admin:websiteInfo:add']"
-        >新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['admin:websiteInfo:edit']"
-        >修改</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['admin:websiteInfo:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['admin:websiteInfo:export']"
-        >导出</el-button>
-      </el-col>
-      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
-    </el-row>
-
-    <el-table v-loading="loading" :data="websiteInfoList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="信息ID" align="center" prop="id" />
-      <el-table-column label="网站标题" align="center" prop="title" />
-      <el-table-column label="SEO关键词" align="center" prop="keywords" />
-      <el-table-column label="网站描述" align="center" prop="description" />
-      <el-table-column label="备案号" align="center" prop="icp" />
-      <el-table-column label="系统版本" align="center" prop="version" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:websiteInfo:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:websiteInfo:remove']">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    
-    <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
-    />
-
-    <!-- 添加或修改网站信息对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="websiteInfoRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="网站标题" prop="title">
-          <el-input v-model="form.title" placeholder="请输入网站标题" />
-        </el-form-item>
-        <el-form-item label="SEO关键词" prop="keywords">
-          <el-input v-model="form.keywords" placeholder="请输入SEO关键词" />
-        </el-form-item>
-        <el-form-item label="网站描述" prop="description">
-          <el-input v-model="form.description" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="备案号" prop="icp">
-          <el-input v-model="form.icp" placeholder="请输入备案号" />
-        </el-form-item>
-        <el-form-item label="系统版本" prop="version">
-          <el-input v-model="form.version" placeholder="请输入系统版本" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
+        <div class="record-actions">
+          <template v-if="isEditing(item)">
+            <el-button size="small" type="primary" icon="Check" @click="save(item)" class="custom-btn">保存</el-button>
+            <el-button size="small" icon="Close" @click="cancelEdit" class="custom-btn">取消</el-button>
+          </template>
+          <template v-else>
+            <el-button size="small" type="primary" icon="Edit" @click="startEdit(item)" class="custom-btn">修改</el-button>
+          </template>
         </div>
-      </template>
-    </el-dialog>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup name="WebsiteInfo">
-import { listWebsiteInfo, getWebsiteInfo, delWebsiteInfo, addWebsiteInfo, updateWebsiteInfo } from "@/api/admin/websiteInfo";
+import { ref, reactive, getCurrentInstance } from "vue";
+import { listWebsiteInfo, updateWebsiteInfo } from "@/api/admin/websiteInfo";
 
 const { proxy } = getCurrentInstance();
 
 const websiteInfoList = ref([]);
-const open = ref(false);
 const loading = ref(true);
-const showSearch = ref(true);
-const ids = ref([]);
-const single = ref(true);
-const multiple = ref(true);
-const total = ref(0);
-const title = ref("");
-
-const data = reactive({
-  form: {},
-  queryParams: {
-    pageNum: 1,
-    pageSize: 10,
-    title: null,
-    keywords: null,
-    description: null,
-    icp: null,
-    version: null,
-  },
-  rules: {
-    title: [
-      { required: true, message: "网站标题不能为空", trigger: "blur" }
-    ],
-    version: [
-      { required: true, message: "系统版本不能为空", trigger: "blur" }
-    ],
-    createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
-    ],
-    updateTime: [
-      { required: true, message: "更新时间不能为空", trigger: "blur" }
-    ]
-  }
+const editingId = ref(null);
+const editingRow = reactive({
+  id: null,
+  title: "",
+  keywords: "",
+  description: "",
+  icp: "",
+  version: ""
 });
 
-const { queryParams, form, rules } = toRefs(data);
+function isEditing(item) {
+  return editingId.value === item.id;
+}
 
-/** 查询网站信息列表 */
 function getList() {
   loading.value = true;
-  listWebsiteInfo(queryParams.value).then(response => {
+  listWebsiteInfo().then(response => {
     websiteInfoList.value = response.rows;
-    total.value = response.total;
     loading.value = false;
   });
 }
 
-// 取消按钮
-function cancel() {
-  open.value = false;
-  reset();
+function startEdit(item) {
+  if (editingId.value !== null) return;
+  Object.assign(editingRow, item);
+  editingId.value = item.id;
 }
 
-// 表单重置
-function reset() {
-  form.value = {
-    id: null,
-    title: null,
-    keywords: null,
-    description: null,
-    icp: null,
-    version: null,
-    createTime: null,
-    updateTime: null
-  };
-  proxy.resetForm("websiteInfoRef");
+function cancelEdit() {
+  editingId.value = null;
 }
 
-/** 搜索按钮操作 */
-function handleQuery() {
-  queryParams.value.pageNum = 1;
-  getList();
-}
-
-/** 重置按钮操作 */
-function resetQuery() {
-  proxy.resetForm("queryRef");
-  handleQuery();
-}
-
-// 多选框选中数据
-function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.id);
-  single.value = selection.length != 1;
-  multiple.value = !selection.length;
-}
-
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  open.value = true;
-  title.value = "添加网站信息";
-}
-
-/** 修改按钮操作 */
-function handleUpdate(row) {
-  reset();
-  const _id = row.id || ids.value
-  getWebsiteInfo(_id).then(response => {
-    form.value = response.data;
-    open.value = true;
-    title.value = "修改网站信息";
-  });
-}
-
-/** 提交按钮 */
-function submitForm() {
-  proxy.$refs["websiteInfoRef"].validate(valid => {
-    if (valid) {
-      if (form.value.id != null) {
-        updateWebsiteInfo(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          getList();
-        });
-      } else {
-        addWebsiteInfo(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
-          open.value = false;
-          getList();
-        });
-      }
-    }
-  });
-}
-
-/** 删除按钮操作 */
-function handleDelete(row) {
-  const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除网站信息编号为"' + _ids + '"的数据项？').then(function() {
-    return delWebsiteInfo(_ids);
-  }).then(() => {
+function save(item) {
+  if (!editingRow.title || !editingRow.version) {
+    proxy.$modal.msgError("网站标题和系统版本不能为空");
+    return;
+  }
+  updateWebsiteInfo(editingRow).then(() => {
+    proxy.$modal.msgSuccess("修改成功");
+    editingId.value = null;
     getList();
-    proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
-}
-
-/** 导出按钮操作 */
-function handleExport() {
-  proxy.download('admin/websiteInfo/export', {
-    ...queryParams.value
-  }, `websiteInfo_${new Date().getTime()}.xlsx`)
+  });
 }
 
 getList();
 </script>
+
+<style scoped>
+.app-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.record-item {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+  border-left: 5px solid #409eff;
+}
+
+.record-item.editing {
+  border-left: 5px solid #ff9800;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.record-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.el-form-item {
+  margin-bottom: 12px;
+}
+
+.value {
+  display: block;
+  padding: 10px;
+  background: #f5f7fa;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #606266;
+  transition: all 0.3s ease;
+}
+
+.record-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* 自定义输入框 */
+.custom-input {
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+  border-color: #409eff !important;
+  box-shadow: 0 0 8px rgba(64, 158, 255, 0.4);
+}
+
+/* 自定义按钮 */
+.custom-btn {
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+</style>
