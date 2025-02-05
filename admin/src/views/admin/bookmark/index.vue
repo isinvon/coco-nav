@@ -244,7 +244,6 @@
 </template>
 
 <script setup name="Bookmark">
-import { Picture as IconPicture } from '@element-plus/icons-vue'
 
 import {
   listBookmark,
@@ -271,6 +270,9 @@ const title = ref("");
 const bookmarkStatusTypeList = ref([]); // 书签状态类型
 const bookmarkDeleteStatusList = ref([]); // 书签删除状态类型
 const bookmarkDefaultIcon = ref(''); // 书签默认图标
+
+// 用于保存修改操作时的初始数据，用于判断数据是否有变化
+const originalForm = ref(null);
 
 const data = reactive({
   form: {},
@@ -326,7 +328,9 @@ const data = reactive({
 
 const {queryParams, form, rules} = toRefs(data);
 
-/** Index */
+/**
+ * 获取初始化索引数据
+ */
 function getIndex() {
   indexBookmark().then(response => {
     bookmarkStatusTypeList.value = response.data.bookmarkStatusTypeList;
@@ -335,7 +339,9 @@ function getIndex() {
   });
 }
 
-/** 查询书签管理列表 */
+/**
+ * 查询书签管理列表
+ */
 function getList() {
   loading.value = true;
   listBookmark(queryParams.value).then(response => {
@@ -345,13 +351,17 @@ function getList() {
   });
 }
 
-// 取消按钮
+/**
+ * 取消按钮操作，关闭对话框并重置表单数据
+ */
 function cancel() {
   open.value = false;
   reset();
 }
 
-// 表单重置
+/**
+ * 表单重置方法
+ */
 function reset() {
   form.value = {
     id: null,
@@ -367,57 +377,85 @@ function reset() {
     createTime: null,
     updateTime: null
   };
+  // 重置初始数据变量
+  originalForm.value = null;
   proxy.resetForm("bookmarkRef");
 }
 
-/** 搜索按钮操作 */
+/**
+ * 搜索按钮操作
+ */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/**
+ * 重置按钮操作
+ */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
 
-// 多选框选中数据
+/**
+ * 多选框选中数据
+ */
 function handleSelectionChange(selection) {
   ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
+/**
+ * 新增按钮操作
+ */
 function handleAdd() {
   reset();
   open.value = true;
   title.value = "添加书签管理";
 }
 
-/** 修改按钮操作 */
+/**
+ * 修改按钮操作
+ * @param {Object} row - 选中的书签数据对象
+ */
 function handleUpdate(row) {
   reset();
-  const _id = row.id || ids.value
+  // 获取待修改的书签ID
+  const _id = row.id || ids.value;
   getBookmark(_id).then(response => {
+    // 设置表单数据
     form.value = response.data;
+    // 保存初始数据，用于后续判断是否有修改（深拷贝）
+    originalForm.value = JSON.parse(JSON.stringify(response.data));
     open.value = true;
     title.value = "修改书签管理";
   });
 }
 
-/** 提交按钮 */
+/**
+ * 提交按钮操作
+ */
 function submitForm() {
+  // 表单校验
   proxy.$refs["bookmarkRef"].validate(valid => {
     if (valid) {
+      // 判断是否为修改操作
       if (form.value.id != null) {
+        // 判断表单数据是否有改变，如果没有改变则提示并不发起更新请求
+        if (JSON.stringify(form.value) === JSON.stringify(originalForm.value)) {
+          proxy.$modal.msg("没有任何改变");
+          return;
+        }
+        // 执行修改操作
         updateBookmark(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
+        // 执行新增操作
         addBookmark(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功");
           open.value = false;
@@ -428,7 +466,10 @@ function submitForm() {
   });
 }
 
-/** 删除按钮操作 */
+/**
+ * 删除按钮操作
+ * @param {Object} row - 待删除的书签数据对象
+ */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
   proxy.$modal.confirm('是否确认删除书签管理编号为"' + _ids + '"的数据项？').then(function () {
@@ -440,21 +481,24 @@ function handleDelete(row) {
   });
 }
 
-/** 导出按钮操作 */
+/**
+ * 导出按钮操作
+ */
 function handleExport() {
   proxy.download('admin/bookmark/export', {
     ...queryParams.value
   }, `bookmark_${new Date().getTime()}.xlsx`)
 }
 
-/** 修改状态按钮操作 */
+/**
+ * 修改状态按钮操作
+ * @param {Object} row - 待修改状态的书签数据对象
+ */
 function handleUpdateBookmarkStatus(row) {
   // 拷贝插槽数据 row 到 form.value
   form.value = row;
-
   // 使用三元表达式切换 form.status
   form.value.status = row.status === 0 ? 1 : 0;
-
   // 执行更新操作
   if (form.value.id != null) {
     updateBookmark(form.value).then(response => {
@@ -462,17 +506,18 @@ function handleUpdateBookmarkStatus(row) {
       form.value.status === 0
           ? proxy.$modal.msgWarning("书签已禁用")
           : proxy.$modal.msgSuccess("书签已启用");
-
       getList();
     });
   }
 }
 
-/** 修改排序按钮操作 */
+/**
+ * 修改排序按钮操作
+ * @param {Object} row - 待修改排序的书签数据对象
+ */
 function handleUpdateBookmarkSortOrder(row) {
   // 拷贝插槽数据 row 到 form.value
   form.value = row;
-
   // 执行更新操作
   if (form.value.id != null) {
     updateBookmark(form.value).then(response => {
@@ -484,13 +529,20 @@ function handleUpdateBookmarkSortOrder(row) {
   }
 }
 
-/** 判断是否是HTTPS链接 */
+/**
+ * 判断是否是HTTPS链接
+ * @param {String} url - 链接地址
+ * @returns {Boolean} 是否为HTTPS链接
+ */
 const isHttpsUrl = (url) => {
   const urlPattern = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i;
   return urlPattern.test(url);
 };
 
-/** url信息爬虫 */
+/**
+ * url信息爬虫方法
+ * @param {String} url - 待爬取的链接地址
+ */
 function urlCrawl(url) {
   if (url) {
     // 校验是否为链接
@@ -521,7 +573,6 @@ function urlCrawl(url) {
     proxy.$modal.msgError("爬取失败，请检查网络或URL");
   });
 }
-
 
 getList();
 getIndex();
