@@ -221,6 +221,10 @@
         </el-form-item>
         <el-form-item label="网站图标" prop="icon">
           <el-input v-model="form.icon" placeholder="请输入网站图标"/>
+          <!-- 提示要不要使用默认图标, 截取 form.url 的第三个"/"前的域名+favicon.ico作为图标域名, 点击后填入form.icon-->
+          <el-button v-show="isHttpsUrl(form.url) && form.url != null" type="primary" @click="getDefaultIcon(form.url)">
+            使用 favicon.ico 图标
+          </el-button>
         </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
           <el-input-number v-model="form.sortOrder" :min="1" label="排序值"/>
@@ -573,6 +577,32 @@ function urlCrawl(url) {
     proxy.$modal.msgError("爬取失败，请检查网络或URL");
   });
 }
+
+
+/**
+ * 获取默认图标方法
+ * 从给定的 url 中提取协议和域名部分，然后拼接 "/favicon.ico" 作为默认图标地址，
+ * 点击按钮后将生成的地址赋值给 form.icon。
+ * @param {String} url - 用户输入的网址
+ */
+function getDefaultIcon(url) {
+  try {
+    // 使用 URL 对象解析传入的 url
+    const urlObj = new URL(url);
+    // 获取 url 的 origin 部分（协议 + 域名 + 端口，例如：https://www.example.com）
+    const origin = urlObj.origin;
+    // 拼接默认图标地址
+    const defaultIcon = origin + '/favicon.ico';
+    // 将默认图标地址赋值给 form.icon
+    form.value.icon = defaultIcon;
+  } catch (error) {
+    // 如果解析 url 失败，则提示用户输入正确的网址
+    console.error("解析 URL 失败: ", error);
+    // 此处可以使用弹框或者其他方式提示用户错误信息
+    proxy.$modal.msgError("无法解析网址，请检查输入是否正确");
+  }
+}
+
 
 getList();
 getIndex();
