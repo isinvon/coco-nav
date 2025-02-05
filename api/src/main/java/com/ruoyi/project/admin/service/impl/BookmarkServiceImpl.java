@@ -72,7 +72,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
             // 使用 StringBuilder 拼接所有字段信息
             StringBuilder details = new StringBuilder();
-            details.append("书签信息: ");
+            details.append("添加书签信息: ");
             details.append("标题【").append(bookmark.getTitle()).append("】, ");
             details.append("地址【").append(bookmark.getUrl()).append("】, ");
             details.append("描述【").append(bookmark.getDescription()).append("】, ");
@@ -220,21 +220,43 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
     @Override
     public Boolean deleteBookmark(List<Long> idList) {
+        // 先查询待删除的书签信息（便于记录日志）
+        List<Bookmark> bookmarksToDelete = listByIds(idList);
 
+        // 执行删除操作
         boolean remove = removeByIds(idList);
 
         if (remove) {
-            // 删除成功, 记录书签操作日志
-            BookmarkLog bookmarkLog = new BookmarkLog();
-            bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_DELETE);
-            bookmarkLog.setBookmarkId(idList.get(0));
-            bookmarkLog.setOperatorId(SecurityUtils.getUserId());
-            bookmarkLog.setOperatorName(SecurityUtils.getUsername());
-            bookmarkLogService.save(bookmarkLog);
-        }
+            // 删除成功，记录每个书签的删除日志
+            for (Bookmark bookmark : bookmarksToDelete) {
+                BookmarkLog bookmarkLog = new BookmarkLog();
+                bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_DELETE);
+                bookmarkLog.setBookmarkId(bookmark.getId());
+                bookmarkLog.setOperatorId(SecurityUtils.getUserId());
+                bookmarkLog.setOperatorName(SecurityUtils.getUsername());
 
+                // 使用 StringBuilder 拼接删除的详细信息
+                StringBuilder details = new StringBuilder();
+                details.append("删除书签信息: ");
+                details.append("标题【").append(bookmark.getTitle()).append("】, ");
+                details.append("地址【").append(bookmark.getUrl()).append("】, ");
+                details.append("描述【").append(bookmark.getDescription()).append("】, ");
+                details.append("分类ID【").append(bookmark.getBookmarkCategoryId()).append("】, ");
+                details.append("图标【").append(bookmark.getIcon()).append("】, ");
+                details.append("点击次数【").append(bookmark.getClickCount()).append("】, ");
+                details.append("排序值【").append(bookmark.getSortOrder()).append("】, ");
+                details.append("状态【").append(bookmark.getStatus()).append("】");
+
+                // 将拼接好的详细信息记录到日志对象中
+                bookmarkLog.setActionDetails(details.toString());
+
+                // 保存日志记录
+                bookmarkLogService.save(bookmarkLog);
+            }
+        }
         return remove;
     }
+
 
     @Override
     public Map<String, String> getUrlInfoByCrawler(String url) {
