@@ -358,4 +358,14 @@ public class PermissionConstants {
     public static final String ADMIN_WEBSITE_INFO_ADD = "admin:websiteInfo:add";
     public static final String ADMIN_WEBSITE_INFO_EDIT = "admin:websiteInfo:edit";
     public static final String ADMIN_WEBSITE_INFO_REMOVE = "admin:websiteInfo:remove";
+
+    /**
+     * 网站信息日志
+     */
+    public static final String ADMIN_WEBSITE_INFO_LOG_LIST = "admin:websiteInfoLog:list";
+    public static final String ADMIN_WEBSITE_INFO_LOG_EXPORT = "admin:websiteInfoLog:export";
+    public static final String ADMIN_WEBSITE_INFO_LOG_QUERY = "admin:websiteInfoLog:query";
+    public static final String ADMIN_WEBSITE_INFO_LOG_ADD = "admin:websiteInfoLog:add";
+    public static final String ADMIN_WEBSITE_INFO_LOG_EDIT = "admin:websiteInfoLog:edit";
+    public static final String ADMIN_WEBSITE_INFO_LOG_REMOVE = "admin:websiteInfoLog:remove";
 }
