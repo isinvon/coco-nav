@@ -316,4 +316,31 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
         }
         return map;
     }
+
+    @Override
+    public BookmarkVo getBookmarkById(Long bookmarkId) {
+        // 1. 查询书签
+        Bookmark bookmark = getById(bookmarkId);
+        if (bookmark == null) {
+            return null;
+        }
+
+        // 2. 查询书签关联的标签关系
+        LambdaQueryWrapper<BookmarkTagRelation> relationQuery = new LambdaQueryWrapper<>();
+        relationQuery.eq(BookmarkTagRelation::getBookmarkId, bookmarkId);
+        List<BookmarkTagRelation> relations = bookmarkTagRelationService.list(relationQuery);
+
+        // 3. 提取标签 ID
+        List<Long> tagIds = relations.stream().map(BookmarkTagRelation::getBookmarkTagId).toList();
+
+        // 4. 查询标签信息
+        List<BookmarkTag> tags = tagIds.isEmpty() ? Collections.emptyList() : bookmarkTagService.listByIds(tagIds);
+
+        // 5. 封装 BookmarkVo
+        BookmarkVo bookmarkVo = new BookmarkVo();
+        BeanUtil.copyProperties(bookmark, bookmarkVo);
+        bookmarkVo.setBookmarkTags(tags);
+
+        return bookmarkVo;
+    }
 }

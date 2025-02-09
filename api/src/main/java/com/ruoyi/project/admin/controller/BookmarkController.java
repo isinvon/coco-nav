@@ -60,7 +60,7 @@ public class BookmarkController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_QUERY)
     @GetMapping(value = "/{bookmarkId}")
     public AjaxResult getInfo(@PathVariable("bookmarkId") Long bookmarkId) {
-        return success(bookmarkService.getById(bookmarkId));
+        return success(bookmarkService.getBookmarkById(bookmarkId));
     }
 
     /**
