@@ -1,10 +1,9 @@
 package com.ruoyi.project.admin.domain.po;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
+import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
-
-import java.io.Serializable;
 
 /**
  * 书签与标签关联对象 coco_bookmark_tag_relation
@@ -14,16 +13,9 @@ import java.io.Serializable;
  */
 @Data
 @TableName("coco_bookmark_tag_relation")
-public class BookmarkTagRelation implements Serializable {
+public class BookmarkTagRelation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键ID
-     */
-    @TableId(type = IdType.ASSIGN_ID) // 使用雪花算法ID
-    @Excel(name = "主键ID")
-    private Long id;
 
     /**
      * 书签ID
