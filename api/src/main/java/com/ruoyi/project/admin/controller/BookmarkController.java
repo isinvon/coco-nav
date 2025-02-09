@@ -1,7 +1,6 @@
 package com.ruoyi.project.admin.controller;
 
 import com.ruoyi.common.constant.PermissionConstants;
-import com.ruoyi.common.utils.crawler.CrawlerUtil;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -10,6 +9,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.po.Bookmark;
+import com.ruoyi.project.admin.domain.vo.BookmarkVo;
 import com.ruoyi.project.admin.service.BookmarkService;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,9 +36,9 @@ public class BookmarkController extends BaseController {
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LIST)
     @GetMapping("/list")
-    public TableDataInfo list(Bookmark bookmark) {
+    public TableDataInfo list(BookmarkVo bookmarkVo) {
         startPage();
-        List<Bookmark> list = bookmarkService.getBookmarkListByQueryCondition(bookmark);
+        List<BookmarkVo> list = bookmarkService.getBookmarkListByQueryCondition(bookmarkVo);
         return getDataTable(list);
     }
 

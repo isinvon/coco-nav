@@ -1,18 +1,25 @@
 package com.ruoyi.project.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.crawler.CrawlerUtil;
 import com.ruoyi.project.admin.domain.po.Bookmark;
 import com.ruoyi.project.admin.domain.po.BookmarkLog;
+import com.ruoyi.project.admin.domain.po.BookmarkTag;
+import com.ruoyi.project.admin.domain.po.BookmarkTagRelation;
+import com.ruoyi.project.admin.domain.vo.BookmarkVo;
 import com.ruoyi.project.admin.mapper.BookmarkMapper;
 import com.ruoyi.project.admin.service.BookmarkLogService;
 import com.ruoyi.project.admin.service.BookmarkService;
+import com.ruoyi.project.admin.service.BookmarkTagRelationService;
+import com.ruoyi.project.admin.service.BookmarkTagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,32 +36,73 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
     @Resource
     private BookmarkLogService bookmarkLogService;
 
-    @Override
-    public List<Bookmark> getBookmarkListByQueryCondition(Bookmark bookmark) {
+    @Resource
+    private BookmarkTagRelationService bookmarkTagRelationService;
 
+    @Resource
+    private BookmarkTagService bookmarkTagService;
+
+    @Override
+    public List<BookmarkVo> getBookmarkListByQueryCondition(BookmarkVo bookmarkVo) {
+        // 1. 构建查询条件
         LambdaQueryWrapper<Bookmark> qw = new LambdaQueryWrapper<>();
 
-        // 根据书签标题
-        if (bookmark.getTitle() != null) {
-            qw.like(Bookmark::getTitle, bookmark.getTitle());
+        if (bookmarkVo.getTitle() != null) {
+            qw.like(Bookmark::getTitle, bookmarkVo.getTitle());
+        }
+        if (bookmarkVo.getUrl() != null) {
+            qw.like(Bookmark::getUrl, bookmarkVo.getUrl());
+        }
+        if (bookmarkVo.getStatus() != null) {
+            qw.eq(Bookmark::getStatus, bookmarkVo.getStatus());
+        }
+        if (bookmarkVo.getIsDeleted() != null) {
+            qw.eq(Bookmark::getIsDeleted, bookmarkVo.getIsDeleted());
         }
 
-        // 根据 url
-        if (bookmark.getUrl() != null) {
-            qw.like(Bookmark::getUrl, bookmark.getUrl());
+        // 2. 查询书签列表
+        List<Bookmark> bookmarkList = list(qw);
+        if (bookmarkList.isEmpty()) {
+            return Collections.emptyList();
         }
 
-        // 根据状态
-        if (bookmark.getStatus() != null) {
-            qw.eq(Bookmark::getStatus, bookmark.getStatus());
+        // 3. 提取书签ID列表
+        List<Long> bookmarkIds = bookmarkList.stream().map(Bookmark::getId).toList();
+
+        // 4. 查询所有书签对应的标签关系
+        LambdaQueryWrapper<BookmarkTagRelation> relationQuery = new LambdaQueryWrapper<>();
+        relationQuery.in(BookmarkTagRelation::getBookmarkId, bookmarkIds);
+
+        List<BookmarkTagRelation> relations = bookmarkTagRelationService.list(relationQuery);
+        if (relations.isEmpty()) {
+            return bookmarkList.stream().map(bookmark -> {
+                BookmarkVo vo = new BookmarkVo();
+                BeanUtil.copyProperties(bookmark, vo);
+                vo.setBookmarkTags(Collections.emptyList());
+                return vo;
+            }).toList();
         }
 
-        // 根据删除状态
-        if (bookmark.getIsDeleted() != null) {
-            qw.eq(Bookmark::getIsDeleted, bookmark.getIsDeleted());
-        }
+        // 5. 获取所有的标签ID
+        List<Long> tagIds = relations.stream().map(BookmarkTagRelation::getBookmarkTagId).distinct().toList();
 
-        return list(qw);
+        // 6. 查询所有标签
+        List<BookmarkTag> tags = bookmarkTagService.listByIds(tagIds);
+
+        // 7. 组装数据
+        return bookmarkList.stream().map(bookmark -> {
+            BookmarkVo vo = new BookmarkVo();
+            BeanUtil.copyProperties(bookmark, vo);
+
+            // 关联标签
+            List<Long> relatedTagIds = relations.stream()
+                    .filter(r -> r.getBookmarkId().equals(bookmark.getId()))
+                    .map(BookmarkTagRelation::getBookmarkTagId)
+                    .toList();
+
+            vo.setBookmarkTags(tags.stream().filter(tag -> relatedTagIds.contains(tag.getId())).toList());
+            return vo;
+        }).toList();
     }
 
     @Override

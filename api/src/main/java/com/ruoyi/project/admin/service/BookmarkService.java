@@ -11,7 +11,7 @@ import java.util.Map;
  * @since :  2025/1/31 上午3:37
  */
 public interface BookmarkService extends IService<Bookmark> {
-    List<Bookmark> getBookmarkListByQueryCondition(Bookmark bookmark);
+    List<BookmarkVo> getBookmarkListByQueryCondition(BookmarkVo bookmarkVo);
 
     Boolean addBookmark(Bookmark bookmark);
 
