@@ -343,12 +343,20 @@ function handleAdd() {
   title.value = "添加广告管理";
 }
 
-/** 修改按钮操作 */
+/**
+ * 修改按钮操作
+ * 在获取广告详情后，将startTime和endTime映射到dateRange，使得时间范围组件能正确显示
+ */
 function handleUpdate(row) {
   reset();
-  const _id = row.id || ids.value
+  const _id = row.id || ids.value;
   getAdvertisement(_id).then(response => {
+    // 将返回的数据赋值给表单
     form.value = response.data;
+    // 如果存在startTime和endTime，则映射到dateRange数组中
+    if (response.data.startTime && response.data.endTime) {
+      form.value.dateRange = [response.data.startTime, response.data.endTime];
+    }
     open.value = true;
     title.value = "修改广告管理🚩";
   });
