@@ -123,7 +123,12 @@
             >
               <template #error>
                 <div class="image-slot">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 36 36"><path fill="currentColor" d="M18 6a12 12 0 1 0 12 12A12 12 0 0 0 18 6m-1.49 6a1.49 1.49 0 0 1 3 0v6.89a1.49 1.49 0 1 1-3 0ZM18 25.5a1.72 1.72 0 1 1 1.72-1.72A1.72 1.72 0 0 1 18 25.5" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 36 36">
+                    <path fill="currentColor"
+                          d="M18 6a12 12 0 1 0 12 12A12 12 0 0 0 18 6m-1.49 6a1.49 1.49 0 0 1 3 0v6.89a1.49 1.49 0 1 1-3 0ZM18 25.5a1.72 1.72 0 1 1 1.72-1.72A1.72 1.72 0 0 1 18 25.5"
+                          class="clr-i-solid clr-i-solid-path-1"/>
+                    <path fill="none" d="M0 0h36v36H0z"/>
+                  </svg>
                 </div>
               </template>
             </el-image>
@@ -226,6 +231,10 @@
             使用 favicon.ico 图标
           </el-button>
         </el-form-item>
+        <!--标签 bookmarkTags-->
+        <el-form-item label="标签" prop="bookmarkTags">
+          <TagInputTool v-model="bookmarkTagsStr" @updateTags="handleUpdateTags" />
+        </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
           <el-input-number v-model="form.sortOrder" :min="1" label="排序值"/>
         </el-form-item>
@@ -248,6 +257,7 @@
 </template>
 
 <script setup name="Bookmark">
+import TagInputTool from '@/components/TagInputTool'
 
 import {
   listBookmark,
@@ -274,6 +284,7 @@ const title = ref("");
 const bookmarkStatusTypeList = ref([]); // 书签状态类型
 const bookmarkDeleteStatusList = ref([]); // 书签删除状态类型
 const bookmarkDefaultIcon = ref(''); // 书签默认图标
+const bookmarkTagsStr = ref('') // 标签
 
 // 用于保存修改操作时的初始数据，用于判断数据是否有变化
 const originalForm = ref(null);
@@ -291,6 +302,10 @@ const data = reactive({
     clickCount: null,
     sortOrder: null,
     status: null,
+    isDeleted: null,
+    bookmarkTags: [],
+    createTime: null,
+    updateTime: null,
   },
   rules: {
     title: [
@@ -318,6 +333,15 @@ const data = reactive({
       {
         pattern: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/,
         message: '请输入正确的图标链接',
+        trigger: 'blur'
+      }
+    ],
+    bookmarkTags: [
+      {required: false, trigger: "blur"},
+      // 校验, 不允许特殊字符
+      {
+        pattern: /^[a-zA-Z0-9\u4e00-\u9fa5]+$/,
+        message: '标签只能包含中文、英文字母和数字',
         trigger: 'blur'
       }
     ],
@@ -378,8 +402,9 @@ function reset() {
     sortOrder: 1,
     status: 1,
     isDeleted: 0,
+    bookmarkTags: [],
     createTime: null,
-    updateTime: null
+    updateTime: null,
   };
   // 重置初始数据变量
   originalForm.value = null;
@@ -452,6 +477,13 @@ function submitForm() {
           proxy.$modal.msg("没有任何改变");
           return;
         }
+
+        // 处理标签数据
+        form.bookmarkTags = bookmarkTagsStr.value
+            .split(",")
+            .map(tag => tag.trim())
+            .filter(tag => tag.length > 0);
+
         // 执行修改操作
         updateBookmark(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
@@ -603,6 +635,15 @@ function getDefaultIcon(url) {
   }
 }
 
+// 监听 form.bookmarkTags 的变化，同步更新 bookmarkTagsStr
+watch(() => form.bookmarkTags, (newTags) => {
+  bookmarkTagsStr.value = (newTags || []).join(",");
+}, { immediate: true });
+
+// 监听 bookmarkTagsStr 的变化，更新 form.bookmarkTags
+watch(bookmarkTagsStr, (newValue) => {
+  form.bookmarkTags = newValue ? newValue.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0) : [];
+}, { immediate: true });
 
 getList();
 getIndex();
