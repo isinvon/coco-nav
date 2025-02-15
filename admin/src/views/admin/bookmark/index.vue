@@ -233,7 +233,7 @@
         </el-form-item>
         <!--标签 bookmarkTags-->
         <el-form-item label="标签" prop="bookmarkTags">
-          <TagInputTool v-model="bookmarkTagsStr" @updateTags="handleUpdateTags" />
+          <el-input-tag v-model="bookmarkTagsStr" clearable trigger='Enter' placeholder="输入标签, 然后按下Enter确认" />
         </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
           <el-input-number v-model="form.sortOrder" :min="1" label="排序值"/>
@@ -257,7 +257,6 @@
 </template>
 
 <script setup name="Bookmark">
-import TagInputTool from '@/components/TagInputTool'
 
 import {
   listBookmark,
@@ -284,7 +283,7 @@ const title = ref("");
 const bookmarkStatusTypeList = ref([]); // 书签状态类型
 const bookmarkDeleteStatusList = ref([]); // 书签删除状态类型
 const bookmarkDefaultIcon = ref(''); // 书签默认图标
-const bookmarkTagsStr = ref('') // 标签
+const bookmarkTagsStr = ref([]) // 标签
 
 // 用于保存修改操作时的初始数据，用于判断数据是否有变化
 const originalForm = ref(null);
@@ -338,12 +337,12 @@ const data = reactive({
     ],
     bookmarkTags: [
       {required: false, trigger: "blur"},
-      // 校验, 不允许特殊字符
-      {
-        pattern: /^[a-zA-Z0-9\u4e00-\u9fa5]+$/,
-        message: '标签只能包含中文、英文字母和数字',
-        trigger: 'blur'
-      }
+      // // 校验, 不允许特殊字符
+      // {
+      //   pattern: /^[a-zA-Z0-9\u4e00-\u9fa5]+$/,
+      //   message: '标签只能包含中文、英文字母和数字',
+      //   trigger: 'blur'
+      // }
     ],
     createTime: [
       {required: true, message: "创建时间不能为空", trigger: "blur"}
@@ -472,17 +471,15 @@ function submitForm() {
     if (valid) {
       // 判断是否为修改操作
       if (form.value.id != null) {
+
+        // 转化为对象数组之后才能赋值给bookmarkTags
+        form.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({ tagName: tag }));
+
         // 判断表单数据是否有改变，如果没有改变则提示并不发起更新请求
         if (JSON.stringify(form.value) === JSON.stringify(originalForm.value)) {
           proxy.$modal.msg("没有任何改变");
           return;
         }
-
-        // 处理标签数据
-        form.bookmarkTags = bookmarkTagsStr.value
-            .split(",")
-            .map(tag => tag.trim())
-            .filter(tag => tag.length > 0);
 
         // 执行修改操作
         updateBookmark(form.value).then(response => {
@@ -491,6 +488,10 @@ function submitForm() {
           getList();
         });
       } else {
+
+        // 转化为对象数组之后才能赋值给bookmarkTags
+        form.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({ tagName: tag }));
+
         // 执行新增操作
         addBookmark(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功");
@@ -634,16 +635,6 @@ function getDefaultIcon(url) {
     proxy.$modal.msgError("无法解析网址，请检查输入是否正确");
   }
 }
-
-// 监听 form.bookmarkTags 的变化，同步更新 bookmarkTagsStr
-watch(() => form.bookmarkTags, (newTags) => {
-  bookmarkTagsStr.value = (newTags || []).join(",");
-}, { immediate: true });
-
-// 监听 bookmarkTagsStr 的变化，更新 form.bookmarkTags
-watch(bookmarkTagsStr, (newValue) => {
-  form.bookmarkTags = newValue ? newValue.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0) : [];
-}, { immediate: true });
 
 getList();
 getIndex();
