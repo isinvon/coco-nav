@@ -408,6 +408,7 @@ function reset() {
   // 重置初始数据变量
   originalForm.value = null;
   proxy.resetForm("bookmarkRef");
+  bookmarkTagsStr.value = [];
 }
 
 /**
@@ -457,6 +458,8 @@ function handleUpdate(row) {
     form.value = response.data;
     // 保存初始数据，用于后续判断是否有修改（深拷贝）
     originalForm.value = JSON.parse(JSON.stringify(response.data));
+    // 将 bookmarkTags 转换为字符串数组
+    bookmarkTagsStr.value = form.value.bookmarkTags.map(tag => tag.tagName);
     open.value = true;
     title.value = "修改书签管理";
   });
