@@ -9,6 +9,15 @@
             @keyup.enter="handleQuery"
         />
       </el-form-item>
+      <!--描述-->
+      <el-form-item label="描述" label-position="left" label-width="40px" prop="description">
+        <el-input
+            v-model="queryParams.description"
+            placeholder="请输入描述"
+            clearable
+            @keyup.enter="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="网站图标" prop="icon">
         <el-input
             v-model="queryParams.icon"
