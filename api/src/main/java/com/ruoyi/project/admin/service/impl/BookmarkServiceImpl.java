@@ -219,7 +219,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             for (String tagName : tagsToDelete) {
                 BookmarkTagRelation relationToDelete = existingTagMap.get(tagName);
                 bookmarkTagRelationService.removeById(relationToDelete.getId());
-                details.append("删除标签【").append(tagName).append("】 ");
+                details.append("书签ID[").append(newBookmark.getId()).append("]删除标签【").append(tagName).append("】 ");
             }
 
             // [增] 遍历tagsToAdd，如果标签在BookmarkTag中不存在，则新建标签并插入BookmarkTagRelation中
@@ -233,7 +233,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
                     if (bookmarkTagSaveFlag) {
                         // 记录标签日志
-                        details.append("新增标签【").append(newBookmarkTag.getTagName()).append("】 ");
+                        details.append("书签ID[").append(newBookmark.getId()).append("]新增标签【").append(newBookmarkTag.getTagName()).append("】 ");
                         // 设置标签ID到新建标签对象中
                         newBookmarkTag.setId(bookmarkTagService.getOne(new LambdaQueryWrapper<BookmarkTag>().eq(BookmarkTag::getTagName, tagName)).getId());
 
@@ -249,7 +249,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
                     bookmarkTagRelation.setBookmarkId(newBookmark.getId()); // 设置书签ID
                     bookmarkTagRelation.setBookmarkTagId(existingTag.getId()); // 设置标签ID
                     bookmarkTagRelationService.save(bookmarkTagRelation);
-                    details.append("新增标签【").append(existingTag.getTagName()).append("】 ");
+                    details.append("书签ID[").append(newBookmark.getId()).append("]新增标签【").append(existingTag.getTagName()).append("】 ");
                 }
             }
         }
