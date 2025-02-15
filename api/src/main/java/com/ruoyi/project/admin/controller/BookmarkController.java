@@ -79,8 +79,8 @@ public class BookmarkController extends BaseController {
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_EDIT)
     @Log(title = "书签管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Bookmark bookmark) {
-        return toAjax(bookmarkService.updateBookmark(bookmark));
+    public AjaxResult edit(@RequestBody BookmarkVo bookmarkVo) {
+        return toAjax(bookmarkService.updateBookmark(bookmarkVo));
     }
 
     /**

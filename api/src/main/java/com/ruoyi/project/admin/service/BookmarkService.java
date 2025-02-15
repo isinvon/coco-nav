@@ -16,7 +16,7 @@ public interface BookmarkService extends IService<Bookmark> {
 
     Boolean addBookmark(Bookmark bookmark);
 
-    Boolean updateBookmark(Bookmark bookmark);
+    Boolean updateBookmark(BookmarkVo bookmarkVo);
 
     Boolean deleteBookmark(List<Long> idList);
 
