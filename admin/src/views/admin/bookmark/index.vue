@@ -474,6 +474,8 @@ function handleUpdate(row) {
     originalForm.value = JSON.parse(JSON.stringify(response.data));
     // 将 bookmarkTags 转换为字符串数组
     bookmarkTagsStr.value = form.value.bookmarkTags.map(tag => tag.tagName);
+    // 将 bookmarkTagsStr 放到 originalForm 中, 用于后续比较
+    originalForm.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({ tagName: tag }));
     open.value = true;
     title.value = "修改书签管理";
   });
