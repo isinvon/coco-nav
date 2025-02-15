@@ -247,7 +247,7 @@
         </el-form-item>
         <!--标签 bookmarkTags-->
         <el-form-item label="标签" prop="bookmarkTags">
-          <el-input-tag v-model="bookmarkTagsStr" clearable trigger='Enter' placeholder="输入标签, 然后按下Enter确认" />
+          <el-input-tag v-model="bookmarkTagsStr" clearable trigger='Space' placeholder="输入标签, 然后按下Space确认"/>
         </el-form-item>
         <el-form-item label="排序值" prop="sortOrder">
           <el-input-number v-model="form.sortOrder" :min="1" label="排序值"/>
