@@ -23,7 +23,7 @@
     "cheerio": "^1.0.0",
     "clipboard": "2.0.11",
     "echarts": "5.5.1",
-    "element-plus": "2.7.6",
+    "element-plus": "^2.9.4",
     "file-saver": "2.0.5",
     "fuse.js": "6.6.2",
     "js-beautify": "1.14.11",
