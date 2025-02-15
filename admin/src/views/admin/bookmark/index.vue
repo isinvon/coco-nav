@@ -79,7 +79,7 @@
 
     <el-table v-loading="loading" :data="bookmarkList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="书签ID" align="center" prop="id"/>
+      <el-table-column fixed="left" label="书签ID" width="150" align="center" prop="id"/>
       <el-table-column label="网站标题" align="left" prop="title">
         <template #default="scope">
           <Tooltip
@@ -161,7 +161,21 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="排序值" align="center" prop="sortOrder">
+      <el-table-column label="标签" align="center" width="250" prop="bookmarkTags">
+        <template #default="scope">
+          <!-- 遍历bookmarkTags数组，为每个标签对象创建一个el-tag -->
+          <el-tag
+              v-for="(tag, index) in scope.row.bookmarkTags"
+              :key="index"
+              type="info"
+              style="margin: 5px;"
+          >
+            <!-- 显示标签对象的tagName属性 -->
+            {{ tag.tagName }}
+          </el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="排序值" align="center" width="150" prop="sortOrder">
         <template #default="scope">
           <el-input-number
               v-model="scope.row.sortOrder"
@@ -172,7 +186,7 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="状态" align="center" prop="status">
+      <el-table-column fixed="right" label="状态" align="center" prop="status">
         <template #default="scope">
           <TagTool
               :value="scope.row.status"
@@ -183,7 +197,7 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column fixed="right" label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
                      v-hasPermi="['admin:bookmark:edit']">修改
