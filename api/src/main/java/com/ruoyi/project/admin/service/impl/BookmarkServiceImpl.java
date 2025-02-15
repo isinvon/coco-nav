@@ -219,7 +219,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             for (String tagName : tagsToDelete) {
                 BookmarkTagRelation relationToDelete = existingTagMap.get(tagName);
                 bookmarkTagRelationService.removeById(relationToDelete.getId());
-                details.append("书签ID[").append(newBookmark.getId()).append("]删除标签【").append(tagName).append("】 ");
+                details.append("删除标签【").append(tagName).append("】 ");
             }
 
             // [增] 遍历tagsToAdd，如果标签在BookmarkTag中不存在，则新建标签并插入BookmarkTagRelation中
@@ -233,7 +233,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
                     if (bookmarkTagSaveFlag) {
                         // 记录标签日志
-                        details.append("书签ID[").append(newBookmark.getId()).append("]新增标签【").append(newBookmarkTag.getTagName()).append("】 ");
+                        details.append("新增标签【").append(newBookmarkTag.getTagName()).append("】 ");
                         // 设置标签ID到新建标签对象中
                         newBookmarkTag.setId(bookmarkTagService.getOne(new LambdaQueryWrapper<BookmarkTag>().eq(BookmarkTag::getTagName, tagName)).getId());
 
@@ -249,7 +249,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
                     bookmarkTagRelation.setBookmarkId(newBookmark.getId()); // 设置书签ID
                     bookmarkTagRelation.setBookmarkTagId(existingTag.getId()); // 设置标签ID
                     bookmarkTagRelationService.save(bookmarkTagRelation);
-                    details.append("书签ID[").append(newBookmark.getId()).append("]新增标签【").append(existingTag.getTagName()).append("】 ");
+                    details.append("新增标签【").append(existingTag.getTagName()).append("】 ");
                 }
             }
         }
@@ -259,15 +259,17 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
         // 执行更新操作
         boolean update = updateById(newBookmark);
         if (update) {
-            // 记录日志
-            BookmarkLog bookmarkLog = new BookmarkLog();
-            bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_EDIT);
-            bookmarkLog.setBookmarkId(newBookmark.getId());
-            bookmarkLog.setOperatorId(SecurityUtils.getUserId());
-            bookmarkLog.setOperatorName(SecurityUtils.getUsername());
-            bookmarkLog.setActionDetails(details.toString());
-            // 保存日志
-            bookmarkLogService.save(bookmarkLog);
+            // 若details有内容，则记录到BookmarkLog中
+            if (!details.isEmpty()){
+                BookmarkLog bookmarkLog = new BookmarkLog();
+                bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_EDIT);
+                bookmarkLog.setBookmarkId(newBookmark.getId());
+                bookmarkLog.setOperatorId(SecurityUtils.getUserId());
+                bookmarkLog.setOperatorName(SecurityUtils.getUsername());
+                bookmarkLog.setActionDetails(String.format("书签ID [%d] %s", newBookmark.getId(), details));
+                // 保存日志
+                bookmarkLogService.save(bookmarkLog);
+            }
         }
 
         return update;
