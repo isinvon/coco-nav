@@ -185,9 +185,10 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             details.append("修改状态从: 【").append(oldBookmark.getStatus()).append("】 修改为: 【").append(newBookmark.getStatus()).append("】 ");
         }
 
-        // 书签逻辑 ======================================== start ============================================================================
+        // 标签逻辑 ======================================== start ============================================================================
         // 查询当前书签的旧标签关系
-        LambdaQueryWrapper<BookmarkTagRelation> relationLambdaQueryWrapper = new LambdaQueryWrapper<BookmarkTagRelation>().eq(BookmarkTagRelation::getBookmarkId, newBookmark.getId());
+        LambdaQueryWrapper<BookmarkTagRelation> relationLambdaQueryWrapper = new LambdaQueryWrapper<BookmarkTagRelation>()
+                .eq(BookmarkTagRelation::getBookmarkId, newBookmark.getId());
         List<BookmarkTagRelation> oldRelations = bookmarkTagRelationService.list(relationLambdaQueryWrapper);
 
         // 处理前端传下来的标签
@@ -195,9 +196,11 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
         if (newTags != null) {
             // 获取现有标签的名称集合
-            Set<String> existingTagNames = oldRelations.stream()
-                    .map(relation -> bookmarkTagService.getById(relation.getBookmarkTagId()).getTagName())
-                    .collect(Collectors.toSet());
+            Map<String, BookmarkTagRelation> existingTagMap = oldRelations.stream()
+                    .collect(Collectors.toMap(
+                            relation -> bookmarkTagService.getById(relation.getBookmarkTagId()).getTagName(),
+                            relation -> relation
+                    ));
 
             // 获取新标签的名称集合
             Set<String> newTagNames = newTags.stream()
@@ -205,24 +208,18 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
                     .collect(Collectors.toSet());
 
             // 找出需要删除的标签
-            Set<String> tagsToDelete = new HashSet<>(existingTagNames);
+            Set<String> tagsToDelete = new HashSet<>(existingTagMap.keySet());
             tagsToDelete.removeAll(newTagNames);
 
             // 找出需要新增的标签
             Set<String> tagsToAdd = new HashSet<>(newTagNames);
-            tagsToAdd.removeAll(existingTagNames);
+            tagsToAdd.removeAll(existingTagMap.keySet());
 
             // 删除需要删除的标签关系
             for (String tagName : tagsToDelete) {
-                BookmarkTag tagToDelete = bookmarkTagService.getOne(new LambdaQueryWrapper<BookmarkTag>().eq(BookmarkTag::getTagName, tagName));
-                if (tagToDelete != null) {
-                    bookmarkTagRelationService.remove(
-                            new LambdaQueryWrapper<BookmarkTagRelation>()
-                                    .eq(BookmarkTagRelation::getBookmarkId, newBookmark.getId())
-                                    .eq(BookmarkTagRelation::getBookmarkTagId, tagToDelete.getId())
-                    );
-                    details.append("删除标签【").append(tagName).append("】 ");
-                }
+                BookmarkTagRelation relationToDelete = existingTagMap.get(tagName);
+                bookmarkTagRelationService.removeById(relationToDelete.getId());
+                details.append("删除标签【").append(tagName).append("】 ");
             }
 
             // [增] 遍历tagsToAdd，如果标签在BookmarkTag中不存在，则新建标签并插入BookmarkTagRelation中
@@ -251,17 +248,13 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
                     BookmarkTagRelation bookmarkTagRelation = new BookmarkTagRelation();
                     bookmarkTagRelation.setBookmarkId(newBookmark.getId()); // 设置书签ID
                     bookmarkTagRelation.setBookmarkTagId(existingTag.getId()); // 设置标签ID
-                    boolean bookmarkTagRelationSaveFlag = bookmarkTagRelationService.save(bookmarkTagRelation);
-                    // 记录标签日志
-                    if (bookmarkTagRelationSaveFlag) {
-                        details.append("新增标签【").append(existingTag.getTagName()).append("】 ");
-                    }
+                    bookmarkTagRelationService.save(bookmarkTagRelation);
+                    details.append("新增标签【").append(existingTag.getTagName()).append("】 ");
                 }
             }
         }
 
-        // 书签逻辑 ======================================== end ============================================================================
-
+        // 标签逻辑 ======================================== end ============================================================================
 
         // 执行更新操作
         boolean update = updateById(newBookmark);
