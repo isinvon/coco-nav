@@ -44,3 +44,7 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+
+# python
+.venv/
+venv/
