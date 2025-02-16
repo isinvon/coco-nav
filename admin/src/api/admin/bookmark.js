@@ -4,8 +4,8 @@ import request from '@/utils/request'
 export function listBookmark(query) {
   return request({
     url: '/admin/bookmark/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 

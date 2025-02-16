@@ -59,6 +59,18 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             qw.eq(Bookmark::getIsDeleted, bookmarkVo.getIsDeleted());
         }
 
+        if (bookmarkVo.getBookmarkTags() != null && !bookmarkVo.getBookmarkTags().isEmpty()){
+            // 取 bookmarkVo 中 BookmarkTags 数组的第一个值
+
+            String searchTagName = bookmarkVo.getBookmarkTags().get(0).getTagName();
+            // 通过 tagName 获取 BookmarkTag 条目
+            BookmarkTag searchTag = bookmarkTagService.getOne(new LambdaQueryWrapper<BookmarkTag>().eq(BookmarkTag::getTagName, searchTagName));
+            Long searchTagId = searchTag.getId();
+            // 从 bookmarkTagRelation 中获取 bookmarkId
+            Long bookmarkId = bookmarkTagRelationService.getOne(new LambdaQueryWrapper<BookmarkTagRelation>().eq(BookmarkTagRelation::getBookmarkTagId, searchTagId)).getBookmarkId();
+            qw.eq(Bookmark::getId, bookmarkId);
+        }
+
         // 2. 查询书签列表
         List<Bookmark> bookmarkList = list(qw);
         if (bookmarkList.isEmpty()) {

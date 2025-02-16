@@ -9,6 +9,14 @@ export function listBookmarkTag(query) {
   })
 }
 
+// 查询书签标签名字列表,返回List<String>的tagName
+export function listBookmarkTagName() {
+  return request({
+    url: '/admin/bookmarkTag/listTagName',
+    method: 'get'
+  })
+}
+
 // 查询书签标签详细
 export function getBookmarkTag(bookmarkTagId) {
   return request({

@@ -35,4 +35,11 @@ public class BookmarkTagServiceImpl extends ServiceImpl<BookmarkTagMapper, Bookm
 
         return list(qw);
     }
+
+    @Override
+    public List<String> getBookmarkTagNameList() {
+        LambdaQueryWrapper<BookmarkTag> qw = new LambdaQueryWrapper<>();
+        qw.select(BookmarkTag::getTagName);
+        return list(qw).stream().map(BookmarkTag::getTagName).toList();
+    }
 }
