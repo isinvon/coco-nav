@@ -16,6 +16,8 @@ import com.ruoyi.project.admin.service.BookmarkService;
 import com.ruoyi.project.admin.service.BookmarkTagRelationService;
 import com.ruoyi.project.admin.service.BookmarkTagService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -59,16 +61,30 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
             qw.eq(Bookmark::getIsDeleted, bookmarkVo.getIsDeleted());
         }
 
-        if (bookmarkVo.getBookmarkTags() != null && !bookmarkVo.getBookmarkTags().isEmpty()){
-            // 取 bookmarkVo 中 BookmarkTags 数组的第一个值
+        // 条件: 1. bookmarkTags 存在且不为空,不为空字符串时, 才进行条件拼接 (使用 Apache Commons / Spring 工具类)
+        if (CollectionUtils.isNotEmpty(bookmarkVo.getBookmarkTags()) && StringUtils.isNotBlank(bookmarkVo.getBookmarkTags().get(0).getTagName())){
+            // 直接通过标签名称批量查询关联的书签ID (替代原有两次查询)
+            List<String> tagNames = bookmarkVo.getBookmarkTags().stream()
+                    .map(BookmarkTag::getTagName)
+                    .collect(Collectors.toList());
 
-            String searchTagName = bookmarkVo.getBookmarkTags().get(0).getTagName();
-            // 通过 tagName 获取 BookmarkTag 条目
-            BookmarkTag searchTag = bookmarkTagService.getOne(new LambdaQueryWrapper<BookmarkTag>().eq(BookmarkTag::getTagName, searchTagName));
-            Long searchTagId = searchTag.getId();
-            // 从 bookmarkTagRelation 中获取 bookmarkId
-            Long bookmarkId = bookmarkTagRelationService.getOne(new LambdaQueryWrapper<BookmarkTagRelation>().eq(BookmarkTagRelation::getBookmarkTagId, searchTagId)).getBookmarkId();
-            qw.eq(Bookmark::getId, bookmarkId);
+            List<Long> bookmarkIds = bookmarkTagRelationService
+                    .list(new LambdaQueryWrapper<BookmarkTagRelation>()
+                            .in(BookmarkTagRelation::getBookmarkTagId,
+                                    bookmarkTagService.list(new LambdaQueryWrapper<BookmarkTag>()
+                                                    .in(BookmarkTag::getTagName, tagNames))
+                                            .stream().map(BookmarkTag::getId).toList()
+                            ))
+                    .stream()
+                    .map(BookmarkTagRelation::getBookmarkId)
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            if (!bookmarkIds.isEmpty()) { // 仅当ID列表非空时添加条件
+                qw.in(Bookmark::getId, bookmarkIds);
+            }else {
+                return Collections.emptyList();
+            }
         }
 
         // 2. 查询书签列表
@@ -272,7 +288,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
         boolean update = updateById(newBookmark);
         if (update) {
             // 若details有内容，则记录到BookmarkLog中
-            if (!details.isEmpty()){
+            if (!details.isEmpty()) {
                 BookmarkLog bookmarkLog = new BookmarkLog();
                 bookmarkLog.setAction(BookmarkLog.BOOKMARK_LOG_ACTION_EDIT);
                 bookmarkLog.setBookmarkId(newBookmark.getId());
