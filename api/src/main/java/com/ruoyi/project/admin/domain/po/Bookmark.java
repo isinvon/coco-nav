@@ -3,6 +3,7 @@ package com.ruoyi.project.admin.domain.po;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.admin.domain.bo.TypeBo;
@@ -39,6 +40,7 @@ public class Bookmark extends BaseEntity
 
     /** 分类ID */
     @Excel(name = "分类ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long bookmarkCategoryId;
 
     /** 网站图标 */

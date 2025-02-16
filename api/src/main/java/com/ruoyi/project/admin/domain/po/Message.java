@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class Message extends BaseEntity
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** 留言内容 */
@@ -29,6 +31,7 @@ public class Message extends BaseEntity
 
     /** 父留言ID */
     @Excel(name = "父留言ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
     /** 0-删除 1-正常 */

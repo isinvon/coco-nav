@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
 
@@ -33,5 +34,6 @@ public class SettingLog extends BaseEntity
 
     /** 操作人ID */
     @Excel(name = "操作人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long operatorId;
 }

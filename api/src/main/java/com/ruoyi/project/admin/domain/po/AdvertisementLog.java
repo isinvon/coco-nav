@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -24,6 +25,7 @@ public class AdvertisementLog extends BaseEntity {
      * 广告ID
      */
     @Excel(name = "广告ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long advertisementId;
 
     /**
@@ -42,6 +44,7 @@ public class AdvertisementLog extends BaseEntity {
      * 操作人ID
      */
     @Excel(name = "操作人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long operatorId;
 
     /**

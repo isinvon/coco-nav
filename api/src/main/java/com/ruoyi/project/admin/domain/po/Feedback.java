@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
 
@@ -21,10 +22,12 @@ public class Feedback extends BaseEntity
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** 反馈类型ID */
     @Excel(name = "反馈类型ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long feedbackTypeId;
 
     /** 反馈内容 */

@@ -36,6 +36,7 @@ public class User extends BaseEntity
 
     /** 用户等级ID */
     @Excel(name = "用户等级ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userGradeId;
 
     /** 头像URL */

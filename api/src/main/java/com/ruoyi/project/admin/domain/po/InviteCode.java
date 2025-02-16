@@ -28,10 +28,12 @@ public class InviteCode extends BaseEntity
 
     /** 创建人ID */
     @Excel(name = "创建人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long creatorId;
 
     /** 使用者ID */
     @Excel(name = "使用者ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** 0-未使用 1-已使用 */

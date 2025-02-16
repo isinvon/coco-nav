@@ -24,6 +24,7 @@ public class UserLoginLog extends BaseEntity
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** 登录IP */

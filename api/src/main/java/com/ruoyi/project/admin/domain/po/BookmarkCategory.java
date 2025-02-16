@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class BookmarkCategory extends BaseEntity
 
     /** 父分类ID */
     @Excel(name = "父分类ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
     /** 排序值 */

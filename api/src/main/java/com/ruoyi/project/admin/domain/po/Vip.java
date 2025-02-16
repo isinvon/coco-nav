@@ -24,10 +24,12 @@ public class Vip extends BaseEntity
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** VIP类型ID */
     @Excel(name = "VIP类型ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long vipTypeId;
 
     /** 开始时间 */

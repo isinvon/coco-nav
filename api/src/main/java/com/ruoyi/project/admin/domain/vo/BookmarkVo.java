@@ -46,6 +46,7 @@ public class BookmarkVo extends BaseEntity {
      * 分类ID
      */
     @Excel(name = "分类ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long bookmarkCategoryId;
 
     /**

@@ -24,6 +24,7 @@ public class FeedbackLog extends BaseEntity
 
     /** 反馈ID */
     @Excel(name = "反馈ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long feedbackId;
 
     /** 操作类型 */
@@ -32,6 +33,7 @@ public class FeedbackLog extends BaseEntity
 
     /** 操作人ID */
     @Excel(name = "操作人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long operatorId;
 
     /** 操作时间 */

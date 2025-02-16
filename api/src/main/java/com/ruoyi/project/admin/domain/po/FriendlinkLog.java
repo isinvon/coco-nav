@@ -24,6 +24,7 @@ public class FriendlinkLog extends BaseEntity
 
     /** 友链ID */
     @Excel(name = "友链ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long friendlinkId;
 
     /** 操作类型 */
@@ -38,6 +39,7 @@ public class FriendlinkLog extends BaseEntity
 
     /** 操作人ID */
     @Excel(name = "操作人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long operatorId;
 
     /**

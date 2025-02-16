@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.enums.ThemeColor;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.admin.domain.bo.TypeBo;
@@ -27,6 +28,7 @@ public class Area implements Serializable
 
     /** 地区ID */
     @Excel(name = "地区ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Integer id;
 
     /** 地区名称 */
@@ -35,6 +37,7 @@ public class Area implements Serializable
 
     /** 父级ID */
     @Excel(name = "父级ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
     /** 行政级别：1-省 2-市 3-区 */

@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
@@ -21,11 +22,13 @@ public class BookmarkTagRelation extends BaseEntity {
      * 书签ID
      */
     @Excel(name = "书签ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long bookmarkId;
 
     /**
      * 标签ID
      */
     @Excel(name = "标签ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long bookmarkTagId;
 }

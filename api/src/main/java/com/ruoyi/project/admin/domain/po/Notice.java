@@ -36,6 +36,7 @@ public class Notice extends BaseEntity
 
     /** 发送人ID */
     @Excel(name = "发送人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long senderId;
 
     /** 发送时间 */

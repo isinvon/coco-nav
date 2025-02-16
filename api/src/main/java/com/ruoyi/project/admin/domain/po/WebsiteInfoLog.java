@@ -1,6 +1,7 @@
 package com.ruoyi.project.admin.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import lombok.Data;
@@ -23,12 +24,14 @@ public class WebsiteInfoLog extends BaseEntity {
      * 网站信息ID
      */
     @Excel(name = "网站信息ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long websiteInfoId;
 
     /**
      * 操作人ID
      */
     @Excel(name = "操作人ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long operatorId;
 
     /**

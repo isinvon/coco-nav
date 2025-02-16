@@ -24,10 +24,12 @@ public class BrowseHistory extends BaseEntity
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** 书签ID */
     @Excel(name = "书签ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long bookmarkId;
 
     /** 浏览时间 */

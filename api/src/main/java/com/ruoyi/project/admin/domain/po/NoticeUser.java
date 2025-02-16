@@ -24,10 +24,12 @@ public class NoticeUser extends BaseEntity
 
     /** 通知ID */
     @Excel(name = "通知ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long noticeId;
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long userId;
 
     /** 0-未读 1-已读 */
