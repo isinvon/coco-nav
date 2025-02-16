@@ -732,10 +732,19 @@ function querySearchBookmarkTagNameAsync(queryString, cb) {
  * 处理标签选择事件
  * @param {Object} selectedItem - 选中的建议项对象（如 { value: "影视" }）
  */
-function handleSelectTag(selectedItem) {
-  // 将选中的标签名同步到 queryParams.bookmarkTags
-    queryParams.value.bookmarkTags = [{tagName: selectedItem.value}];
-}
+// function handleSelectTag(selectedItem) {
+//   // 将选中的标签名同步到 queryParams.bookmarkTags
+//     queryParams.value.bookmarkTags = [{tagName: selectedItem.value}];
+// }
+// 监听bookmarkTagsStr,然后赋值给queryParams.bookmarkTags
+watch(() => searchTagName.value, (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        // 将选中的标签名同步到 queryParams.bookmarkTags
+        queryParams.value.bookmarkTags = [{tagName: newValue}];
+        console.log("queryParams.value.bookmarkTags",queryParams.value.bookmarkTags)
+      }
+    }
+)
 
 getList();
 getIndex();
