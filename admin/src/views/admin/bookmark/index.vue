@@ -152,7 +152,7 @@
               :tooltip-text="scope.row.icon"
           >
             <el-image
-                :src="isHttpsUrl(scope.row.icon) ? scope.row.icon : bookmarkDefaultIcon"
+                :src="validURL(scope.row.icon) ? scope.row.icon : bookmarkDefaultIcon"
                 fit="contain"
                 style="width: 30px; height: 30px;"
             >
@@ -276,7 +276,7 @@
         <el-form-item label="网站图标" prop="icon">
           <el-input v-model="form.icon" placeholder="请输入网站图标"/>
           <!-- 提示要不要使用默认图标, 截取 form.url 的第三个"/"前的域名+favicon.ico作为图标域名, 点击后填入form.icon-->
-          <el-button v-show="isHttpsUrl(form.url) && form.url != null" type="primary" @click="getDefaultIcon(form.url)">
+          <el-button v-show="validURL(form.url) && form.url != null" type="primary" @click="getDefaultIcon(form.url)">
             使用 favicon.ico 图标
           </el-button>
         </el-form-item>
@@ -316,6 +316,7 @@ import {
   getUrlInfoByCrawler,
   indexBookmark
 } from "@/api/admin/bookmark";
+import {validURL} from "@/utils/validate.js";
 import TagTool from "@/components/TagTool/index.vue";
 import {listBookmarkTagName} from "@/api/admin/bookmarkTag.js";
 
@@ -623,24 +624,13 @@ function handleUpdateBookmarkSortOrder(row) {
 }
 
 /**
- * 判断是否是HTTPS链接
- * @param {String} url - 链接地址
- * @returns {Boolean} 是否为HTTPS链接
- */
-const isHttpsUrl = (url) => {
-  const urlPattern = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i;
-  return urlPattern.test(url);
-};
-
-/**
  * url信息爬虫方法
  * @param {String} url - 待爬取的链接地址
  */
 function urlCrawl(url) {
   if (url) {
     // 校验是否为链接
-    const urlPattern = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i;
-    let b = urlPattern.test(url);
+    let b = validURL(url);
     // 如果校验不通过
     if (!b) {
       proxy.$modal.msgWarning("请输入有效的网址");
