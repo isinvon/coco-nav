@@ -41,6 +41,18 @@ public class BookmarkTagController extends BaseController {
     }
 
     /**
+     * 查询书签标签列表,返回List<String>的tagName
+     *
+     * @return List<String>
+     */
+    @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_LIST)
+    @GetMapping("/listTagName")
+    public AjaxResult listTagName() {
+        List<String> list = bookmarkTagService.getBookmarkTagNameList();
+        return success(list);
+    }
+
+    /**
      * 导出书签标签列表
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_TAG_EXPORT)

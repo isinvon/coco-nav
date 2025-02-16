@@ -34,21 +34,31 @@
             @keyup.enter="handleQuery"
         />
       </el-form-item>
+      <!--标签-->
+      <el-form-item label="标签" prop="searchTagName">
+        <el-autocomplete
+            v-model="searchTagName"
+            :fetch-suggestions="querySearchBookmarkTagNameAsync"
+            placeholder="请输入标签"
+            @select="handleSelectTag"
+            clearable
+        />
+      </el-form-item>
       <el-form-item label="状态" prop="status">
-          <el-button-group>
-            <el-button
-                :type="queryParams.status === 1 ? 'success' : ''"
-                @click="queryParams.status = 1">已启用
-            </el-button>
-            <el-button
-                :type="queryParams.status === null ? 'info' : ''"
-                @click="queryParams.status = null">全部
-            </el-button>
-            <el-button
-                :type="queryParams.status === 0 ? 'danger' : ''"
-                @click="queryParams.status = 0">已禁用
-            </el-button>
-          </el-button-group>
+        <el-button-group>
+          <el-button
+              :type="queryParams.status === 1 ? 'success' : ''"
+              @click="queryParams.status = 1">已启用
+          </el-button>
+          <el-button
+              :type="queryParams.status === null ? 'info' : ''"
+              @click="queryParams.status = null">全部
+          </el-button>
+          <el-button
+              :type="queryParams.status === 0 ? 'danger' : ''"
+              @click="queryParams.status = 0">已禁用
+          </el-button>
+        </el-button-group>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -307,6 +317,7 @@ import {
   indexBookmark
 } from "@/api/admin/bookmark";
 import TagTool from "@/components/TagTool/index.vue";
+import {listBookmarkTagName} from "@/api/admin/bookmarkTag.js";
 
 const {proxy} = getCurrentInstance();
 
@@ -323,6 +334,7 @@ const bookmarkStatusTypeList = ref([]); // 书签状态类型
 const bookmarkDeleteStatusList = ref([]); // 书签删除状态类型
 const bookmarkDefaultIcon = ref(''); // 书签默认图标
 const bookmarkTagsStr = ref([]) // 标签
+const searchTagName = ref("") // 用于搜索的标签名称
 
 // 用于保存修改操作时的初始数据，用于判断数据是否有变化
 const originalForm = ref(null);
@@ -500,7 +512,7 @@ function handleUpdate(row) {
     // 将 bookmarkTags 转换为字符串数组
     bookmarkTagsStr.value = form.value.bookmarkTags.map(tag => tag.tagName);
     // 将 bookmarkTagsStr 放到 originalForm 中, 用于后续比较
-    originalForm.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({ tagName: tag }));
+    originalForm.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({tagName: tag}));
     open.value = true;
     title.value = "修改书签管理";
   });
@@ -517,7 +529,7 @@ function submitForm() {
       if (form.value.id != null) {
 
         // 转化为对象数组之后才能赋值给bookmarkTags
-        form.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({ tagName: tag }));
+        form.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({tagName: tag}));
 
         // 判断表单数据是否有改变，如果没有改变则提示并不发起更新请求
         if (JSON.stringify(form.value) === JSON.stringify(originalForm.value)) {
@@ -534,7 +546,7 @@ function submitForm() {
       } else {
 
         // 转化为对象数组之后才能赋值给bookmarkTags
-        form.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({ tagName: tag }));
+        form.value.bookmarkTags = bookmarkTagsStr.value.map(tag => ({tagName: tag}));
 
         // 执行新增操作
         addBookmark(form.value).then(response => {
@@ -678,6 +690,51 @@ function getDefaultIcon(url) {
     // 此处可以使用弹框或者其他方式提示用户错误信息
     proxy.$modal.msgError("无法解析网址，请检查输入是否正确");
   }
+}
+
+/**
+ * 异步查询书签标签名称列表
+ * @param {string} queryString - 用户输入的查询字符串
+ * @param {Function} cb - 回调函数，用于返回建议项
+ */
+function querySearchBookmarkTagNameAsync(queryString, cb) {
+  // 调用后端接口获取标签名称列表
+  listBookmarkTagName()
+      .then(response => {
+        if (response.code === 200) {
+          // 将标签名称列表转换为符合 el-autocomplete 要求的格式
+          const tagNames = response.data || [];
+          const suggestions = tagNames.map(tagName => ({
+            value: tagName, // value 是 el-autocomplete 显示的内容
+          }));
+
+          // 根据用户输入过滤建议项
+          const filteredSuggestions = queryString
+              ? suggestions.filter(suggestion =>
+                  suggestion.value.toLowerCase().includes(queryString.toLowerCase())
+              )
+              : suggestions;
+
+          // 调用回调函数返回过滤后的建议项
+          cb(filteredSuggestions);
+        } else {
+          // 如果接口调用失败，返回空数组
+          cb([]);
+        }
+      })
+      .catch(error => {
+        proxy.$modal.msgError("查询书签标签名称列表失败", error);
+        cb([]);
+      });
+}
+
+/**
+ * 处理标签选择事件
+ * @param {Object} selectedItem - 选中的建议项对象（如 { value: "影视" }）
+ */
+function handleSelectTag(selectedItem) {
+  // 将选中的标签名同步到 queryParams.bookmarkTags
+    queryParams.value.bookmarkTags = [{tagName: selectedItem.value}];
 }
 
 getList();

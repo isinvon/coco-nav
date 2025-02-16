@@ -11,6 +11,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.admin.domain.po.Bookmark;
 import com.ruoyi.project.admin.domain.vo.BookmarkVo;
 import com.ruoyi.project.admin.service.BookmarkService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @author sinvon
  * @date 2025-01-30
  */
+@Slf4j
 @RestController
 @RequestMapping("/admin/bookmark")
 public class BookmarkController extends BaseController {
@@ -35,9 +37,10 @@ public class BookmarkController extends BaseController {
      * 查询书签管理列表
      */
     @CustomPermission(PermissionConstants.ADMIN_BOOKMARK_LIST)
-    @GetMapping("/list")
-    public TableDataInfo list(BookmarkVo bookmarkVo) {
+    @PostMapping("/list")
+    public TableDataInfo list(@RequestBody BookmarkVo bookmarkVo) {
         startPage();
+        log.info("查询书签管理列表, 查询条件为: {}", bookmarkVo);
         List<BookmarkVo> list = bookmarkService.getBookmarkListByQueryCondition(bookmarkVo);
         return getDataTable(list);
     }

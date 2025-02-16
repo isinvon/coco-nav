@@ -18,4 +18,11 @@ public interface BookmarkTagService extends IService<BookmarkTag> {
      * @return
      */
     List<BookmarkTag> getBookmarkTagListByQueryCondition(BookmarkTag bookmarkTag);
+
+    /**
+     * 查询书签标签列表,返回List<String>的tagName
+     *
+     * @return List<String>
+     */
+    List<String> getBookmarkTagNameList();
 }
