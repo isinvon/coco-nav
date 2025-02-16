@@ -115,7 +115,7 @@
     <el-table v-loading="loading" :data="bookmarkList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column fixed="left" label="书签ID" width="150" align="center" prop="id"/>
-      <el-table-column label="网站标题" align="left" prop="title">
+      <el-table-column label="网站标题" width="150" align="left" prop="title">
         <template #default="scope">
           <Tooltip
               placement="right"

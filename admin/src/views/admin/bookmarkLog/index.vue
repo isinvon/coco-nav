@@ -30,8 +30,8 @@
 
     <el-table v-loading="loading" :data="bookmarkLogList" @selection-change="handleSelectionChange">
       <!--<el-table-column type="selection" width="55" align="center" />-->
-      <el-table-column label="日志ID" align="center" prop="id" />
-      <el-table-column label="书签ID" align="center" prop="bookmarkId" />
+      <el-table-column fixed="left" label="日志ID" align="center" prop="id" />
+      <el-table-column fixed="left" label="书签ID" align="center" prop="bookmarkId" />
       <el-table-column label="操作类型" align="center" prop="action">
         <template #default="scope">
           <TagTool
@@ -41,7 +41,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="操作详情" align="center" prop="actionDetails">
+      <el-table-column label="操作详情" align="left" width="450" prop="actionDetails">
         <template #default="scope">
           <Tooltip
               placement="bottom"
