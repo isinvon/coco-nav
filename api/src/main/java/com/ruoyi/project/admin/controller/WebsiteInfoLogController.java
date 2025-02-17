@@ -8,8 +8,8 @@ import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.project.admin.domain.po.WebsiteInfoLog;
-import com.ruoyi.project.admin.service.WebsiteInfoLogService;
+import com.ruoyi.common.model.domain.po.WebsiteInfoLog;
+import com.ruoyi.common.model.service.WebsiteInfoLogService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

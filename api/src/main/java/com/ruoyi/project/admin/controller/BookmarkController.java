@@ -8,9 +8,9 @@ import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.project.admin.domain.po.Bookmark;
-import com.ruoyi.project.admin.domain.vo.BookmarkVo;
-import com.ruoyi.project.admin.service.BookmarkService;
+import com.ruoyi.common.model.domain.po.Bookmark;
+import com.ruoyi.common.model.domain.vo.BookmarkVo;
+import com.ruoyi.common.model.service.BookmarkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +40,6 @@ public class BookmarkController extends BaseController {
     @PostMapping("/list")
     public TableDataInfo list(@RequestBody BookmarkVo bookmarkVo) {
         startPage();
-        log.info("查询书签管理列表, 查询条件为: {}", bookmarkVo);
         List<BookmarkVo> list = bookmarkService.getBookmarkListByQueryCondition(bookmarkVo);
         return getDataTable(list);
     }

@@ -12,9 +12,9 @@ replacement_template = r'public class \1ServiceImpl extends ServiceImpl<\1Mapper
 def generate_import_statements(class_name):
     """根据类名生成导入语句"""
     import_statements = [
-        f"import com.ruoyi.project.admin.domain.{class_name};",
-        f"import com.ruoyi.project.admin.service.{class_name}Service;",
-        f"import com.ruoyi.project.admin.mapper.{class_name}Mapper;",
+        f"import com.ruoyi.common.model.domain.{class_name};",
+        f"import com.ruoyi.common.model.service.{class_name}Service;",
+        f"import com.ruoyi.common.model.mapper.{class_name}Mapper;",
         "import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;"
     ]
     return import_statements

@@ -1,0 +1,99 @@
+package com.ruoyi.common.model.service.impl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.common.model.service.PointLogService;
+
+import java.util.List;
+import com.ruoyi.common.utils.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ruoyi.common.model.mapper.PointLogMapper;
+import com.ruoyi.common.model.domain.po.PointLog;
+import com.ruoyi.common.model.service.custom.PointLogCustomService;
+import org.springframework.stereotype.Service;
+
+/**
+ * 积分流水Service业务层处理
+ * 
+ * @author sinvon
+ * @date 2025-01-30
+ */
+@Service
+public class PointLogServiceImpl extends ServiceImpl<PointLogMapper,PointLog> implements PointLogCustomService, PointLogService
+{
+    @Autowired
+    private PointLogMapper pointLogMapper;
+
+    /**
+     * 查询积分流水
+     * 
+     * @param pointLogId 积分流水主键
+     * @return 积分流水
+     */
+    @Override
+    public PointLog selectPointLogByPointLogId(Long pointLogId)
+    {
+        return pointLogMapper.selectPointLogByPointLogId(pointLogId);
+    }
+
+    /**
+     * 查询积分流水列表
+     * 
+     * @param pointLog 积分流水
+     * @return 积分流水
+     */
+    @Override
+    public List<PointLog> selectPointLogList(PointLog pointLog)
+    {
+        return pointLogMapper.selectPointLogList(pointLog);
+    }
+
+    /**
+     * 新增积分流水
+     * 
+     * @param pointLog 积分流水
+     * @return 结果
+     */
+    @Override
+    public int insertPointLog(PointLog pointLog)
+    {
+        pointLog.setCreateTime(DateUtils.getNowDate());
+        return pointLogMapper.insertPointLog(pointLog);
+    }
+
+    /**
+     * 修改积分流水
+     * 
+     * @param pointLog 积分流水
+     * @return 结果
+     */
+    @Override
+    public int updatePointLog(PointLog pointLog)
+    {
+        pointLog.setUpdateTime(DateUtils.getNowDate());
+        return pointLogMapper.updatePointLog(pointLog);
+    }
+
+    /**
+     * 批量删除积分流水
+     * 
+     * @param pointLogIds 需要删除的积分流水主键
+     * @return 结果
+     */
+    @Override
+    public int deletePointLogByPointLogIds(Long[] pointLogIds)
+    {
+        return pointLogMapper.deletePointLogByPointLogIds(pointLogIds);
+    }
+
+    /**
+     * 删除积分流水信息
+     * 
+     * @param pointLogId 积分流水主键
+     * @return 结果
+     */
+    @Override
+    public int deletePointLogByPointLogId(Long pointLogId)
+    {
+        return pointLogMapper.deletePointLogByPointLogId(pointLogId);
+    }
+}

@@ -8,13 +8,12 @@ import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.project.admin.domain.po.Area;
-import com.ruoyi.project.admin.service.AreaService;
+import com.ruoyi.common.model.domain.po.Area;
+import com.ruoyi.common.model.service.AreaService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
