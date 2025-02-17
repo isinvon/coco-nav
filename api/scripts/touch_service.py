@@ -5,10 +5,10 @@ source_folder = r'C:\Users\sinvon\Desktop\mycode\coco-nav\api\src\main\java\com\
 # 目标文件夹路径，要创建 Service 文件的文件夹
 target_folder = r'C:\Users\sinvon\Desktop\mycode\coco-nav\api\src\main\java\com\ruoyi\project\admin\service'
 # 代码模板
-template = """package com.ruoyi.common.model.service;
+template = """package com.ruoyi.project.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ruoyi.common.model.domain.{domain};
+import com.ruoyi.project.admin.domain.{domain};
 
 /**
  * @author : sinvon

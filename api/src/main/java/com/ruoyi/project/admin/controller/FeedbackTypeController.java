@@ -8,8 +8,8 @@ import com.ruoyi.framework.security.permission.CustomPermission;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.common.model.domain.po.FeedbackType;
-import com.ruoyi.common.model.service.FeedbackTypeService;
+import com.ruoyi.project.admin.domain.po.FeedbackType;
+import com.ruoyi.project.admin.service.FeedbackTypeService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
