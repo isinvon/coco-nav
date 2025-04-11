@@ -2,6 +2,7 @@ package com.ruoyi.project.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ruoyi.project.admin.domain.po.Bookmark;
+import com.ruoyi.project.admin.domain.po.BookmarkCategory;
 import com.ruoyi.project.admin.domain.vo.BookmarkVo;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface BookmarkService extends IService<Bookmark> {
     Map<String, String> getUrlInfoByCrawler(String url);
 
     BookmarkVo getBookmarkById(Long bookmarkId);
+
+    Map<BookmarkCategory, List<BookmarkVo>> getCategoryAndBookmark();
 }

@@ -5,16 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.crawler.CrawlerUtil;
-import com.ruoyi.project.admin.domain.po.Bookmark;
-import com.ruoyi.project.admin.domain.po.BookmarkLog;
-import com.ruoyi.project.admin.domain.po.BookmarkTag;
-import com.ruoyi.project.admin.domain.po.BookmarkTagRelation;
+import com.ruoyi.project.admin.domain.po.*;
 import com.ruoyi.project.admin.domain.vo.BookmarkVo;
 import com.ruoyi.project.admin.mapper.BookmarkMapper;
-import com.ruoyi.project.admin.service.BookmarkLogService;
-import com.ruoyi.project.admin.service.BookmarkService;
-import com.ruoyi.project.admin.service.BookmarkTagRelationService;
-import com.ruoyi.project.admin.service.BookmarkTagService;
+import com.ruoyi.project.admin.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +37,9 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
     @Resource
     private BookmarkTagService bookmarkTagService;
 
+    @Resource
+    private BookmarkCategoryService bookmarkCategoryService;
+
     @Override
     public List<BookmarkVo> getBookmarkListByQueryCondition(BookmarkVo bookmarkVo) {
         // 1. 构建查询条件
@@ -62,7 +59,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
         }
 
         // 条件: 1. bookmarkTags 存在且不为空,不为空字符串时, 才进行条件拼接 (使用 Apache Commons / Spring 工具类)
-        if (CollectionUtils.isNotEmpty(bookmarkVo.getBookmarkTags()) && StringUtils.isNotBlank(bookmarkVo.getBookmarkTags().get(0).getTagName())){
+        if (CollectionUtils.isNotEmpty(bookmarkVo.getBookmarkTags()) && StringUtils.isNotBlank(bookmarkVo.getBookmarkTags().get(0).getTagName())) {
             // 直接通过标签名称批量查询关联的书签ID (替代原有两次查询)
             List<String> tagNames = bookmarkVo.getBookmarkTags().stream()
                     .map(BookmarkTag::getTagName)
@@ -82,7 +79,7 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
             if (!bookmarkIds.isEmpty()) { // 仅当ID列表非空时添加条件
                 qw.in(Bookmark::getId, bookmarkIds);
-            }else {
+            } else {
                 return Collections.emptyList();
             }
         }
@@ -380,4 +377,51 @@ public class BookmarkServiceImpl extends ServiceImpl<BookmarkMapper, Bookmark> i
 
         return bookmarkVo;
     }
+
+    @Override
+    public Map<BookmarkCategory, List<BookmarkVo>> getCategoryAndBookmark() {
+        // 1. 获取所有分类
+        List<BookmarkCategory> categories = bookmarkCategoryService.list();
+        System.out.println("Categories: " + categories); // 打印分类数据
+
+        // 2. 获取所有书签，并转换为 BookmarkVo
+        List<BookmarkVo> bookmarks = list().stream().map(bookmark -> {
+            BookmarkVo bookmarkVo = new BookmarkVo();
+            BeanUtil.copyProperties(bookmark, bookmarkVo);
+            System.out.println("Bookmark: " + bookmarkVo); // 打印书签数据
+
+            // 获取书签标签
+            bookmarkVo.setBookmarkTags(bookmarkTagRelationService.list(new LambdaQueryWrapper<BookmarkTagRelation>()
+                            .eq(BookmarkTagRelation::getBookmarkId, bookmark.getId())
+                            .select(BookmarkTagRelation::getBookmarkTagId))
+                    .stream()
+                    .map(relation -> bookmarkTagService.getById(relation.getBookmarkTagId()))
+                    .collect(Collectors.toList()));
+
+            return bookmarkVo;
+        }).collect(Collectors.toList());
+
+        System.out.println("Bookmarks: " + bookmarks); // 打印所有书签信息
+
+        // 3. 根据分类ID分组书签
+        Map<Long, List<BookmarkVo>> categoryBookmarkMap = bookmarks.stream()
+                .collect(Collectors.groupingBy(BookmarkVo::getBookmarkCategoryId));
+        System.out.println("Category-Bookmark Map: " + categoryBookmarkMap); // 打印分组结果
+
+        // 4. 构建最终的结果 Map，key 为分类对象，value 为书签列表
+        Map<BookmarkCategory, List<BookmarkVo>> result = new HashMap<>();
+        for (BookmarkCategory category : categories) {
+            List<BookmarkVo> categoryBookmarks = categoryBookmarkMap.get(category.getId());
+            System.out.println("Category: " + category + " -> Bookmarks: " + categoryBookmarks); // 打印分类和书签列表
+            if (categoryBookmarks != null) {
+                result.put(category, categoryBookmarks);
+            } else {
+                result.put(category, new ArrayList<>()); // 如果没有书签，则返回空列表
+            }
+        }
+
+        return result;
+    }
+
+
 }
